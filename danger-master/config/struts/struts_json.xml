@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+	<constant name="struts.devMode" value="true"></constant>
+	<package name="json_package" extends="json-default">
+
+
+		<!-- 查询隐患详细信息 -->
+		<action name="queryDetailInfo" class="danger.action.queryView.QueryDetailInfo">
+			<result name="success" type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
+		
+
+		<!-- 查询统计隐患信息 -->
+		<action name="queryDangerTongji" class="danger.action.queryView.TongjiDangerAction">
+			<result name="success" type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
+
+
+	</package>
+</struts>

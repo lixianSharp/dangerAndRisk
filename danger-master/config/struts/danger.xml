@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+	<package name="danger" extends="json-default" namespace="/">
+		
+		<action name="danger_*" class="dangerAction"
+			method="{1}">
+			<result name="success" type="json"></result>
+			<result name="add">/main/hdfour.jsp</result>
+			<result name="updateByDanger">/main/hdQuery.jsp</result>
+		</action>
+		
+		<action name="spot_*" class="spotDisposeAction" method="{1}">
+			<result name="success">/main/hdfour.jsp</result>
+		</action>
+		
+		
+	</package>
+</struts>

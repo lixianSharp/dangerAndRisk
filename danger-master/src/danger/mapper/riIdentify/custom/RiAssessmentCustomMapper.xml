@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="danger.mapper.riIdentify.custom.RiAssessmentCustomMapper">
+
+	<!-- 查询分页 index:当前页页号 currentCount:每页显示的记录数 -->
+	<sql id="query_page_limit">
+		<if test="index!=null">
+			LIMIT #{index},#{currentCount}
+		</if>
+	</sql>
+	
+	<!-- 查询风险评估的条件 -->
+	<sql id="query_RiAssessment_where">
+		<if test="assessmentid!=null">
+			and assessmentid=#{assessmentid}
+		</if>
+		<if test="riskmsgid!=null">
+			and riskmsgid=#{riskmsgid}
+		</if>
+		<if test="possibility!=null">
+			and possibility=#{possibility}
+		</if>
+		<if test="persondegreeofexposure!=null">
+			and persondegreeofexposure=#{persondegreeofexposure}
+		</if>
+		<if test="lossofcconsequences!=null">
+			and lossofcconsequences=#{lossofcconsequences}
+		</if>
+		<if test="riskvalue!=null">
+			and riskvalue=#{riskvalue}
+		</if>
+		<if test="riskgrade!=null">
+			and riskgrade=#{riskgrade}
+		</if>
+		<if test="evaluatetime!=null">
+			and evaluatetime=#{evaluatetime}
+		</if>
+	</sql>
+	
+	
+	<!-- 组合条件查询风险评估信息 根据评估时间降序排序 分页查询 -->
+	<select id="findRiAssessmentByCondition" resultType="danger.bean.riIdentify.RiAssessment" parameterType="map">
+		select * from riassessment
+		<where>
+			<include refid="query_RiAssessment_where"></include>
+		</where>
+		order by evaluatetime desc
+		<include refid="query_page_limit"></include>
+	</select>
+	
+	
+	<!-- 组合条件查询风险评估信息的总条数 -->
+	<select id="getRiAssessmentCountByCondition" parameterType="map" resultType="int">
+		select count(*) from riassessment
+		<where>
+			<include refid="query_RiAssessment_where"></include>
+		</where>
+	</select>
+	
+	
+</mapper>

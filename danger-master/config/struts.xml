@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+	
+	<!-- 隐患排查  start -->
+	<!-- <constant name="devMode" value="true"></constant> -->
+	<constant name="struts.enable.DynamicMethodInvocation" value="true" />
+	<constant name="struts.action.extension" value="action" />
+	<constant name="struts.objectFactory" value="spring"></constant>
+
+	<!-- 解决还乱全被struts拦截没匹配的action -->
+	<package name="error" extends="struts-default">
+		<default-action-ref name="notFound" />
+		<action name="notFound" class="danger.action.sys.ErrorAction">
+			<result>/404.jsp</result>
+		</action>
+	</package>
+
+	<!-- 乔利强写的 -->
+	<include file="struts/struts_json.xml"></include>
+	<include file="struts/queryView.xml"></include>
+	<!-- 马非写的 -->
+	<include file="struts/struts_rechecktable.xml"></include>
+	<include file="struts/struts_sys.xml"></include>
+	<!-- xianyuan -->
+	<include file="struts/danger.xml"></include>
+	<include file="struts/initDic.xml"></include>
+	<!-- 雷龙的 -->
+	<include file="struts/dangerHandle.xml"></include>
+	<!-- 学姐的 -->
+	<include file="struts/dictionary.xml"></include>
+	<include file="struts/unit.xml"></include>
+	
+	<!-- 隐患排查 end -->
+
+	
+	<!-- 风险管控 start -->
+	<!-- lixianyuan -->
+	<include file="struts/riassessment.xml"></include>
+	<include file="struts/riidentification.xml"></include>
+	<include file="struts/riidentificationrange.xml"></include>
+	<include file="struts/riRespon.xml"></include>
+	<include file="struts/ririsklist.xml"></include>
+	
+	<!-- lixianyuan -->
+	
+	<!-- 风险管控  end -->
+</struts>

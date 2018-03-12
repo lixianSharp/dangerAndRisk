@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="danger.mapper.riIdentify.RiAssessmentMapper">
+  <resultMap id="BaseResultMap" type="danger.bean.riIdentify.RiAssessment">
+    <id column="assessmentId" jdbcType="VARCHAR" property="assessmentid" />
+    <result column="riskMsgId" jdbcType="VARCHAR" property="riskmsgid" />
+    <result column="possibility" jdbcType="VARCHAR" property="possibility" />
+    <result column="personDegreeOfExposure" jdbcType="VARCHAR" property="persondegreeofexposure" />
+    <result column="lossOfCconsequences" jdbcType="VARCHAR" property="lossofcconsequences" />
+    <result column="riskValue" jdbcType="DOUBLE" property="riskvalue" />
+    <result column="riskGrade" jdbcType="VARCHAR" property="riskgrade" />
+    <result column="evaluateTime" jdbcType="TIMESTAMP" property="evaluatetime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    assessmentId, riskMsgId, possibility, personDegreeOfExposure, lossOfCconsequences, 
+    riskValue, riskGrade, evaluateTime
+  </sql>
+  <select id="selectByExample" parameterType="danger.bean.riIdentify.RiAssessmentExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from riassessment
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from riassessment
+    where assessmentId = #{assessmentid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from riassessment
+    where assessmentId = #{assessmentid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="danger.bean.riIdentify.RiAssessmentExample">
+    delete from riassessment
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="danger.bean.riIdentify.RiAssessment">
+    insert into riassessment (assessmentId, riskMsgId, possibility, 
+      personDegreeOfExposure, lossOfCconsequences, 
+      riskValue, riskGrade, evaluateTime
+      )
+    values (#{assessmentid,jdbcType=VARCHAR}, #{riskmsgid,jdbcType=VARCHAR}, #{possibility,jdbcType=VARCHAR}, 
+      #{persondegreeofexposure,jdbcType=VARCHAR}, #{lossofcconsequences,jdbcType=VARCHAR}, 
+      #{riskvalue,jdbcType=DOUBLE}, #{riskgrade,jdbcType=VARCHAR}, #{evaluatetime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="danger.bean.riIdentify.RiAssessment">
+    insert into riassessment
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="assessmentid != null">
+        assessmentId,
+      </if>
+      <if test="riskmsgid != null">
+        riskMsgId,
+      </if>
+      <if test="possibility != null">
+        possibility,
+      </if>
+      <if test="persondegreeofexposure != null">
+        personDegreeOfExposure,
+      </if>
+      <if test="lossofcconsequences != null">
+        lossOfCconsequences,
+      </if>
+      <if test="riskvalue != null">
+        riskValue,
+      </if>
+      <if test="riskgrade != null">
+        riskGrade,
+      </if>
+      <if test="evaluatetime != null">
+        evaluateTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="assessmentid != null">
+        #{assessmentid,jdbcType=VARCHAR},
+      </if>
+      <if test="riskmsgid != null">
+        #{riskmsgid,jdbcType=VARCHAR},
+      </if>
+      <if test="possibility != null">
+        #{possibility,jdbcType=VARCHAR},
+      </if>
+      <if test="persondegreeofexposure != null">
+        #{persondegreeofexposure,jdbcType=VARCHAR},
+      </if>
+      <if test="lossofcconsequences != null">
+        #{lossofcconsequences,jdbcType=VARCHAR},
+      </if>
+      <if test="riskvalue != null">
+        #{riskvalue,jdbcType=DOUBLE},
+      </if>
+      <if test="riskgrade != null">
+        #{riskgrade,jdbcType=VARCHAR},
+      </if>
+      <if test="evaluatetime != null">
+        #{evaluatetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="danger.bean.riIdentify.RiAssessmentExample" resultType="java.lang.Long">
+    select count(*) from riassessment
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update riassessment
+    <set>
+      <if test="record.assessmentid != null">
+        assessmentId = #{record.assessmentid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.riskmsgid != null">
+        riskMsgId = #{record.riskmsgid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.possibility != null">
+        possibility = #{record.possibility,jdbcType=VARCHAR},
+      </if>
+      <if test="record.persondegreeofexposure != null">
+        personDegreeOfExposure = #{record.persondegreeofexposure,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lossofcconsequences != null">
+        lossOfCconsequences = #{record.lossofcconsequences,jdbcType=VARCHAR},
+      </if>
+      <if test="record.riskvalue != null">
+        riskValue = #{record.riskvalue,jdbcType=DOUBLE},
+      </if>
+      <if test="record.riskgrade != null">
+        riskGrade = #{record.riskgrade,jdbcType=VARCHAR},
+      </if>
+      <if test="record.evaluatetime != null">
+        evaluateTime = #{record.evaluatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update riassessment
+    set assessmentId = #{record.assessmentid,jdbcType=VARCHAR},
+      riskMsgId = #{record.riskmsgid,jdbcType=VARCHAR},
+      possibility = #{record.possibility,jdbcType=VARCHAR},
+      personDegreeOfExposure = #{record.persondegreeofexposure,jdbcType=VARCHAR},
+      lossOfCconsequences = #{record.lossofcconsequences,jdbcType=VARCHAR},
+      riskValue = #{record.riskvalue,jdbcType=DOUBLE},
+      riskGrade = #{record.riskgrade,jdbcType=VARCHAR},
+      evaluateTime = #{record.evaluatetime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="danger.bean.riIdentify.RiAssessment">
+    update riassessment
+    <set>
+      <if test="riskmsgid != null">
+        riskMsgId = #{riskmsgid,jdbcType=VARCHAR},
+      </if>
+      <if test="possibility != null">
+        possibility = #{possibility,jdbcType=VARCHAR},
+      </if>
+      <if test="persondegreeofexposure != null">
+        personDegreeOfExposure = #{persondegreeofexposure,jdbcType=VARCHAR},
+      </if>
+      <if test="lossofcconsequences != null">
+        lossOfCconsequences = #{lossofcconsequences,jdbcType=VARCHAR},
+      </if>
+      <if test="riskvalue != null">
+        riskValue = #{riskvalue,jdbcType=DOUBLE},
+      </if>
+      <if test="riskgrade != null">
+        riskGrade = #{riskgrade,jdbcType=VARCHAR},
+      </if>
+      <if test="evaluatetime != null">
+        evaluateTime = #{evaluatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where assessmentId = #{assessmentid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="danger.bean.riIdentify.RiAssessment">
+    update riassessment
+    set riskMsgId = #{riskmsgid,jdbcType=VARCHAR},
+      possibility = #{possibility,jdbcType=VARCHAR},
+      personDegreeOfExposure = #{persondegreeofexposure,jdbcType=VARCHAR},
+      lossOfCconsequences = #{lossofcconsequences,jdbcType=VARCHAR},
+      riskValue = #{riskvalue,jdbcType=DOUBLE},
+      riskGrade = #{riskgrade,jdbcType=VARCHAR},
+      evaluateTime = #{evaluatetime,jdbcType=TIMESTAMP}
+    where assessmentId = #{assessmentid,jdbcType=VARCHAR}
+  </update>
+</mapper>

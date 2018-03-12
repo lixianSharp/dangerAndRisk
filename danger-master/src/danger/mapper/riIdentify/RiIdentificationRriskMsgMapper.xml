@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="danger.mapper.riIdentify.RiIdentificationRriskMsgMapper">
+  <resultMap id="BaseResultMap" type="danger.bean.riIdentify.RiIdentificationRriskMsg">
+    <id column="riskMsgId" jdbcType="VARCHAR" property="riskmsgid" />
+    <result column="identiryId" jdbcType="VARCHAR" property="identiryid" />
+    <result column="riskAddress" jdbcType="VARCHAR" property="riskaddress" />
+    <result column="riskDescribe" jdbcType="VARCHAR" property="riskdescribe" />
+    <result column="riskType" jdbcType="VARCHAR" property="risktype" />
+    <result column="professionalTypes" jdbcType="VARCHAR" property="professionaltypes" />
+    <result column="disasterTypes" jdbcType="VARCHAR" property="disastertypes" />
+    <result column="canCauseAccidents" jdbcType="VARCHAR" property="cancauseaccidents" />
+    <result column="ctrlMeasure" jdbcType="VARCHAR" property="ctrlmeasure" />
+    <result column="principal" jdbcType="VARCHAR" property="principal" />
+    <result column="superintendent" jdbcType="VARCHAR" property="superintendent" />
+    <result column="monitoringPeriod" jdbcType="VARCHAR" property="monitoringperiod" />
+    <result column="evaluationStatus" jdbcType="VARCHAR" property="evaluationstatus" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    riskMsgId, identiryId, riskAddress, riskDescribe, riskType, professionalTypes, disasterTypes, 
+    canCauseAccidents, ctrlMeasure, principal, superintendent, monitoringPeriod, evaluationStatus
+  </sql>
+  <select id="selectByExample" parameterType="danger.bean.riIdentify.RiIdentificationRriskMsgExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from riidentificationrriskmsg
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from riidentificationrriskmsg
+    where riskMsgId = #{riskmsgid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from riidentificationrriskmsg
+    where riskMsgId = #{riskmsgid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="danger.bean.riIdentify.RiIdentificationRriskMsgExample">
+    delete from riidentificationrriskmsg
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="danger.bean.riIdentify.RiIdentificationRriskMsg">
+    insert into riidentificationrriskmsg (riskMsgId, identiryId, riskAddress, 
+      riskDescribe, riskType, professionalTypes, 
+      disasterTypes, canCauseAccidents, ctrlMeasure, 
+      principal, superintendent, monitoringPeriod, 
+      evaluationStatus)
+    values (#{riskmsgid,jdbcType=VARCHAR}, #{identiryid,jdbcType=VARCHAR}, #{riskaddress,jdbcType=VARCHAR}, 
+      #{riskdescribe,jdbcType=VARCHAR}, #{risktype,jdbcType=VARCHAR}, #{professionaltypes,jdbcType=VARCHAR}, 
+      #{disastertypes,jdbcType=VARCHAR}, #{cancauseaccidents,jdbcType=VARCHAR}, #{ctrlmeasure,jdbcType=VARCHAR}, 
+      #{principal,jdbcType=VARCHAR}, #{superintendent,jdbcType=VARCHAR}, #{monitoringperiod,jdbcType=VARCHAR}, 
+      #{evaluationstatus,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="danger.bean.riIdentify.RiIdentificationRriskMsg">
+    insert into riidentificationrriskmsg
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="riskmsgid != null">
+        riskMsgId,
+      </if>
+      <if test="identiryid != null">
+        identiryId,
+      </if>
+      <if test="riskaddress != null">
+        riskAddress,
+      </if>
+      <if test="riskdescribe != null">
+        riskDescribe,
+      </if>
+      <if test="risktype != null">
+        riskType,
+      </if>
+      <if test="professionaltypes != null">
+        professionalTypes,
+      </if>
+      <if test="disastertypes != null">
+        disasterTypes,
+      </if>
+      <if test="cancauseaccidents != null">
+        canCauseAccidents,
+      </if>
+      <if test="ctrlmeasure != null">
+        ctrlMeasure,
+      </if>
+      <if test="principal != null">
+        principal,
+      </if>
+      <if test="superintendent != null">
+        superintendent,
+      </if>
+      <if test="monitoringperiod != null">
+        monitoringPeriod,
+      </if>
+      <if test="evaluationstatus != null">
+        evaluationStatus,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="riskmsgid != null">
+        #{riskmsgid,jdbcType=VARCHAR},
+      </if>
+      <if test="identiryid != null">
+        #{identiryid,jdbcType=VARCHAR},
+      </if>
+      <if test="riskaddress != null">
+        #{riskaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="riskdescribe != null">
+        #{riskdescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="risktype != null">
+        #{risktype,jdbcType=VARCHAR},
+      </if>
+      <if test="professionaltypes != null">
+        #{professionaltypes,jdbcType=VARCHAR},
+      </if>
+      <if test="disastertypes != null">
+        #{disastertypes,jdbcType=VARCHAR},
+      </if>
+      <if test="cancauseaccidents != null">
+        #{cancauseaccidents,jdbcType=VARCHAR},
+      </if>
+      <if test="ctrlmeasure != null">
+        #{ctrlmeasure,jdbcType=VARCHAR},
+      </if>
+      <if test="principal != null">
+        #{principal,jdbcType=VARCHAR},
+      </if>
+      <if test="superintendent != null">
+        #{superintendent,jdbcType=VARCHAR},
+      </if>
+      <if test="monitoringperiod != null">
+        #{monitoringperiod,jdbcType=VARCHAR},
+      </if>
+      <if test="evaluationstatus != null">
+        #{evaluationstatus,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="danger.bean.riIdentify.RiIdentificationRriskMsgExample" resultType="java.lang.Long">
+    select count(*) from riidentificationrriskmsg
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update riidentificationrriskmsg
+    <set>
+      <if test="record.riskmsgid != null">
+        riskMsgId = #{record.riskmsgid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.identiryid != null">
+        identiryId = #{record.identiryid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.riskaddress != null">
+        riskAddress = #{record.riskaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.riskdescribe != null">
+        riskDescribe = #{record.riskdescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="record.risktype != null">
+        riskType = #{record.risktype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.professionaltypes != null">
+        professionalTypes = #{record.professionaltypes,jdbcType=VARCHAR},
+      </if>
+      <if test="record.disastertypes != null">
+        disasterTypes = #{record.disastertypes,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cancauseaccidents != null">
+        canCauseAccidents = #{record.cancauseaccidents,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ctrlmeasure != null">
+        ctrlMeasure = #{record.ctrlmeasure,jdbcType=VARCHAR},
+      </if>
+      <if test="record.principal != null">
+        principal = #{record.principal,jdbcType=VARCHAR},
+      </if>
+      <if test="record.superintendent != null">
+        superintendent = #{record.superintendent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.monitoringperiod != null">
+        monitoringPeriod = #{record.monitoringperiod,jdbcType=VARCHAR},
+      </if>
+      <if test="record.evaluationstatus != null">
+        evaluationStatus = #{record.evaluationstatus,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update riidentificationrriskmsg
+    set riskMsgId = #{record.riskmsgid,jdbcType=VARCHAR},
+      identiryId = #{record.identiryid,jdbcType=VARCHAR},
+      riskAddress = #{record.riskaddress,jdbcType=VARCHAR},
+      riskDescribe = #{record.riskdescribe,jdbcType=VARCHAR},
+      riskType = #{record.risktype,jdbcType=VARCHAR},
+      professionalTypes = #{record.professionaltypes,jdbcType=VARCHAR},
+      disasterTypes = #{record.disastertypes,jdbcType=VARCHAR},
+      canCauseAccidents = #{record.cancauseaccidents,jdbcType=VARCHAR},
+      ctrlMeasure = #{record.ctrlmeasure,jdbcType=VARCHAR},
+      principal = #{record.principal,jdbcType=VARCHAR},
+      superintendent = #{record.superintendent,jdbcType=VARCHAR},
+      monitoringPeriod = #{record.monitoringperiod,jdbcType=VARCHAR},
+      evaluationStatus = #{record.evaluationstatus,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="danger.bean.riIdentify.RiIdentificationRriskMsg">
+    update riidentificationrriskmsg
+    <set>
+      <if test="identiryid != null">
+        identiryId = #{identiryid,jdbcType=VARCHAR},
+      </if>
+      <if test="riskaddress != null">
+        riskAddress = #{riskaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="riskdescribe != null">
+        riskDescribe = #{riskdescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="risktype != null">
+        riskType = #{risktype,jdbcType=VARCHAR},
+      </if>
+      <if test="professionaltypes != null">
+        professionalTypes = #{professionaltypes,jdbcType=VARCHAR},
+      </if>
+      <if test="disastertypes != null">
+        disasterTypes = #{disastertypes,jdbcType=VARCHAR},
+      </if>
+      <if test="cancauseaccidents != null">
+        canCauseAccidents = #{cancauseaccidents,jdbcType=VARCHAR},
+      </if>
+      <if test="ctrlmeasure != null">
+        ctrlMeasure = #{ctrlmeasure,jdbcType=VARCHAR},
+      </if>
+      <if test="principal != null">
+        principal = #{principal,jdbcType=VARCHAR},
+      </if>
+      <if test="superintendent != null">
+        superintendent = #{superintendent,jdbcType=VARCHAR},
+      </if>
+      <if test="monitoringperiod != null">
+        monitoringPeriod = #{monitoringperiod,jdbcType=VARCHAR},
+      </if>
+      <if test="evaluationstatus != null">
+        evaluationStatus = #{evaluationstatus,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where riskMsgId = #{riskmsgid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="danger.bean.riIdentify.RiIdentificationRriskMsg">
+    update riidentificationrriskmsg
+    set identiryId = #{identiryid,jdbcType=VARCHAR},
+      riskAddress = #{riskaddress,jdbcType=VARCHAR},
+      riskDescribe = #{riskdescribe,jdbcType=VARCHAR},
+      riskType = #{risktype,jdbcType=VARCHAR},
+      professionalTypes = #{professionaltypes,jdbcType=VARCHAR},
+      disasterTypes = #{disastertypes,jdbcType=VARCHAR},
+      canCauseAccidents = #{cancauseaccidents,jdbcType=VARCHAR},
+      ctrlMeasure = #{ctrlmeasure,jdbcType=VARCHAR},
+      principal = #{principal,jdbcType=VARCHAR},
+      superintendent = #{superintendent,jdbcType=VARCHAR},
+      monitoringPeriod = #{monitoringperiod,jdbcType=VARCHAR},
+      evaluationStatus = #{evaluationstatus,jdbcType=VARCHAR}
+    where riskMsgId = #{riskmsgid,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,352 @@
+/*閫氱敤鍖�*/
+*{
+    padding:0;
+    margin:0;
+    font-family:"瀹嬩綋";
+}
+.error {
+	color: red;
+}
+/*瀵艰埅*/
+.el_stairTitle{
+    margin:5px 10px;
+    border-bottom:1px solid #eee;
+    padding-bottom:10px;
+    font-weight:bolder;	
+}
+.el_stairTitle span{
+    font-weight:bolder;	
+}
+
+/*
+绱㈠紩鍐呭
+*/
+.el_queryBox {
+    width: 100%;
+    height: auto;
+    border-bottom: 1px solid #ddd;
+    position: relative;
+    padding-bottom:10px;
+    margin:0 auto;
+    margin-top:10px;
+}
+.el_queryButton {
+    position: absolute;
+    right: 50px;
+    bottom: 10px;
+}
+.el_queryBox .form-control {
+    height: 25px;
+    border-radius: 3px;
+    font-size: 12px;
+    padding-top: 1px;
+    padding-bottom: 1px;
+    background-color:white;
+}
+.modal .form-control{
+	
+    background-color:white;
+}
+/*鎼滅储琛�*/
+.el_queryBoxrow{
+    height:35px;
+    line-height:35px;
+    padding-top:0;
+    padding-bottom:0;
+    clear:both;
+}
+/*鎼滅储杈规*/
+.el_queryBoxrow .el_qlmQuery {
+    min-width: 230px;
+    width: 25%;
+    float: left;
+    margin: 0 10px;
+}
+/*span鏀瑰彉鏍峰紡鍚庣殑鏍峰瓙*/
+.el_spans {
+    padding: 6px 12px;
+    font-size: 13px;
+    font-weight: normal;
+    line-height: 1;
+    color: #555;
+    text-align: center;
+    width: 1%;
+    white-space: nowrap;
+    vertical-align: middle;
+    display: table-cell;
+}
+/*鍗曢�夋鐨刲abel*/
+.el_radioBox{
+    margin-right:10px;
+}
+.el_qlmQuery label{
+    font-size:13px;
+}
+.el_qlmQueryR{
+    min-width:250px;
+}
+
+/*
+鏍囬
+*/
+.el_mainHead {
+    width: 100%;
+    text-align: center;
+    margin-top: 20px;
+    padding-bottom:20px;
+    margin-bottom:0;
+    border-bottom: 1px solid #ddd;
+    font-size:15px;
+}
+
+/*
+鎸夐挳
+*/
+ .el_MainxiaoMain{
+ 	padding:0;
+ 	height:auto;
+ 	width:100%;
+ }
+ 
+ 
+/*
+涓昏閮ㄥ垎
+*/
+.el_Mainmain{
+	margin-top:20px;
+}
+
+.el_main {
+    height: auto;
+    width: 100%;
+    padding-bottom:20px;
+    margin:0;
+}
+.panel{
+    box-shadow:none;
+}
+.panel-body{
+    border:none;
+}
+
+/*
+鎸夐挳鎿嶄綔
+*/
+.el_topButton {
+    height: 40px;
+    margin-top:10px;
+}
+.el_topButton button {
+    margin-right: 20px;
+    font-size:13px;
+}
+
+.el_delButton:hover {
+    cursor: pointer;
+}
+/*鏈夐摼鎺ョ殑鎸夐挳*/
+.el_topButton a {
+    text-decoration:none;
+    color:white;
+}
+.el_topButton a:hover{
+    background:none;
+}
+
+/*
+宸︿晶鐨勬爲
+*/
+.el_leftTree{
+    min-width:13%;
+    float:left;
+}
+.el_treeTitle{
+    display: block;
+    font-size:15px;
+    padding:20px;
+    padding-bottom:0;
+}
+ul.ztree {
+    width: 100%;
+    background-color: white;
+    height: auto;
+    border:0;
+    padding-bottom:30px;
+    overflow-y: auto;
+    text-align:center;
+}
+/*鏍戠殑灏忎笁瑙�*/
+.el_smallTriangle {
+    position: absolute;
+    right: 7px;
+    top: 10px;
+    z-index: 20;
+}
+
+/*
+鍙充晶鍐呭
+*/
+.el_qlmContent{
+    width:85%;
+    float:right;
+    font-size:15px;
+}
+/*琛ㄦ牸鍘婚櫎a鏍囩鐨勪笅鍒掔嚎*/
+.table a{
+    text-decoration:none;
+    color:darkblue;
+    padding:2px 6px;
+}
+.table a:hover{
+    background-color:rgb(250,250,250);
+    color:dodgerblue;
+    font-weight:bolder;
+}
+/*鍒嗛〉*/
+#paginationID{
+    color:black;
+    height:51px;
+    min-width:580px;
+    background-color:white;
+    border:2px solid #eee;
+    padding:8px;
+    float:right;
+}
+.pagination-link{
+    border:1px solid #ccc;
+}
+
+/*鍒嗛〉*/
+#paginationIDU{
+    color:black;
+    height:51px;
+    min-width:580px;
+    background-color:white;
+    border:2px solid #eee;
+    padding:8px;
+    float:right;
+}
+.pagination-link{
+    border:1px solid #ccc;
+}
+#paginationIDU table{
+    position:relative;
+    top:-10px;
+}
+#paginationIDU table tbody tr:first-child td:nth-child(2){
+    position:relative;
+    top:10px;
+}
+
+
+/*
+妯℃�佹涓殑鍐呭
+*/
+/* 瀹藉害 */
+.modal .modal-dialog{ 
+    width:80%;
+    style="height:450px; 
+    overflow-y:scroll;
+}
+#el_Export .modal-dialog{
+    width:50%;
+    min-width:600px;
+}
+        
+.el_modellist {
+    margin: 10px;
+    margin-bottom: 15px;
+    width: 97%;
+}
+
+.modal .form-control {
+    border-radius: 3px;
+    height:32px;
+    font-size: 13px;
+    width:76%;/*
+    padding-top: 1px;
+    padding-bottom: 1px;*/
+}
+/* 鏂囨湰妗� */
+.modal .texta {
+	
+	height:auto;	
+}
+.el_modelinput {
+    width: 80%;
+}
+/*绱㈠紩涓殑涓嬫媺妗�*/
+.selectpicker {
+    padding: 0;
+    padding-left: 10px;
+}
+/*鏌ョ湅鏉冮檺锛岃鑹茬殑璇︾粏淇℃伅*/
+.el_AuthInfo {
+    width: 100%;
+}
+.el_AuthInfo th, .el_AuthInfo td {
+    width: 50%;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    border: 1px solid #ccc;
+}
+/*鍗曢�夋寜閽殑瀛椾綋澶у皬*/
+.el_modellist  label{
+    font-size:13px;
+}
+/*鏍囬*/
+.modal-title{
+    font-size:16px;
+}
+
+
+/*<!--璇︾粏淇℃伅锛屽煿璁。妗�-->*/
+.el_parperInfo table {
+        width: 95%;
+        margin:0 auto;
+    }
+.el_parperInfo table tr {
+    height: 35px;
+    line-height:35px;
+    border-bottom: 1px solid rgb(250,250,250);
+    border-right: 1px solid #ccc;
+}
+.el_parperInfo table tr:first-child{
+    border-top: 1px solid #ccc;
+}
+.el_parperInfo table tr:last-child{
+	border-bottom: 1px solid #ccc;
+}
+.el_parperInfo table tr td:nth-child(even){
+    text-align:left;
+    min-width:100px;
+    padding-right:30px;
+    margin-right:20px;
+    padding-left:10px;
+}
+.el_parperInfo table tr td:nth-child(odd) {
+    width: 90px;
+    background-color:#eee;
+    text-align:center;
+    border-right:1px solid #eee;
+    border-left:1px solid #ddd;
+}
+#el_FourInfo .table{
+	min-width:50%;
+	width:90%;
+	margin:0 30px;
+}
+
+
+/* 淇濆瓨鎸夐挳 */
+ #querySubmitDiv{
+	padding-right:24%;
+}
+
+
+/* 楠岃瘉绾㈣壊锛� */
+.error {
+	color: red;
+}
+

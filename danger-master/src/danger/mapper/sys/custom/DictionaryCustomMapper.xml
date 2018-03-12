@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="danger.mapper.sys.custom.DictionaryCustomMapper">
+	
+	<!--查询字典的条件 -->
+	<sql id="query_dictionary_where">
+		<if test="dictionaryId!=null">
+			and dictionaryId=#{dictionaryId}
+		</if>
+		<if test="upDictionaryId!=null">
+			and upDictionaryId=#{upDictionaryId}
+		</if>
+		<if test="name!=null">
+			and name like '%${name}%'
+			
+		</if>
+		<if test="1 == 1">
+			and dictionaryId !='10'
+		</if>
+	</sql>
+
+	<!-- 查询分页 -->
+	<sql id="queryPage_limit">
+		<if test="index!=null">
+			LIMIT #{index},#{currentCount}
+		</if>
+	</sql>
+	<!-- 按条件查出所有的字典信息 -->
+	<select id="findDictionaryByCondition" resultType="danger.bean.sys.Dictionary"
+		parameterType="hashmap">
+		SELECT * FROM dictionary
+
+		<where>
+			<include refid="query_dictionary_where"></include>
+			
+		</where>
+		
+		<include refid="queryPage_limit"></include>
+
+	</select>
+
+	<!-- 得到符合该条件的字典记录数量 -->
+	<select id="getDictionaryCountByDepartmentId" resultType="int"
+		parameterType="hashmap">
+		SELECT count(dictionaryid) FROM dictionary
+		<where>
+			<include refid="query_dictionary_where"></include>
+		</where>
+	</select>
+
+
+
+</mapper>

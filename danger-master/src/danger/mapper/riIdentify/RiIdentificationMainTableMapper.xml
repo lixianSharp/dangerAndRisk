@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="danger.mapper.riIdentify.RiIdentificationMainTableMapper">
+  <resultMap id="BaseResultMap" type="danger.bean.riIdentify.RiIdentificationMainTable">
+    <id column="identiryId" jdbcType="VARCHAR" property="identiryid" />
+    <result column="year" jdbcType="TIMESTAMP" property="year" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="meetingAddress" jdbcType="VARCHAR" property="meetingaddress" />
+    <result column="compere" jdbcType="VARCHAR" property="compere" />
+    <result column="recorder" jdbcType="VARCHAR" property="recorder" />
+    <result column="participants" jdbcType="VARCHAR" property="participants" />
+    <result column="meetingContent" jdbcType="VARCHAR" property="meetingcontent" />
+    <result column="identifyMark" jdbcType="VARCHAR" property="identifymark" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createtime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    identiryId, year, name, meetingAddress, compere, recorder, participants, meetingContent, 
+    identifyMark, createTime
+  </sql>
+  <select id="selectByExample" parameterType="danger.bean.riIdentify.RiIdentificationMainTableExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from riidentificationmaintable
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from riidentificationmaintable
+    where identiryId = #{identiryid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from riidentificationmaintable
+    where identiryId = #{identiryid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="danger.bean.riIdentify.RiIdentificationMainTableExample">
+    delete from riidentificationmaintable
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="danger.bean.riIdentify.RiIdentificationMainTable">
+    insert into riidentificationmaintable (identiryId, year, name, 
+      meetingAddress, compere, recorder, 
+      participants, meetingContent, identifyMark, 
+      createTime)
+    values (#{identiryid,jdbcType=VARCHAR}, #{year,jdbcType=TIMESTAMP}, #{name,jdbcType=VARCHAR}, 
+      #{meetingaddress,jdbcType=VARCHAR}, #{compere,jdbcType=VARCHAR}, #{recorder,jdbcType=VARCHAR}, 
+      #{participants,jdbcType=VARCHAR}, #{meetingcontent,jdbcType=VARCHAR}, #{identifymark,jdbcType=VARCHAR}, 
+      #{createtime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="danger.bean.riIdentify.RiIdentificationMainTable">
+    insert into riidentificationmaintable
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="identiryid != null">
+        identiryId,
+      </if>
+      <if test="year != null">
+        year,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="meetingaddress != null">
+        meetingAddress,
+      </if>
+      <if test="compere != null">
+        compere,
+      </if>
+      <if test="recorder != null">
+        recorder,
+      </if>
+      <if test="participants != null">
+        participants,
+      </if>
+      <if test="meetingcontent != null">
+        meetingContent,
+      </if>
+      <if test="identifymark != null">
+        identifyMark,
+      </if>
+      <if test="createtime != null">
+        createTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="identiryid != null">
+        #{identiryid,jdbcType=VARCHAR},
+      </if>
+      <if test="year != null">
+        #{year,jdbcType=TIMESTAMP},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="meetingaddress != null">
+        #{meetingaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="compere != null">
+        #{compere,jdbcType=VARCHAR},
+      </if>
+      <if test="recorder != null">
+        #{recorder,jdbcType=VARCHAR},
+      </if>
+      <if test="participants != null">
+        #{participants,jdbcType=VARCHAR},
+      </if>
+      <if test="meetingcontent != null">
+        #{meetingcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="identifymark != null">
+        #{identifymark,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="danger.bean.riIdentify.RiIdentificationMainTableExample" resultType="java.lang.Long">
+    select count(*) from riidentificationmaintable
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update riidentificationmaintable
+    <set>
+      <if test="record.identiryid != null">
+        identiryId = #{record.identiryid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.year != null">
+        year = #{record.year,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.name != null">
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.meetingaddress != null">
+        meetingAddress = #{record.meetingaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.compere != null">
+        compere = #{record.compere,jdbcType=VARCHAR},
+      </if>
+      <if test="record.recorder != null">
+        recorder = #{record.recorder,jdbcType=VARCHAR},
+      </if>
+      <if test="record.participants != null">
+        participants = #{record.participants,jdbcType=VARCHAR},
+      </if>
+      <if test="record.meetingcontent != null">
+        meetingContent = #{record.meetingcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.identifymark != null">
+        identifyMark = #{record.identifymark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createtime != null">
+        createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update riidentificationmaintable
+    set identiryId = #{record.identiryid,jdbcType=VARCHAR},
+      year = #{record.year,jdbcType=TIMESTAMP},
+      name = #{record.name,jdbcType=VARCHAR},
+      meetingAddress = #{record.meetingaddress,jdbcType=VARCHAR},
+      compere = #{record.compere,jdbcType=VARCHAR},
+      recorder = #{record.recorder,jdbcType=VARCHAR},
+      participants = #{record.participants,jdbcType=VARCHAR},
+      meetingContent = #{record.meetingcontent,jdbcType=VARCHAR},
+      identifyMark = #{record.identifymark,jdbcType=VARCHAR},
+      createTime = #{record.createtime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="danger.bean.riIdentify.RiIdentificationMainTable">
+    update riidentificationmaintable
+    <set>
+      <if test="year != null">
+        year = #{year,jdbcType=TIMESTAMP},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="meetingaddress != null">
+        meetingAddress = #{meetingaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="compere != null">
+        compere = #{compere,jdbcType=VARCHAR},
+      </if>
+      <if test="recorder != null">
+        recorder = #{recorder,jdbcType=VARCHAR},
+      </if>
+      <if test="participants != null">
+        participants = #{participants,jdbcType=VARCHAR},
+      </if>
+      <if test="meetingcontent != null">
+        meetingContent = #{meetingcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="identifymark != null">
+        identifyMark = #{identifymark,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where identiryId = #{identiryid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="danger.bean.riIdentify.RiIdentificationMainTable">
+    update riidentificationmaintable
+    set year = #{year,jdbcType=TIMESTAMP},
+      name = #{name,jdbcType=VARCHAR},
+      meetingAddress = #{meetingaddress,jdbcType=VARCHAR},
+      compere = #{compere,jdbcType=VARCHAR},
+      recorder = #{recorder,jdbcType=VARCHAR},
+      participants = #{participants,jdbcType=VARCHAR},
+      meetingContent = #{meetingcontent,jdbcType=VARCHAR},
+      identifyMark = #{identifymark,jdbcType=VARCHAR},
+      createTime = #{createtime,jdbcType=TIMESTAMP}
+    where identiryId = #{identiryid,jdbcType=VARCHAR}
+  </update>
+</mapper>

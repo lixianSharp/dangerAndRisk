@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>菜单</title>
+
+    <script type="text/javascript" src="danger/js/jquery.min.js"></script>
+    <script type="text/javascript" src="danger/bs/js/bootstrap.js"></script>
+    <link rel="stylesheet" href="danger/bs/css/bootstrap.css"/>
+
+    <link rel="stylesheet" href="danger/css/public/menu.css"/>
+
+</head>
+<body>
+
+    <div class="el_left" id="el_left">
+        <!--左边索引模块-->
+        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+
+            <!--隐患管理-->
+            <div class="panel panel-default el_bigMenu" value="0">
+                <div class="panel-heading" role="tab" id="heading1">
+                    <a role="button" data-toggle="collapse" data-parent="#accordion"
+                       href="#collapse1" aria-expanded="true" aria-controls="collapse1" class="el_title">
+                        隐患管理
+                    </a>
+                </div>
+                <div id="collapse1" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading1">
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <a id="#hdInsert" href="../hdmanage/hdInsert.html" class="towmenu" aria-controls="profile">
+                                隐患录入
+                            </a>
+                        </li>
+                        <li class="list-group-item">
+                            <a id="#handle" href="../hdmanage/handle.html" class="towmenu" aria-controls="profile" role="tab">
+                                现场处理
+                            </a>
+                        </li>
+                        <li class="list-group-item">
+                            <a id="#hdfour" href="../hdmanage/hdfour.html" class="towmenu" aria-controls="profile" role="tab">
+                                隐患四定
+                            </a>
+                        </li>
+                        <li class="list-group-item">
+                            <a id="#hdtrace" href="../hdmanage/hdtrace.html" class="towmenu" aria-controls="profile" role="tab">
+                                隐患跟踪
+                            </a>
+                        </li>
+                        <li class="list-group-item">
+                            <a id="#hdReview" href="../hdmanage/hdReview.html" class="towmenu" aria-controls="profile" role="tab">
+                                隐患复查
+                            </a>
+                        </li>
+                        <li class="list-group-item">
+                            <a id="#hdQuery" href="../hdmanage/hdQuery.html" class="towmenu" aria-controls="profile" role="tab">
+                                隐患查询
+                            </a>
+                        </li>
+                        <li class="list-group-item">
+                            <a id="#hdDayReport" href="../hdmanage/hdDayReport.html" class="towmenu" aria-controls="profile" role="tab">
+                                隐患日报
+                            </a>
+                        </li>
+                        <li class="list-group-item">
+                            <a id="#hdStatistic" href="../hdmanage/hdStatistic.html" class="towmenu" aria-controls="profile" role="tab">
+                                隐患统计
+                            </a>
+                        </li>
+                        <li class="list-group-item">
+                            <a id="#hdMonthReport" href="../hdmanage/hdMonthReport.html" class="towmenu" aria-controls="profile" role="tab">
+                                隐患月报
+                            </a>
+                        </li>
+                        <li class="list-group-item">
+                            <a id="#queryUser5" href="../hdmanage/" class="towmenu" aria-controls="profile" role="tab" data-toggle="tab">
+                                隐患分类
+                            </a>
+                        </li>
+                        <li class="list-group-item">
+                            <a id="#queryUser6" href="../hdmanage/" class="towmenu" aria-controls="profile" role="tab" data-toggle="tab">
+                                短信提醒
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!--系统管理-->
+            <div class="panel panel-default el_bigMenu" value="1">
+                <div class="panel-heading" role="tab" id="heading2">
+                    <a role="button" data-toggle="collapse" data-parent="#accordion"
+                       href="#collapse2" aria-expanded="true" aria-controls="collapse2" class="el_title">
+                        系统管理
+                    </a>
+                </div>
+                <div id="collapse2" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading2">
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <a id="#departManage" href="../systemManage/departManage.html" class="towmenu" aria-controls="profile" role="tab">
+                                机构管理
+                            </a>
+                        </li>
+                        <li class="list-group-item">
+                            <a id="#users" href="../systemManage/users.html" class="towmenu" aria-controls="profile" role="tab">
+                                用户管理
+                            </a>
+                        </li>
+                        <li class="list-group-item">
+                            <a id="#dictionary" href="../systemManage/dictionary.html" class="towmenu" aria-controls="profile" role="tab">
+                                字典管理
+                            </a>
+                        </li>
+                        <li class="list-group-item">
+                            <a id="#authority" href="../systemManage/authority.html" class="towmenu" aria-controls="profile" role="tab">
+                                查看权限
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>

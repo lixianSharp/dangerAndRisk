@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+	<package name="queryView" extends="struts-default" namespace="/">
+		<action name="queryView_*" class="danger.action.queryView.QueryViewAction"
+			method="{1}">
+			<result name="pageDanger">/main/handle.jsp</result>
+			<result name="pageSiding">/main/hdfour.jsp
+			</result>
+			<result name="pageDangerS">/main/hdtrace.jsp
+			</result>
+			<result name="pageDangerSF">/main/hdReview.jsp</result>
+			<result name="pageDangerQuery">/main/hdQuery.jsp
+			</result>
+			<result name="pageDangerSFR">/main/hdDayReport.jsp
+			</result>
+			<result name="pageDangerSFR1">/main/hdMonthReport.jsp
+			</result>
+		</action>
+
+		<action name="tongjiInfo" class="danger.action.queryView.TongjiAction">
+			<result>/main/hdStatistic.jsp</result>
+		</action>
+
+
+		<!-- 登陆 -->
+		<action name="login" class="loginAction">
+			<result name="success" type="redirect">/index.jsp</result>
+			<result name="error">/message.jsp</result>
+		</action>
+
+		<!-- 退出 -->
+		<action name="logout" class="logoutAction">
+			<!-- 成功后送到登陆页面 -->
+			<result name="success" type="redirect">/login/login.jsp</result>
+		</action>
+
+
+	</package>
+
+</struts>

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<package name="dictionary" extends="json-default">
+		
+		<!-- 按照上级字典编号查询字典信息  -->
+		<action name="searchDictionaryByUpId"
+			class="danger.action.sys.dic.SearchDictionaryAction"
+			method="searchDictionaryByUpId">
+			<result type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
+		
+		<!-- 查询即将新增的字典的编号  -->
+		<action name="searchDicNextId"
+			class="danger.action.sys.dic.SearchDictionaryAction"
+			method="searchNextId">
+			<result type="json">
+				<param name="root">nextId</param>
+			</result>
+		</action>
+	
+		<!-- 按条件查询字典信息  -->
+		<action name="searchDictionaryByCondition"
+			class="danger.action.sys.dic.SearchDictionaryAction"
+			method="searchDictionaryByCondition">
+			<result type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
+		
+		<!-- 查找要更新的字典信息  -->
+		<action name="getUpdateDictionary"
+			class="danger.action.sys.dic.UpdateDictionaryAction"
+			method="getUpdateDictionary">
+			<result type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
+		
+		<!-- 更新字典信息  -->
+		<action name="updateDictionaryAction"
+			class="danger.action.sys.dic.UpdateDictionaryAction"
+			method="updateDictionary">
+			<result type="json">
+				<param name="root">updateResult</param>
+			</result>
+		</action>
+		
+		<!-- 增加字典信息 -->
+		<action name="addDictionaryAction"
+			class="danger.action.sys.dic.AddDictionaryAction"
+			method="addDictionary">
+			<result type="json">
+				<param name="root">addResult</param>
+			</result>
+		</action>
+		
+		<!-- 批量删除字典信息 -->
+		<action name="deleteDictionaryAction"
+			class="danger.action.sys.dic.DeleteDictionaryAction"
+			method="deleteDictionary">
+			<result type="json">
+				<param name="root">deleteResult</param>
+			</result>
+		</action>
+		
+		<!-- 单条删除 -->
+		<action name="deleteSingleDic" class="danger.action.sys.dic.DeleteDictionaryAction" 
+			method="deleteSingleDic">
+			<result type="json">
+				<param name="root">deleteSingleResult2</param>
+			</result>
+		</action>
+		
+		<!-- 查询字典树 -->
+		<action name="searchDTreeAction"
+			class="danger.action.sys.dic.SearchDTreeAction" method="searchDTree">
+			<result type="json">
+				<param name="root">treeList2</param>
+			</result>
+		</action>
+	</package>
+</struts>

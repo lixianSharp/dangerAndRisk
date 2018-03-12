@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace命名空间，作用就是对sql进行分类化管理，理解sql隔离 注意：使用mapper代理方法开发，namespace有特殊重要的作用 -->
+<mapper namespace="danger.mapper.dangerManage.custom.DangerCustomMapper">
+
+	<!-- qiao li qiang start -->
+	<!-- 查询分页 -->
+	<sql id="query_page_limit">
+		<if test="index!=null">
+			LIMIT #{index},#{currentCount}
+		</if>
+	</sql>
+	<!-- 查询隐患的条件 -->
+	<sql id="query_danger_where">
+		<if test="checkunit!=null">
+			and checkunit=#{checkunit}
+		</if>
+		<if test="manager!=null">
+			and manager=#{manager}
+		</if>
+		<if test="startTime!=null">
+			and findTime > #{startTime}
+		</if>
+		<if test="endTime!=null">
+			and findTime&lt;#{endTime}
+		</if>
+		<if test="dangergrade!=null">
+			and dangergrade=#{dangergrade}
+		</if>
+		<if test="address!=null">
+			and address like '%${address}%'
+		</if>
+		<if test="content!=null">
+			and content like '%${content}%'
+		</if>
+		<if test="type!=null">
+			and type=#{type}
+		</if>
+		<if test="dangerstatus!=null">
+			and dangerstatus=#{dangerstatus}
+		</if>
+		<if test="unit!=null">
+			and unit=#{unit}
+		</if>
+		<if test="findtime!=null">
+			and findtime=#{findtime}
+		</if>
+	</sql>
+
+	<!-- 查出隐患按发现时间降序排序 -->
+	<select id="findDangerByCondition" resultType="danger.bean.dangerManage.Danger"
+		parameterType="hashmap">
+		SELECT * FROM `danger`.`danger`
+		<where>
+			<include refid="query_danger_where"></include>
+		</where>
+		ORDER BY findtime DESC
+		<include refid="query_page_limit"></include>
+	</select>
+	
+	<!-- 根据条件查询满足条件的总数 -->
+	<select id="getDangerCountByCondition" resultType="int"
+		parameterType="hashmap">
+		SELECT count(dangerId) FROM `danger`.`danger`
+		<where>
+			<include refid="query_danger_where"></include>
+		</where>
+	</select>
+	<!-- qiao li qiang end -->
+
+	<!-- lixianyuan start -->
+	<!-- 查询所有隐患信息 中的班次 -->
+	<select id="findAllDangerclassType" resultType="danger.bean.dangerManage.Danger">
+		select classType
+		from danger
+	</select>
+
+	<!-- 查询所有隐患信息 中的检查单位 -->
+	<select id="findAllDangercheckUnit" resultType="danger.bean.dangerManage.Danger">
+		select checkUnit
+		from danger
+	</select>
+
+	<!-- 查询所有隐患信息 中的隐患类型 -->
+	<select id="findAllDangertype" resultType="danger.bean.dangerManage.Danger">
+		select type from
+		danger
+	</select>
+
+	<!-- 查询所有隐患信息 中的责任单位 -->
+	<select id="findAllDangerunit" resultType="danger.bean.dangerManage.Danger">
+		select unit from
+		danger
+	</select>
+	
+	<!-- 根据机构名称获取机构的负责人  也就是根据责任单位名称获取责任单位的负责人 -->
+	<select id="getManagerByDepartmentName" parameterType="String" resultType="String">
+		select department.manager from department where department.name = #{departmentname}
+	</select>
+	<!-- lixianyuan end -->
+</mapper>
+
+

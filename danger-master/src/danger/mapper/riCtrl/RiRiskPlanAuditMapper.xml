@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="danger.mapper.riCtrl.RiRiskPlanAuditMapper">
+  <resultMap id="BaseResultMap" type="danger.bean.riCtrl.RiRiskPlanAudit">
+    <id column="riskPlanAuditId" jdbcType="VARCHAR" property="riskplanauditid" />
+    <result column="riCtrlPlanId" jdbcType="VARCHAR" property="rictrlplanid" />
+    <result column="auditMsg" jdbcType="VARCHAR" property="auditmsg" />
+    <result column="auditStatus" jdbcType="VARCHAR" property="auditstatus" />
+    <result column="auditTime" jdbcType="TIMESTAMP" property="audittime" />
+    <result column="auditPerson" jdbcType="VARCHAR" property="auditperson" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    riskPlanAuditId, riCtrlPlanId, auditMsg, auditStatus, auditTime, auditPerson
+  </sql>
+  <select id="selectByExample" parameterType="danger.bean.riCtrl.RiRiskPlanAuditExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from ririskplanaudit
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ririskplanaudit
+    where riskPlanAuditId = #{riskplanauditid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from ririskplanaudit
+    where riskPlanAuditId = #{riskplanauditid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="danger.bean.riCtrl.RiRiskPlanAuditExample">
+    delete from ririskplanaudit
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="danger.bean.riCtrl.RiRiskPlanAudit">
+    insert into ririskplanaudit (riskPlanAuditId, riCtrlPlanId, auditMsg, 
+      auditStatus, auditTime, auditPerson
+      )
+    values (#{riskplanauditid,jdbcType=VARCHAR}, #{rictrlplanid,jdbcType=VARCHAR}, #{auditmsg,jdbcType=VARCHAR}, 
+      #{auditstatus,jdbcType=VARCHAR}, #{audittime,jdbcType=TIMESTAMP}, #{auditperson,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="danger.bean.riCtrl.RiRiskPlanAudit">
+    insert into ririskplanaudit
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="riskplanauditid != null">
+        riskPlanAuditId,
+      </if>
+      <if test="rictrlplanid != null">
+        riCtrlPlanId,
+      </if>
+      <if test="auditmsg != null">
+        auditMsg,
+      </if>
+      <if test="auditstatus != null">
+        auditStatus,
+      </if>
+      <if test="audittime != null">
+        auditTime,
+      </if>
+      <if test="auditperson != null">
+        auditPerson,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="riskplanauditid != null">
+        #{riskplanauditid,jdbcType=VARCHAR},
+      </if>
+      <if test="rictrlplanid != null">
+        #{rictrlplanid,jdbcType=VARCHAR},
+      </if>
+      <if test="auditmsg != null">
+        #{auditmsg,jdbcType=VARCHAR},
+      </if>
+      <if test="auditstatus != null">
+        #{auditstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="audittime != null">
+        #{audittime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="auditperson != null">
+        #{auditperson,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="danger.bean.riCtrl.RiRiskPlanAuditExample" resultType="java.lang.Long">
+    select count(*) from ririskplanaudit
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update ririskplanaudit
+    <set>
+      <if test="record.riskplanauditid != null">
+        riskPlanAuditId = #{record.riskplanauditid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rictrlplanid != null">
+        riCtrlPlanId = #{record.rictrlplanid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.auditmsg != null">
+        auditMsg = #{record.auditmsg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.auditstatus != null">
+        auditStatus = #{record.auditstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.audittime != null">
+        auditTime = #{record.audittime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.auditperson != null">
+        auditPerson = #{record.auditperson,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update ririskplanaudit
+    set riskPlanAuditId = #{record.riskplanauditid,jdbcType=VARCHAR},
+      riCtrlPlanId = #{record.rictrlplanid,jdbcType=VARCHAR},
+      auditMsg = #{record.auditmsg,jdbcType=VARCHAR},
+      auditStatus = #{record.auditstatus,jdbcType=VARCHAR},
+      auditTime = #{record.audittime,jdbcType=TIMESTAMP},
+      auditPerson = #{record.auditperson,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="danger.bean.riCtrl.RiRiskPlanAudit">
+    update ririskplanaudit
+    <set>
+      <if test="rictrlplanid != null">
+        riCtrlPlanId = #{rictrlplanid,jdbcType=VARCHAR},
+      </if>
+      <if test="auditmsg != null">
+        auditMsg = #{auditmsg,jdbcType=VARCHAR},
+      </if>
+      <if test="auditstatus != null">
+        auditStatus = #{auditstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="audittime != null">
+        auditTime = #{audittime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="auditperson != null">
+        auditPerson = #{auditperson,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where riskPlanAuditId = #{riskplanauditid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="danger.bean.riCtrl.RiRiskPlanAudit">
+    update ririskplanaudit
+    set riCtrlPlanId = #{rictrlplanid,jdbcType=VARCHAR},
+      auditMsg = #{auditmsg,jdbcType=VARCHAR},
+      auditStatus = #{auditstatus,jdbcType=VARCHAR},
+      auditTime = #{audittime,jdbcType=TIMESTAMP},
+      auditPerson = #{auditperson,jdbcType=VARCHAR}
+    where riskPlanAuditId = #{riskplanauditid,jdbcType=VARCHAR}
+  </update>
+</mapper>

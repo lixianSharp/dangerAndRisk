@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="danger.mapper.dangerHandle.DelayMapper" >
+  <resultMap id="BaseResultMap" type="danger.bean.dangerHandle.Delay" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="sidingId" property="sidingid" jdbcType="INTEGER" />
+    <result column="delaySeq" property="delayseq" jdbcType="INTEGER" />
+    <result column="deleayReason" property="deleayreason" jdbcType="VARCHAR" />
+    <result column="delayTime" property="delaytime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, sidingId, delaySeq, deleayReason, delayTime
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="danger.bean.dangerHandle.DelayExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from delay
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from delay
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from delay
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="danger.bean.dangerHandle.DelayExample" >
+    delete from delay
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="danger.bean.dangerHandle.Delay" >
+    insert into delay (id, sidingId, delaySeq, 
+      deleayReason, delayTime)
+    values (#{id,jdbcType=INTEGER}, #{sidingid,jdbcType=INTEGER}, #{delayseq,jdbcType=INTEGER}, 
+      #{deleayreason,jdbcType=VARCHAR}, #{delaytime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="danger.bean.dangerHandle.Delay" >
+    insert into delay
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="sidingid != null" >
+        sidingId,
+      </if>
+      <if test="delayseq != null" >
+        delaySeq,
+      </if>
+      <if test="deleayreason != null" >
+        deleayReason,
+      </if>
+      <if test="delaytime != null" >
+        delayTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="sidingid != null" >
+        #{sidingid,jdbcType=INTEGER},
+      </if>
+      <if test="delayseq != null" >
+        #{delayseq,jdbcType=INTEGER},
+      </if>
+      <if test="deleayreason != null" >
+        #{deleayreason,jdbcType=VARCHAR},
+      </if>
+      <if test="delaytime != null" >
+        #{delaytime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="danger.bean.dangerHandle.DelayExample" resultType="java.lang.Integer" >
+    select count(*) from delay
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update delay
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.sidingid != null" >
+        sidingId = #{record.sidingid,jdbcType=INTEGER},
+      </if>
+      <if test="record.delayseq != null" >
+        delaySeq = #{record.delayseq,jdbcType=INTEGER},
+      </if>
+      <if test="record.deleayreason != null" >
+        deleayReason = #{record.deleayreason,jdbcType=VARCHAR},
+      </if>
+      <if test="record.delaytime != null" >
+        delayTime = #{record.delaytime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update delay
+    set id = #{record.id,jdbcType=INTEGER},
+      sidingId = #{record.sidingid,jdbcType=INTEGER},
+      delaySeq = #{record.delayseq,jdbcType=INTEGER},
+      deleayReason = #{record.deleayreason,jdbcType=VARCHAR},
+      delayTime = #{record.delaytime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="danger.bean.dangerHandle.Delay" >
+    update delay
+    <set >
+      <if test="sidingid != null" >
+        sidingId = #{sidingid,jdbcType=INTEGER},
+      </if>
+      <if test="delayseq != null" >
+        delaySeq = #{delayseq,jdbcType=INTEGER},
+      </if>
+      <if test="deleayreason != null" >
+        deleayReason = #{deleayreason,jdbcType=VARCHAR},
+      </if>
+      <if test="delaytime != null" >
+        delayTime = #{delaytime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="danger.bean.dangerHandle.Delay" >
+    update delay
+    set sidingId = #{sidingid,jdbcType=INTEGER},
+      delaySeq = #{delayseq,jdbcType=INTEGER},
+      deleayReason = #{deleayreason,jdbcType=VARCHAR},
+      delayTime = #{delaytime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

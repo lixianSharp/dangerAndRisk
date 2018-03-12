@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="danger.mapper.riIdentify.custom.RiIdentificationRriskMsgCustomMapper">
+   <!-- 查询分页 index:当前页页号 currentCount:每页显示的记录数 -->
+	<sql id="query_page_limit">
+		<if test="index!=null">
+			LIMIT #{index},#{currentCount}
+		</if>
+	</sql>
+	
+	<!-- 查询辨识风险信息的条件 -->
+	<sql id="query_RiIdentificationRriskMsg_where">
+		<if test="riskmsgid!=null">
+			and riskmsgid=#{riskmsgid}
+		</if>
+		<if test="identiryid!=null">
+			and identiryid=#{identiryid}
+		</if>
+		<if test="riskaddress!=null">
+			and riskaddress=#{riskaddress}
+		</if>
+		<if test="riskdescribe!=null">
+			and riskdescribe=#{riskdescribe}
+		</if>
+		<if test="risktype!=null">
+			and risktype=#{risktype}
+		</if>
+		<if test="professionaltypes!=null">
+			and professionaltypes=#{professionaltypes}
+		</if>
+		<if test="disastertypes!=null">
+			and disastertypes=#{disastertypes}
+		</if>
+		<if test="cancauseaccidents!=null">
+			and cancauseaccidents=#{cancauseaccidents}
+		</if>
+		<if test="ctrlmeasure!=null">
+			and ctrlmeasure=#{ctrlmeasure}
+		</if>
+		<if test="principal!=null">
+			and principal=#{principal}
+		</if>
+		<if test="superintendent!=null">
+			and superintendent=#{superintendent}
+		</if>
+		<if test="monitoringperiod!=null">
+			and monitoringperiod=#{monitoringperiod}
+		</if>
+		<if test="evaluationstatus!=null">
+			and evaluationstatus=#{evaluationstatus}
+		</if>
+	</sql>
+	
+	<!-- 组合条件查询辨识风险信息 分页查询 根据风险类型降序排序 -->
+	<select id="findRiIdentificationRriskMsgByCondition" parameterType="map" resultType="danger.bean.riIdentify.RiIdentificationRriskMsg">
+		select * from riIdentificationrriskmsg
+		<where>
+			<include refid="query_RiIdentificationRriskMsg_where"></include>
+		</where>
+		order by risktype desc 
+		<include refid="query_page_limit"></include>
+	</select>
+	
+	
+	<!-- 组合条件查询辨识风险信息的总记录数 -->
+	<select id="getRiIdentificationRriskMsgCountByCondition" parameterType="map" resultType="int">
+		select count(*) from riIdentificationrriskmsg
+		<where>
+			<include refid="query_RiIdentificationRriskMsg_where"></include>
+		</where>
+	</select>
+	
+	
+	<!-- 根据辨识风险信息id删除风险管控计划详细表信息 -->
+	<select id="delRiCtrlPlanByRiskMsgId" parameterType="String" resultType="int">
+		DELETE FROM ridetailedofriskctrlplan WHERE ridetailedofriskctrlplan.riskMsgId=#{riskMsgId}
+	</select>
+	
+	
+	
+</mapper>

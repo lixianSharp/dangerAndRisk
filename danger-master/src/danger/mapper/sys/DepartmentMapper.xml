@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="danger.mapper.sys.DepartmentMapper" >
+  <resultMap id="BaseResultMap" type="danger.bean.sys.Department" >
+    <id column="departmentId" property="departmentid" jdbcType="VARCHAR" />
+    <result column="upDepartmentId" property="updepartmentid" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="manager" property="manager" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    departmentId, upDepartmentId, name, manager, phone
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="danger.bean.sys.DepartmentExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from department
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from department
+    where departmentId = #{departmentid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from department
+    where departmentId = #{departmentid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="danger.bean.sys.DepartmentExample" >
+    delete from department
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="danger.bean.sys.Department" >
+    insert into department (departmentId, upDepartmentId, name, 
+      manager, phone)
+    values (#{departmentid,jdbcType=VARCHAR}, #{updepartmentid,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{manager,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="danger.bean.sys.Department" >
+    insert into department
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="departmentid != null" >
+        departmentId,
+      </if>
+      <if test="updepartmentid != null" >
+        upDepartmentId,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="manager != null" >
+        manager,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="departmentid != null" >
+        #{departmentid,jdbcType=VARCHAR},
+      </if>
+      <if test="updepartmentid != null" >
+        #{updepartmentid,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="manager != null" >
+        #{manager,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="danger.bean.sys.DepartmentExample" resultType="java.lang.Integer" >
+    select count(*) from department
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update department
+    <set >
+      <if test="record.departmentid != null" >
+        departmentId = #{record.departmentid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updepartmentid != null" >
+        upDepartmentId = #{record.updepartmentid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.manager != null" >
+        manager = #{record.manager,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phone != null" >
+        phone = #{record.phone,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update department
+    set departmentId = #{record.departmentid,jdbcType=VARCHAR},
+      upDepartmentId = #{record.updepartmentid,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      manager = #{record.manager,jdbcType=VARCHAR},
+      phone = #{record.phone,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="danger.bean.sys.Department" >
+    update department
+    <set >
+      <if test="updepartmentid != null" >
+        upDepartmentId = #{updepartmentid,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="manager != null" >
+        manager = #{manager,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where departmentId = #{departmentid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="danger.bean.sys.Department" >
+    update department
+    set upDepartmentId = #{updepartmentid,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      manager = #{manager,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR}
+    where departmentId = #{departmentid,jdbcType=VARCHAR}
+  </update>
+  
+  
+  <!-- 2017.9.3 by yuanyr-->
+  
+  <!-- 查询机构树信息 -->
+	<select id="getUnitTree" resultType="Map">
+		select departmentId, upDepartmentId,name 
+		FROM department
+	</select>
+	
+	<!-- 添加机构 -->
+	<insert id="addUnit" parameterType="Department">
+		INSERT INTO
+		department(departmentId,name,upDepartmentId,manager,phone)
+		VALUES(#{departmentId},#{name},#{upDepartmentId},#{manager},#{phone})
+	</insert>
+	
+	<!-- 根据机构id删除机构 -->
+	<delete id="deleteUnit" parameterType="String">
+		DELETE 
+		FROM department 
+		WHERE departmentId=#{departmentId}
+	</delete>
+	
+	<!-- 修改机构信息 -->
+	<update id="updateUnit" parameterType="Department">
+		UPDATE department SET
+				name=#{name},
+				manager=#{manager},
+				phone=#{phone}
+				WHERE departmentId=#{departmentId}
+	</update>
+	
+	<!-- 根据departmentId查询机构信息 -->
+	<select id="getUnitByUnitId" parameterType="String" resultType="Department">
+		SELECT departmentId, upDepartmentId,name,manager,phone
+		FROM department 
+		WHERE departmentId=#{departmentId}
+	</select>
+
+	<!-- 根据upDepartmentId查询机构信息 -->
+	<select id="getUnitByUpUnitId" parameterType="String" resultType="Department">
+		SELECT departmentId, upDepartmentId,name,manager,phone
+		FROM department 
+		where upDepartmentId=#{upDepartmentId}
+	</select>
+	
+	<!-- 按条件查询机构 -->
+	<select id="getUnitByConditon" parameterType="map" resultType="Department">
+		SELECT departmentId, upDepartmentId,name,manager,phone
+		FROM department
+		<where>
+			<if test="departmentId!=null &amp;&amp; departmentId !='' ">
+				AND departmentId LIKE concat(concat('%',#{departmentId}),'%') <!-- =#{departmentId} -->
+			</if>
+			<if test="name!=null &amp;&amp; name!=''">
+				AND name LIKE concat(concat('%',#{name}),'%')
+			</if>
+		</where>
+	</select>
+	
+	
+	
+	<!-- 根据上级机构Id查询下一个要插入的下一级机构Id -->
+	<select id="getNextUnitId" parameterType="String" resultType="String">
+		SELECT MAX(departmentId)+001 FROM department WHERE
+		upDepartmentId=#{upDepartmentId}
+	</select>
+  	
+  	<!-- 根据上级机构id查询其最大的下一级机构编号 -->
+  	<select id="getMaxUnitIdByUpUnitId" parameterType="String" resultType="String">
+  		select max(department.departmentId+0) from department where department.upDepartmentId = #{updepartmentid}
+  	</select>
+  	
+  	
+  
+</mapper>

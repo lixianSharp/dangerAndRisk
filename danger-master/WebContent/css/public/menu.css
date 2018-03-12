@@ -1,0 +1,101 @@
+/*通用区*/
+* {
+    padding: 0;
+    margin: 0;
+    font-family: "宋体";
+    font-size:13px;
+}
+
+/*<!--菜单-->*/
+.el_left {
+    width: 100%;
+    font-weight:bolder;
+}
+.el_bigMenu{
+    border:1px solid #888;
+    border-right:none;
+    border-top:none;
+}
+#el_left .panel-group .panel{
+    border-radius:0;
+}
+#el_left .panel-default > .panel-heading{
+    background-color:rgb(51,122,183);
+    border-color:#1b6d85;
+    border-radius:0;
+    color:white;
+    text-decoration:none;
+}
+#el_left .list-group{
+    border-color:#ccc;
+}
+#el_left .list-group-item{
+    border-color:#ccc;
+    border-right:none;
+    padding:0;
+}
+#heading1 a,#heading2 a{
+    color:white;
+    text-decoration: none;
+}
+.el_title{
+    display:block;
+    width:100%;
+    height:100%;
+    font-size:14px;
+    background-color:rgb(51,122,183);
+    color:white;
+    text-decoration:none;
+}
+.el_title:hover{
+    text-decoration:none;
+    color:white;
+}
+.el_title:active {
+    text-decoration: none;
+    color: white;
+}
+
+.list-group-item {
+    padding: 0;
+    text-align:center;
+}
+
+.list-group-item a {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    background-color:#d4f4fc;
+    padding: 6px;
+    color:#3f48cc;
+    font-size:13px;
+    text-decoration:none;
+}
+.list-group-item a:hover{
+    background-color:#439eec;
+    color:white;
+    cursor:pointer;
+}
+.list-group-item.active a{
+    background-color:#439eec;
+    color:white;
+}
+#accordion .panel {
+    margin-top: 0;
+}
+
+li.list-group-item{
+    padding:0;
+}
+/*菜单头*/
+#el_MenuHead{
+    background-color:rgb(51,122,183);
+    line-height:40px;
+    padding-left:20px;
+    position:relative;
+}
+#el_MenuHead span{
+    color:white;
+    font-size:20px;
+}
+

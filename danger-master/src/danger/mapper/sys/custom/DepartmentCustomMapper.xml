@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="danger.mapper.sys.custom.DepartmentCustomMapper">
+	
+	<!--查询字典的条件 -->
+	<sql id="query_department_where">
+		<if test="departmentId!=null">
+			and departmentId=#{departmentId}
+		</if>
+		<if test="upDepartmentId!=null">
+			and upDepartmentId=#{upDepartmentId}
+		</if>
+		<if test="name!=null">
+			and name like '%${name}%'
+		</if>
+	</sql>
+
+	<!-- 查询分页 -->
+	<sql id="queryPage_limit">
+		<if test="index!=null">
+			LIMIT #{index},#{currentCount}
+		</if>
+	</sql>
+	<!-- 按条件查出所有的字典信息 -->
+	<select id="findDepartmentByCondition" resultType="danger.bean.sys.Department"
+		parameterType="hashmap">
+		SELECT * FROM department
+
+		<where>
+			<include refid="query_department_where"></include>
+			
+		</where>
+		
+		<include refid="queryPage_limit"></include>
+
+	</select>
+
+	<!-- 得到符合该条件的字典记录数量 -->
+	<select id="getDepartmentCountByDepartmentId" resultType="int"
+		parameterType="hashmap">
+		SELECT count(departmentId) FROM department
+		<where>
+			<include refid="query_department_where"></include>
+		</where>
+	</select>
+
+
+
+</mapper>

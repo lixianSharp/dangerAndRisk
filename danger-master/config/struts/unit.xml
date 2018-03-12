@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<package name="unit" extends="json-default">
+	
+		<action name="searchUnitByUpId"
+			class="danger.action.sys.unit.SearchUnitAction"
+			method="searchUnitByUpId">
+			<result type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
+		
+		<action name="searchNextUnitId"
+			class="danger.action.sys.unit.SearchUnitAction"
+			method="searchNextUnitId">
+			<result type="json">
+				<param name="root">nextId</param>
+			</result>
+		</action>
+	
+		<action name="searchUnitByCondition"
+			class="danger.action.sys.unit.SearchUnitAction"
+			method="searchUnitByCondition">
+			<result type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
+		
+		<action name="getUpdateUnit"
+			class="danger.action.sys.unit.UpdateUnitAction"
+			method="getUpdateUnit">
+			<result type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
+		
+		<action name="updateUnit"
+			class="danger.action.sys.unit.UpdateUnitAction"
+			method="updateUnit">
+			<result type="json">
+				<param name="root">updateResult</param>
+			</result>
+		</action>
+		
+		<action name="addUnitAction"
+			class="danger.action.sys.unit.AddUnitAction"
+			method="addUnit">
+			<result type="json">
+				<param name="root">addResult</param>
+			</result>
+		</action>
+		
+		<action name="deleteUnitAction"
+			class="danger.action.sys.unit.DeleteUnitAction"
+			method="deleteUnit">
+			<result type="json">
+				<param name="root">treeList2</param>
+			</result>
+		</action>
+		
+		<action name="searchTreeAction"
+			class="danger.action.sys.unit.SearchTreeAction" method="searchTree">
+			<result type="json">
+				<param name="root">treeList2</param>
+			</result>
+		</action>
+		
+		
+		<!-- 添加机构 lxy-->
+		<!-- <action name="unit_*" class="danger.action.sys.unit.AddUnitAction" method="{1}">
+			要转成json的map
+			<result name="ok" type="json">
+				这里指定将被Struts2序列化的属性，该属性在action中必须有对应的getter方法
+				<param name="root">map</param>
+			</result>
+			
+			
+		</action> -->
+		
+	</package>
+</struts>

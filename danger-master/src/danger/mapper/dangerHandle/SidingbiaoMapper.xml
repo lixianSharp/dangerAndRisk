@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="danger.mapper.dangerHandle.SidingbiaoMapper" >
+  <resultMap id="BaseResultMap" type="danger.bean.dangerHandle.Sidingbiao" >
+    <id column="sidingId" property="sidingid" jdbcType="INTEGER" />
+    <result column="dangerId" property="dangerid" jdbcType="INTEGER" />
+    <result column="sidingTime" property="sidingtime" jdbcType="TIMESTAMP" />
+    <result column="supervisor" property="supervisor" jdbcType="VARCHAR" />
+    <result column="rectificationTime" property="rectificationtime" jdbcType="TIMESTAMP" />
+    <result column="rectificationMeasure" property="rectificationmeasure" jdbcType="VARCHAR" />
+    <result column="dutyPerson" property="dutyperson" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    sidingId, dangerId, sidingTime, supervisor, rectificationTime, rectificationMeasure, 
+    dutyPerson
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="danger.bean.dangerHandle.SidingbiaoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sidingbiao
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from sidingbiao
+    where sidingId = #{sidingid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sidingbiao
+    where sidingId = #{sidingid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="danger.bean.dangerHandle.SidingbiaoExample" >
+    delete from sidingbiao
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="danger.bean.dangerHandle.Sidingbiao" >
+    insert into sidingbiao (sidingId, dangerId, sidingTime, 
+      supervisor, rectificationTime, rectificationMeasure, 
+      dutyPerson)
+    values (#{sidingid,jdbcType=INTEGER}, #{dangerid,jdbcType=INTEGER}, #{sidingtime,jdbcType=TIMESTAMP}, 
+      #{supervisor,jdbcType=VARCHAR}, #{rectificationtime,jdbcType=TIMESTAMP}, #{rectificationmeasure,jdbcType=VARCHAR}, 
+      #{dutyperson,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="danger.bean.dangerHandle.Sidingbiao" >
+    insert into sidingbiao
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="sidingid != null" >
+        sidingId,
+      </if>
+      <if test="dangerid != null" >
+        dangerId,
+      </if>
+      <if test="sidingtime != null" >
+        sidingTime,
+      </if>
+      <if test="supervisor != null" >
+        supervisor,
+      </if>
+      <if test="rectificationtime != null" >
+        rectificationTime,
+      </if>
+      <if test="rectificationmeasure != null" >
+        rectificationMeasure,
+      </if>
+      <if test="dutyperson != null" >
+        dutyPerson,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="sidingid != null" >
+        #{sidingid,jdbcType=INTEGER},
+      </if>
+      <if test="dangerid != null" >
+        #{dangerid,jdbcType=INTEGER},
+      </if>
+      <if test="sidingtime != null" >
+        #{sidingtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="supervisor != null" >
+        #{supervisor,jdbcType=VARCHAR},
+      </if>
+      <if test="rectificationtime != null" >
+        #{rectificationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rectificationmeasure != null" >
+        #{rectificationmeasure,jdbcType=VARCHAR},
+      </if>
+      <if test="dutyperson != null" >
+        #{dutyperson,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="danger.bean.dangerHandle.SidingbiaoExample" resultType="java.lang.Integer" >
+    select count(*) from sidingbiao
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update sidingbiao
+    <set >
+      <if test="record.sidingid != null" >
+        sidingId = #{record.sidingid,jdbcType=INTEGER},
+      </if>
+      <if test="record.dangerid != null" >
+        dangerId = #{record.dangerid,jdbcType=INTEGER},
+      </if>
+      <if test="record.sidingtime != null" >
+        sidingTime = #{record.sidingtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.supervisor != null" >
+        supervisor = #{record.supervisor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rectificationtime != null" >
+        rectificationTime = #{record.rectificationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.rectificationmeasure != null" >
+        rectificationMeasure = #{record.rectificationmeasure,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dutyperson != null" >
+        dutyPerson = #{record.dutyperson,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update sidingbiao
+    set sidingId = #{record.sidingid,jdbcType=INTEGER},
+      dangerId = #{record.dangerid,jdbcType=INTEGER},
+      sidingTime = #{record.sidingtime,jdbcType=TIMESTAMP},
+      supervisor = #{record.supervisor,jdbcType=VARCHAR},
+      rectificationTime = #{record.rectificationtime,jdbcType=TIMESTAMP},
+      rectificationMeasure = #{record.rectificationmeasure,jdbcType=VARCHAR},
+      dutyPerson = #{record.dutyperson,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="danger.bean.dangerHandle.Sidingbiao" >
+    update sidingbiao
+    <set >
+      <if test="dangerid != null" >
+        dangerId = #{dangerid,jdbcType=INTEGER},
+      </if>
+      <if test="sidingtime != null" >
+        sidingTime = #{sidingtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="supervisor != null" >
+        supervisor = #{supervisor,jdbcType=VARCHAR},
+      </if>
+      <if test="rectificationtime != null" >
+        rectificationTime = #{rectificationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rectificationmeasure != null" >
+        rectificationMeasure = #{rectificationmeasure,jdbcType=VARCHAR},
+      </if>
+      <if test="dutyperson != null" >
+        dutyPerson = #{dutyperson,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where sidingId = #{sidingid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="danger.bean.dangerHandle.Sidingbiao" >
+    update sidingbiao
+    set dangerId = #{dangerid,jdbcType=INTEGER},
+      sidingTime = #{sidingtime,jdbcType=TIMESTAMP},
+      supervisor = #{supervisor,jdbcType=VARCHAR},
+      rectificationTime = #{rectificationtime,jdbcType=TIMESTAMP},
+      rectificationMeasure = #{rectificationmeasure,jdbcType=VARCHAR},
+      dutyPerson = #{dutyperson,jdbcType=VARCHAR}
+    where sidingId = #{sidingid,jdbcType=INTEGER}
+  </update>
+</mapper>

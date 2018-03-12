@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace命名空间，作用就是对sql进行分类化管理，理解sql隔离 注意：使用mapper代理方法开发，namespace有特殊重要的作用 -->
+<mapper namespace="danger.mapper.queryView.QueryViewCustomMapper">
+
+
+	<select id="getDangerSpotByDangerId" resultType="danger.bean.queryView.DangerSpot"
+		parameterType="int">
+		SELECT * FROM danger_spot where dangerId=#{value}
+	</select>
+
+
+	<!-- 查询隐患五定视图开始 -->
+	<select id="getDangerSidingCountByCondition" resultType="int"
+		parameterType="hashmap">
+		SELECT count(sidingid) FROM danger_siding
+		<where>
+			<include refid="query_where"></include>
+		</where>
+	</select>
+	<select id="findDangerSidingByCondition" resultType="danger.bean.queryView.DangerSiding"
+		parameterType="hashmap">
+		SELECT * FROM danger_siding
+		<where>
+			<include refid="query_where"></include>
+		</where>
+		ORDER BY rectificationTime desc
+		<include refid="query_page_limit"></include>
+	</select>
+
+	<select id="getDangerSidingBySidingId" resultType="danger.bean.queryView.DangerSiding"
+		parameterType="int">
+		select * from danger_siding where sidingid=#{value}
+	</select>
+	<!-- 查询隐患五定视图结束 -->
+
+
+	<!-- 查询隐患五定跟踪视图开始 -->
+	<select id="getDangerSidingFollowCountByCondition" resultType="int"
+		parameterType="hashmap">
+		SELECT count(sidingid) FROM danger_siding_follow
+		<where>
+			<include refid="query_where"></include>
+		</where>
+	</select>
+	<select id="findDangerSidingFollowByCondition" resultType="danger.bean.queryView.DangerSidingFollow"
+		parameterType="hashmap">
+		SELECT * FROM `danger`.`danger_siding_follow`
+		<where>
+			<include refid="query_where"></include>
+		</where>
+		ORDER BY recheckTime desc
+		<include refid="query_page_limit"></include>
+	</select>
+
+	<select id="getDangerSidingFollowBySidingId" resultType="danger.bean.queryView.DangerSidingFollow"
+		parameterType="int">
+		select * from danger_siding where sidingid=#{value}
+	</select>
+	<!-- 查询隐患五定跟踪视图结束 -->
+
+
+	<!-- 查询隐患五定跟踪复查视图开始 -->
+	<select id="getDangerSidingFollowRecheckCountByCondition"
+		resultType="int" parameterType="hashmap">
+		SELECT count(sidingid) FROM danger_siding_follow_recheck
+		<where>
+			<include refid="query_where"></include>
+		</where>
+	</select>
+	<select id="findDangerSidingFollowRecheckByCondition"
+		resultType="danger.bean.queryView.DangerSidingFollowRecheck"
+		parameterType="hashmap">
+		SELECT * FROM `danger`.`danger_siding_follow_recheck`
+		<where>
+			<include refid="query_where"></include>
+		</where>
+		ORDER BY unit	
+		<include refid="query_page_limit"></include>
+	</select>
+
+	<select id="getDangerSidingFollowRecheckBySidingId" resultType="danger.bean.queryView.DangerSidingFollowRecheck"
+		parameterType="int">
+		select * from danger_siding where sidingid=#{value}
+	</select>
+	<!-- 查询隐患五定跟踪复查视图结束 -->
+
+
+
+
+
+
+	<!-- 查询分页 -->
+	<sql id="query_page_limit">
+		<if test="index!=null">
+			LIMIT #{index},#{currentCount}
+		</if>
+	</sql>
+	<!-- 查询隐患的条件 -->
+	<sql id="query_where">
+		<if test="checkunit!=null">
+			and checkunit=#{checkunit}
+		</if>
+		<if test="manager!=null">
+			and manager=#{manager}
+		</if>
+		<if test="startTime!=null">
+			and findTime > #{startTime}
+		</if>
+		<if test="endTime!=null">
+			and findTime&lt;#{endTime}
+		</if>
+		<if test="dangergrade!=null">
+			and dangergrade=#{dangergrade}
+		</if>
+		<if test="address!=null">
+			and address like '%${address}%'
+		</if>
+		<if test="content!=null">
+			and content like '%${content}%'
+		</if>
+		<if test="type!=null">
+			and type=#{type}
+		</if>
+		<if test="dangerstatus">
+			and dangerstatus=#{dangerstatus}
+		</if>
+		<if test="unit!=null">
+			and unit=#{unit}
+		</if>
+		<if test="findtime!=null">
+			and findtime=#{findtime}
+		</if>
+	</sql>
+
+
+
+</mapper>

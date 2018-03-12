@@ -1,0 +1,108 @@
+@CHARSET "UTF-8";
+
+    /* <!--选择树--> */
+        /*索引，角色树*/
+        #treeDemo2 {
+            overflow: visible;
+            padding:10px;
+            height: auto;
+            position: absolute;
+            top: 14px;
+            border:1px solid #ccc;
+        }
+        #log{
+            background-color:white;
+            height:25px;
+            width:180px;
+            border-color:rgb(204,204,204);
+            border-radius:0 3px 3px 0;
+            padding-left:10px;
+            padding-top:2px;
+            box-shadow:0 1px 1px #eee inset;
+
+        }
+        #log:active{
+            border-color: #66afe9;
+            -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6);
+            box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6);
+        }
+        #log li{
+            background-color:white;
+        }
+
+        /*单个员工配置权限*/
+        #el_chooseDepart4, #treeDemo4 {
+            width: 307px;
+        }
+
+        #treeDemo4 {
+            height: auto;
+        }
+
+    /* <!--选择树--> */
+        /*选择角色,选择部门,配置角色*/
+        #el_chooseDepart, #treeDemo10,
+        #el_chooseDepart12, #treeDemo12,
+        #el_chooseDepart13, #treeDemo13,
+        #el_chooseDepart11, #treeDemo11 {
+            width: 310px;
+        }
+
+        #treeDemo10, #treeDemo11,#treeDemo12, #treeDemo2, #treeDemo13 {
+            overflow: visible;
+            padding: 10px;
+            height: auto;
+            position: absolute;
+            top: 14px;
+            border: 1px solid #ccc;
+            z-index: 100;
+        }
+
+        /*单选*/
+        #log {
+            background-color: white;
+            height: 25px;
+            width: 100%;
+            border-color: rgb(204, 204, 204);
+            border-radius: 0 3px 3px 0;
+            padding-left: 10px;
+            padding-top: 2px;
+            box-shadow: 0 1px 1px #eee inset;
+        }
+
+        #log:active {
+            border-color: #66afe9;
+            -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6);
+            box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6);
+        }
+
+        #log li {
+            background-color: white;
+        }
+
+        /*多选*/
+        #el_chooseDepart, #el_chooseDepart11, #el_chooseDepart12,#el_chooseDepart13 {
+            background-color: white;
+            min-height: 25px;
+            height: auto;
+            width: 100%;
+            border-color: rgb(204, 204, 204);
+            border-radius: 0 3px 3px 0;
+            padding-left: 10px;
+            padding-top: 2px;
+            box-shadow: 0 1px 1px #eee inset;
+        }
+
+        #el_chooseDepart:active, #el_chooseDepart11:active, #el_chooseDepart12:active,#el_chooseDepart13:active {
+            border-color: #66afe9;
+            -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6);
+            box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6);
+        }
+
+        #el_chooseDepart li, #el_chooseDepart11 li,#el_chooseDepart12 li,#el_chooseDepart13 li  {
+            list-style: none;
+            width: auto;
+            margin-right: 10px;
+            float: left;
+            background-color: white;
+        }

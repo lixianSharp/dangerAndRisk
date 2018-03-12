@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+	<!-- 只需要定义个别名,这个应该有 -->
+	<typeAliases>
+		<package name="danger.mapper" />
+		<package name="danger.bean" />
+	</typeAliases>
+	<!-- 动态代理也不需要配置这个扫描，留着也行 -->
+	<mappers>
+		<!-- 原始DAO开发使用这个手动加载xml -->
+		<package name="danger.mapper" />
+	</mappers>
+
+</configuration>

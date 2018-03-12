@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+	<package name="dangerHander" extends="json-default" namespace="/">
+		<action name="sidingHander_*" class="sidingAction" method="{1}">
+			<result type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
+		<action name="followHander_*" class="followAction" method="{1}">
+			<result type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
+		<action name="delayHander_*" class="delayAction" method="{1}">
+			<result type="json">
+				<param name="root">result</param>
+			</result>
+		</action>		
+	</package>
+</struts>

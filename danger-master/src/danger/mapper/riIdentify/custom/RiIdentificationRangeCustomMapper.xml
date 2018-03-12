@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="danger.mapper.riIdentify.custom.RiIdentificationRangeCustomMapper">
+	<!-- 查询分页   index:当前页页号   currentCount:每页显示的记录数-->
+	<sql id="query_page_limit">
+		<if test="index!=null">
+			LIMIT #{index},#{currentCount}
+		</if>
+	</sql>
+	
+	<!-- 查询风险辨识范围的条件 -->
+	<sql id="query_RiIdentificationRange_where">
+		<if test="idenranid!=null">
+			and idenranid=#{idenranid}
+		</if>
+		<if test="facename!=null">
+			and facename=#{facename}
+		</if>
+		<if test="survey!=null">
+			and survey=#{survey}
+		</if>
+		<if test="rirtype!=null">
+			and rirtype=#{rirtype}
+		</if>
+		<if test="starttime!=null">
+			and starttime=#{starttime}
+		</if>
+		<if test="endtime!=null">
+			and endtime=#{endtime}
+		</if>
+	</sql>
+	
+	<!-- 查询职责分工 按照岗位降序排序  分页查询-->
+	<select id="findRiIdentificationRangeByCondition" resultType="danger.bean.riIdentify.RiIdentificationRange" 
+		parameterType="map">
+		select * from riIdentificationRange
+		<where>
+			<include refid="query_RiIdentificationRange_where"></include>
+		</where>
+		order by starttime
+		<include refid="query_page_limit"></include>
+	</select>
+	
+	<!-- 根据条件查询满足条件的总数 -->
+	<select id="getRiIdentificationRangeCountByCondition" resultType="int"
+			parameterType="map">
+		select count(idenranid) from riIdentificationRange	
+		<where>
+			<include refid="query_RiIdentificationRange_where"></include>
+		</where>
+	</select>
+	
+</mapper>

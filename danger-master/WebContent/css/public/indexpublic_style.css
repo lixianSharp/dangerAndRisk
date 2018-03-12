@@ -1,0 +1,160 @@
+/*通用区*/
+* {
+    padding: 0;
+    margin: 0;
+    font-family: "宋体";
+    font-size:13px;
+}
+
+/*表格去除a标签的下划线*/
+.table a {
+    text-decoration: none;
+    color: darkblue;
+    padding: 2px 6px;
+}
+
+.table a:hover {
+    background-color: rgb(250, 250, 250);
+    color: dodgerblue;
+}
+
+/*分页*/
+#paginationID {
+    color: black;
+    height: 51px;
+    min-width: 580px;
+    background-color: white;
+    border: 2px solid #eee;
+    padding: 8px;
+    float: right;
+    margin-right:30px;
+}
+.pagination-link {
+    border: 1px solid #ccc;
+}
+
+
+
+/*主要内容*/
+.tab-pane {
+    padding: 0;
+}
+.panel-heading {
+    font-size: 15px
+}
+.panel-heading span{
+    font-size:15px;;
+}
+.html_middle {
+    width: 100%;
+}
+.el_main{
+    margin:10px 30px;
+}
+#leftbackground{
+    height:580px;
+    background-color:#d4f4fc;
+    width:13%;
+    float: left;
+    min-width: 100px;
+    margin-top:3px;
+    border-right:1px solid #ccc;
+    position:relative;
+}
+.el_right {
+    float: right;
+    margin-top: 3px;
+    width: 87%;
+    min-height:800px;
+    border:0;
+    height:100%;
+    margin-bottom:50px;
+}
+
+
+/*用户添加*/
+.el_modellist {
+    margin: 10px;
+    margin-bottom: 15px;
+    width: 500px;
+    font-size: 15px;
+}
+/*单选按钮的字体大小*/
+.el_modellist  label{
+    font-size:13px;
+}
+.el_modelinput {
+    width: 300px;
+}
+.el_qlmQuery {
+    min-width: 250px;
+    width: 25%;
+    float: left;
+    margin: 10px;
+}
+/*span改变样式后的样子*/
+.el_spans {
+    padding: 6px 12px;
+    font-size: 13px;
+    font-weight: normal;
+    line-height: 1;
+    color: #555;
+    text-align: center;
+    width: 1%;
+    white-space: nowrap;
+    vertical-align: middle;
+    display: table-cell;
+}
+.form-control {
+    /* height: 25px; */
+    border-radius: 3px;
+    width: 350px;
+    font-size: 12px;
+    padding-top: 1px;
+    padding-bottom: 1px;
+}
+
+/*用户详细信息*/
+ .el_parperInfo table {
+     width: 70%;
+ }
+
+.el_parperInfo table caption {
+    font-size: 20px;
+    width: 100%;
+    font-weight: 500;
+    margin: 5px;
+    letter-spacing: 5px;
+}
+
+.el_parperInfo table tr {
+    height: 35px;
+    border-bottom: 1px solid #eee;
+}
+
+.el_parperInfo table tr td:first-child {
+    width: 20%;
+}
+
+/*隐藏菜单*/
+/*<!--箭头-->*/
+#heading1{
+    position:relative;
+}
+#leftArrow{
+    width:25px;
+    position:absolute;
+    top:3px;
+    right:0;
+}
+#rightArrow{
+    position:absolute;
+    width:30px;
+    top:75px;
+    left:0;
+	display:none;
+}
+#leftArrow:hover,#rightArrow:hover{
+    box-shadow: 0 1px 3px #fff;
+    border:1px solid #000;
+}

@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="danger.mapper.riIdentify.RiIdentificationRangeMapper">
+  <resultMap id="BaseResultMap" type="danger.bean.riIdentify.RiIdentificationRange">
+    <id column="idenRanId" jdbcType="VARCHAR" property="idenranid" />
+    <result column="faceName" jdbcType="VARCHAR" property="facename" />
+    <result column="survey" jdbcType="VARCHAR" property="survey" />
+    <result column="rIRType" jdbcType="VARCHAR" property="rirtype" />
+    <result column="startTime" jdbcType="TIMESTAMP" property="starttime" />
+    <result column="endTime" jdbcType="TIMESTAMP" property="endtime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    idenRanId, faceName, survey, rIRType, startTime, endTime
+  </sql>
+  <select id="selectByExample" parameterType="danger.bean.riIdentify.RiIdentificationRangeExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from riidentificationrange
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from riidentificationrange
+    where idenRanId = #{idenranid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from riidentificationrange
+    where idenRanId = #{idenranid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="danger.bean.riIdentify.RiIdentificationRangeExample">
+    delete from riidentificationrange
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="danger.bean.riIdentify.RiIdentificationRange">
+    insert into riidentificationrange (idenRanId, faceName, survey, 
+      rIRType, startTime, endTime
+      )
+    values (#{idenranid,jdbcType=VARCHAR}, #{facename,jdbcType=VARCHAR}, #{survey,jdbcType=VARCHAR}, 
+      #{rirtype,jdbcType=VARCHAR}, #{starttime,jdbcType=TIMESTAMP}, #{endtime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="danger.bean.riIdentify.RiIdentificationRange">
+    insert into riidentificationrange
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="idenranid != null">
+        idenRanId,
+      </if>
+      <if test="facename != null">
+        faceName,
+      </if>
+      <if test="survey != null">
+        survey,
+      </if>
+      <if test="rirtype != null">
+        rIRType,
+      </if>
+      <if test="starttime != null">
+        startTime,
+      </if>
+      <if test="endtime != null">
+        endTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="idenranid != null">
+        #{idenranid,jdbcType=VARCHAR},
+      </if>
+      <if test="facename != null">
+        #{facename,jdbcType=VARCHAR},
+      </if>
+      <if test="survey != null">
+        #{survey,jdbcType=VARCHAR},
+      </if>
+      <if test="rirtype != null">
+        #{rirtype,jdbcType=VARCHAR},
+      </if>
+      <if test="starttime != null">
+        #{starttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endtime != null">
+        #{endtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="danger.bean.riIdentify.RiIdentificationRangeExample" resultType="java.lang.Long">
+    select count(*) from riidentificationrange
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update riidentificationrange
+    <set>
+      <if test="record.idenranid != null">
+        idenRanId = #{record.idenranid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.facename != null">
+        faceName = #{record.facename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.survey != null">
+        survey = #{record.survey,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rirtype != null">
+        rIRType = #{record.rirtype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.starttime != null">
+        startTime = #{record.starttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.endtime != null">
+        endTime = #{record.endtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update riidentificationrange
+    set idenRanId = #{record.idenranid,jdbcType=VARCHAR},
+      faceName = #{record.facename,jdbcType=VARCHAR},
+      survey = #{record.survey,jdbcType=VARCHAR},
+      rIRType = #{record.rirtype,jdbcType=VARCHAR},
+      startTime = #{record.starttime,jdbcType=TIMESTAMP},
+      endTime = #{record.endtime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="danger.bean.riIdentify.RiIdentificationRange">
+    update riidentificationrange
+    <set>
+      <if test="facename != null">
+        faceName = #{facename,jdbcType=VARCHAR},
+      </if>
+      <if test="survey != null">
+        survey = #{survey,jdbcType=VARCHAR},
+      </if>
+      <if test="rirtype != null">
+        rIRType = #{rirtype,jdbcType=VARCHAR},
+      </if>
+      <if test="starttime != null">
+        startTime = #{starttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endtime != null">
+        endTime = #{endtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where idenRanId = #{idenranid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="danger.bean.riIdentify.RiIdentificationRange">
+    update riidentificationrange
+    set faceName = #{facename,jdbcType=VARCHAR},
+      survey = #{survey,jdbcType=VARCHAR},
+      rIRType = #{rirtype,jdbcType=VARCHAR},
+      startTime = #{starttime,jdbcType=TIMESTAMP},
+      endTime = #{endtime,jdbcType=TIMESTAMP}
+    where idenRanId = #{idenranid,jdbcType=VARCHAR}
+  </update>
+</mapper>

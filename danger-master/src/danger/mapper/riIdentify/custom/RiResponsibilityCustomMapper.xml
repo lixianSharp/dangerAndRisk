@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace命名空间，作用就是对sql进行分类化管理，理解sql隔离 注意：使用mapper代理方法开发，namespace有特殊重要的作用 -->
+<mapper namespace="danger.mapper.riIdentify.custom.RiResponsibilityCustomMapper">
+	
+	<!-- 查询分页   index:当前页页号   currentCount:每页显示的记录数-->
+	<sql id="query_page_limit">
+		<if test="index!=null">
+			LIMIT #{index},#{currentCount}
+		</if>
+	</sql>
+	
+	<!-- 查询岗位职责的条件 -->
+	<sql id="query_Responsibility_where">
+		<if test="respid!=null">
+			and respid=#{respid}
+		</if>
+		<if test="quarters!=null">
+			and quarters=#{quarters}
+		</if>
+		<if test="duty!=null">
+			and duty=#{duty}
+		</if>
+		<if test="ctrlcontent!=null">
+			and ctrlcontent=#{ctrlcontent}
+		</if>
+		<if test="ctrlfrequency!=null">
+			and ctrlfrequency=#{ctrlfrequency}
+		</if>
+		<if test="analysisfrequency!=null">
+			and analysisfrequency=#{analysisfrequency}
+		</if>
+	</sql>
+	
+	<!-- 查询职责分工 按照岗位降序排序  分页查询-->
+	<select id="findRiResponsibilityByCondition" resultType="danger.bean.riIdentify.RiResponsibility" 
+		parameterType="map">
+		select * from riresponsibility
+		<where>
+			<include refid="query_Responsibility_where"></include>
+		</where>
+		order by quarters
+		<include refid="query_page_limit"></include>
+	</select>
+	
+	<!-- 根据条件查询满足条件的总数 -->
+	<select id="getRiRiesponsibilityCountByCondition" resultType="int"
+			parameterType="map">
+		select count(respid) from riresponsibility	
+		<where>
+			<include refid="query_Responsibility_where"></include>
+		</where>
+	</select>
+	
+	
+</mapper>

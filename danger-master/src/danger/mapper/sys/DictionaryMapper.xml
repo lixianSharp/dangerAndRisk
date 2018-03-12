@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="danger.mapper.sys.DictionaryMapper" >
+  <resultMap id="BaseResultMap" type="danger.bean.sys.Dictionary" >
+    <id column="dictionaryId" property="dictionaryid" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="upDictionaryId" property="updictionaryid" jdbcType="VARCHAR" />
+    <result column="isUse" property="isuse" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    dictionaryId, name, upDictionaryId, isUse, description
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="danger.bean.sys.DictionaryExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from dictionary
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from dictionary
+    where dictionaryId = #{dictionaryid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from dictionary
+    where dictionaryId = #{dictionaryid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="danger.bean.sys.DictionaryExample" >
+    delete from dictionary
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="danger.bean.sys.Dictionary" >
+    insert into dictionary (dictionaryId, name, upDictionaryId, 
+      isUse, description)
+    values (#{dictionaryid,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{updictionaryid,jdbcType=VARCHAR}, 
+      #{isuse,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="danger.bean.sys.Dictionary" >
+    insert into dictionary
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="dictionaryid != null" >
+        dictionaryId,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="updictionaryid != null" >
+        upDictionaryId,
+      </if>
+      <if test="isuse != null" >
+        isUse,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="dictionaryid != null" >
+        #{dictionaryid,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="updictionaryid != null" >
+        #{updictionaryid,jdbcType=VARCHAR},
+      </if>
+      <if test="isuse != null" >
+        #{isuse,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="danger.bean.sys.DictionaryExample" resultType="java.lang.Integer" >
+    select count(*) from dictionary
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update dictionary
+    <set >
+      <if test="record.dictionaryid != null" >
+        dictionaryId = #{record.dictionaryid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updictionaryid != null" >
+        upDictionaryId = #{record.updictionaryid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isuse != null" >
+        isUse = #{record.isuse,jdbcType=VARCHAR},
+      </if>
+      <if test="record.description != null" >
+        description = #{record.description,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update dictionary
+    set dictionaryId = #{record.dictionaryid,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      upDictionaryId = #{record.updictionaryid,jdbcType=VARCHAR},
+      isUse = #{record.isuse,jdbcType=VARCHAR},
+      description = #{record.description,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="danger.bean.sys.Dictionary" >
+    update dictionary
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="updictionaryid != null" >
+        upDictionaryId = #{updictionaryid,jdbcType=VARCHAR},
+      </if>
+      <if test="isuse != null" >
+        isUse = #{isuse,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where dictionaryId = #{dictionaryid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="danger.bean.sys.Dictionary" >
+    update dictionary
+    set name = #{name,jdbcType=VARCHAR},
+      upDictionaryId = #{updictionaryid,jdbcType=VARCHAR},
+      isUse = #{isuse,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR}
+    where dictionaryId = #{dictionaryid,jdbcType=VARCHAR}
+  </update>
+  
+  
+  <!-- 2017.9.5 by yuanyr-->
+  
+  	<sql id="dictionaryColumns">dictionaryId,name,upDictionaryId,isUse,description</sql>
+	
+	<!-- 查询字典树信息 -->
+	<select id="getDictionaryTree" resultType="Map">
+		SELECT dictionaryId,name,upDictionaryId 
+		FROM dictionary
+	</select>
+	
+	<!-- 添加字典信息 -->
+	<insert id="addDictionary" parameterType="Dictionary">
+		INSERT INTO
+		dictionary(<include refid="dictionaryColumns"/>)
+		VALUES(#{dictionaryId},#{name},#{upDictionaryId},#{isUse},#{description})
+	</insert>
+	
+	<!-- 根据字典Id删除字典信息 -->
+	<delete id="deleteDictionary" parameterType="String">
+		DELETE 
+		FROM dictionary 
+		WHERE dictionaryId=#{dictionaryId}
+	</delete>
+
+	<!-- 修改字典信息 -->
+	<update id="updateDictionary" parameterType="Dictionary">
+		UPDATE dictionary
+		<set>
+			<if test="name!=null &amp;&amp; name !='' ">
+				name=#{name},
+			</if>
+			<if test="isUse==true || isUse ==false ">
+				isUse=#{isUse},
+			</if>
+			<if test="description!=null &amp;&amp; description !='' ">
+				description=#{description},
+			</if>
+			</set>
+				where dictionaryId=#{dictionaryId}
+	</update>
+	
+	<!-- 根据dictionaryId查询字典信息 -->
+	<select id="getDictionaryById" parameterType="String" resultType="Dictionary">
+		SELECT <include refid="dictionaryColumns"/> 
+		FROM dictionary
+		WHERE dictionaryId=#{dictionaryId}
+	</select>
+	
+	<!-- 根据upDictionaryId查询下级字典信息 -->
+	<select id="getDictionaryByUpDicId" parameterType="String" resultType="Dictionary">
+		SELECT <include refid="dictionaryColumns"/> 
+		FROM dictionary 
+		WHERE upDictionaryId=#{upDictionaryId}
+	</select>
+	
+	<!-- 根据条件查询字典信息-->
+	<select id="getDictionaryByConditon" parameterType="map" resultType="Dictionary">
+		SELECT <include refid="dictionaryColumns"/> 
+		FROM dictionary 
+		<where>
+			<if test="dictionaryId!=null &amp;&amp; dictionaryId !='' ">
+				AND dictionaryId=#{dictionaryId}
+			</if>
+			<if test="name!=null &amp;&amp; name!=''">
+				AND name LIKE concat(concat('%',#{name}),'%')
+			</if>
+		</where>
+	</select>
+	
+	<!-- 根据上级字典Id查询下一个要插入的下一级字典的编号 -->
+	<select id="getMaxDictionaryId" parameterType="String" resultType="String">
+		SELECT MAX(dictionaryId) 
+		FROM dictionary 
+		WHERE upDictionaryId=#{upDictionaryId}
+	</select>
+	
+</mapper>

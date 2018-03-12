@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="danger.mapper.riIdentify.RiResponsibilityMapper">
+  <resultMap id="BaseResultMap" type="danger.bean.riIdentify.RiResponsibility">
+    <id column="respId" jdbcType="VARCHAR" property="respid" />
+    <result column="quarters" jdbcType="VARCHAR" property="quarters" />
+    <result column="duty" jdbcType="VARCHAR" property="duty" />
+    <result column="ctrlContent" jdbcType="VARCHAR" property="ctrlcontent" />
+    <result column="ctrlFrequency" jdbcType="VARCHAR" property="ctrlfrequency" />
+    <result column="analysisFrequency" jdbcType="VARCHAR" property="analysisfrequency" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    respId, quarters, duty, ctrlContent, ctrlFrequency, analysisFrequency
+  </sql>
+  <select id="selectByExample" parameterType="danger.bean.riIdentify.RiResponsibilityExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from riresponsibility
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from riresponsibility
+    where respId = #{respid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from riresponsibility
+    where respId = #{respid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="danger.bean.riIdentify.RiResponsibilityExample">
+    delete from riresponsibility
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="danger.bean.riIdentify.RiResponsibility">
+    insert into riresponsibility (respId, quarters, duty, 
+      ctrlContent, ctrlFrequency, analysisFrequency
+      )
+    values (#{respid,jdbcType=VARCHAR}, #{quarters,jdbcType=VARCHAR}, #{duty,jdbcType=VARCHAR}, 
+      #{ctrlcontent,jdbcType=VARCHAR}, #{ctrlfrequency,jdbcType=VARCHAR}, #{analysisfrequency,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="danger.bean.riIdentify.RiResponsibility">
+    insert into riresponsibility
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="respid != null">
+        respId,
+      </if>
+      <if test="quarters != null">
+        quarters,
+      </if>
+      <if test="duty != null">
+        duty,
+      </if>
+      <if test="ctrlcontent != null">
+        ctrlContent,
+      </if>
+      <if test="ctrlfrequency != null">
+        ctrlFrequency,
+      </if>
+      <if test="analysisfrequency != null">
+        analysisFrequency,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="respid != null">
+        #{respid,jdbcType=VARCHAR},
+      </if>
+      <if test="quarters != null">
+        #{quarters,jdbcType=VARCHAR},
+      </if>
+      <if test="duty != null">
+        #{duty,jdbcType=VARCHAR},
+      </if>
+      <if test="ctrlcontent != null">
+        #{ctrlcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="ctrlfrequency != null">
+        #{ctrlfrequency,jdbcType=VARCHAR},
+      </if>
+      <if test="analysisfrequency != null">
+        #{analysisfrequency,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="danger.bean.riIdentify.RiResponsibilityExample" resultType="java.lang.Long">
+    select count(*) from riresponsibility
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update riresponsibility
+    <set>
+      <if test="record.respid != null">
+        respId = #{record.respid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.quarters != null">
+        quarters = #{record.quarters,jdbcType=VARCHAR},
+      </if>
+      <if test="record.duty != null">
+        duty = #{record.duty,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ctrlcontent != null">
+        ctrlContent = #{record.ctrlcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ctrlfrequency != null">
+        ctrlFrequency = #{record.ctrlfrequency,jdbcType=VARCHAR},
+      </if>
+      <if test="record.analysisfrequency != null">
+        analysisFrequency = #{record.analysisfrequency,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update riresponsibility
+    set respId = #{record.respid,jdbcType=VARCHAR},
+      quarters = #{record.quarters,jdbcType=VARCHAR},
+      duty = #{record.duty,jdbcType=VARCHAR},
+      ctrlContent = #{record.ctrlcontent,jdbcType=VARCHAR},
+      ctrlFrequency = #{record.ctrlfrequency,jdbcType=VARCHAR},
+      analysisFrequency = #{record.analysisfrequency,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="danger.bean.riIdentify.RiResponsibility">
+    update riresponsibility
+    <set>
+      <if test="quarters != null">
+        quarters = #{quarters,jdbcType=VARCHAR},
+      </if>
+      <if test="duty != null">
+        duty = #{duty,jdbcType=VARCHAR},
+      </if>
+      <if test="ctrlcontent != null">
+        ctrlContent = #{ctrlcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="ctrlfrequency != null">
+        ctrlFrequency = #{ctrlfrequency,jdbcType=VARCHAR},
+      </if>
+      <if test="analysisfrequency != null">
+        analysisFrequency = #{analysisfrequency,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where respId = #{respid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="danger.bean.riIdentify.RiResponsibility">
+    update riresponsibility
+    set quarters = #{quarters,jdbcType=VARCHAR},
+      duty = #{duty,jdbcType=VARCHAR},
+      ctrlContent = #{ctrlcontent,jdbcType=VARCHAR},
+      ctrlFrequency = #{ctrlfrequency,jdbcType=VARCHAR},
+      analysisFrequency = #{analysisfrequency,jdbcType=VARCHAR}
+    where respId = #{respid,jdbcType=VARCHAR}
+  </update>
+</mapper>

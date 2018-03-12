@@ -1,0 +1,96 @@
+@CHARSET "UTF-8";
+/*导航*/
+.el_stairTitle {
+	margin: 5px 10px;
+	border-bottom: 1px solid #eee;
+	padding-bottom: 10px;
+	font-weight: bolder;
+}
+
+#mainPage {
+	background-color: #eee;
+	width: 100%;
+	padding-bottom: 20px;
+}
+
+#chart1 {
+	width: 94%;
+	height: 400px;
+	float: left;
+	background-color: white;
+	margin: 3%;
+	padding-bottom: 6%;
+	padding-top: 10px;
+}
+
+#main {
+	width: 70%;
+	float: left;
+	height: 100%;
+}
+
+#optionArea {
+	width: 30%;
+	height: 100%;
+	float: right;
+}
+
+#optionArea .form-control, #optionArea2 .form-control {
+	width: 120px;
+}
+
+#optionArea ul li, #optionArea2 ul li {
+	float: left;
+	list-style: none;
+	margin-right: 20px;
+	line-height: 34px;
+}
+
+.analyButton {
+	float: right;
+	margin-right: 40px;
+	margin-top: 10px;
+}
+
+/*2*/
+#chart2 {
+	clear: both;
+	background-color: white;
+	margin: 3%;
+	padding: 3% 1%;
+	height: 400px;
+	padding-bottom: 6%;
+	padding-top: 10px;
+}
+
+#main2 {
+	width: 70%;
+	float: right;
+	height: 100%;
+}
+
+#optionArea2 {
+	width: 30%;
+	height: 100%;
+	float: left;
+}
+
+#form2 {
+	margin-bottom: 20px;
+	height: 100px;
+}
+
+#form22 {
+	clear: both;
+	border-top: 1px solid #eee;
+	padding-top: 10px;
+}
+
+.form22Div {
+	margin: 10px;
+	margin-left: 60px;
+}
+
+#form22timeInterval input {
+	display: inline-block;
+}

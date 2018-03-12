@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace命名空间，作用就是对sql进行分类化管理，理解sql隔离 注意：使用mapper代理方法开发，namespace有特殊重要的作用 -->
+<mapper namespace="danger.mapper.queryView.TongjiMapper">
+	<sql id="query_date">
+		<if test="startTime!=null">
+			and findTime>#{startTime}
+		</if>
+		<if test="endTime!=null">
+			and findTime &lt; #{endTime}
+		</if>
+	</sql>
+
+	<select id="getTongjiInfo" parameterType="hashmap"
+		resultType="danger.bean.queryView.Tongji">
+		SELECT
+		d.checkunit,
+		SUM(CASE d.dangerGrade WHEN 'C' THEN 1
+		ELSE 0 END)
+		cji,
+		SUM(CASE
+		d.dangerGrade WHEN 'B' THEN 1 ELSE 0 END) bji,
+		SUM(CASE
+		d.dangerGrade
+		WHEN 'A' THEN 1 ELSE 0 END) aji,
+		SUM(CASE d.type
+		WHEN '采煤'
+		THEN 1 ELSE 0
+		END) caimei,
+		SUM(CASE d.type WHEN '开掘' THEN 1
+		ELSE 0 END)
+		kaijue,
+		SUM(CASE
+		d.type WHEN '机电' THEN 1 ELSE 0 END) jidian,
+		SUM(CASE
+		d.type WHEN '运输' THEN
+		1 ELSE 0 END) yunshu,
+		SUM(CASE d.type
+		WHEN '通风'
+		THEN 1 ELSE 0 END) tongfeng,
+		SUM(CASE d.type WHEN '地测' THEN 1
+		ELSE 0
+		END) dice,
+		SUM(CASE d.type
+		WHEN '其他'
+		THEN 1 ELSE 0 END)qita
+		FROM danger
+		d
+		<where>
+			<include refid="query_date"></include>
+		</where>
+		GROUP BY checkunit;
+	</select>
+
+
+
+	<select id="getTotalInfo" parameterType="hashmap"
+		resultType="danger.bean.queryView.Tongji">
+		SELECT
+		d.checkunit,
+		SUM(CASE d.dangerGrade WHEN 'C' THEN 1
+		ELSE 0 END)
+		cji,
+		SUM(CASE
+		d.dangerGrade WHEN 'B' THEN 1 ELSE 0 END) bji,
+		SUM(CASE
+		d.dangerGrade
+		WHEN 'A' THEN 1 ELSE 0 END) aji,
+		SUM(CASE d.type
+		WHEN '采煤'
+		THEN 1 ELSE 0
+		END) caimei,
+		SUM(CASE d.type WHEN '开掘' THEN 1
+		ELSE 0 END)
+		kaijue,
+		SUM(CASE
+		d.type WHEN '机电' THEN 1 ELSE 0 END) jidian,
+		SUM(CASE
+		d.type WHEN '运输' THEN
+		1 ELSE 0 END) yunshu,
+		SUM(CASE d.type
+		WHEN '通风'
+		THEN 1 ELSE 0 END) tongfeng,
+		SUM(CASE d.type WHEN '地测' THEN 1
+		ELSE 0
+		END) dice,
+		SUM(CASE d.type
+		WHEN '其他'
+		THEN 1 ELSE 0 END)qita
+		FROM danger d
+		<where>
+			<include refid="query_date"></include>
+		</where>
+	</select>
+
+
+
+</mapper>

@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="danger.mapper.riCtrl.RiDetailedOfRiskCtrlPlanMapper">
+  <resultMap id="BaseResultMap" type="danger.bean.riCtrl.RiDetailedOfRiskCtrlPlan">
+    <id column="detailedOfRiskCtrlPlanId" jdbcType="VARCHAR" property="detailedofriskctrlplanid" />
+    <result column="riCtrlPlanId" jdbcType="VARCHAR" property="rictrlplanid" />
+    <result column="riskMsgId" jdbcType="VARCHAR" property="riskmsgid" />
+    <result column="dutyDepartment" jdbcType="VARCHAR" property="dutydepartment" />
+    <result column="implementationOfMeasures" jdbcType="VARCHAR" property="implementationofmeasures" />
+    <result column="measureIsValid" jdbcType="VARCHAR" property="measureisvalid" />
+    <result column="inspectionSituation" jdbcType="VARCHAR" property="inspectionsituation" />
+    <result column="analysisTime" jdbcType="TIMESTAMP" property="analysistime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    detailedOfRiskCtrlPlanId, riCtrlPlanId, riskMsgId, dutyDepartment, implementationOfMeasures, 
+    measureIsValid, inspectionSituation, analysisTime
+  </sql>
+  <select id="selectByExample" parameterType="danger.bean.riCtrl.RiDetailedOfRiskCtrlPlan" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from ridetailedofriskctrlplan
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ridetailedofriskctrlplan
+    where detailedOfRiskCtrlPlanId = #{detailedofriskctrlplanid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from ridetailedofriskctrlplan
+    where detailedOfRiskCtrlPlanId = #{detailedofriskctrlplanid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="danger.bean.riCtrl.RiDetailedOfRiskCtrlPlanExample">
+    delete from ridetailedofriskctrlplan
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="danger.bean.riCtrl.RiDetailedOfRiskCtrlPlan">
+    insert into ridetailedofriskctrlplan (detailedOfRiskCtrlPlanId, riCtrlPlanId, 
+      riskMsgId, dutyDepartment, implementationOfMeasures, 
+      measureIsValid, inspectionSituation, analysisTime
+      )
+    values (#{detailedofriskctrlplanid,jdbcType=VARCHAR}, #{rictrlplanid,jdbcType=VARCHAR}, 
+      #{riskmsgid,jdbcType=VARCHAR}, #{dutydepartment,jdbcType=VARCHAR}, #{implementationofmeasures,jdbcType=VARCHAR}, 
+      #{measureisvalid,jdbcType=VARCHAR}, #{inspectionsituation,jdbcType=VARCHAR}, #{analysistime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="danger.bean.riCtrl.RiDetailedOfRiskCtrlPlan">
+    insert into ridetailedofriskctrlplan
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="detailedofriskctrlplanid != null">
+        detailedOfRiskCtrlPlanId,
+      </if>
+      <if test="rictrlplanid != null">
+        riCtrlPlanId,
+      </if>
+      <if test="riskmsgid != null">
+        riskMsgId,
+      </if>
+      <if test="dutydepartment != null">
+        dutyDepartment,
+      </if>
+      <if test="implementationofmeasures != null">
+        implementationOfMeasures,
+      </if>
+      <if test="measureisvalid != null">
+        measureIsValid,
+      </if>
+      <if test="inspectionsituation != null">
+        inspectionSituation,
+      </if>
+      <if test="analysistime != null">
+        analysisTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="detailedofriskctrlplanid != null">
+        #{detailedofriskctrlplanid,jdbcType=VARCHAR},
+      </if>
+      <if test="rictrlplanid != null">
+        #{rictrlplanid,jdbcType=VARCHAR},
+      </if>
+      <if test="riskmsgid != null">
+        #{riskmsgid,jdbcType=VARCHAR},
+      </if>
+      <if test="dutydepartment != null">
+        #{dutydepartment,jdbcType=VARCHAR},
+      </if>
+      <if test="implementationofmeasures != null">
+        #{implementationofmeasures,jdbcType=VARCHAR},
+      </if>
+      <if test="measureisvalid != null">
+        #{measureisvalid,jdbcType=VARCHAR},
+      </if>
+      <if test="inspectionsituation != null">
+        #{inspectionsituation,jdbcType=VARCHAR},
+      </if>
+      <if test="analysistime != null">
+        #{analysistime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="danger.bean.riCtrl.RiDetailedOfRiskCtrlPlanExample" resultType="java.lang.Long">
+    select count(*) from ridetailedofriskctrlplan
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update ridetailedofriskctrlplan
+    <set>
+      <if test="record.detailedofriskctrlplanid != null">
+        detailedOfRiskCtrlPlanId = #{record.detailedofriskctrlplanid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rictrlplanid != null">
+        riCtrlPlanId = #{record.rictrlplanid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.riskmsgid != null">
+        riskMsgId = #{record.riskmsgid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dutydepartment != null">
+        dutyDepartment = #{record.dutydepartment,jdbcType=VARCHAR},
+      </if>
+      <if test="record.implementationofmeasures != null">
+        implementationOfMeasures = #{record.implementationofmeasures,jdbcType=VARCHAR},
+      </if>
+      <if test="record.measureisvalid != null">
+        measureIsValid = #{record.measureisvalid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.inspectionsituation != null">
+        inspectionSituation = #{record.inspectionsituation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.analysistime != null">
+        analysisTime = #{record.analysistime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update ridetailedofriskctrlplan
+    set detailedOfRiskCtrlPlanId = #{record.detailedofriskctrlplanid,jdbcType=VARCHAR},
+      riCtrlPlanId = #{record.rictrlplanid,jdbcType=VARCHAR},
+      riskMsgId = #{record.riskmsgid,jdbcType=VARCHAR},
+      dutyDepartment = #{record.dutydepartment,jdbcType=VARCHAR},
+      implementationOfMeasures = #{record.implementationofmeasures,jdbcType=VARCHAR},
+      measureIsValid = #{record.measureisvalid,jdbcType=VARCHAR},
+      inspectionSituation = #{record.inspectionsituation,jdbcType=VARCHAR},
+      analysisTime = #{record.analysistime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="danger.bean.riCtrl.RiDetailedOfRiskCtrlPlan">
+    update ridetailedofriskctrlplan
+    <set>
+      <if test="rictrlplanid != null">
+        riCtrlPlanId = #{rictrlplanid,jdbcType=VARCHAR},
+      </if>
+      <if test="riskmsgid != null">
+        riskMsgId = #{riskmsgid,jdbcType=VARCHAR},
+      </if>
+      <if test="dutydepartment != null">
+        dutyDepartment = #{dutydepartment,jdbcType=VARCHAR},
+      </if>
+      <if test="implementationofmeasures != null">
+        implementationOfMeasures = #{implementationofmeasures,jdbcType=VARCHAR},
+      </if>
+      <if test="measureisvalid != null">
+        measureIsValid = #{measureisvalid,jdbcType=VARCHAR},
+      </if>
+      <if test="inspectionsituation != null">
+        inspectionSituation = #{inspectionsituation,jdbcType=VARCHAR},
+      </if>
+      <if test="analysistime != null">
+        analysisTime = #{analysistime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where detailedOfRiskCtrlPlanId = #{detailedofriskctrlplanid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="danger.bean.riCtrl.RiDetailedOfRiskCtrlPlan">
+    update ridetailedofriskctrlplan
+    set riCtrlPlanId = #{rictrlplanid,jdbcType=VARCHAR},
+      riskMsgId = #{riskmsgid,jdbcType=VARCHAR},
+      dutyDepartment = #{dutydepartment,jdbcType=VARCHAR},
+      implementationOfMeasures = #{implementationofmeasures,jdbcType=VARCHAR},
+      measureIsValid = #{measureisvalid,jdbcType=VARCHAR},
+      inspectionSituation = #{inspectionsituation,jdbcType=VARCHAR},
+      analysisTime = #{analysistime,jdbcType=TIMESTAMP}
+    where detailedOfRiskCtrlPlanId = #{detailedofriskctrlplanid,jdbcType=VARCHAR}
+  </update>
+</mapper>

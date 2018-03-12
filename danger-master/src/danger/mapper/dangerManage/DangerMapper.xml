@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="danger.mapper.dangerManage.DangerMapper" >
+  <resultMap id="BaseResultMap" type="danger.bean.dangerManage.Danger" >
+    <id column="dangerId" property="dangerid" jdbcType="INTEGER" />
+    <result column="findTime" property="findtime" jdbcType="TIMESTAMP" />
+    <result column="classType" property="classtype" jdbcType="VARCHAR" />
+    <result column="findPerson" property="findperson" jdbcType="VARCHAR" />
+    <result column="checkUnit" property="checkunit" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
+    <result column="dangerGrade" property="dangergrade" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="unit" property="unit" jdbcType="VARCHAR" />
+    <result column="manager" property="manager" jdbcType="VARCHAR" />
+    <result column="dangerStatusNum" property="dangerstatusnum" jdbcType="VARCHAR" />
+    <result column="dangerStatus" property="dangerstatus" jdbcType="VARCHAR" />
+    <result column="dangerReport" property="dangerreport" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    dangerId, findTime, classType, findPerson, checkUnit, address, content, dangerGrade, 
+    type, unit, manager, dangerStatusNum, dangerStatus, dangerReport
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="danger.bean.dangerManage.DangerExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from danger
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from danger
+    where dangerId = #{dangerid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from danger
+    where dangerId = #{dangerid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="danger.bean.dangerManage.DangerExample" >
+    delete from danger
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="danger.bean.dangerManage.Danger" >
+    insert into danger (dangerId, findTime, classType, 
+      findPerson, checkUnit, address, 
+      content, dangerGrade, type, 
+      unit, manager, dangerStatusNum, 
+      dangerStatus, dangerReport)
+    values (#{dangerid,jdbcType=INTEGER}, #{findtime,jdbcType=TIMESTAMP}, #{classtype,jdbcType=VARCHAR}, 
+      #{findperson,jdbcType=VARCHAR}, #{checkunit,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
+      #{content,jdbcType=VARCHAR}, #{dangergrade,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, 
+      #{unit,jdbcType=VARCHAR}, #{manager,jdbcType=VARCHAR}, #{dangerstatusnum,jdbcType=VARCHAR}, 
+      #{dangerstatus,jdbcType=VARCHAR}, #{dangerreport,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="danger.bean.dangerManage.Danger" >
+    insert into danger
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="dangerid != null" >
+        dangerId,
+      </if>
+      <if test="findtime != null" >
+        findTime,
+      </if>
+      <if test="classtype != null" >
+        classType,
+      </if>
+      <if test="findperson != null" >
+        findPerson,
+      </if>
+      <if test="checkunit != null" >
+        checkUnit,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+      <if test="dangergrade != null" >
+        dangerGrade,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="unit != null" >
+        unit,
+      </if>
+      <if test="manager != null" >
+        manager,
+      </if>
+      <if test="dangerstatusnum != null" >
+        dangerStatusNum,
+      </if>
+      <if test="dangerstatus != null" >
+        dangerStatus,
+      </if>
+      <if test="dangerreport != null" >
+        dangerReport,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="dangerid != null" >
+        #{dangerid,jdbcType=INTEGER},
+      </if>
+      <if test="findtime != null" >
+        #{findtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="classtype != null" >
+        #{classtype,jdbcType=VARCHAR},
+      </if>
+      <if test="findperson != null" >
+        #{findperson,jdbcType=VARCHAR},
+      </if>
+      <if test="checkunit != null" >
+        #{checkunit,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="dangergrade != null" >
+        #{dangergrade,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="unit != null" >
+        #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="manager != null" >
+        #{manager,jdbcType=VARCHAR},
+      </if>
+      <if test="dangerstatusnum != null" >
+        #{dangerstatusnum,jdbcType=VARCHAR},
+      </if>
+      <if test="dangerstatus != null" >
+        #{dangerstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="dangerreport != null" >
+        #{dangerreport,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="danger.bean.dangerManage.DangerExample" resultType="java.lang.Integer" >
+    select count(*) from danger
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update danger
+    <set >
+      <if test="record.dangerid != null" >
+        dangerId = #{record.dangerid,jdbcType=INTEGER},
+      </if>
+      <if test="record.findtime != null" >
+        findTime = #{record.findtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.classtype != null" >
+        classType = #{record.classtype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.findperson != null" >
+        findPerson = #{record.findperson,jdbcType=VARCHAR},
+      </if>
+      <if test="record.checkunit != null" >
+        checkUnit = #{record.checkunit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.address != null" >
+        address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.content != null" >
+        content = #{record.content,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dangergrade != null" >
+        dangerGrade = #{record.dangergrade,jdbcType=VARCHAR},
+      </if>
+      <if test="record.type != null" >
+        type = #{record.type,jdbcType=VARCHAR},
+      </if>
+      <if test="record.unit != null" >
+        unit = #{record.unit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.manager != null" >
+        manager = #{record.manager,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dangerstatusnum != null" >
+        dangerStatusNum = #{record.dangerstatusnum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dangerstatus != null" >
+        dangerStatus = #{record.dangerstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dangerreport != null" >
+        dangerReport = #{record.dangerreport,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update danger
+    set dangerId = #{record.dangerid,jdbcType=INTEGER},
+      findTime = #{record.findtime,jdbcType=TIMESTAMP},
+      classType = #{record.classtype,jdbcType=VARCHAR},
+      findPerson = #{record.findperson,jdbcType=VARCHAR},
+      checkUnit = #{record.checkunit,jdbcType=VARCHAR},
+      address = #{record.address,jdbcType=VARCHAR},
+      content = #{record.content,jdbcType=VARCHAR},
+      dangerGrade = #{record.dangergrade,jdbcType=VARCHAR},
+      type = #{record.type,jdbcType=VARCHAR},
+      unit = #{record.unit,jdbcType=VARCHAR},
+      manager = #{record.manager,jdbcType=VARCHAR},
+      dangerStatusNum = #{record.dangerstatusnum,jdbcType=VARCHAR},
+      dangerStatus = #{record.dangerstatus,jdbcType=VARCHAR},
+      dangerReport = #{record.dangerreport,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="danger.bean.dangerManage.Danger" >
+    update danger
+    <set >
+      <if test="findtime != null" >
+        findTime = #{findtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="classtype != null" >
+        classType = #{classtype,jdbcType=VARCHAR},
+      </if>
+      <if test="findperson != null" >
+        findPerson = #{findperson,jdbcType=VARCHAR},
+      </if>
+      <if test="checkunit != null" >
+        checkUnit = #{checkunit,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="dangergrade != null" >
+        dangerGrade = #{dangergrade,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="unit != null" >
+        unit = #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="manager != null" >
+        manager = #{manager,jdbcType=VARCHAR},
+      </if>
+      <if test="dangerstatusnum != null" >
+        dangerStatusNum = #{dangerstatusnum,jdbcType=VARCHAR},
+      </if>
+      <if test="dangerstatus != null" >
+        dangerStatus = #{dangerstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="dangerreport != null" >
+        dangerReport = #{dangerreport,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where dangerId = #{dangerid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="danger.bean.dangerManage.Danger" >
+    update danger
+    set findTime = #{findtime,jdbcType=TIMESTAMP},
+      classType = #{classtype,jdbcType=VARCHAR},
+      findPerson = #{findperson,jdbcType=VARCHAR},
+      checkUnit = #{checkunit,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      content = #{content,jdbcType=VARCHAR},
+      dangerGrade = #{dangergrade,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      unit = #{unit,jdbcType=VARCHAR},
+      manager = #{manager,jdbcType=VARCHAR},
+      dangerStatusNum = #{dangerstatusnum,jdbcType=VARCHAR},
+      dangerStatus = #{dangerstatus,jdbcType=VARCHAR},
+      dangerReport = #{dangerreport,jdbcType=VARCHAR}
+    where dangerId = #{dangerid,jdbcType=INTEGER}
+  </update>
+</mapper>

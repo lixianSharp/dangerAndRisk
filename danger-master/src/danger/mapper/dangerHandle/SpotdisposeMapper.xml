@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="danger.mapper.dangerHandle.SpotdisposeMapper" >
+  <resultMap id="BaseResultMap" type="danger.bean.dangerHandle.Spotdispose" >
+    <id column="disposeId" property="disposeid" jdbcType="INTEGER" />
+    <result column="dangerId" property="dangerid" jdbcType="INTEGER" />
+    <result column="hasSafeMeasure" property="hassafemeasure" jdbcType="VARCHAR" />
+    <result column="disposeMeasure" property="disposemeasure" jdbcType="VARCHAR" />
+    <result column="disposeDate" property="disposedate" jdbcType="TIMESTAMP" />
+    <result column="disposePerson" property="disposeperson" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    disposeId, dangerId, hasSafeMeasure, disposeMeasure, disposeDate, disposePerson
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="danger.bean.dangerHandle.SpotdisposeExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from spotdispose
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from spotdispose
+    where disposeId = #{disposeid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from spotdispose
+    where disposeId = #{disposeid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="danger.bean.dangerHandle.SpotdisposeExample" >
+    delete from spotdispose
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="danger.bean.dangerHandle.Spotdispose" >
+    insert into spotdispose (disposeId, dangerId, hasSafeMeasure, 
+      disposeMeasure, disposeDate, disposePerson
+      )
+    values (#{disposeid,jdbcType=INTEGER}, #{dangerid,jdbcType=INTEGER}, #{hassafemeasure,jdbcType=VARCHAR}, 
+      #{disposemeasure,jdbcType=VARCHAR}, #{disposedate,jdbcType=TIMESTAMP}, #{disposeperson,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="danger.bean.dangerHandle.Spotdispose" >
+    insert into spotdispose
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="disposeid != null" >
+        disposeId,
+      </if>
+      <if test="dangerid != null" >
+        dangerId,
+      </if>
+      <if test="hassafemeasure != null" >
+        hasSafeMeasure,
+      </if>
+      <if test="disposemeasure != null" >
+        disposeMeasure,
+      </if>
+      <if test="disposedate != null" >
+        disposeDate,
+      </if>
+      <if test="disposeperson != null" >
+        disposePerson,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="disposeid != null" >
+        #{disposeid,jdbcType=INTEGER},
+      </if>
+      <if test="dangerid != null" >
+        #{dangerid,jdbcType=INTEGER},
+      </if>
+      <if test="hassafemeasure != null" >
+        #{hassafemeasure,jdbcType=VARCHAR},
+      </if>
+      <if test="disposemeasure != null" >
+        #{disposemeasure,jdbcType=VARCHAR},
+      </if>
+      <if test="disposedate != null" >
+        #{disposedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="disposeperson != null" >
+        #{disposeperson,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="danger.bean.dangerHandle.SpotdisposeExample" resultType="java.lang.Integer" >
+    select count(*) from spotdispose
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update spotdispose
+    <set >
+      <if test="record.disposeid != null" >
+        disposeId = #{record.disposeid,jdbcType=INTEGER},
+      </if>
+      <if test="record.dangerid != null" >
+        dangerId = #{record.dangerid,jdbcType=INTEGER},
+      </if>
+      <if test="record.hassafemeasure != null" >
+        hasSafeMeasure = #{record.hassafemeasure,jdbcType=VARCHAR},
+      </if>
+      <if test="record.disposemeasure != null" >
+        disposeMeasure = #{record.disposemeasure,jdbcType=VARCHAR},
+      </if>
+      <if test="record.disposedate != null" >
+        disposeDate = #{record.disposedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.disposeperson != null" >
+        disposePerson = #{record.disposeperson,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update spotdispose
+    set disposeId = #{record.disposeid,jdbcType=INTEGER},
+      dangerId = #{record.dangerid,jdbcType=INTEGER},
+      hasSafeMeasure = #{record.hassafemeasure,jdbcType=VARCHAR},
+      disposeMeasure = #{record.disposemeasure,jdbcType=VARCHAR},
+      disposeDate = #{record.disposedate,jdbcType=TIMESTAMP},
+      disposePerson = #{record.disposeperson,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="danger.bean.dangerHandle.Spotdispose" >
+    update spotdispose
+    <set >
+      <if test="dangerid != null" >
+        dangerId = #{dangerid,jdbcType=INTEGER},
+      </if>
+      <if test="hassafemeasure != null" >
+        hasSafeMeasure = #{hassafemeasure,jdbcType=VARCHAR},
+      </if>
+      <if test="disposemeasure != null" >
+        disposeMeasure = #{disposemeasure,jdbcType=VARCHAR},
+      </if>
+      <if test="disposedate != null" >
+        disposeDate = #{disposedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="disposeperson != null" >
+        disposePerson = #{disposeperson,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where disposeId = #{disposeid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="danger.bean.dangerHandle.Spotdispose" >
+    update spotdispose
+    set dangerId = #{dangerid,jdbcType=INTEGER},
+      hasSafeMeasure = #{hassafemeasure,jdbcType=VARCHAR},
+      disposeMeasure = #{disposemeasure,jdbcType=VARCHAR},
+      disposeDate = #{disposedate,jdbcType=TIMESTAMP},
+      disposePerson = #{disposeperson,jdbcType=VARCHAR}
+    where disposeId = #{disposeid,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="danger.mapper.riIdentify.custom.RiIdentificationMainTableCustomMapper">
+
+ 	<!-- 查询分页 index:当前页页号 currentCount:每页显示的记录数 -->
+	<sql id="query_page_limit">
+		<if test="index!=null">
+			LIMIT #{index},#{currentCount}
+		</if>
+	</sql> 	
+	
+	<!-- 查询风险辨识主表的条件 -->
+	<sql id="query_RiIdentificationMainTable_where">
+		<if test="identiryid!=null">
+			and identiryid=#{identiryid}
+		</if>
+		<if test="year!=null">
+			and year=#{year}
+		</if>
+		<if test="name!=null">
+			and name=#{name}
+		</if>
+		<if test="meetingaddress!=null">
+			and meetingaddress=#{meetingaddress}
+		</if>
+		<if test="compere!=null">
+			and compere=#{compere}
+		</if>
+		<if test="recorder!=null">
+			and recorder=#{recorder}
+		</if>
+		<if test="participants!=null">
+			and participants=#{participants}
+		</if>
+		<if test="meetingcontent!=null">
+			and meetingcontent=#{meetingcontent}
+		</if>
+		<if test="identifymark!=null">
+			and identifymark=#{identifymark}
+		</if>
+		<if test="createtime!=null">
+			and createtime=#{createtime}
+		</if>
+	</sql>
+	
+	
+	<!-- 组合条件查询风险辨识信息主表信息 按创建时间降序排序 分页查询 -->
+	<select id="findRiIdentificationMainTableByCondition" resultType="danger.bean.riIdentify.RiIdentificationMainTable"
+		parameterType="map">
+		
+		select * from riIdentificationMainTable
+		<where>
+			<include refid="query_RiIdentificationMainTable_where"></include>
+		</where>
+		order by createtime desc
+		<include refid="query_page_limit"></include>
+	</select>
+	
+	
+	<!-- 根据组合条件查询风险辨识信息主表的总条数 -->
+	<select id="getRiIdentificationMainTableCountByCondition" resultType="int" parameterType="map">
+		select count(*) from riidentificationmaintable
+		<where>
+			<include refid="query_RiIdentificationMainTable_where"></include>
+		</where>
+	</select>
+	
+	
+</mapper>
