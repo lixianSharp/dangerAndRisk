@@ -94,6 +94,15 @@ public class RiIdentificationRangeServiceImpl implements RiIdentificationRangeSe
 		return pageBean;
 	}
 
+	/**
+	 * 查询所有风险辨识范围信息
+	 */
+	@Override
+	public List<RiIdentificationRange> findAllRiIdentificationRange() throws Exception {
+		List<RiIdentificationRange> allRiIdentificationRange = riIdentificationRangeCustomMapper.findAllRiIdentificationRange();
+		return allRiIdentificationRange;
+	}
+
 	
 	
 

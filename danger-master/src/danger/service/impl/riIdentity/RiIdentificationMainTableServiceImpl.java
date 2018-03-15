@@ -1,5 +1,6 @@
 package danger.service.impl.riIdentity;
 
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -123,6 +124,39 @@ public class RiIdentificationMainTableServiceImpl implements RiIdentificationMai
 		pageBean.setProductList(riIdentificationMainTableList);
 
 		return pageBean;
+	}
+
+	
+	/**
+	 * 根据组合条件查询风险辨识主表信息及其对应的辨识风险信息 
+	 * 			如果没有输入 identiryid，则说明是只需要显示所有风险辨识主表信息及其对应的(辨识风险信息及数量) 
+	 * 			输入identiryid，则说明是查询当前风险辨识主表信息及其对应的所有辨识风险信息
+	 */
+	@Override
+	public List<Map<String, Object>> findIdentifyMainAndRiskMsgByCondition(Map<String, Object> condition) throws Exception {
+		List<Map<String, Object>> resultListMap = riIdentificationMainTableCustomMapper.findIdentifyMainAndRiskMsgByCondition(condition);
+		return resultListMap;
+	}
+
+	/**
+	 * 根据组合条件查询风险辨识主表信息及其对应的辨识风险信息 的总记录数
+	 */
+	@Override
+	public Integer getIdentifyMainAndRiskMsgCountByCondition(Map<String, Object> condition) throws Exception {
+		Integer currentCount = riIdentificationMainTableCustomMapper.getIdentifyMainAndRiskMsgCountByCondition(condition);
+		return currentCount;
+	}
+	
+	
+	/**
+	 * 根据主键id获取辨识主表信息
+	 * @param identiryid
+	 * @return  辨识主表信息的javabean
+	 * @throws Exception
+	 */
+	public RiIdentificationMainTable findIdentifyMainByIdentifyId(String identiryid) throws Exception{
+		RiIdentificationMainTable identificationMainTable = riIdentificationMainTableMapper.selectByPrimaryKey(identiryid);
+		return identificationMainTable;
 	}
 
 }

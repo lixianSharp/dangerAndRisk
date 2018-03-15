@@ -24,4 +24,10 @@ public interface RiIdentificationRangeCustomMapper {
 	 */
 	public int getRiIdentificationRangeCountByCondition(Map<String,Object> map)throws Exception;
 	
+	/**
+	 * 查询所有风险辨识范围信息
+	 * @return
+	 * @throws Exception
+	 */
+	public List<RiIdentificationRange> findAllRiIdentificationRange()throws Exception;
 }

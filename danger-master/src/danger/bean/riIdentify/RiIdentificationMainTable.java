@@ -102,4 +102,14 @@ public class RiIdentificationMainTable {
     public void setCreatetime(Date createtime) {
         this.createtime = createtime;
     }
+
+	@Override
+	public String toString() {
+		return "RiIdentificationMainTable [identiryid=" + identiryid + ", year=" + year + ", name=" + name
+				+ ", meetingaddress=" + meetingaddress + ", compere=" + compere + ", recorder=" + recorder
+				+ ", participants=" + participants + ", meetingcontent=" + meetingcontent + ", identifymark="
+				+ identifymark + ", createtime=" + createtime + "]";
+	}
+    
+    
 }

@@ -44,7 +44,7 @@ public interface RiIdentificationRriskMsgService {
 	 * @return
 	 * @throws SQLException
 	 */
-	public PageBean<RiIdentificationRriskMsg> findDangerSidingByCondition(int currentPage, int currentCount,
+	public PageBean<RiIdentificationRriskMsg> findRiIdentificationRriskMsgByCondition(int currentPage, int currentCount,
 			Map<String, Object> condition) throws Exception;
 	
 	

@@ -52,21 +52,6 @@ public class PageBean<T> {
 	public void setProductList(List<T> productList) {
 		this.productList = productList;
 	}
-	@Override
-	public String toString() {
-		return "PageBean [currentPage=" + currentPage + ", currentCount=" + currentCount + ", totalCount=" + totalCount
-				+ ", totalPage=" + totalPage + ", productList=" + productList + "]";
-	}
-	
-	
-	
-	
-
-
-
-
-
-
 
 
 }

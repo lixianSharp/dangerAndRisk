@@ -13,7 +13,7 @@ function addOpenBtn(){
 	$("#addmeetingcontent").val("");//会议内容
 }
 
-//增加年度辨识的保存按钮的点击事件
+//增加专项辨识的保存按钮的点击事件
 function addSave(){
 	// 表单校验   
 	var isNotNull = $("#addForm").validate({
@@ -49,12 +49,12 @@ function addSave(){
 		}
 	});
 
-	// 如果通过表单校验，则执行新增年度辨识信息操作
+	// 如果通过表单校验，则执行新增专项辨识信息操作
 	if (isNotNull.form()) {
 		$.ajax({
 			type : "post",
 			dataType : "json",
-			url : "${pageContext.request.contextPath}/identify_addRiIdentificationMainTable.action",
+			url : "${pageContext.request.contextPath}/identify_addRiIdentificationMainTableS.action",
 			data : $("#addForm").serialize(),
 			success : function(data) {
 				alert(data.result);
@@ -74,18 +74,18 @@ function addSave(){
 //打开修改按钮的模态框
 function updateOpenBtn(obj){
 	//初始化表单
-	// 1。获取到当前选中的隐藏的年度辨识id
+	// 1。获取到当前选中的隐藏的专项辨识id
 	var idenranid= $(obj).siblings("input").val();
 	$("#updateidenranid").val(idenranid);
 	var $td = $(obj).parents("tr").children("td");
-	var year = $td.eq(2).text();//年度
+	var year = $td.eq(2).text();//专项
 	var meetingaddress = $td.eq(4).text();//会议地点
 	var compere = $td.eq(5).text();//主持人
 	var recorder = $td.eq(6).text();//记录人
 	var participants = $td.eq(7).text();//参会人员
 	var meetingcontent = $td.eq(8).text();//会议内容
 	
-	//$("#optsdate5").val(year);//年度
+	//$("#optsdate5").val(year);//专项
 	$("#updatemeetingaddress").val(meetingaddress);//会议地点
 	$("#updatecompere").val(compere);//主持人
 	$("#updaterecorder").val(recorder);//记录人
@@ -129,12 +129,12 @@ function updateBtn(){
 		}
 	});
 
-	// 如果通过表单校验，则执行修改年度辨识信息操作
+	// 如果通过表单校验，则执行修改专项辨识信息操作
 	if (isNotNull.form()) {
 		$.ajax({
 			type : "post",
 			dataType : "json",
-			url : "${pageContext.request.contextPath}/identify_updateRiIdentificationMainTable.action",
+			url : "${pageContext.request.contextPath}/identify_updateRiIdentificationMainTableS.action",
 			data : $("#updateForm").serialize(),
 			success : function(data) {
 				alert(data.result);
@@ -160,7 +160,7 @@ function findAllRiRespon() {
 	$.ajax({
 		type : "post",
 		dataType : "json",
-		url : "identify_findRiIdentificationMainTableByConditionY.action",
+		url : "identify_findRiIdentificationMainTableByConditionS.action",
 		data : {
 			// 当前页页号 每页显示的记录数
 			"currentPage" : $("#currentPage").val(),// 当前页页号
@@ -174,13 +174,13 @@ function findAllRiRespon() {
 			var options = "";
 			for (var i = 0; i < data.resultMapList.length; i++) {
 				var identiryid = data.resultMapList[i].identiryId;//辨识信息id
-				var year = data.resultMapList[i].year;// 年度
+				var year = data.resultMapList[i].year;// 专项
 				var meetingaddress = data.resultMapList[i].meetingAddress;//会议地点
 				var compere = data.resultMapList[i].compere;// 主持人
 				var recorder = data.resultMapList[i].recorder;// 记录人
 				var participants = data.resultMapList[i].participants;//参会人员
 				var meetingcontent = data.resultMapList[i].meetingContent;//会议内容
-				var identifymark = data.resultMapList[i].identifyMark;//标记(Y/S 年度/专项)
+				var identifymark = data.resultMapList[i].identifyMark;//标记(Y/S 专项/专项)
 				var createtime = data.resultMapList[i].createTime;//创建时间
 				var riskmsgcount = data.resultMapList[i].riskmsgcount;//辨识风险信息数量
 				
@@ -189,7 +189,7 @@ function findAllRiRespon() {
 			    options += "<td><input type='checkbox'></td>";
 				options +="<td>"+((data.currentPage-1)*10+i+1)+"</td>";
 				options +="<td>"+year+"</td>";//年份
-				options +="<td>"+riskmsgcount+"</td>";//该年度辨识对应的辨识风险信息数量
+				options +="<td>"+riskmsgcount+"</td>";//该专项辨识对应的辨识风险信息数量
 				//options +="<td>"+"未评估"+"</td>";
 				options +="<td>"+meetingaddress+"</td>";//会议地点
 				options +="<td>"+compere+"</td>";//主持人
@@ -199,6 +199,7 @@ function findAllRiRespon() {
 				options +="<td>" +"<input  type='hidden' value='"+identiryid+"'><a data-toggle='modal' data-target='#modifierDuty' onclick='updateOpenBtn(this)' >修改</a><a href='#' onclick='detailYRecognize(this) '>详情</a></td>";
 				options += "</tr>";
 			}
+		
 			// currentPage：当前页页号 currentCount：每页显示的记录数 totalCount：总记录数
 			PagePilot(data.currentPage, data.currentCount, data.totalCount);
 			
@@ -243,7 +244,7 @@ function PagePilot(currentPage, currentCount, totalCount) {
 
 //详情
 function detailYRecognize(obj){
-	// 1。获取到当前选中的隐藏的年度辨识id
+	// 1。获取到当前选中的隐藏的专项辨识id
 	var idenranid= $(obj).siblings("input").val();
 	
 	//为form表单的input隐藏域赋值

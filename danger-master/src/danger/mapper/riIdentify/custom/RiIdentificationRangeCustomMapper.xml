@@ -50,4 +50,9 @@
 		</where>
 	</select>
 	
+	
+	<!-- 查询所有风险辨识范围信息 -->
+	<select id="findAllRiIdentificationRange" resultType="danger.bean.riIdentify.RiIdentificationRange">
+		select * from riIdentificationRange
+	</select>
 </mapper>

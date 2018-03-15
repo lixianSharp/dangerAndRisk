@@ -2,6 +2,7 @@ package danger.service.lxyTestUtil;
 
 import java.util.Date;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -20,56 +21,73 @@ import danger.utils.UUIDUtil;
 @ContextConfiguration("classpath:spring/applicationContext-*.xml")
 public class TestRiIdentificationMainTableUtil {
 	@Resource
-	private RiIdentificationMainTableService riIdentificationMainTableService; 
+	private RiIdentificationMainTableService identifyService; 
 	
 	@Test
 	public void add()throws Exception{
-		RiIdentificationMainTable riIdentificationMainTable = new RiIdentificationMainTable();
-		riIdentificationMainTable.setIdentiryid(UUIDUtil.getUUID2());
-		riIdentificationMainTable.setIdentifymark("Y");
-		riIdentificationMainTable.setCreatetime(new Date());
-		riIdentificationMainTable.setCompere("主持人");
-		riIdentificationMainTable.setMeetingaddress("会议地址");
-		riIdentificationMainTable.setMeetingcontent("会议内容");
-		riIdentificationMainTable.setName("2016年年度专项辨识");
-		riIdentificationMainTable.setParticipants("参会人员");
-		riIdentificationMainTable.setRecorder("记录人");
-		riIdentificationMainTable.setYear(new Date(2016, 10, 24));
+		RiIdentificationMainTable identify = new RiIdentificationMainTable();
+		identify.setIdentiryid(UUIDUtil.getUUID2());
+		identify.setIdentifymark("Y");
+		identify.setCreatetime(new Date());
+		identify.setCompere("主持人");
+		identify.setMeetingaddress("会议地址");
+		identify.setMeetingcontent("会议内容");
+		identify.setName("2016年年度专项辨识");
+		identify.setParticipants("参会人员");
+		identify.setRecorder("记录人");
+		identify.setYear(new Date(2016, 10, 24));
 		
-		boolean result = riIdentificationMainTableService.addRiIdentificationMainTable(riIdentificationMainTable);
+		boolean result = identifyService.addRiIdentificationMainTable(identify);
 		System.out.println("是否添加成功?"+result);
 	}
 	
 	
 	@Test
 	public void update()throws Exception{
-		RiIdentificationMainTable riIdentificationMainTable = new RiIdentificationMainTable();
-		riIdentificationMainTable.setIdentiryid("581071247bb140e1a331706b430147c4");
-		riIdentificationMainTable.setIdentifymark("Y");
-		riIdentificationMainTable.setCreatetime(new Date());
-		riIdentificationMainTable.setCompere("主持人1");
-		riIdentificationMainTable.setMeetingaddress("会议地址1");
-		riIdentificationMainTable.setMeetingcontent("会议内容1");
-		riIdentificationMainTable.setName("2016年年度专项辨识1");
-		riIdentificationMainTable.setParticipants("参会人员1");
-		riIdentificationMainTable.setRecorder("记录人1");
-		riIdentificationMainTable.setYear(new Date(2016, 10, 24));
-		boolean result = riIdentificationMainTableService.updateRiIdentificationMainTable(riIdentificationMainTable);
+		RiIdentificationMainTable identify = new RiIdentificationMainTable();
+		identify.setIdentiryid("581071247bb140e1a331706b430147c4");
+		identify.setIdentifymark("Y");
+		identify.setCreatetime(new Date());
+		identify.setCompere("主持人1");
+		identify.setMeetingaddress("会议地址1");
+		identify.setMeetingcontent("会议内容1");
+		identify.setName("2016年年度专项辨识1");
+		identify.setParticipants("参会人员1");
+		identify.setRecorder("记录人1");
+		identify.setYear(new Date(2016, 10, 24));
+		boolean result = identifyService.updateRiIdentificationMainTable(identify);
 		System.out.println(result);
 	}
 	
 	@Test
 	public void find()throws Exception{
 		Map<String,Object> condition = new LinkedHashMap<String,Object>();
-		PageBean<RiIdentificationMainTable> pageBean = riIdentificationMainTableService.findDangerSidingByCondition(1, 5, condition);
+		PageBean<RiIdentificationMainTable> pageBean = identifyService.findDangerSidingByCondition(1, 5, condition);
 		System.out.println(pageBean.getProductList().size());
 		System.out.println(pageBean.getProductList().get(0).getCompere());
 	}
 	
 	@Test
 	public void delete()throws Exception{
-		boolean result = riIdentificationMainTableService.delRiIdentificationMainTable("b345d7c5b84c410cb9dacf7cd7db8ae3");
+		boolean result = identifyService.delRiIdentificationMainTable("b345d7c5b84c410cb9dacf7cd7db8ae3");
 		System.out.println(result);
 		
 	}
+	
+	@Test
+	public void findriskMsgAndMainTable() throws Exception{
+		Map<String,Object> condition = new LinkedHashMap<String,Object>();
+		int currpage = 1;//当前页页号
+		int currCount = 20;//每页显示的记录数
+		condition.put("index", (currpage-1)*currCount);//（当前页页号-1）*每页显示的记录数
+		condition.put("currentCount", currCount);
+		//condition.put("identiryid", "4db947fba1a546ebaecff2ac5d1116ea");
+		condition.put("identifymark", "Y");
+		List<Map<String, Object>> resultMap = identifyService.findIdentifyMainAndRiskMsgByCondition(condition);
+		Integer resultCount = identifyService.getIdentifyMainAndRiskMsgCountByCondition(condition);
+		System.out.println("总记录数"+resultCount/2);
+		System.out.println(resultMap.size()+" =="+resultMap);
+	}
+	
+	
 }

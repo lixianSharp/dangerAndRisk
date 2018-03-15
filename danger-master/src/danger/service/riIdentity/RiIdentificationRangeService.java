@@ -1,6 +1,7 @@
 package danger.service.riIdentity;
 
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Map;
 
 import danger.bean.queryView.DangerSiding;
@@ -47,5 +48,12 @@ public interface RiIdentificationRangeService {
 	public PageBean<RiIdentificationRange> findDangerSidingByCondition(int currentPage, int currentCount,
 			Map<String, Object> condition) throws Exception;
 	
+	
+	/**
+	 * 查询所有风险辨识范围信息
+	 * @return
+	 * @throws Exception
+	 */
+	public List<RiIdentificationRange> findAllRiIdentificationRange()throws Exception;
 	
 }

@@ -25,6 +25,7 @@
 </head>
 
 <body>
+
 	<!--头-->
 	<jsp:include page="../public/header.jsp"></jsp:include>
 

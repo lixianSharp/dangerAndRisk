@@ -43,6 +43,13 @@
 		</if>
 	</sql>
 	
+	<!-- 辨识信息主表的所有字段 -->
+	<sql id="Base_Column_List_riIdentificationMainTable">
+	    DISTINCT(riIdentificationMainTable.identiryId),riIdentificationMainTable.createTime,riIdentificationMainTable.identifyMark,
+		riIdentificationMainTable.compere,riIdentificationMainTable.meetingAddress,
+		riIdentificationMainTable.meetingContent,riIdentificationMainTable.name,riIdentificationMainTable.participants,
+		riIdentificationMainTable.recorder,riIdentificationMainTable.year
+    </sql>
 	
 	<!-- 组合条件查询风险辨识信息主表信息 按创建时间降序排序 分页查询 -->
 	<select id="findRiIdentificationMainTableByCondition" resultType="danger.bean.riIdentify.RiIdentificationMainTable"
@@ -63,6 +70,98 @@
 		<where>
 			<include refid="query_RiIdentificationMainTable_where"></include>
 		</where>
+	</select>
+	
+	
+	<!-- 查询辨识风险信息的条件 -->
+	<sql id="query_RiIdentificationRriskMsg_where">
+		<if test="riskmsgid!=null">
+			and riskmsgid=#{riskmsgid}
+		</if>
+		<if test="identiryid!=null">
+			and identiryid=#{identiryid}
+		</if>
+		<if test="riskaddress!=null">
+			and riskaddress=#{riskaddress}
+		</if>
+		<if test="riskdescribe!=null">
+			and riskdescribe=#{riskdescribe}
+		</if>
+		<if test="risktype!=null">
+			and risktype=#{risktype}
+		</if>
+		<if test="professionaltypes!=null">
+			and professionaltypes=#{professionaltypes}
+		</if>
+		<if test="disastertypes!=null">
+			and disastertypes=#{disastertypes}
+		</if>
+		<if test="cancauseaccidents!=null">
+			and cancauseaccidents=#{cancauseaccidents}
+		</if>
+		<if test="ctrlmeasure!=null">
+			and ctrlmeasure=#{ctrlmeasure}
+		</if>
+		<if test="principal!=null">
+			and principal=#{principal}
+		</if>
+		<if test="superintendent!=null">
+			and superintendent=#{superintendent}
+		</if>
+		<if test="monitoringperiod!=null">
+			and monitoringperiod=#{monitoringperiod}
+		</if>
+		<if test="evaluationstatus!=null">
+			and evaluationstatus=#{evaluationstatus}
+		</if>
+	</sql>
+	
+	<!-- 辨识风险信息的所有字段 -->
+	<sql id="Base_Column_List_riIdentificationrriskmsg">
+   		 riIdentificationrriskmsg.riskMsgId,riIdentificationrriskmsg.canCauseAccidents,riIdentificationrriskmsg.ctrlMeasure,
+		 riIdentificationrriskmsg.disasterTypes,riIdentificationrriskmsg.evaluationStatus,riIdentificationrriskmsg.identiryId,
+		 riIdentificationrriskmsg.monitoringPeriod,riIdentificationrriskmsg.principal,riIdentificationrriskmsg.professionalTypes,
+         riIdentificationrriskmsg.riskAddress,riIdentificationrriskmsg.riskDescribe,riIdentificationrriskmsg.riskType,
+         riIdentificationrriskmsg.superintendent 
+    </sql>
+  
+  
+	<!-- 根据组合条件查询风险辨识主表信息及其对应的辨识风险信息   主界面-->
+	<select id="findIdentifyMainAndRiskMsgByCondition" parameterType="map" resultType="map">
+		select <include refid="Base_Column_List_riIdentificationMainTable"></include>,
+				(SELECT COUNT(*) FROM riidentificationrriskmsg WHERE riidentificationrriskmsg.identiryId=riIdentificationMainTable.identiryid) as "riskmsgcount"
+		from riIdentificationMainTable,riIdentificationrriskmsg
+		<where>
+			<!-- 年度还是专项 -->
+			<if test="identifymark!=null">
+				and riIdentificationMainTable.identifymark=#{identifymark}
+			</if>
+			<!-- 如果没有输入 identiryid，则说明是只需要显示所有风险辨识主表信息及其对应的(辨识风险信息及数量)-->
+			<!-- 输入identiryid，则说明是查询当前风险辨识主表信息及其对应的所有辨识风险信息 -->
+			<!-- <if test="identiryid!=null">
+				and riIdentificationMainTable.identiryid = #{identiryid}
+			</if> -->
+			
+		</where>
+			order by riIdentificationMainTable.createtime desc
+			<include refid="query_page_limit"></include>	
+	</select>
+	
+	<!-- 根据组合条件查询风险辨识主表信息及其对应的辨识风险信息 的总记录数  主界面-->
+	<select id="getIdentifyMainAndRiskMsgCountByCondition" parameterType="map" resultType="int">
+		select   count(*)	from riIdentificationMainTable
+		<where>
+			<!-- 年度还是专项 -->
+			<if test="identifymark!=null">
+				and riIdentificationMainTable.identifymark=#{identifymark}
+			</if>
+		</where>
+	</select>
+	
+	
+	<!-- 根据风险辨识主表id查询该条风险辨识主表信息及其对应的所有辨识风险信息 -->
+	<select id="selIdentifyMainAndRiskMsgByIdentityId" parameterType="String" resultType="map">
+		
 	</select>
 	
 	

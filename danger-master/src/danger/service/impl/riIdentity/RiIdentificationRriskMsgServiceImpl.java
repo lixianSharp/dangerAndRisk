@@ -81,8 +81,11 @@ public class RiIdentificationRriskMsgServiceImpl implements RiIdentificationRris
 		return (result3 > 0 ? true : false);
 	}
 
+	/**
+	 * 组合条件查询 风险辨识信息
+	 */
 	@Override
-	public PageBean<RiIdentificationRriskMsg> findDangerSidingByCondition(int currentPage, int currentCount,
+	public PageBean<RiIdentificationRriskMsg> findRiIdentificationRriskMsgByCondition(int currentPage, int currentCount,
 			Map<String, Object> condition) throws Exception {
 		// 目的：就是想办法封装一个PageBean 并返回
 		PageBean<RiIdentificationRriskMsg> pageBean = new PageBean();
