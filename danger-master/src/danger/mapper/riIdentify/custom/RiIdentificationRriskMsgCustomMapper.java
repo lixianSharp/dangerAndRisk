@@ -31,4 +31,7 @@ public interface RiIdentificationRriskMsgCustomMapper {
 	 * @throws Exception
 	 */
 	public Integer delRiCtrlPlanByRiskMsgId(String riskMsgId)throws Exception;
+	
+	
+	
 }

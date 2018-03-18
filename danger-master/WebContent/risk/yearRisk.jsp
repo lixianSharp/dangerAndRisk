@@ -221,7 +221,7 @@
 														
 													</select>
 													<textarea id="addriskaddress" class="form-control texta"
-													rows="2" name="riIdentificationRriskMsg.riskaddress" readonly="readonly"></textarea>
+													rows="2" name="riIdentificationRriskMsg.riskaddress" ></textarea>
 												</div>
 												<!-- 存放选中的风险地点，用于追加到文本框中 -->
 												<input id="addAddressToTextarea" type="hidden" value=""/>

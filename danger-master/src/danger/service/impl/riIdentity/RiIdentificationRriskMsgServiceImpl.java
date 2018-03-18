@@ -132,4 +132,15 @@ public class RiIdentificationRriskMsgServiceImpl implements RiIdentificationRris
 		return (result>0?true:false);
 	}
 
+	/**
+	 * 根据风险信息id查找辨识风险信息
+	 */
+	@Override
+	public RiIdentificationRriskMsg selRiIdentifyRriskMsgByRiskMsgId(String riskMsgId) throws Exception {
+		RiIdentificationRriskMsg riskMsg = riIdentificationRriskMsgMapper.selectByPrimaryKey(riskMsgId);
+		return riskMsg;
+	}
+	
+	
+
 }

@@ -55,4 +55,11 @@ public interface RiIdentificationRriskMsgService {
 	 * @throws Exception
 	 */
 	public boolean delRiCtrlPlanByRiskMsgId(String riskMsgId)throws Exception;
+	
+	/**根据风险信息id查找辨识风险信息
+	 * @param riskMsgId
+	 * @return
+	 * @throws Exception
+	 */
+	public RiIdentificationRriskMsg selRiIdentifyRriskMsgByRiskMsgId(String riskMsgId) throws Exception;
 }

@@ -28,8 +28,6 @@ function initWorkFace(){
 
 			$("#updateriskAddressSelect").append(str);
 		
-			//刷新数据
-			//findAllRiRespon();
 		},
 		error : function() {
 			alert("初始化字典失败，请重新初始化！");
