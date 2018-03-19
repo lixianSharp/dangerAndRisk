@@ -15,11 +15,44 @@ function addOpenBtn(){
 
 //增加年度辨识的保存按钮的点击事件
 function addSave(){
+	//alert($("#optsdate5").val())
+	if($("#optsdate5").val()==""){
+		alert("年份不能为空");
+	}else{//****>>>>>年份有值的情况再判断
+		//根据输入的年度在风险辨识主表中查询是否有记录 用于判断 一年只能有一条专项辨识信息
+		$.ajax({
+			type : "post",
+			dataType : "json",
+			url : "${pageContext.request.contextPath}/identify_theYearIsExist.action",
+			data : {
+				"identifyNTime":$("#optsdate5").val()
+			},
+			success : function(data) {
+				if(data.result=="yes"){
+					//说明当前输入的年份重复了，不能进行表单提交
+					alert("该年份已经进行了年度辨识，一个年度只能进行一次辨识，不可重复辨识,请重新选择年份!");
+				}else if(data.result=="no"){
+					//说明年份没有重复，可以提交表单
+					addSaveBtnClick();//提交表单
+					//alert("可以提交表单");
+				}
+			},
+			error : function() {
+				alert("添加失败，请重新添加！");
+			}
+		});
+	}
+	
+}
+
+//新增的表单校验和保存操作
+function addSaveBtnClick(){
+	$("#strTime").val($("#optsdate5").val());//将年度保存在对应的隐藏域中
 	// 表单校验   
 	var isNotNull = $("#addForm").validate({
 		ignore : [],
 		rules : {
-			//"identify.year" : "required",// 年份
+			"yearDate" : "required",// 年份
 			"identify.meetingaddress" : "required",// 会议地点
 			"identify.compere" : "required",//主持人
 			"identify.recorder" :"required",// 记录人
@@ -28,9 +61,9 @@ function addSave(){
 		},
 		
 		messages : {
-			/*"identify.year" : {// 年份
+			"yearDate" : {// 年份
 				required : "不能为空"
-			},*/
+			},
 			"identify.meetingaddress" : {// 会议地点
 				required : "不能为空"
 			},
@@ -67,7 +100,6 @@ function addSave(){
 			}
 		});
 	}
-
 }
 
 
@@ -85,7 +117,9 @@ function updateOpenBtn(obj){
 	var participants = $td.eq(7).text();//参会人员
 	var meetingcontent = $td.eq(8).text();//会议内容
 	
-	//$("#optsdate5").val(year);//年度
+	$("#updatestrTime").val(year);//将年度保存在对应的隐藏域中
+	
+	$("#optsdate520").val(year);//年度
 	$("#updatemeetingaddress").val(meetingaddress);//会议地点
 	$("#updatecompere").val(compere);//主持人
 	$("#updaterecorder").val(recorder);//记录人
@@ -95,11 +129,12 @@ function updateOpenBtn(obj){
 
 //确认修改按钮的点击事件
 function updateBtn(){
+	$("#updatestrTime").val($("#optsdate520").val());//将年度保存在对应的隐藏域中
 	// 表单校验   
 	var isNotNull = $("#updateForm").validate({
 		ignore : [],
 		rules : {
-			//"identify.year" : "required",// 年份
+			"updateYearDate" : "required",// 年份
 			"identify.meetingaddress" : "required",// 会议地点
 			"identify.compere" : "required",//主持人
 			"identify.recorder" :"required",// 记录人
@@ -108,9 +143,9 @@ function updateBtn(){
 		},
 		
 		messages : {
-			/*"identify.year" : {// 年份
+			"updateYearDate" : {// 年份
 				required : "不能为空"
-			},*/
+			},
 			"identify.meetingaddress" : {// 会议地点
 				required : "不能为空"
 			},
@@ -184,11 +219,13 @@ function findAllRiRespon() {
 				var createtime = data.resultMapList[i].createTime;//创建时间
 				var riskmsgcount = data.resultMapList[i].riskmsgcount;//辨识风险信息数量
 				
+				var yearDealWith =/\d{4}/g.exec(year);//让年度的显示只显示年份
+				
 				//开始拼接
 				options += "<tr>";
 			    options += "<td><input type='checkbox'></td>";
 				options +="<td>"+((data.currentPage-1)*10+i+1)+"</td>";
-				options +="<td>"+year+"</td>";//年份
+				options +="<td>"+yearDealWith+"</td>";//年份
 				options +="<td>"+riskmsgcount+"</td>";//该年度辨识对应的辨识风险信息数量
 				//options +="<td>"+"未评估"+"</td>";
 				options +="<td>"+meetingaddress+"</td>";//会议地点
@@ -252,6 +289,13 @@ function detailYRecognize(obj){
 }
 
 
+//添加年度辨识信息的时候，当选完年度的时候，判断该年度是否已经辨识过了
+function addYearChange(){
+	/*if($("#optsdate5").val()=="2015"){
+		alert("该年份已辨识，请重新输入")
+	}*/
+	
+}
 
 
 

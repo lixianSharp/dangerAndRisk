@@ -130,7 +130,7 @@ function initCanCauseAccidentType(){
 
 //=============
 
-//初始化可能性
+//初始化可能性(L)
 function initPossibility(){
 	$.ajax({
 		type : "post",
@@ -142,7 +142,7 @@ function initPossibility(){
 
 				var str = "<option value=''>--请选择--</option>";//<option value="综采">综采</option>
 				for(var i=0;i<data.dictionaryList.length;i++){
-					str +="<option value="+data.dictionaryList[i].name+">"+data.dictionaryList[i].name+"</option>";
+					str +="<option title='"+data.dictionaryList[i].description+"' value="+data.dictionaryList[i].name+">"+data.dictionaryList[i].name+"</option>";
 				}
 				$("#evaluatePossibility").append(str);
 
@@ -154,7 +154,7 @@ function initPossibility(){
 }
 
 
-//初始化人员暴露频繁程度
+//初始化人员暴露频繁程度(E)
 function initBLPFCD(){
 	$.ajax({
 		type : "post",
@@ -166,7 +166,7 @@ function initBLPFCD(){
 
 				var str = "<option value=''>--请选择--</option>";//<option value="综采">综采</option>
 				for(var i=0;i<data.dictionaryList.length;i++){
-					str +="<option value="+data.dictionaryList[i].name+">"+data.dictionaryList[i].name+"</option>";
+					str +="<option title='"+data.dictionaryList[i].description+"' value="+data.dictionaryList[i].name+">"+data.dictionaryList[i].name+"</option>";
 				}
 				$("#evaluatePersondegreeofexposure").append(str);
 
@@ -177,7 +177,7 @@ function initBLPFCD(){
 	});
 }
 
-//初始化损失后果
+//初始化损失后果(C)
 function initSSHG(){
 	$.ajax({
 		type : "post",
@@ -189,7 +189,7 @@ function initSSHG(){
 
 				var str = "<option value=''>--请选择--</option>";//<option value="综采">综采</option>
 				for(var i=0;i<data.dictionaryList.length;i++){
-					str +="<option value="+data.dictionaryList[i].name+">"+data.dictionaryList[i].name+"</option>";
+					str +="<option title='"+data.dictionaryList[i].description+"' value="+data.dictionaryList[i].name+">"+data.dictionaryList[i].name+"</option>";
 				}
 				$("#evaluateLossfcconsequence").append(str);
 
@@ -370,12 +370,18 @@ function riskEvaluate(){
 	var riskmsgid=$("input[type='checkbox']:checked").siblings("input").val();//辨识风险信息id
 	$("#assessmentToriskmsgid").val(riskmsgid);//为辨识风险信息id的隐藏域赋值  用于风险评估
 	 //data-toggle="modal" data-target="#addDuty"
-	if(checkboxCount==1){
+	//查看评估状态，状态为"已评估"的不能再进行评估
+	var evaluateStatus=$("input[type='checkbox']:checked").siblings("input").attr("title");//获取评估状态
+	
+	
+	if(checkboxCount==1&&evaluateStatus!="已评估"){
 		$("#riskEvaluate").modal();//打开模态框
 	}else if(checkboxCount>1){
 		alert("只能选中一行");
 	}else if(checkboxCount<1){
 		alert("请选中一行");
+	}else if(evaluateStatus=="已评估"){
+		alert("已评估的不能重复进行评估");
 	}
 	
 }
@@ -504,7 +510,7 @@ function findAllRiRespon() {
 				
 				//开始拼接
 				options += "<tr>";
-			    options += "<td><input type='checkbox' value='"+identifyMainId+"'><input type='hidden' value='"+riskmsgid+"'></td>";
+			    options += "<td><input type='checkbox' value='"+identifyMainId+"'><input type='hidden' title='"+evaluationstatus+"' value='"+riskmsgid+"'></td>";
 				options +="<td>"+((data.pageBean.currentPage-1)*10+i+1)+"</td>";
 				options +="<td>"+identifyMainMsg+"</td>";//风险来源
 				options +="<td>"+riskAddress+"</td>";//风险地点
@@ -617,6 +623,9 @@ function findBtn(){
 }
 //清空按钮的点击事件
 function clearBtn(){
+	
+	alert($("#evaluateFindCondition option:selected").attr("title"))
+	
 	//清空查询条件和 当前页页号 每页显示的记录数，恢复初始值
 	$("#currentPage").val("1");
 	$("#currentCount").val("10");
@@ -624,4 +633,35 @@ function clearBtn(){
 	$("#riskDescribeFindCondition").val("");//风险描述
 	$("#riskAddressFindCondition").val("");//风险地点
 	$("#evaluateFindCondition").val("");//评估状态
+}
+
+function optionChange(){
+	/*$("#evaluateLossfcconsequence").blur( function () { 
+		alert("Hello World!"); 
+		
+	} );*/
+	//alert($("#evaluatePossibility option:selected").attr("title"))//可能性
+	//alert($("#evaluatePersondegreeofexposure option:selected").attr("title"))//人员暴露频繁程度
+	//alert($("#evaluateLossfcconsequence option:selected").attr("title"))//损失后果
+	var possibility = $("#evaluatePossibility option:selected").attr("title");//可能性
+	var exposure = $("#evaluatePersondegreeofexposure option:selected").attr("title");//人员暴露频繁程度
+	var consequence = $("#evaluateLossfcconsequence option:selected").attr("title");//损失后果
+	
+	var riskValue = possibility*exposure*consequence;//计算出风险值
+	//alert(possibility*exposure*consequence)
+	$("#evaluateRiskValue").val(riskValue);//风险值
+	
+	if(riskValue>320){
+		$("#evaluateRiskGrade").val("极其危险,不能继续作业");
+	}else if(riskValue>20 && riskValue<70){
+		$("#evaluateRiskGrade").val("一般危险,需要注意");
+	}else if(riskValue>160 && riskValue<320){
+		$("#evaluateRiskGrade").val("高度危险,需立即整改");
+	}else if(riskValue<20){
+		$("#evaluateRiskGrade").val("稍有危险,可以接受");
+	}else if(riskValue>70 && riskValue<160){
+		$("#evaluateRiskGrade").val("显著危险,需要整改");
+	}
+	
+	
 }

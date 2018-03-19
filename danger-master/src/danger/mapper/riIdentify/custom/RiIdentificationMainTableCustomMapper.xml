@@ -159,8 +159,15 @@
 	</select>
 	
 	
-	<!-- 根据风险辨识主表id查询该条风险辨识主表信息及其对应的所有辨识风险信息 -->
-	<select id="selIdentifyMainAndRiskMsgByIdentityId" parameterType="String" resultType="map">
+	<!-- 根据风险辨识主表年份 查询该是否有该年度的年度辨识主表信息 -->
+	<select id="selIdentifyMainByYear" parameterType="map" resultType="danger.bean.riIdentify.RiIdentificationMainTable">
+		SELECT * FROM riidentificationmaintable
+		<where>
+			<if test="year!=null and year!=''">
+				riidentificationmaintable.year like  CONCAT('%',#{year},'%')  
+			</if>
+			AND riidentificationmaintable.identifyMark ="Y"
+		</where>
 		
 	</select>
 	

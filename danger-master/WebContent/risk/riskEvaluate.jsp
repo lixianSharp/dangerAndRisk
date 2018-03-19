@@ -83,7 +83,6 @@
 												<span class="el_spans">风险地点：</span>
 												 <input id="riskAddressFindCondition"
 													class="selectpicker form-control" title="请选择" name="type">
-													
 												</input>
 											</div>
 										</div>
@@ -349,7 +348,7 @@
 												<div class="input-group el_modellist" role="toolbar">
 													<span class="el_spans">损失后果（C）：</span>
 													<select	class="selectpicker form-control" title="请选择" 
-													id="evaluateLossfcconsequence" name="riAssessment.lossofcconsequences">
+													id="evaluateLossfcconsequence" onchange="optionChange()"  name="riAssessment.lossofcconsequences">
 														<!-- <option value="" id="option0">--请选择--</option>
 														<option value="连续接触">10人以上死亡</option>
 														<option value="每周一次接触">3-9人死亡</option>
@@ -357,7 +356,13 @@
 														<option value="非常罕见的接触">轻伤</option> -->
 													</select>
 												</div>
-								
+												<script type="text/javascript">
+												/* 	$("#evaluateLossfcconsequence").change( function () { 
+														alert("Hello World!"); 
+														
+													} ); */
+												
+												</script>
 												
 								
 												

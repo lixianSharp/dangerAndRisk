@@ -15,11 +15,12 @@ function addOpenBtn(){
 
 //增加专项辨识的保存按钮的点击事件
 function addSave(){
+	$("#strTime").val($("#optsdate5").val());//将年度保存在对应的隐藏域中
 	// 表单校验   
 	var isNotNull = $("#addForm").validate({
 		ignore : [],
 		rules : {
-			//"identify.year" : "required",// 年份
+			"yearDate" : "required",// 年份
 			"identify.meetingaddress" : "required",// 会议地点
 			"identify.compere" : "required",//主持人
 			"identify.recorder" :"required",// 记录人
@@ -28,9 +29,9 @@ function addSave(){
 		},
 		
 		messages : {
-			/*"identify.year" : {// 年份
+			"yearDate" : {// 年份
 				required : "不能为空"
-			},*/
+			},
 			"identify.meetingaddress" : {// 会议地点
 				required : "不能为空"
 			},
@@ -78,14 +79,16 @@ function updateOpenBtn(obj){
 	var idenranid= $(obj).siblings("input").val();
 	$("#updateidenranid").val(idenranid);
 	var $td = $(obj).parents("tr").children("td");
-	var year = $td.eq(2).text();//专项
+	var year = $td.eq(2).text();//年份
 	var meetingaddress = $td.eq(4).text();//会议地点
 	var compere = $td.eq(5).text();//主持人
 	var recorder = $td.eq(6).text();//记录人
 	var participants = $td.eq(7).text();//参会人员
 	var meetingcontent = $td.eq(8).text();//会议内容
 	
-	//$("#optsdate5").val(year);//专项
+	$("#updatestrTime").val(year);//将年度保存在对应的隐藏域中
+	
+	$("#optsdate55").val(year);//年份
 	$("#updatemeetingaddress").val(meetingaddress);//会议地点
 	$("#updatecompere").val(compere);//主持人
 	$("#updaterecorder").val(recorder);//记录人
@@ -95,11 +98,12 @@ function updateOpenBtn(obj){
 
 //确认修改按钮的点击事件
 function updateBtn(){
+	$("#updatestrTime").val($("#optsdate55").val());//将年度保存在对应的隐藏域中
 	// 表单校验   
 	var isNotNull = $("#updateForm").validate({
 		ignore : [],
 		rules : {
-			//"identify.year" : "required",// 年份
+			"updateYearDate" : "required",// 年份
 			"identify.meetingaddress" : "required",// 会议地点
 			"identify.compere" : "required",//主持人
 			"identify.recorder" :"required",// 记录人
@@ -108,9 +112,9 @@ function updateBtn(){
 		},
 		
 		messages : {
-			/*"identify.year" : {// 年份
+			"updateYearDate" : {// 年份
 				required : "不能为空"
-			},*/
+			},
 			"identify.meetingaddress" : {// 会议地点
 				required : "不能为空"
 			},
@@ -184,11 +188,13 @@ function findAllRiRespon() {
 				var createtime = data.resultMapList[i].createTime;//创建时间
 				var riskmsgcount = data.resultMapList[i].riskmsgcount;//辨识风险信息数量
 				
+				var yearDealWith =/\d{4}/g.exec(year);//让年度的显示只显示年份
+				
 				//开始拼接
 				options += "<tr>";
 			    options += "<td><input type='checkbox'></td>";
 				options +="<td>"+((data.currentPage-1)*10+i+1)+"</td>";
-				options +="<td>"+year+"</td>";//年份
+				options +="<td>"+yearDealWith+"</td>";//年份
 				options +="<td>"+riskmsgcount+"</td>";//该专项辨识对应的辨识风险信息数量
 				//options +="<td>"+"未评估"+"</td>";
 				options +="<td>"+meetingaddress+"</td>";//会议地点

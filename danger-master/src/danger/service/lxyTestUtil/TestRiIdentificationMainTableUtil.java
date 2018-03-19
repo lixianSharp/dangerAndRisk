@@ -1,5 +1,6 @@
 package danger.service.lxyTestUtil;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -89,5 +90,25 @@ public class TestRiIdentificationMainTableUtil {
 		System.out.println(resultMap.size()+" =="+resultMap);
 	}
 	
+	
+	
+	@Test
+	public void string2Data()throws Exception{
+		String strData = "2019";
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy");
+		Date parse = simpleDateFormat.parse(strData);
+		System.out.println(parse.toString());
+		System.out.println(new Date());
+	}
+	
+	@Test
+	public void selIdentifyMainByYear()throws Exception{
+		String year ="2015";
+		Map<String,Object> condition = new LinkedHashMap<String,Object>();
+		condition.put("year", year);
+		List<RiIdentificationMainTable> selIdentifyMainByYear = identifyService.selIdentifyMainByYear(condition);
+		System.out.println("条数:"+selIdentifyMainByYear.size());
+		System.out.println(selIdentifyMainByYear.size()>0?true:false);
+	}
 	
 }

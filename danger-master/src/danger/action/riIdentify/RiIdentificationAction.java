@@ -1,5 +1,6 @@
 package danger.action.riIdentify;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -72,20 +73,77 @@ public class RiIdentificationAction extends ActionSupport{
 	public void setRiIdentificationRriskMsg(RiIdentificationRriskMsg riIdentificationRriskMsg) {
 		this.riIdentificationRriskMsg = riIdentificationRriskMsg;
 	}
-
 	
+	//年度  添加用的
+	private String identifyNTime;
+	public String getIdentifyNTime() {
+		return identifyNTime;
+	}
+	public void setIdentifyNTime(String identifyNTime) {
+		this.identifyNTime = identifyNTime;
+	}
+	
+	//年度 修改用的
+	private String updateYearDate;
+	public String getUpdateYearDate() {
+		return updateYearDate;
+	}
+
+	public void setUpdateYearDate(String updateYearDate) {
+		this.updateYearDate = updateYearDate;
+	}
+
 	//======以下是各种操作====》
+	/**
+	 * 字符串转日期  String->Date
+	 * @throws Exception
+	 */
+	public Date string2Data(String strData)throws Exception{
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy");
+		Date parse = simpleDateFormat.parse(strData);
+		return parse;
+	}
+	
 	
 	/**
-	 * 添加辨识信息(年度Y)
+	 * 添加年度的辨识主表信息的时候判断该年份是否存在
+	 */
+	public String theYearIsExist()throws Exception{
+		//实例化要转成json的map集合
+		map = new LinkedHashMap<String,Object>();
+		
+		//接收年份
+		String strDate = ServletActionContext.getRequest().getParameter("identifyNTime");
+		//封装查询条件的map集合
+		Map<String,Object> condition = new LinkedHashMap<String,Object>();
+		condition.put("year", strDate);
+		//以"该年份"为条件在年度辨识主表中查询是否有信息
+		List<RiIdentificationMainTable> selIdentifyMainByYear = riIdentificationMainTableService.selIdentifyMainByYear(condition);
+		if(selIdentifyMainByYear.size()>0){
+			map.put("result", "yes");
+		}else{
+			map.put("result", "no");
+		}
+		return "ok";
+	}
+	
+	/**
+	 * 添加辨识主表信息(年度Y)
 	 * @return
 	 * @throws Exception
 	 */
 	public String addRiIdentificationMainTable()throws Exception{
 		//实例化要转成json的map集合
 		map = new LinkedHashMap<String,Object>();
+		
+		//接收年份
+		String strDate = ServletActionContext.getRequest().getParameter("identifyNTime");
+		Date yearDate = string2Data(strDate);//字符串转日期
+		
 		//添加主键
 		identify.setIdentiryid(UUIDUtil.getUUID2());
+		//添加年份
+		identify.setYear(yearDate);
 		//添加创建时间
 		identify.setCreatetime(new Date());
 		//添加年度辨识的名字
@@ -105,13 +163,19 @@ public class RiIdentificationAction extends ActionSupport{
 	
 	
 	/**
-	 * 修改辨识信息(年度Y)(不修改创建时间)
+	 * 修改辨识主表信息(年度Y)(不修改创建时间)
 	 * @return
 	 * @throws Exception
 	 */
 	public String updateRiIdentificationMainTable() throws Exception{
 		//实例化要转成json的map集合
 		map = new LinkedHashMap<String,Object>();
+		
+		//接收年份
+		String strDate = ServletActionContext.getRequest().getParameter("updateYearDate");
+		Date yearDate = string2Data(strDate);//字符串转日期
+		//添加年份
+		identify.setYear(yearDate);		
 		
 		boolean result = riIdentificationMainTableService.updateRiIdentificationMainTable(identify);
 		if(result){
@@ -321,15 +385,22 @@ public class RiIdentificationAction extends ActionSupport{
 	//===============以下是专项辨识的
 	
 	/**
-	 * 添加辨识信息(专项S)
+	 * 添加辨识主表信息(专项S)
 	 * @return
 	 * @throws Exception
 	 */
 	public String addRiIdentificationMainTableS()throws Exception{
 		//实例化要转成json的map集合
 		map = new LinkedHashMap<String,Object>();
+		
+		//接收年份
+		String strDate = ServletActionContext.getRequest().getParameter("identifyNTime");
+		Date yearDate = string2Data(strDate);//字符串转日期
+		
 		//添加主键
 		identify.setIdentiryid(UUIDUtil.getUUID2());
+		//添加年份
+		identify.setYear(yearDate);
 		//添加创建时间
 		identify.setCreatetime(new Date());
 		//添加专项辨识的名字
@@ -346,16 +417,23 @@ public class RiIdentificationAction extends ActionSupport{
 	}
 	
 	
+
 	
 	
 	/**
-	 * 修改辨识信息(专项S)(不修改创建时间)
+	 * 修改辨识主表信息(专项S)(不修改创建时间)
 	 * @return
 	 * @throws Exception
 	 */
 	public String updateRiIdentificationMainTableS() throws Exception{
 		//实例化要转成json的map集合
 		map = new LinkedHashMap<String,Object>();
+		
+		//接收年份
+		String strDate = ServletActionContext.getRequest().getParameter("updateYearDate");
+		Date yearDate = string2Data(strDate);//字符串转日期
+		//添加年份
+		identify.setYear(yearDate);		
 		
 		boolean result = riIdentificationMainTableService.updateRiIdentificationMainTable(identify);
 		if(result){

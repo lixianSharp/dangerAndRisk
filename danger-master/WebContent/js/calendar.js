@@ -75,6 +75,19 @@ $(function(){
 	    clearfun:function() { },   //清除日期后的回调
 	    okfun:function() { }       //点击确定后的回调
 	})
+	//只带年份的日历
+	$("#optsdate55").jeDate({
+	    isinitVal: false,
+	    festival: false,
+	    isTime:false,
+	    minDate:'1995',
+	    ishmsVal: true,
+	    format: "YYYY",
+	    zIndex: 3000,
+	    choosefun:function() { },  //选中日期后的回调
+	    clearfun:function() { },   //清除日期后的回调
+	    okfun:function() { }       //点击确定后的回调
+	})
 	//只带月份的日历
 	$("#optsdate6").jeDate({
 	    isinitVal: false,

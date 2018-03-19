@@ -159,4 +159,10 @@ public class RiIdentificationMainTableServiceImpl implements RiIdentificationMai
 		return identificationMainTable;
 	}
 
+	@Override
+	public List<RiIdentificationMainTable> selIdentifyMainByYear(Map<String,Object> condition) throws Exception {
+		List<RiIdentificationMainTable> identificationMainTableList = riIdentificationMainTableCustomMapper.selIdentifyMainByYear(condition);
+		return identificationMainTableList;
+	}
+
 }

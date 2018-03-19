@@ -143,13 +143,17 @@
 												<!-- 隐藏域，隐藏年度辨识的标记 -->
 												<input type="hidden" name="identify.identifymark" value="Y"/>
 												
-											   <!-- <div class="input-group el_modellist" role="toolbar">
+												<!-- 隐藏域，隐藏年度 -->
+												<input id="strTime" type="hidden" name="identifyNTime">
+												
+												
+											   <div class="input-group el_modellist" role="toolbar">
 													<span class="el_spans">年&nbsp;&nbsp;份：</span>
 													<input
 													class="datainp wicon form-control" id="optsdate5"
 													type="text" placeholder="点击选择年份" value=""
-													name="identify.year" readonly />
-												</div>  -->
+													 name="yearDate" onclick="addYearChange()" /><!-- name="identify.year" -->
+												</div>  
 								
 												<div class="input-group el_modellist" role="toolbar">
 													<span class="el_spans">地&nbsp;&nbsp;点：</span>
@@ -207,13 +211,15 @@
 													<!-- 隐藏域，隐藏要修改的年度辨识的id -->
 													<input id="updateidenranid" type="hidden" name="identify.identiryid" value="">
 													
-												<!-- <div class="input-group el_modellist" role="toolbar">
+													<!-- 隐藏域，隐藏年度 -->
+													<input id="updatestrTime" type="hidden" name="identifyNTime" value="">
+													
+												<div class="input-group el_modellist" role="toolbar">
 													<span class="el_spans">年&nbsp;&nbsp;份：</span>
 													<input
-													class="datainp wicon form-control" id="optsdate5"
-													type="text" placeholder="" value="2018"
-													name="identify.year" readonly />
-												</div> -->
+													class="datainp wicon form-control" id="optsdate520"
+													type="text" placeholder="" value="" name="updateYearDate" readonly="readonly"/>
+												</div>
 								
 												<div class="input-group el_modellist" role="toolbar">
 													<span class="el_spans">地&nbsp;&nbsp;点：</span>

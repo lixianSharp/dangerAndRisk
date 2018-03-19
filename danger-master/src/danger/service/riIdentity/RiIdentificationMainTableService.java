@@ -73,4 +73,14 @@ public interface RiIdentificationMainTableService {
 	 * @throws Exception
 	 */
 	public RiIdentificationMainTable findIdentifyMainByIdentifyId(String identiryid) throws Exception;
+	
+	
+	/**
+	 * 根据风险辨识主表年份 查询该是否有该年度的年度辨识主表信息 
+	 * @param year
+	 * @return
+	 * @throws Exception
+	 */
+	public List<RiIdentificationMainTable> selIdentifyMainByYear(Map<String,Object>	condition)throws Exception;
+	
 }
