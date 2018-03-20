@@ -275,16 +275,16 @@ function addSave(){
 //修改
 //打开修改模态框之前要进行的操作
 function updateOpenBtn(obj){
-	var address = $(obj).parents("tr").children("td").eq(2).text();//风险地点
-	var describe = $(obj).parents("tr").children("td").eq(3).text();//风险描述
-	var riType = $(obj).parents("tr").children("td").eq(4).text();//风险类型
-	var proType = $(obj).parents("tr").children("td").eq(5).text();//专业类型
-	var disasterType = $(obj).parents("tr").children("td").eq(6).text();//灾害类型
-	var cancauseAccident = $(obj).parents("tr").children("td").eq(7).text();//可能导致事故
-	var ctrlMeasure = $(obj).parents("tr").children("td").eq(8).text();//管控措施
-	var principal = $(obj).parents("tr").children("td").eq(9).text();//负责人
-	var superintendent = $(obj).parents("tr").children("td").eq(10).text();//监管人
-	var monitoringperiod = $(obj).parents("tr").children("td").eq(11).text();//管控周期
+	var address = $(obj).parents("tr").children("td").eq(1).text();//风险地点
+	var describe = $(obj).parents("tr").children("td").eq(2).text();//风险描述
+	var riType = $(obj).parents("tr").children("td").eq(3).text();//风险类型
+	var proType = $(obj).parents("tr").children("td").eq(4).text();//专业类型
+	var disasterType = $(obj).parents("tr").children("td").eq(5).text();//灾害类型
+	var cancauseAccident = $(obj).parents("tr").children("td").eq(6).text();//可能导致事故
+	var ctrlMeasure = $(obj).parents("tr").children("td").eq(7).text();//管控措施
+	var principal = $(obj).parents("tr").children("td").eq(8).text();//负责人
+	var superintendent = $(obj).parents("tr").children("td").eq(9).text();//监管人
+	var monitoringperiod = $(obj).parents("tr").children("td").eq(10).text();//管控周期
 	
 	
 	//初始化表单(回显数据)
@@ -474,7 +474,7 @@ function findAllRiRespon() {
 				var identiryid = data.pageBean.productList[i].identiryid;//风险辨识主表id
 				//开始拼接
 				options += "<tr>";
-			    options += "<td><input type='checkbox'></td>";
+			    //options += "<td><input type='checkbox'></td>";
 				options +="<td>"+((data.pageBean.currentPage-1)*10+i+1)+"</td>";
 				options +="<td>"+riskaddress+"</td>";//风险地点
 				options +="<td>"+riskdescribe+"</td>";//风险描述

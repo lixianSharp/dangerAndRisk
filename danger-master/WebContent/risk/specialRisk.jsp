@@ -29,6 +29,10 @@
     border-left: 1px solid #ccc;
 
 }
+
+a {
+  cursor:pointer;
+}
 </style>
 </head>
 
@@ -73,7 +77,7 @@
 									<table class="table  table-bordered">
 									<tr>
 									<td>年份</td>
-									<td>${identifyMainTableY.year }</td>
+									<td><fmt:formatDate value="${identifyMainTableY.year }" pattern="yyyy-MM-dd"/></td>
 									<td>地点</td>
 									<td>${identifyMainTableY.meetingaddress }</td>
 									</tr>
@@ -103,7 +107,7 @@
 									<table class="table table-hover table-bordered">
 										<thead>
 											<tr>
-												<th>操作</th>
+												<!-- <th>操作</th>  -->
 												<th>序号</th>
 												<th>风险地点</th>
 												<th>风险描述</th>

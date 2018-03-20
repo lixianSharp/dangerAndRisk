@@ -13,7 +13,6 @@
 
 <%@ include file="/controls/cssJs.jsp"%>
 
-<script type="text/javascript" src="<%=path%>/js/risk/yearRecognize.js"></script>
 
 <link rel="stylesheet" href="<%=path%>/css/public/public_style.css" />
 

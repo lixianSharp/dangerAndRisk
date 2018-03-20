@@ -67,7 +67,7 @@
 									<table class="table table-hover table-bordered">
 										<thead>
 											<tr>
-												<th>操作</th>
+												<!-- <th>操作</th> -->
 												<th>序号</th>
 												<th>工作面名称</th>
 												<th>概况</th>
@@ -150,14 +150,15 @@
 													<input
 													class="datainp wicon form-control" id="optsdate2"
 													type="text" placeholder="点击选择开始时间" value=""
-													name="riIdentificationRange.starttime" readonly />
+													name="riIdentificationRange.starttime" />
 												</div>
+												
 												<div class="input-group el_modellist" role="toolbar">
 													<span class="el_spans">结束时间：</span>
 													<input
 													class="datainp wicon form-control" id="optsdate22"
 													type="text" placeholder="点击选择结束时间" value=""
-													name="riIdentificationRange.endtime" readonly />
+													name="riIdentificationRange.endtime" />
 												</div>
 												
 												</form>
@@ -215,15 +216,15 @@
 													<span class="el_spans">开始时间：</span>
 													<input
 													class="datainp wicon form-control" id="optsdate3"
-													type="text" placeholder="" value="2018-03-02"
-													name="riIdentificationRange.starttime" readonly />
+													type="text" placeholder="" value=""
+													name="riIdentificationRange.starttime"  />
 												</div>
 												<div class="input-group el_modellist" role="toolbar">
 													<span class="el_spans">结束时间：</span>
 													<input
 													class="datainp wicon form-control" id="optsdate33"
-													type="text" placeholder="" value="2018-03-03"
-													name="riIdentificationRange.endtime" readonly />
+													type="text" placeholder="" value=""
+													name="riIdentificationRange.endtime"  />
 												</div>
 												
 												</form>

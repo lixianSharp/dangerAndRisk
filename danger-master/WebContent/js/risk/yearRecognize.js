@@ -110,12 +110,12 @@ function updateOpenBtn(obj){
 	var idenranid= $(obj).siblings("input").val();
 	$("#updateidenranid").val(idenranid);
 	var $td = $(obj).parents("tr").children("td");
-	var year = $td.eq(2).text();//年度
-	var meetingaddress = $td.eq(4).text();//会议地点
-	var compere = $td.eq(5).text();//主持人
-	var recorder = $td.eq(6).text();//记录人
-	var participants = $td.eq(7).text();//参会人员
-	var meetingcontent = $td.eq(8).text();//会议内容
+	var year = $td.eq(1).text();//年度
+	var meetingaddress = $td.eq(3).text();//会议地点
+	var compere = $td.eq(4).text();//主持人
+	var recorder = $td.eq(5).text();//记录人
+	var participants = $td.eq(6).text();//参会人员
+	var meetingcontent = $td.eq(7).text();//会议内容
 	
 	$("#updatestrTime").val(year);//将年度保存在对应的隐藏域中
 	
@@ -223,7 +223,7 @@ function findAllRiRespon() {
 				
 				//开始拼接
 				options += "<tr>";
-			    options += "<td><input type='checkbox'></td>";
+			    //options += "<td><input type='checkbox'></td>";
 				options +="<td>"+((data.currentPage-1)*10+i+1)+"</td>";
 				options +="<td>"+yearDealWith+"</td>";//年份
 				options +="<td>"+riskmsgcount+"</td>";//该年度辨识对应的辨识风险信息数量
@@ -233,7 +233,7 @@ function findAllRiRespon() {
 				options +="<td>"+recorder+"</td>";//记录人
 				options +="<td>"+participants+"</td>";//参会人员
 				options +="<td>"+meetingcontent+"</td>";//会议内容
-				options +="<td>" +"<input  type='hidden' value='"+identiryid+"'><a data-toggle='modal' data-target='#modifierDuty' onclick='updateOpenBtn(this)' >修改</a><a href='#' onclick='detailYRecognize(this) '>详情</a></td>";
+				options +="<td>" +"<input  type='hidden' value='"+identiryid+"'><a data-toggle='modal' data-target='#modifierDuty' onclick='updateOpenBtn(this)' href='#'>修改</a><a href='#' onclick='detailYRecognize(this) '>详情</a></td>";
 				options += "</tr>";
 			}
 			// currentPage：当前页页号 currentCount：每页显示的记录数 totalCount：总记录数

@@ -507,6 +507,8 @@ function findAllRiRespon() {
 					riskValue ="=";//风险值
 				}
 				
+				var riskGrade=dealWithRiGradeColor(riskValue,riskGrade);
+				
 				
 				//开始拼接
 				options += "<tr>";
@@ -525,7 +527,12 @@ function findAllRiRespon() {
 				options +="<td>"+superintendent+"</td>";//监管人
 				options +="<td>"+monitoringperiod+"</td>";//监管周期
 				options +="<td>"+riskGrade+"</td>";//风险等级
-				options +="<td>"+evaluationstatus+"</td>";//评估状态
+				if(evaluationstatus=="未评估"){
+					options +="<td><font color='red'>未评估</font></td>";//评估状态
+				}else if(evaluationstatus=="已评估"){
+					options +="<td><font color='blue'>已评估</font></td>";//评估状态
+				}
+				//options +="<td>"+evaluationstatus+"</td>";//评估状态
 				options +="<td><input type='hidden' value='"+possibility+"'><input type='hidden' value='"+lossOfCconsequences+"'><input type='hidden' value='"+personDegreeOfExposure+"'><input type='hidden' value='"+riskValue+"'><a href='#' onclick='riskEvaluateDetailInfo(this)'>详情</a></td>";
 				options += "</tr>";
 			}
@@ -541,6 +548,25 @@ function findAllRiRespon() {
 }
 
 
+//根据风险值处理风险等级颜色  参数：风险值  风险等级    返回值：带有颜色的风险等级
+function dealWithRiGradeColor(riskValue,riskGrade){
+	var riskGradeWithColor ="";
+	if(riskValue>320){
+		riskGradeWithColor = "<font color='Crimson'>"+riskGrade+"</td>";
+	}else if(riskValue>20 && riskValue<70){
+		riskGradeWithColor = "<font color='Violet'>"+riskGrade+"</td>";
+	}else if(riskValue>160 && riskValue<320){
+		riskGradeWithColor = "<font color='HotPink'>"+riskGrade+"</td>";
+	}else if(riskValue<20){
+		riskGradeWithColor = "<font color='PaleVioletRed'>"+riskGrade+"</td>";
+	}else if(riskValue>70 && riskValue<160){
+		riskGradeWithColor = "<font color='Magenta'>"+riskGrade+"</td>";
+	}else{
+		riskGradeWithColor = "=";
+	}
+	
+	return riskGradeWithColor;
+}
 
 
 
@@ -624,7 +650,7 @@ function findBtn(){
 //清空按钮的点击事件
 function clearBtn(){
 	
-	alert($("#evaluateFindCondition option:selected").attr("title"))
+	//alert($("#evaluateFindCondition option:selected").attr("title"))
 	
 	//清空查询条件和 当前页页号 每页显示的记录数，恢复初始值
 	$("#currentPage").val("1");
@@ -635,21 +661,20 @@ function clearBtn(){
 	$("#evaluateFindCondition").val("");//评估状态
 }
 
-function optionChange(){
-	/*$("#evaluateLossfcconsequence").blur( function () { 
-		alert("Hello World!"); 
-		
-	} );*/
-	//alert($("#evaluatePossibility option:selected").attr("title"))//可能性
-	//alert($("#evaluatePersondegreeofexposure option:selected").attr("title"))//人员暴露频繁程度
-	//alert($("#evaluateLossfcconsequence option:selected").attr("title"))//损失后果
+
+//计算LEC
+function optionChange3(){
 	var possibility = $("#evaluatePossibility option:selected").attr("title");//可能性
 	var exposure = $("#evaluatePersondegreeofexposure option:selected").attr("title");//人员暴露频繁程度
 	var consequence = $("#evaluateLossfcconsequence option:selected").attr("title");//损失后果
 	
+	
 	var riskValue = possibility*exposure*consequence;//计算出风险值
 	//alert(possibility*exposure*consequence)
-	$("#evaluateRiskValue").val(riskValue);//风险值
+	if(!isNaN(riskValue)){
+		$("#evaluateRiskValue").val(riskValue);//风险值
+	}
+	
 	
 	if(riskValue>320){
 		$("#evaluateRiskGrade").val("极其危险,不能继续作业");
@@ -662,6 +687,61 @@ function optionChange(){
 	}else if(riskValue>70 && riskValue<160){
 		$("#evaluateRiskGrade").val("显著危险,需要整改");
 	}
-	
-	
 }
+
+//计算LEC
+function optionChange2(){
+	var possibility = $("#evaluatePossibility option:selected").attr("title");//可能性
+	var exposure = $("#evaluatePersondegreeofexposure option:selected").attr("title");//人员暴露频繁程度
+	var consequence = $("#evaluateLossfcconsequence option:selected").attr("title");//损失后果
+	
+	
+	var riskValue = possibility*exposure*consequence;//计算出风险值
+	//alert(possibility*exposure*consequence)
+	if(!isNaN(riskValue)){
+		$("#evaluateRiskValue").val(riskValue);//风险值
+	}
+	
+	if(riskValue>320){
+		$("#evaluateRiskGrade").val("极其危险,不能继续作业");
+	}else if(riskValue>20 && riskValue<70){
+		$("#evaluateRiskGrade").val("一般危险,需要注意");
+	}else if(riskValue>160 && riskValue<320){
+		$("#evaluateRiskGrade").val("高度危险,需立即整改");
+	}else if(riskValue<20){
+		$("#evaluateRiskGrade").val("稍有危险,可以接受");
+	}else if(riskValue>70 && riskValue<160){
+		$("#evaluateRiskGrade").val("显著危险,需要整改");
+	}
+}
+
+//计算LEC
+function optionChange1(){
+	var possibility = $("#evaluatePossibility option:selected").attr("title");//可能性
+	var exposure = $("#evaluatePersondegreeofexposure option:selected").attr("title");//人员暴露频繁程度
+	var consequence = $("#evaluateLossfcconsequence option:selected").attr("title");//损失后果
+	
+	
+	var riskValue = possibility*exposure*consequence;//计算出风险值
+	//alert(possibility*exposure*consequence)
+	if(!isNaN(riskValue)){
+		$("#evaluateRiskValue").val(riskValue);//风险值
+	}
+	
+	if(riskValue>320){
+		$("#evaluateRiskGrade").val("极其危险,不能继续作业");
+	}else if(riskValue>20 && riskValue<70){
+		$("#evaluateRiskGrade").val("一般危险,需要注意");
+	}else if(riskValue>160 && riskValue<320){
+		$("#evaluateRiskGrade").val("高度危险,需立即整改");
+	}else if(riskValue<20){
+		$("#evaluateRiskGrade").val("稍有危险,可以接受");
+	}else if(riskValue>70 && riskValue<160){
+		$("#evaluateRiskGrade").val("显著危险,需要整改");
+	}
+}
+
+
+
+
+

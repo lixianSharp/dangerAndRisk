@@ -326,7 +326,7 @@
 												<div class="input-group el_modellist" role="toolbar">
 													<span class="el_spans">可能性（L）：</span>
 													<select	class="selectpicker form-control" title="请选择" 
-													id="evaluatePossibility" name="riAssessment.possibility">
+													id="evaluatePossibility" onchange="optionChange1()" name="riAssessment.possibility">
 														<!-- <option value="" id="option0">--请选择--</option>
 														<option value="完全可以预料">完全可以预料</option>
 														<option value="可能，但不经常">可能，但不经常</option>
@@ -337,7 +337,7 @@
 												<div class="input-group el_modellist" role="toolbar">
 													<span class="el_spans">人员暴露频繁程度（E）：</span>
 													<select	class="selectpicker form-control" title="请选择" 
-													id="evaluatePersondegreeofexposure" name="riAssessment.persondegreeofexposure">
+													id="evaluatePersondegreeofexposure" onchange="optionChange2()" name="riAssessment.persondegreeofexposure">
 														<!-- <option value="" id="option0">--请选择--</option>
 														<option value="连续接触">连续接触</option>
 														<option value="每周一次接触">每周一次接触</option>
@@ -348,7 +348,7 @@
 												<div class="input-group el_modellist" role="toolbar">
 													<span class="el_spans">损失后果（C）：</span>
 													<select	class="selectpicker form-control" title="请选择" 
-													id="evaluateLossfcconsequence" onchange="optionChange()"  name="riAssessment.lossofcconsequences">
+													id="evaluateLossfcconsequence" onchange="optionChange3()"  name="riAssessment.lossofcconsequences">
 														<!-- <option value="" id="option0">--请选择--</option>
 														<option value="连续接触">10人以上死亡</option>
 														<option value="每周一次接触">3-9人死亡</option>
@@ -369,12 +369,12 @@
 												<div class="input-group el_modellist" role="toolbar">
 													<span class="el_spans">风险值（D）：</span>
 													<input type="text" class="form-control el_modelinput" value="" 
-														id="evaluateRiskValue" name="riAssessment.riskvalue" />
+														id="evaluateRiskValue" name="riAssessment.riskvalue" readonly="readonly"/>
 												</div>
 												<div class="input-group el_modellist" role="toolbar">
 													<span class="el_spans">风险等级：</span>
 													<input type="text" class="form-control el_modelinput" value=""
-														id="evaluateRiskGrade" name="riAssessment.riskgrade" />
+														id="evaluateRiskGrade" name="riAssessment.riskgrade" readonly="readonly"/>
 												</div>
 												
 												</form>

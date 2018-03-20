@@ -74,7 +74,7 @@
 									<table class="table table-hover table-bordered">
 										<thead>
 											<tr>
-												<th>操作</th>
+												<!-- <th>操作</th> -->
 												<th>序号</th>
 												<th>专项</th>
 												<th>风险数量</th>
@@ -87,7 +87,7 @@
 											</tr>
 										</thead>
 										<tbody id="tbody">
-											<tr>
+											<%-- <tr>
 												<td>
 												<input type="checkbox">
 												</td>
@@ -112,7 +112,7 @@
 												<td>
 													<a data-toggle="modal" data-target="#modifierDuty" >修改</a>
 													<a href="<%=path%>/risk/yearRisk.jsp">详情</a>
-												</td>
+												</td> --%>
 											</tr>
 
 										</tbody>

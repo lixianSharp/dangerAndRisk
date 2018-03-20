@@ -45,63 +45,85 @@ function addOpenBtn(){
 	
 }
 
+//比较开始和结束时间  开始时间不能大于结束时间
+function compareTime(startTime,endTime){
+	    
+	 var d1 = new Date(startTime.replace(/\-/g, "\/"));    
+	 var d2 = new Date(endTime.replace(/\-/g, "\/"));    
+	    
+	  if(startTime!=""&&endTime!=""&&d1 >d2)    {    
+		  alert("开始时间不能大于结束时间！");    
+		  return false;    
+	  } else{
+		  //开始时间小于结束时间  正确的 可以进行操作
+		 //alert("时间正确");
+		  return true;
+	  } 
+}
+
+
 //增加风险辨识范围的保存按钮的点击事件
 function addSave(){
-	// 表单校验   
-	var isNotNull = $("#addForm").validate({
-		ignore : [],
-		rules : {
-			"riIdentificationRange.facename" : "required",// 工作面名称
-			"riIdentificationRange.survey" : "required",// 概况
-			"riIdentificationRange.rirtype" : "required",// 类型
-			"riIdentificationRange.starttime" :{// 开始时间
-				required:true,
-				date:true     
+	var flag=compareTime($("#optsdate2").val(),$("#optsdate22").val());
+	if(flag){
+		//表示开始时间 <= 结束时间  可以进行表单提交
+		// 表单校验   
+		var isNotNull = $("#addForm").validate({
+			ignore : [],
+			rules : {
+				"riIdentificationRange.facename" : "required",// 工作面名称
+				"riIdentificationRange.survey" : "required",// 概况
+				"riIdentificationRange.rirtype" : "required",// 类型
+				"riIdentificationRange.starttime" :{// 开始时间
+					required:true,
+				},
+				"riIdentificationRange.endtime" : {// 结束时间
+					required:true,
+				}
 			},
-			"riIdentificationRange.endtime" : {// 结束时间
-				required:true,
-				date:true    
-			}
-		},
-		messages : {
-			"riIdentificationRange.facename" : {// 工作面名称
-				required : "不能为空"
-			},
-			"riIdentificationRange.survey" : {// 概况
-				required : "不能为空"
-			},
-			"riIdentificationRange.rirtype" : {// 类型
-				required : "不能为空"
-			},
-			"riIdentificationRange.starttime" : {// 开始时间
-				required : "不能为空",
-				date : "请输入开始时间"
-			},
-			"riIdentificationRange.endtime" : {// 结束时间
-				required : "不能为空",
-				date : "请输入结束时间"
-			}
-		}
-	});
-
-	// 如果通过表单校验，则执行新增风险辨识范围信息操作
-	if (isNotNull.form()) {
-		$.ajax({
-			type : "post",
-			dataType : "json",
-			url : "identificationRange_addRiIdentificationRange.action",
-			data : $("#addForm").serialize(),
-			success : function(data) {
-				alert(data.result);
-				$("#addDuty").modal("hide");
-				//刷新数据
-				findAllRiRespon();
-			},
-			error : function() {
-				alert("添加失败，请重新添加！");
+			messages : {
+				"riIdentificationRange.facename" : {// 工作面名称
+					required : "不能为空"
+				},
+				"riIdentificationRange.survey" : {// 概况
+					required : "不能为空"
+				},
+				"riIdentificationRange.rirtype" : {// 类型
+					required : "不能为空"
+				},
+				"riIdentificationRange.starttime" : {// 开始时间
+					required : "不能为空",
+				},
+				"riIdentificationRange.endtime" : {// 结束时间
+					required : "不能为空",
+				}
 			}
 		});
-	}
+
+		// 如果通过表单校验，则执行新增风险辨识范围信息操作
+		if (isNotNull.form()) {
+			$.ajax({
+				type : "post",
+				dataType : "json",
+				url : "identificationRange_addRiIdentificationRange.action",
+				data : $("#addForm").serialize(),
+				success : function(data) {
+					alert(data.result);
+					$("#addDuty").modal("hide");
+					//刷新数据
+					findAllRiRespon();
+				},
+				error : function() {
+					alert("添加失败，请重新添加！");
+				}
+			});
+		}//第二个if的括号
+	}else{//与最大的if配对的else
+		//表示 开始时间 > 结束时间 不可以进行表单提交
+		
+	}//else的括号
+	
+	
 
 }
 
@@ -114,11 +136,11 @@ function updateOpenBtn(obj) {
 	$("#updateidenranid").val(idenranid);
 	
 	var $td = $(obj).parents("tr").children("td");
-	var facename = $td.eq(2).text();//工作面
-	var survey = $td.eq(3).text();//概况
-	var rirtype = $td.eq(4).text();//类型
-	var starttime = $td.eq(5).text();//开始时间
-	var endtime = $td.eq(6).text();//结束时间
+	var facename = $td.eq(1).text();//工作面
+	var survey = $td.eq(2).text();//概况
+	var rirtype = $td.eq(3).text();//类型
+	var starttime = $td.eq(4).text();//开始时间
+	var endtime = $td.eq(5).text();//结束时间
 	
 	//2.进行表单初始化
 	$("#updatefacename").val(facename);//工作面
@@ -130,60 +152,64 @@ function updateOpenBtn(obj) {
 
 //确认修改的点击事件
 function updateBtn(){
-	// 表单校验   
-	var isNotNull = $("#updateForm").validate({
-		ignore : [],
-		rules : {
-			"riIdentificationRange.facename" : "required",// 工作面名称
-			"riIdentificationRange.survey" : "required",// 概况
-			"riIdentificationRange.rirtype" : "required",// 类型
-			"riIdentificationRange.starttime" :{// 开始时间
-				required:true,
-				date:true     
+	var flag=compareTime($("#optsdate3").val(),$("#optsdate33").val());
+	if(flag){
+		//开始时间 《 结束时间  正确  可以进行表单提交
+		// 表单校验   
+		var isNotNull = $("#updateForm").validate({
+			ignore : [],
+			rules : {
+				"riIdentificationRange.facename" : "required",// 工作面名称
+				"riIdentificationRange.survey" : "required",// 概况
+				"riIdentificationRange.rirtype" : "required",// 类型
+				"riIdentificationRange.starttime" :{// 开始时间
+					required:true,
+				},
+				"riIdentificationRange.endtime" : {// 结束时间
+					required:true,
+				}
 			},
-			"riIdentificationRange.endtime" : {// 结束时间
-				required:true,
-				date:true    
+			messages : {
+				"riIdentificationRange.facename" : {// 工作面名称
+					required : "不能为空"
+				},
+				"riIdentificationRange.survey" : {// 概况
+					required : "不能为空"
+				},
+				"riIdentificationRange.rirtype" : {// 类型
+					required : "不能为空"
+				},
+				"riIdentificationRange.starttime" : {// 开始时间
+					required : "不能为空",
+				},
+				"riIdentificationRange.endtime" : {// 结束时间
+					required : "不能为空",
+				}
 			}
-		},
-		messages : {
-			"riIdentificationRange.facename" : {// 工作面名称
-				required : "不能为空"
-			},
-			"riIdentificationRange.survey" : {// 概况
-				required : "不能为空"
-			},
-			"riIdentificationRange.rirtype" : {// 类型
-				required : "不能为空"
-			},
-			"riIdentificationRange.starttime" : {// 开始时间
-				required : "不能为空",
-				date : "请输入开始时间"
-			},
-			"riIdentificationRange.endtime" : {// 结束时间
-				required : "不能为空",
-				date : "请输入结束时间"
-			}
-		}
-	});
+		});//表单校验的括号
 
-	// 如果通过表单校验，则执行修改操作
-	if (isNotNull.form()) {
-		$.ajax({
-			type : "post",
-			dataType : "json",
-			url : "identificationRange_updateRiIdentificationRange.action",
-			data : $("#updateForm").serialize(),
-			success : function(data) {
-				alert(data.result);
-				$("#modifierDuty").modal("hide");
-				//刷新数据
-				findAllRiRespon();
-			},
-			error : function() {
-				alert("添加失败，请重新添加！");
-			}
-		});
+		// 如果通过表单校验，则执行修改操作
+		if (isNotNull.form()) {
+			$.ajax({
+				type : "post",
+				dataType : "json",
+				url : "identificationRange_updateRiIdentificationRange.action",
+				data : $("#updateForm").serialize(),
+				success : function(data) {
+					alert(data.result);
+					$("#modifierDuty").modal("hide");
+					//刷新数据
+					findAllRiRespon();
+				},
+				error : function() {
+					alert("添加失败，请重新添加！");
+				}
+			});
+		}//第二个if的括号
+		
+	}else{//与第一个if配对的else
+		//开始时间大于结束时间，不进行表单提交
+		
 	}
 	
 	
@@ -260,14 +286,14 @@ function findAllRiRespon() {
 				
 				//开始拼接
 				options += "<tr>";
-			    options += "<td><input type='checkbox'></td>";
+			    //options += "<td><input type='checkbox'></td>";
 				options +="<td>"+((data.pageBean.currentPage-1)*10+i+1)+"</td>";
 				options +="<td>"+facename+"</td>";
 				options +="<td>"+survey+"</td>";
 				options +="<td>"+rirtype+"</td>";
 				options +="<td>"+startDateTime+"</td>";
-				options +="<td>"+startDateTime+"</td>";
-				options +="<td>" +"<input  type='hidden' value='"+idenranid+"'><a data-toggle='modal' data-target='#modifierDuty' onclick='updateOpenBtn(this)' >修改</a><a data-toggle='modal' data-target='#deleteDuty' onclick='delOpenBtn(this)'>删除</a></td>";
+				options +="<td>"+endDateTime+"</td>";
+				options +="<td>" +"<input  type='hidden' value='"+idenranid+"'><a data-toggle='modal' data-target='#modifierDuty' onclick='updateOpenBtn(this)' href='#'>修改</a><a data-toggle='modal' data-target='#deleteDuty' onclick='delOpenBtn(this)' href='#'>删除</a></td>";
 				options += "</tr>";
 			}
 			

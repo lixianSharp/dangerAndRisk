@@ -82,7 +82,7 @@
 									<table class="table table-hover table-bordered">
 										<thead>
 											<tr>
-												<th>操作</th>
+												<!-- <th>操作</th> -->
 												<th>序号</th>
 												<th>年度</th>
 												<th>风险数量</th>

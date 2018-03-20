@@ -58,7 +58,6 @@
 
 								<!--按钮面板-->
 								<div class="panel-body">
-
 									<div>
 									<button class="btn btn-primary" data-toggle="modal" data-target="#addDuty" onclick="addDutyBtn()">新增职责</button>
 									</div>
@@ -66,7 +65,7 @@
 									<table class="table table-hover table-bordered">
 										<thead>
 											<tr>
-												<th>操作</th>
+												<!-- <th>操作</th> -->
 												<th>序号</th>
 												<th>岗位</th>
 												<th>职责</th>
