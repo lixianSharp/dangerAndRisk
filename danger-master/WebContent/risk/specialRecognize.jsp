@@ -184,6 +184,36 @@
 										</div><!-- /.modal-content -->
 									</div>
 								</div><!-- /.modal -->
+								
+								<!-- 模态框（删除年度辨识主表） -->
+								<div class="modal fade" id="deleteRiskY" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+									<div class="modal-dialog">
+										<div class="modal-content">
+											<div class="modal-header">
+												<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+													&times;
+												</button>
+												<h4 class="modal-title" id="myModalLabel">
+												删除年度辨识信息
+												</h4>
+											</div>
+											<div class="modal-body">
+												您确定要删除该条年度辨识信息吗？
+											</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-default" data-dismiss="modal">关闭
+												</button>
+												<button type="button" class="btn btn-primary" onclick="delClick()">
+													确认删除
+												</button>
+											</div>
+										</div><!-- /.modal-content -->
+									</div>
+								</div><!-- /.modal -->
+								
+								<!-- 隐藏域 用于删除操作的年度辨识id -->
+								<input id="delIdentifyId" type="hidden" value=""/>
+								
 								<!-- 模态框（修改专项辨识信息） -->
 								<div class="modal fade" id="modifierDuty" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 									<div class="modal-dialog">

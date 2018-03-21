@@ -219,15 +219,14 @@ a {
 													<span class="el_spans">风险地点：</span>
 													<select	class="selectpicker form-control" title="请选择" 
 													id="addriskAddressSelect" name="" onchange="addselectchange(this)">
-														<option value="" id="option0">--请选择--</option>
+														<!-- <option value="" id="option0">--请选择--</option>
 														<option value="综采">综采</option>
-														<option value="综掘">综掘</option>
-														
+														<option value="综掘">综掘</option> -->
 													</select>
 													<textarea id="addriskaddress" class="form-control texta"
 													rows="2" name="riIdentificationRriskMsg.riskaddress" ></textarea>
 												</div>
-												<!-- 存放选中的风险地点，用于追加到文本框中 -->
+												<!--隐藏域， 存放选中的风险地点，用于追加到文本框中 -->
 												<input id="addAddressToTextarea" type="hidden" value=""/>
 												
 												<div class="input-group el_modellist" role="toolbar">
@@ -427,7 +426,7 @@ a {
 									</div>
 								</div><!-- /.modal -->
 								
-								<!-- 模态框（删除年度风险） -->
+								<!-- 模态框（删除年度的辨识风险信息） -->
 								<div class="modal fade" id="deleteRisk" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 									<div class="modal-dialog">
 										<div class="modal-content">

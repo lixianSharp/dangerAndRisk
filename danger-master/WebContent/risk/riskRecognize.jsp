@@ -78,7 +78,7 @@
 											</tr>
 										</thead>
 										<tbody id="tbody">
-											<tr>
+											<!-- <tr>
 												<td>
 												<input type="checkbox">
 												</td>
@@ -104,7 +104,7 @@
 													<a data-toggle="modal" data-target="#modifierDuty" >修改</a>
 													<a data-toggle="modal" data-target="#deleteDuty">删除</a>
 												</td>
-											</tr>
+											</tr> -->
 
 										</tbody>
 									</table>
