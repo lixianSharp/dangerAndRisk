@@ -67,17 +67,21 @@ public class RiIdentificationMainTableServiceImpl implements RiIdentificationMai
 		//0.1 封装条件
 		criteria.andIdentiryidEqualTo(identiryid);
 		List<RiIdentificationRriskMsg> riIdentificationRriskMsgList = riIdentificationRriskMsgMapper.selectByExample(riIdentificationRriskMsgExample);
-		//0.2 如果该条风险辨识主表信息有对应的辨识风险信息，则将其对应的辨识风险信息也删除
+		//0.2 如果该条风险辨识主表信息有对应的辨识风险信息，则将其对应的辨识风险信息也删除   
 		if(riIdentificationRriskMsgList.size()>0){
-			RiIdentificationRriskMsg riIdentificationRriskMsg = riIdentificationRriskMsgList.get(0);
-			String riskmsgid = riIdentificationRriskMsg.getRiskmsgid();//获取风险信息id
-			//1.删除辨识风险信息表信息(已经包括了辨识风险信息表的级联删除) 参数：风险信息id
-			boolean result = riIdentificationRriskMsgService.delRiIdentificationRriskMsg(riskmsgid);
+			//0.2.1(其对应的辨识风险信息有>=1条的时候)
+			for(int i=0;i<riIdentificationRriskMsgList.size();i++){
+				RiIdentificationRriskMsg riIdentificationRriskMsg = riIdentificationRriskMsgList.get(i);
+				String riskmsgid = riIdentificationRriskMsg.getRiskmsgid();//获取风险信息id
+				//1.删除辨识风险信息表信息(已经包括了辨识风险信息表的级联删除) 参数：风险信息id
+				boolean result = riIdentificationRriskMsgService.delRiIdentificationRriskMsg(riskmsgid);
+			}
+			
 			//2.根据风险辨识主表id删除风险辨识主表信息
 			int result2 = riIdentificationMainTableMapper.deleteByPrimaryKey(identiryid);
-			return (result&&(result2>0?true:false));
+			return (result2>0?true:false);
 		}else{
-			//2.根据风险辨识主表id删除风险辨识主表信息
+			//2.根据风险辨识主表id删除风险辨识主表信息   其对应的辨识风险信息只有0条的时候
 			int result2 = riIdentificationMainTableMapper.deleteByPrimaryKey(identiryid);
 			return ((result2>0?true:false));
 		}

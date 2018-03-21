@@ -98,8 +98,8 @@
 											</div>
 										</div>
 										<button type="button"
-										class="btn btn-primary el_queryButton btn-sm"  style="left: 963.617px;" onclick="findBtn()">查询</button>
-									<button type="button" class="btn btn-default btn-sm" style="margin-left: 1050px; margin-top: -21px;" onclick="clearBtn()" >清空</button>
+										class="btn btn-primary el_queryButton btn-sm"   style="right:10%;" onclick="findBtn()">查询</button>
+										<button type="button" class="btn btn-primary el_queryButton btn-sm" style="right:3%; margin-top: 5px;" onclick="clearBtn()" >清空</button>
 									</div>
 
 								</form>
@@ -140,7 +140,7 @@
 											</tr>
 										</thead>
 										<tbody id="tbody">
-											<tr>
+											<!-- <tr>
 												<td>
 												<input type="checkbox">
 												</td>
@@ -186,7 +186,7 @@
 												<td>
 													<a onclick="riskEvaluateDetailInfo()">详情</a>
 												</td>
-											</tr>
+											</tr> -->
 
 										</tbody>
 									</table>

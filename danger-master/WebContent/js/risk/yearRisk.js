@@ -7,7 +7,7 @@ $(function(){
 	findAllRiRespon();
 })
 
-//初始化工作面地点  == 从风险辨识范围中查询，查询出所有工作面名称
+//初始化工作面地点(风险地点)  == 从风险辨识范围中查询，查询出所有工作面名称
 function initWorkFace(){
 	$.ajax({
 		type : "post",
@@ -305,7 +305,7 @@ function updateOpenBtn(obj){
 	$("#updateriskmsgid").val(result);
 }
 
-////将选择风险地点的select下拉框选中的值追加到 风险地点文本框中
+//将选择风险地点的select下拉框选中的值追加到 风险地点文本框中
 function updateselectchange(obj){
 	var riskAddress = $("#updateriskAddressSelect option:selected").text();//选择风险地点的select下拉框
 	

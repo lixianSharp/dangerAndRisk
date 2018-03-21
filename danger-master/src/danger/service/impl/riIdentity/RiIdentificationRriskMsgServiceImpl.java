@@ -64,14 +64,18 @@ public class RiIdentificationRriskMsgServiceImpl implements RiIdentificationRris
 		criteria.andRiskmsgidEqualTo(riskMsgId);
 		List<RiAssessment> riAssessmentList = riAssessmentMapper.selectByExample(riAssessmentExample);
 		if (riAssessmentList.size() > 0) {
-			RiAssessment riAssessment = riAssessmentList.get(0);
-			// 获取风险评估信息id
-			String assessmentid = riAssessment.getAssessmentid();
-			// 根据风险评估信息id删除风险评估信息
-			int result = riAssessmentMapper.deleteByPrimaryKey(assessmentid);
+			//对应的风险评估信息>=1的情况
+			for(int i=0;i<riAssessmentList.size();i++){
+				RiAssessment riAssessment = riAssessmentList.get(i);
+				// 获取风险评估信息id
+				String assessmentid = riAssessment.getAssessmentid();
+				// 根据风险评估信息id删除风险评估信息
+				int result = riAssessmentMapper.deleteByPrimaryKey(assessmentid);
+			}
+			
 		}
 
-		// 2.根据辨识风险信息id删除风险管控计划详细表信息
+		// 2.根据辨识风险信息id删除风险管控计划详细表信息  删除管控计划详细信息
 		Integer result2 = riIdentificationRriskMsgCustomMapper.delRiCtrlPlanByRiskMsgId(riskMsgId);
 		
 		

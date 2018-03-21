@@ -154,7 +154,32 @@ function updateBtn(){
 }
 
 
+//删除按钮的点击事件
+function delOpenBtn(obj){
+	//将年度辨识的id保存到用于删除的隐藏域中
+	$("#delIdentifyId").val($(obj).attr("title"));
+}
 
+//删除按钮的确定点击事件
+function delClick(){
+	$.ajax({
+		type : "post",
+		dataType : "json",
+		url : "${pageContext.request.contextPath}/identify_delRiIdentificationMainTableS.action",
+		data : {
+			"identiryid":$("#delIdentifyId").val()
+		},
+		success : function(data) {
+			alert(data.result);
+			$("#deleteRiskY").modal("hide");
+			//刷新数据
+			findAllRiRespon();
+		},
+		error : function() {
+			alert("删除失败，请重新删除！");
+		}
+	});
+}
 
 
 
@@ -202,7 +227,7 @@ function findAllRiRespon() {
 				options +="<td>"+recorder+"</td>";//记录人
 				options +="<td>"+participants+"</td>";//参会人员
 				options +="<td>"+meetingcontent+"</td>";//会议内容
-				options +="<td>" +"<input  type='hidden' value='"+identiryid+"'><a href='#' data-toggle='modal' data-target='#modifierDuty' onclick='updateOpenBtn(this)' >修改</a><a href='#' onclick='detailYRecognize(this) '>详情</a></td>";
+				options +="<td>" +"<input  type='hidden' value='"+identiryid+"'><a href='#' data-toggle='modal' data-target='#modifierDuty' onclick='updateOpenBtn(this)' >修改</a><a data-toggle='modal' data-target='#deleteRiskY' onclick='delOpenBtn(this)' href='#' title='"+identiryid+"'>删除</a><a href='#' onclick='detailYRecognize(this) '>详情</a></td>";
 				options += "</tr>";
 			}
 		
