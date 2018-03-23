@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="danger.mapper.riCtrl.custom.RiDetailedOfRiskCtrlPlanCustomMapper">
+
+	<!--查询风险信息的条件 -->
+	<sql id="query_riskInfo_where">
+		<if test="riCtrlPlanId!=null">
+			and riCtrlPlanId=#{riCtrlPlanId}
+		</if>
+	</sql>
+	
+	<!-- 查询风险信息的范围 -->
+	<sql id="query_riskInfo_limit">
+		<if test="index!=null">
+			LIMIT #{index},#{currentCount}
+		</if>
+	</sql>
+	
+	<!-- 按条件查出所有的风险信息 -->
+	<select id="getAllRiskMsgByControlPlanId" resultType="danger.bean.riIdentify.RiIdentificationRriskMsg" parameterType="hashmap">
+		select riidentificationrriskmsg.* from ridetailedofriskctrlplan , riidentificationrriskmsg 
+
+		<where>
+			<include refid="query_riskInfo_where"></include>
+			 and riidentificationrriskmsg.riskMsgId=ridetailedofriskctrlplan.riskMsgId
+		</where>
+		
+		<include refid="query_riskInfo_limit"></include>
+
+	</select>
+	
+	<!-- 按条件查出所有的风险的数量 -->
+	<select id="getAllRiskMsgCountByControlPlanId" resultType="int" parameterType="hashmap">
+		select count(riidentificationrriskmsg.riskMsgId) from ridetailedofriskctrlplan , riidentificationrriskmsg 
+
+		<where>
+			<include refid="query_riskInfo_where"></include>
+			 and riidentificationrriskmsg.riskMsgId=ridetailedofriskctrlplan.riskMsgId
+		</where>
+		
+
+	</select>
+	<!-- 通过风险id得到分析信息 -->
+	<select id="getAnalysisPlanByRiskId" resultType="danger.bean.riCtrl.RiDetailedOfRiskCtrlPlan" parameterType="string">
+		SELECT * from ridetailedofriskctrlplan where riskMsgId=#{riskMsgId}
+
+
+	</select>
+	
+	<!-- 按条件查出所有的风险和分析的信息 -->
+	<select id="getAllRiskMsgAndAnalysisPlanByControlPlanId" resultType="hashmap" parameterType="hashmap">
+		select riidentificationrriskmsg.*,ridetailedofriskctrlplan.* from ridetailedofriskctrlplan , riidentificationrriskmsg 
+
+		<where>
+			<include refid="query_riskInfo_where"></include>
+			 and riidentificationrriskmsg.riskMsgId=ridetailedofriskctrlplan.riskMsgId
+		</where>
+		
+
+	</select>
+	<!-- 通过风险id得到添加分析信息 -->
+	<update id="addControlPlanAnalysis" parameterType="danger.bean.riCtrl.RiDetailedOfRiskCtrlPlan">
+		
+		update ridetailedofriskctrlplan set dutyDepartment = #{dutydepartment},implementationOfMeasures = #{implementationofmeasures}, measureIsValid = #{measureisvalid},inspectionSituation = #{inspectionsituation} where riskMsgId=#{riskmsgid} and riCtrlPlanId=#{rictrlplanid};
+	</update>
+	<!-- 得到月管控计划的措施无效的数量 -->
+	<select id="getValidCount" resultType="int" parameterType="string">
+		select count(*) from ridetailedofriskctrlplan where measureIsValid="无效" and riCtrlPlanId=#{riCtrlPlanId}
+
+		
+	</select>
+	
+	<!-- 得到该管控记录的所有责任部门及其个数 -->
+	<select id="getDutyDepartmentList" resultType="map" parameterType="string">
+		SELECT dutyDepartment, count(dutyDepartment) AS count from ridetailedofriskctrlplan WHERE riCtrlPlanId=#{riCtrlPlanId} GROUP BY dutyDepartment
+	</select>
+	
+	
+	<!-- 得到该管控记录的所有失效风险地点及其个数 -->
+	<select id="getAddressList" resultType="map" parameterType="string">
+		SELECT riskAddress, count(riskAddress) AS count from ridetailedofriskctrlplan,riidentificationrriskmsg WHERE ridetailedofriskctrlplan.riskMsgId=riidentificationrriskmsg.riskMsgId and riCtrlPlanId=#{riCtrlPlanId} GROUP BY riskAddress
+	</select>
+	
+	<!-- 得到专业类型下拉列表 -->
+	<select id="getProfessionalTypesList" resultType="string">
+		SELECT name from dictionary where upDictionaryId="10101"
+	</select>
+	
+	
+	
+
+</mapper>
