@@ -178,51 +178,5 @@ public class InitDictionaryAction extends ActionSupport{
 		return "ok";
 	}
 	
-	//===
-	/**
-	 * 初始化可能性
-	 * @return
-	 * @throws Exception
-	 */
-	public String initPossibility()throws Exception{
-		//实例化要转成json的map集合
-		map = new LinkedHashMap<String,Object>();
-		
-		List<Dictionary> dictionaryList = dictionaryService.getDictionaryByUpDicId("10901");
-		
-		map.put("dictionaryList", dictionaryList);
-		return "ok";
-	}
-	
-	/**
-	 * 初始化人员暴露频繁程度
-	 * @return
-	 * @throws Exception
-	 */
-	public String initBLPFCD()throws Exception{
-		//实例化要转成json的map集合
-		map = new LinkedHashMap<String,Object>();
-		
-		List<Dictionary> dictionaryList = dictionaryService.getDictionaryByUpDicId("11001");
-		
-		map.put("dictionaryList", dictionaryList);
-		return "ok";
-	}
-	
-	/**
-	 * 初始化损失后果
-	 * @return
-	 * @throws Exception
-	 */
-	public String initSSHG()throws Exception{
-		//实例化要转成json的map集合
-		map = new LinkedHashMap<String,Object>();
-		
-		List<Dictionary> dictionaryList = dictionaryService.getDictionaryByUpDicId("11101");
-		
-		map.put("dictionaryList", dictionaryList);
-		return "ok";
-	}
-	
 	
 }

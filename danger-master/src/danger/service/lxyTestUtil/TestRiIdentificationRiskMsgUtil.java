@@ -68,20 +68,16 @@ public class TestRiIdentificationRiskMsgUtil {
 	@Test
 	public void find()throws Exception{
 		Map<String,Object> condition = new LinkedHashMap<String,Object>();
-		PageBean<RiIdentificationRriskMsg> RiResponsibilityList = riIdentificationRriskMsgService.findRiIdentificationRriskMsgByCondition(1, 4, condition);
+		PageBean<RiIdentificationRriskMsg> RiResponsibilityList = riIdentificationRriskMsgService.findDangerSidingByCondition(1, 4, condition);
 		List<RiIdentificationRriskMsg> riResponsibilityList = RiResponsibilityList.getProductList();
 		System.out.println("条数"+riResponsibilityList.size());
 		System.out.println("数据："+riResponsibilityList.get(0).getCtrlmeasure());
 		
 	}
 	
-	/**
-	 * 删除风险辨识信息
-	 * @throws Exception
-	 */
 	@Test
 	public void delete()throws Exception{
-		boolean result = riIdentificationRriskMsgService.delRiIdentificationRriskMsg("sadfwe12sd3");
+		boolean result = riIdentificationRriskMsgService.delRiIdentificationRriskMsg("5387f57187454b0088ef842c9085af69");
 		System.out.println("删除成功了吗?"+result);
 	}
 }

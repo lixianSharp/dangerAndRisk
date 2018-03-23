@@ -25,7 +25,6 @@
 </head>
 
 <body>
-
 	<!--头-->
 	<jsp:include page="../public/header.jsp"></jsp:include>
 
@@ -67,7 +66,7 @@
 									<table class="table table-hover table-bordered">
 										<thead>
 											<tr>
-												<!-- <th>操作</th> -->
+												<th>操作</th>
 												<th>序号</th>
 												<th>工作面名称</th>
 												<th>概况</th>
@@ -78,7 +77,7 @@
 											</tr>
 										</thead>
 										<tbody id="tbody">
-											<!-- <tr>
+											<tr>
 												<td>
 												<input type="checkbox">
 												</td>
@@ -104,7 +103,7 @@
 													<a data-toggle="modal" data-target="#modifierDuty" >修改</a>
 													<a data-toggle="modal" data-target="#deleteDuty">删除</a>
 												</td>
-											</tr> -->
+											</tr>
 
 										</tbody>
 									</table>
@@ -150,15 +149,14 @@
 													<input
 													class="datainp wicon form-control" id="optsdate2"
 													type="text" placeholder="点击选择开始时间" value=""
-													name="riIdentificationRange.starttime" />
+													name="riIdentificationRange.starttime" readonly />
 												</div>
-												
 												<div class="input-group el_modellist" role="toolbar">
 													<span class="el_spans">结束时间：</span>
 													<input
 													class="datainp wicon form-control" id="optsdate22"
 													type="text" placeholder="点击选择结束时间" value=""
-													name="riIdentificationRange.endtime" />
+													name="riIdentificationRange.endtime" readonly />
 												</div>
 												
 												</form>
@@ -216,15 +214,15 @@
 													<span class="el_spans">开始时间：</span>
 													<input
 													class="datainp wicon form-control" id="optsdate3"
-													type="text" placeholder="" value=""
-													name="riIdentificationRange.starttime"  />
+													type="text" placeholder="" value="2018-03-02"
+													name="riIdentificationRange.starttime" readonly />
 												</div>
 												<div class="input-group el_modellist" role="toolbar">
 													<span class="el_spans">结束时间：</span>
 													<input
 													class="datainp wicon form-control" id="optsdate33"
-													type="text" placeholder="" value=""
-													name="riIdentificationRange.endtime"  />
+													type="text" placeholder="" value="2018-03-03"
+													name="riIdentificationRange.endtime" readonly />
 												</div>
 												
 												</form>

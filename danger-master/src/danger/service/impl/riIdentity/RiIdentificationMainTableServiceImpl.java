@@ -1,6 +1,5 @@
 package danger.service.impl.riIdentity;
 
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -67,21 +66,17 @@ public class RiIdentificationMainTableServiceImpl implements RiIdentificationMai
 		//0.1 封装条件
 		criteria.andIdentiryidEqualTo(identiryid);
 		List<RiIdentificationRriskMsg> riIdentificationRriskMsgList = riIdentificationRriskMsgMapper.selectByExample(riIdentificationRriskMsgExample);
-		//0.2 如果该条风险辨识主表信息有对应的辨识风险信息，则将其对应的辨识风险信息也删除   
+		//0.2 如果该条风险辨识主表信息有对应的辨识风险信息，则将其对应的辨识风险信息也删除
 		if(riIdentificationRriskMsgList.size()>0){
-			//0.2.1(其对应的辨识风险信息有>=1条的时候)
-			for(int i=0;i<riIdentificationRriskMsgList.size();i++){
-				RiIdentificationRriskMsg riIdentificationRriskMsg = riIdentificationRriskMsgList.get(i);
-				String riskmsgid = riIdentificationRriskMsg.getRiskmsgid();//获取风险信息id
-				//1.删除辨识风险信息表信息(已经包括了辨识风险信息表的级联删除) 参数：风险信息id
-				boolean result = riIdentificationRriskMsgService.delRiIdentificationRriskMsg(riskmsgid);
-			}
-			
+			RiIdentificationRriskMsg riIdentificationRriskMsg = riIdentificationRriskMsgList.get(0);
+			String riskmsgid = riIdentificationRriskMsg.getRiskmsgid();//获取风险信息id
+			//1.删除辨识风险信息表信息(已经包括了辨识风险信息表的级联删除) 参数：风险信息id
+			boolean result = riIdentificationRriskMsgService.delRiIdentificationRriskMsg(riskmsgid);
 			//2.根据风险辨识主表id删除风险辨识主表信息
 			int result2 = riIdentificationMainTableMapper.deleteByPrimaryKey(identiryid);
-			return (result2>0?true:false);
+			return (result&&(result2>0?true:false));
 		}else{
-			//2.根据风险辨识主表id删除风险辨识主表信息   其对应的辨识风险信息只有0条的时候
+			//2.根据风险辨识主表id删除风险辨识主表信息
 			int result2 = riIdentificationMainTableMapper.deleteByPrimaryKey(identiryid);
 			return ((result2>0?true:false));
 		}
@@ -128,45 +123,6 @@ public class RiIdentificationMainTableServiceImpl implements RiIdentificationMai
 		pageBean.setProductList(riIdentificationMainTableList);
 
 		return pageBean;
-	}
-
-	
-	/**
-	 * 根据组合条件查询风险辨识主表信息及其对应的辨识风险信息 
-	 * 			如果没有输入 identiryid，则说明是只需要显示所有风险辨识主表信息及其对应的(辨识风险信息及数量) 
-	 * 			输入identiryid，则说明是查询当前风险辨识主表信息及其对应的所有辨识风险信息
-	 */
-	@Override
-	public List<Map<String, Object>> findIdentifyMainAndRiskMsgByCondition(Map<String, Object> condition) throws Exception {
-		List<Map<String, Object>> resultListMap = riIdentificationMainTableCustomMapper.findIdentifyMainAndRiskMsgByCondition(condition);
-		return resultListMap;
-	}
-
-	/**
-	 * 根据组合条件查询风险辨识主表信息及其对应的辨识风险信息 的总记录数
-	 */
-	@Override
-	public Integer getIdentifyMainAndRiskMsgCountByCondition(Map<String, Object> condition) throws Exception {
-		Integer currentCount = riIdentificationMainTableCustomMapper.getIdentifyMainAndRiskMsgCountByCondition(condition);
-		return currentCount;
-	}
-	
-	
-	/**
-	 * 根据主键id获取辨识主表信息
-	 * @param identiryid
-	 * @return  辨识主表信息的javabean
-	 * @throws Exception
-	 */
-	public RiIdentificationMainTable findIdentifyMainByIdentifyId(String identiryid) throws Exception{
-		RiIdentificationMainTable identificationMainTable = riIdentificationMainTableMapper.selectByPrimaryKey(identiryid);
-		return identificationMainTable;
-	}
-
-	@Override
-	public List<RiIdentificationMainTable> selIdentifyMainByYear(Map<String,Object> condition) throws Exception {
-		List<RiIdentificationMainTable> identificationMainTableList = riIdentificationMainTableCustomMapper.selIdentifyMainByYear(condition);
-		return identificationMainTableList;
 	}
 
 }

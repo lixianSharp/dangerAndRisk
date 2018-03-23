@@ -1,7 +1,6 @@
 package danger.service.riIdentity;
 
 import java.sql.SQLException;
-import java.util.List;
 import java.util.Map;
 
 import danger.bean.riIdentify.RiAssessment;
@@ -42,33 +41,5 @@ public interface RiAssessmentService {
 	 * @throws SQLException
 	 */
 	public PageBean<RiAssessment> findDangerSidingByCondition(int currentPage, int currentCount,
-			Map<String, Object> condition) throws Exception;
-	
-	/**
-	 * 组合条件查询 风险辨识主表的名称name+辨识风险信息表+风险评估表信息
-	 * @param condition 组合条件
-	 * @return
-	 * @throws Exception
-	 */
-	public List<Map<String,Object>> findIdentifyMsgAndAssessmentByCondition(Map<String,Object> condition)throws Exception;
-	
-	
-	/**
-	 * 组合条件查询 风险辨识主表的名称name+辨识风险信息表+风险评估表信息 的总记录数 
-	 * @param condition 组合条件
-	 * @return 符合组合条件的 总记录数
-	 * @throws Exception
-	 */
-	public Integer findIdentifyMsgAndAssessmentCountByCondition(Map<String,Object>condition)throws Exception;
-	
-	/**
-	 * 组合条件查询 风险辨识主表的名称name+辨识风险信息表+风险评估表信息
-	 * @param currentPage
-	 * @param currentCount
-	 * @param condition
-	 * @return
-	 * @throws Exception
-	 */
-	public PageBean<Map<String, Object>> findRiskMsgAndAssessmentByCondition(int currentPage, int currentCount,
 			Map<String, Object> condition) throws Exception;
 }

@@ -13,7 +13,7 @@
 
 <%@ include file="/controls/cssJs.jsp"%>
 <script type="text/javascript" src="<%=path%>/controls/echarts/echarts.js"></script>
-
+<script type="text/javascript" src="<%=path%>/js/risk/riskConstitute.js"></script>
 <link rel="stylesheet" href="<%=path%>/css/public/public_style.css" />
 
 </head>
@@ -52,54 +52,57 @@
 							<!-- 灾害类型风险构成 -->
 							<div  class="col-md-12">
 							<div class="col-md-6">
-							<h4 align="center">当前重大风险工12处</h4>
+							<h4 align="center">当前重大风险共12处</h4>
 							<table class="table table-hover table-bordered">
-							<thead>
+						<thead>
 							<tr>
 							<th>灾害类型</th>
 							<th>风险数量</th>
 							<th>占比</th>
 							</tr>
 							</thead>
-							<tbody>
+								<tbody>
 							<tr>
-							<td>冲击地压</td>
-							<td>2</td>
-							<td>16%</td>
+							<td>水</td>
+							<td id="shuiCountId"></td>
+							<td id="shuiScaleId"></td>
+							</tr>
+							<tr>
+							<td>火</td>
+							<td id="huoCountId"></td>
+							<td  id="huoScaleId"></td>
+							</tr>
+							<tr>
+							<td>瓦斯</td>
+							<td id="wasiCountId"></td>
+							<td  id="wasiScaleId"></td>
+							</tr>
+							<tr>
+							<td>顶板</td>
+							<td id="dingbanCountId"></td>
+							<td  id="dingbanScaleId"></td>
+							</tr>
+							<tr>
+							<td>煤层</td>
+							<td id="meicengCountId"></td>
+							<td  id="meicengScaleId"></td>
 							</tr>
 							<tr>
 							<td>冲击地压</td>
-							<td>2</td>
-							<td>16%</td>
+							<td id="diyaCountId"></td>
+							<td  id="diyaScaleId"></td>
 							</tr>
 							<tr>
-							<td>冲击地压</td>
-							<td>2</td>
-							<td>16%</td>
-							</tr>
-							<tr>
-							<td>冲击地压</td>
-							<td>2</td>
-							<td>16%</td>
-							</tr>
-							<tr>
-							<td>冲击地压</td>
-							<td>2</td>
-							<td>16%</td>
-							</tr>
-							<tr>
-							<td>冲击地压</td>
-							<td>2</td>
-							<td>16%</td>
-							</tr>
-							<tr>
-							<td>冲击地压</td>
-							<td>2</td>
-							<td>16%</td>
+							<td>提升运输</td>
+							<td id="yunshuCountId"></td>
+							<td id="yunshuScaleId"></td>
 							</tr>
 							</tbody>
+							
 							</table>
 							</div>
+							
+							
 							<div id="riskType" class="col-md-6" style="height:320px;">
 							
 							</div>
@@ -109,7 +112,7 @@
 							
 							</div>
 								<script type="text/javascript">
-								  // 基于准备好的dom，初始化echarts实例
+				/* 				  // 基于准备好的dom，初始化echarts实例
 						        var myChart = echarts.init(document.getElementById('riskType'));
 
 						        // 指定图表的配置项和数据
@@ -148,8 +151,7 @@
 						            type:'pie',
 						            radius : [0, 100],//设置中心是否有空心圆
 						            center : ['50%', '50%'],
-						            /*roseType : 'area',*/
-						           selectedMode: 'single',
+						         
 						            data:[
 						                {value:10, name:'水'},
 						                {value:5, name:'火'},
@@ -164,9 +166,9 @@
 						};
 
 						        // 使用刚指定的配置项和数据显示图表。
-						        myChart.setOption(option);
-						        
-						     // 基于准备好的dom，初始化echarts实例
+						        myChart.setOption(option);*/
+						         
+						    /*  // 基于准备好的dom，初始化echarts实例
 						        var myChart1 = echarts.init(document.getElementById('riskDep'));
 						
 						        // 指定图表的配置项和数据
@@ -176,9 +178,7 @@
 					                	left: 'center'
 						            },
 						             tooltip: {},//提示框 
-						            /* legend: {//图例
-						                data:['失效风险地点']
-						            }, */
+						           
 						            xAxis: {
 						                data: ["总数量","3256工作面","32986工作面","458工作面","井口","洗煤机出口"]
 						            },
@@ -191,9 +191,9 @@
 						        };
 						
 						        // 使用刚指定的配置项和数据显示图表。
-						        myChart1.setOption(option1);
+						        myChart1.setOption(option1); */
 							        
-							        /*  */
+							        
 							       
 							    </script>
 							</div>

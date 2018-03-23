@@ -4,10 +4,10 @@
 	"http://struts.apache.org/dtds/struts-2.3.dtd">
 
 <struts>
-	<package name="identifyYS" extends="json-default" namespace="/">
+	<package name="identification" extends="json-default" namespace="/">
 		
 		<!-- 年度辨识和专项辨识 -->
-		<action name="identify_*" class="riIdentificationAction"
+		<action name="identification_*" class="RiIdentificationAction"
 			method="{1}">
 			
 			<!-- 这个用于将map转成json -->
@@ -15,10 +15,7 @@
 				<!-- 这里指定将被Struts2序列化的属性，该属性在action中必须有对应的getter方法 -->
 				<param name="root">map</param>
 			</result>
-			<!-- 年度 -->
-			<result name="detailOpY">/risk/yearRisk.jsp</result>
-			<!-- 专项 -->
-			<result name="detailOpS">/risk/specialRisk.jsp</result>
+			
 		</action>
 		
 		

@@ -58,6 +58,7 @@
 
 								<!--按钮面板-->
 								<div class="panel-body">
+
 									<div>
 									<button class="btn btn-primary" data-toggle="modal" data-target="#addDuty" onclick="addDutyBtn()">新增职责</button>
 									</div>
@@ -65,7 +66,7 @@
 									<table class="table table-hover table-bordered">
 										<thead>
 											<tr>
-												<!-- <th>操作</th> -->
+												<th>操作</th>
 												<th>序号</th>
 												<th>岗位</th>
 												<th>职责</th>
@@ -76,7 +77,7 @@
 											</tr>
 										</thead>
 										<tbody id="tbody">
-											<!-- <tr>
+											<tr>
 												<td>
 												<input type="checkbox">
 												</td>
@@ -102,7 +103,7 @@
 													<a data-toggle="modal" data-target="#modifierDuty" onclick="updateBtn()" >修改</a>
 													<a data-toggle="modal" data-target="#deleteDuty" onclick="delBtn()">删除</a>
 												</td>
-											</tr> -->
+											</tr>
 
 										</tbody>
 									</table>

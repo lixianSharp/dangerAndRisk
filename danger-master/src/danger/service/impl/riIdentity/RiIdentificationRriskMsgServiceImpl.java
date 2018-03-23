@@ -64,18 +64,14 @@ public class RiIdentificationRriskMsgServiceImpl implements RiIdentificationRris
 		criteria.andRiskmsgidEqualTo(riskMsgId);
 		List<RiAssessment> riAssessmentList = riAssessmentMapper.selectByExample(riAssessmentExample);
 		if (riAssessmentList.size() > 0) {
-			//对应的风险评估信息>=1的情况
-			for(int i=0;i<riAssessmentList.size();i++){
-				RiAssessment riAssessment = riAssessmentList.get(i);
-				// 获取风险评估信息id
-				String assessmentid = riAssessment.getAssessmentid();
-				// 根据风险评估信息id删除风险评估信息
-				int result = riAssessmentMapper.deleteByPrimaryKey(assessmentid);
-			}
-			
+			RiAssessment riAssessment = riAssessmentList.get(0);
+			// 获取风险评估信息id
+			String assessmentid = riAssessment.getAssessmentid();
+			// 根据风险评估信息id删除风险评估信息
+			int result = riAssessmentMapper.deleteByPrimaryKey(assessmentid);
 		}
 
-		// 2.根据辨识风险信息id删除风险管控计划详细表信息  删除管控计划详细信息
+		// 2.根据辨识风险信息id删除风险管控计划详细表信息
 		Integer result2 = riIdentificationRriskMsgCustomMapper.delRiCtrlPlanByRiskMsgId(riskMsgId);
 		
 		
@@ -85,11 +81,8 @@ public class RiIdentificationRriskMsgServiceImpl implements RiIdentificationRris
 		return (result3 > 0 ? true : false);
 	}
 
-	/**
-	 * 组合条件查询 风险辨识信息
-	 */
 	@Override
-	public PageBean<RiIdentificationRriskMsg> findRiIdentificationRriskMsgByCondition(int currentPage, int currentCount,
+	public PageBean<RiIdentificationRriskMsg> findDangerSidingByCondition(int currentPage, int currentCount,
 			Map<String, Object> condition) throws Exception {
 		// 目的：就是想办法封装一个PageBean 并返回
 		PageBean<RiIdentificationRriskMsg> pageBean = new PageBean();
@@ -135,16 +128,5 @@ public class RiIdentificationRriskMsgServiceImpl implements RiIdentificationRris
 		int result = riIdentificationRriskMsgCustomMapper.delRiCtrlPlanByRiskMsgId(riskMsgId);
 		return (result>0?true:false);
 	}
-
-	/**
-	 * 根据风险信息id查找辨识风险信息
-	 */
-	@Override
-	public RiIdentificationRriskMsg selRiIdentifyRriskMsgByRiskMsgId(String riskMsgId) throws Exception {
-		RiIdentificationRriskMsg riskMsg = riIdentificationRriskMsgMapper.selectByPrimaryKey(riskMsgId);
-		return riskMsg;
-	}
-	
-	
 
 }

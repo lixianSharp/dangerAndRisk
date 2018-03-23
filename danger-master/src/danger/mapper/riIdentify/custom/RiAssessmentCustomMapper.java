@@ -23,24 +23,4 @@ public interface RiAssessmentCustomMapper {
 	 * @throws Exception
 	 */
 	public int getRiAssessmentCountByCondition(Map<String,Object> map)throws Exception;
-	
-	
-	/**
-	 * 组合条件查询 风险辨识主表的名称name+辨识风险信息表+风险评估表信息
-	 * @param condition 组合条件
-	 * @return
-	 * @throws Exception
-	 */
-	public List<Map<String,Object>> findIdentifyMsgAndAssessmentByCondition(Map<String,Object> condition)throws Exception;
-	
-	
-	/**
-	 * 组合条件查询 风险辨识主表的名称name+辨识风险信息表+风险评估表信息 的总记录数 
-	 * @param condition 组合条件
-	 * @return 符合组合条件的 总记录数
-	 * @throws Exception
-	 */
-	public Integer findIdentifyMsgAndAssessmentCountByCondition(Map<String,Object>condition)throws Exception;
-	
-	
 }

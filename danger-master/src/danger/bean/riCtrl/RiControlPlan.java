@@ -92,4 +92,14 @@ public class RiControlPlan {
     public void setCheckstatus(String checkstatus) {
         this.checkstatus = checkstatus == null ? null : checkstatus.trim();
     }
+
+	@Override
+	public String toString() {
+		return "RiControlPlan [rictrlplanid=" + rictrlplanid + ", year=" + year + ", monthorweek=" + monthorweek
+				+ ", createtime=" + createtime + ", specialty=" + specialty + ", leader=" + leader
+				+ ", riskctrlplanmark=" + riskctrlplanmark + ", reportstatus=" + reportstatus + ", checkstatus="
+				+ checkstatus + "]";
+	}
+    
+    
 }

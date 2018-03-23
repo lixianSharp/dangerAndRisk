@@ -38,79 +38,6 @@
 	</sql>
 	
 	
-	
-	<!-- 查询辨识风险信息表的条件 -->
-	<sql id="query_RiIdentificationRriskMsg_where">
-		<if test="riskmsgid!=null">
-			and riskmsgid=#{riskmsgid}
-		</if>
-		<if test="identiryid!=null">
-			and identiryid=#{identiryid}
-		</if>
-		<if test="riskaddress!=null">
-			and riskaddress=#{riskaddress}
-		</if>
-		<if test="riskdescribe!=null">
-			and riskdescribe=#{riskdescribe}
-		</if>
-		<if test="risktype!=null">
-			and risktype=#{risktype}
-		</if>
-		<if test="professionaltypes!=null">
-			and professionaltypes=#{professionaltypes}
-		</if>
-		<if test="disastertypes!=null">
-			and disastertypes=#{disastertypes}
-		</if>
-		<if test="cancauseaccidents!=null">
-			and cancauseaccidents=#{cancauseaccidents}
-		</if>
-		<if test="ctrlmeasure!=null">
-			and ctrlmeasure=#{ctrlmeasure}
-		</if>
-		<if test="principal!=null">
-			and principal=#{principal}
-		</if>
-		<if test="superintendent!=null">
-			and superintendent=#{superintendent}
-		</if>
-		<if test="monitoringperiod!=null">
-			and monitoringperiod=#{monitoringperiod}
-		</if>
-		<if test="evaluationstatus!=null">
-			and evaluationstatus=#{evaluationstatus}
-		</if>
-	</sql>
-	
-	<!-- 组合条件查询 风险辨识主表的名称name+辨识风险信息表+风险评估表信息 的条件 -->
-	<sql id="query_identifyAndAssessment_condition">
-		<!-- 以下三个条件是风险评估用的 -->
-		<if test="riskdescribe!=null and riskdescribe!='' ">
-			m.riskDescribe LIKE "%${riskdescribe}%"
-		</if>
-		<if test="riskaddress!=null and riskaddress!='' ">
-			AND m.riskAddress LIKE "%${riskaddress}%"
-		</if>
-		<if test="evaluationstatus!=null and evaluationstatus!='' ">
-			AND m.evaluationStatus LIKE "%${evaluationstatus}%"
-		</if>
-		<!-- 以下的四个条件是风险清单要用的 -->
-		<if test="risktype!=null and risktype!=''">
-			AND m.riskType=#{risktype}
-		</if>
-		<if test="professionaltypes!=null and professionaltypes!=''">
-			AND m.professionalTypes=#{professionaltypes}
-		</if>
-		<if test="disastertypes!=null and disastertypes!=''">
-			AND m.disasterTypes=#{disastertypes}
-		</if>
-		<if test="riskgrade!=null and riskgrade!=''">
-			AND a.riskGrade=#{riskgrade}
-		</if>		
-	</sql>
-	
-	
-	
 	<!-- 组合条件查询风险评估信息 根据评估时间降序排序 分页查询 -->
 	<select id="findRiAssessmentByCondition" resultType="danger.bean.riIdentify.RiAssessment" parameterType="map">
 		select * from riassessment
@@ -127,34 +54,6 @@
 		select count(*) from riassessment
 		<where>
 			<include refid="query_RiAssessment_where"></include>
-		</where>
-	</select>
-	
-	
-	
-	<!-- 组合条件查询 风险辨识主表的名称name+辨识风险信息表+风险评估表信息 -->
-	<select id="findIdentifyMsgAndAssessmentByCondition" parameterType="map" resultType="map">
-		SELECT (SELECT riidentificationmaintable.identiryId FROM riidentificationmaintable
-				WHERE riidentificationmaintable.identiryId=m.identiryId) AS "identifyMainId", 
-				(SELECT riidentificationmaintable.name FROM riidentificationmaintable
-				WHERE riidentificationmaintable.identiryId=m.identiryId) AS "identifyMainMsg",m.*,a.* 
-		FROM riidentificationrriskmsg m LEFT OUTER JOIN riassessment a
-		ON m.riskMsgId = a.riskMsgId
-		<where>
-			<include refid="query_identifyAndAssessment_condition"></include>
-		</where>
-		ORDER BY m.evaluationStatus ASC
-		<include refid="query_page_limit"></include>			
-	</select>
-	
-	
-	<!-- 组合条件查询 风险辨识主表的名称name+辨识风险信息表+风险评估表信息 的总记录数 -->
-	<select id="findIdentifyMsgAndAssessmentCountByCondition" parameterType="map" resultType="int">
-		SELECT count(*) 
-		FROM riidentificationrriskmsg m LEFT OUTER JOIN riassessment a
-		ON m.riskMsgId = a.riskMsgId
-		<where>
-			<include refid="query_identifyAndAssessment_condition"></include>
 		</where>
 	</select>
 	

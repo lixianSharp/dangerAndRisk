@@ -72,11 +72,11 @@ function updateOpenBtn(obj) {
 	$("#updaterespid").val(respid);
 	
 	var $td = $(obj).parents("tr").children("td");
-	var quarters = $td.eq(1).text();//岗位
-	var duty = $td.eq(2).text();//职责
-	var ctrlcontent = $td.eq(3).text();//管控内容
-	var ctrlfrequency = $td.eq(4).text();//管控频率
-	var analysisfrequency = $td.eq(5).text();//风险分析频率
+	var quarters = $td.eq(2).text();//岗位
+	var duty = $td.eq(3).text();//职责
+	var ctrlcontent = $td.eq(4).text();//管控内容
+	var ctrlfrequency = $td.eq(5).text();//管控频率
+	var analysisfrequency = $td.eq(6).text();//风险分析频率
 	
 	//2.进行表单初始化
 	$("#updatequarters").val(quarters);//岗位
@@ -251,14 +251,14 @@ function findAllRiRespon() {
 				
 				//开始拼接
 				options += "<tr>";
-			    //options += "<td><input type='checkbox'></td>";
+			    options += "<td><input type='checkbox'></td>";
 				options +="<td>"+((data.riResponsibilityList.currentPage-1)*10+i+1)+"</td>";
 				options +="<td>"+quarters+"</td>";
 				options +="<td>"+duty+"</td>";
 				options +="<td>"+ctrlcontent+"</td>";
 				options +="<td>"+ctrlfrequency+"</td>";
 				options +="<td>"+analysisfrequency+"</td>";
-				options +="<td>" +"<input  type='hidden' value='"+respid+"'><a data-toggle='modal' data-target='#modifierDuty' href='#' onclick='updateOpenBtn(this)' >修改</a><a data-toggle='modal' data-target='#deleteDuty' href='#' onclick='delOpenBtn(this)'>删除</a></td>";
+				options +="<td>" +"<input  type='hidden' value='"+respid+"'><a data-toggle='modal' data-target='#modifierDuty' onclick='updateOpenBtn(this)' >修改</a><a data-toggle='modal' data-target='#deleteDuty' onclick='delOpenBtn(this)'>删除</a></td>";
 				options += "</tr>";
 			}
 			

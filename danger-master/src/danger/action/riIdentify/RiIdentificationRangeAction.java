@@ -127,7 +127,7 @@ public class RiIdentificationRangeAction extends ActionSupport {
 		//封装查询条件的map集合
 		Map<String,Object> condition = new LinkedHashMap<String,Object>();
 		PageBean<RiIdentificationRange> pageBean = riIdentificationRangeService.findDangerSidingByCondition(Integer.parseInt(currentPage), Integer.parseInt(currentCount), condition);
-		
+		System.out.println("pageBean内容:"+pageBean);
 		
 		map.put("pageBean", pageBean);
 		

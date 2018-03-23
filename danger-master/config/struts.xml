@@ -47,5 +47,12 @@
 	
 	<!-- lixianyuan -->
 	
+	<!-- zhangwenyi -->
+	<include file="struts/riControlPlan.xml"></include>
+	<include file="struts/riControlPlanDetail.xml"></include>
+	<include file="struts/riAnalysisPlan.xml"></include>
+	<include file="struts/riValidPlan.xml"></include>
+	<include file="struts/riConstitute.xml"></include>
+	<!-- zhangwenyi -->
 	<!-- 风险管控  end -->
 </struts>

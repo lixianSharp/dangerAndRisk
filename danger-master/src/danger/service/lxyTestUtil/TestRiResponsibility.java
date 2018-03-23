@@ -67,6 +67,4 @@ public class TestRiResponsibility {
 		boolean result = riResponsibilityService.deleteRiResponsibility("72c02c53eebb4da1bbc0a680ba56c59a");
 		System.out.println("删除成功了吗?"+result);
 	}
-	
-	
 }

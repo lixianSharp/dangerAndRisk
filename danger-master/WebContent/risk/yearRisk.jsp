@@ -3,7 +3,6 @@
 <%
 	String path = request.getContextPath();
 %>
-<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ include file="/tag.jsp"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -14,11 +13,7 @@
 
 <%@ include file="/controls/cssJs.jsp"%>
 
-<script type="text/javascript" src="<%=path%>/js/risk/yearRisk.js"></script>
-<!-- 用于表单校验的 -->
-<script type="text/javascript" src="<%=path%>/js/jquery.validate-1.13.1.js"></script>
-
-
+<script type="text/javascript" src="<%=path%>/js/risk/yearRecognize.js"></script>
 
 <link rel="stylesheet" href="<%=path%>/css/public/public_style.css" />
 
@@ -31,9 +26,6 @@
     text-align: center;
     border-left: 1px solid #ccc;
 
-}
-a {
-  cursor:pointer;
 }
 </style>
 </head>
@@ -79,23 +71,23 @@ a {
 									<table class="table  table-bordered">
 									<tr>
 									<td>年份</td>
-									<td><fmt:formatDate value="${identifyMainTableY.year }" pattern="yyyy"/></td>
+									<td>2015</td>
 									<td>地点</td>
-									<td>${identifyMainTableY.meetingaddress }</td>
+									<td>会议室</td>
 									</tr>
 									<tr>
 									<td>主持人</td>
-									<td>${identifyMainTableY.compere}</td>
+									<td>张三</td>
 									<td>记录人</td>
-									<td>${identifyMainTableY.recorder}</td>
+									<td>王五</td>
 									</tr>
 									<tr>
 									<td>参会人员</td>
-									<td colspan="3">${identifyMainTableY.participants}</td>
+									<td colspan="3">张三，王五</td>
 									</tr>
 									<tr>
 									<td>会议内容</td>
-									<td colspan="3">${identifyMainTableY.meetingcontent}</td>
+									<td colspan="3">这是本次会议内容</td>
 									</tr>
 									</table>
 									</div>
@@ -103,13 +95,13 @@ a {
 
 									<div>
 									<h4>年度风险信息</h4>
-									<button class="btn btn-primary" data-toggle="modal" data-target="#addDuty" onclick="addOpenBtn()">新增</button>
+									<button class="btn btn-primary" data-toggle="modal" data-target="#addDuty" >新增</button>
 									
 									
 									<table class="table table-hover table-bordered">
 										<thead>
 											<tr>
-												<!-- <th>操作</th> -->
+												<th>操作</th>
 												<th>序号</th>
 												<th>风险地点</th>
 												<th>风险描述</th>
@@ -125,35 +117,8 @@ a {
 												<th width="140">操作</th>
 											</tr>
 										</thead>
-										<tbody id="tbody">
-           									<%-- <c:forEach items="${pageBean.productList }" var="riIdentificationRriskMsg" varStatus="varstatus">  
-								                <tr>  
-	           										<td>
-														<input type="checkbox">
-													</td>
-													<td>${varstatus.count }</td>
-								                    <td>${riIdentificationRriskMsg.riskaddress }</td>  
-								                    <td>${riIdentificationRriskMsg.riskdescribe }</td>  
-								                    <td>${riIdentificationRriskMsg.risktype }</td>  
-								                    <td>${riIdentificationRriskMsg.professionaltypes }</td>  
-								                    <td>${riIdentificationRriskMsg.disastertypes }</td>  
-								                    <td>${riIdentificationRriskMsg.cancauseaccidents }</td>  
-								                    <td>${riIdentificationRriskMsg.ctrlmeasure }</td>  
-								                    <td>${riIdentificationRriskMsg.principal }</td>  
-								                    <td>${riIdentificationRriskMsg.superintendent }</td>  
-								                    <td>${riIdentificationRriskMsg.monitoringperiod }</td> 
-								                    <c:if test="${riIdentificationRriskMsg.evaluationstatus}=='N' ">
-								                    	<td>未评估</td>
-								                    </c:if>
-								                    <td>${riIdentificationRriskMsg.evaluationstatus }</td> 
-								                    <td>
-													<a data-toggle="modal" data-target="#modifierDuty" onclick="updateOpenBtn(this)" value="${riIdentificationRriskMsg.riskmsgid}">修改</a>
-													<a data-toggle="modal" data-target="#deleteRisk" onclick="delOpenBtn(this)" value="${riIdentificationRriskMsg.riskmsgid}">删除</a>
-													</td>
-												</td>
-								                </tr>  
-								        	</c:forEach>  --%> 
-											<!-- <tr>
+										<tbody>
+											<tr>
 												<td>
 												<input type="checkbox">
 												</td>
@@ -192,8 +157,8 @@ a {
 													<a data-toggle="modal" data-target="#modifierDuty" >修改</a>
 													<a data-toggle="modal" data-target="#deleteRisk" >删除</a>
 												</td>
-											</tr> -->
-									
+											</tr>
+
 										</tbody>
 									</table>
 									</div>
@@ -211,33 +176,29 @@ a {
 												</h4>
 											</div>
 											<div class="modal-body">
-												<form action="" id="addForm">
-													<!-- 隐藏域，隐藏一个风险辨识主表id -->
-													<input id="addidentiryid" type="hidden" name="riIdentificationRriskMsg.identiryid" value="${identifyMainTableY.identiryid }"/>
-													
+												<form action="">
 												<div class="input-group el_modellist" role="toolbar">
 													<span class="el_spans">风险地点：</span>
 													<select	class="selectpicker form-control" title="请选择" 
-													id="addriskAddressSelect" name="" onchange="addselectchange(this)">
-														<!-- <option value="" id="option0">--请选择--</option>
+													id="" name="">
+														<option value="" id="option0">--请选择--</option>
 														<option value="综采">综采</option>
-														<option value="综掘">综掘</option> -->
+														<option value="综掘">综掘</option>
+														
 													</select>
-													<textarea id="addriskaddress" class="form-control texta"
-													rows="2" name="riIdentificationRriskMsg.riskaddress" ></textarea>
+													<textarea id="dangerneirong" class="form-control texta"
+													rows="2" name="danger.content"></textarea>
 												</div>
-												<!--隐藏域， 存放选中的风险地点，用于追加到文本框中 -->
-												<input id="addAddressToTextarea" type="hidden" value=""/>
-												
+								
 												<div class="input-group el_modellist" role="toolbar">
 													<span class="el_spans">风险描述：</span>
-													<textarea id="addriskdescribe" class="form-control texta"
-													rows="2" name="riIdentificationRriskMsg.riskdescribe"></textarea>
+													<textarea id="dangerneirong" class="form-control texta"
+													rows="2" name="danger.content"></textarea>
 												</div>
 												<div class="input-group el_modellist" role="toolbar">
 													<span class="el_spans">风险类型：</span>
 													<select	class="selectpicker form-control" title="请选择" 
-													id="addrisktype" name="riIdentificationRriskMsg.risktype">
+													id="" name="">
 														<option value="" id="option0">--请选择--</option>
 														<option value="人">人</option>
 														<option value="机">机</option>
@@ -250,7 +211,7 @@ a {
 												<div class="input-group el_modellist" role="toolbar">
 													<span class="el_spans">专业类型：</span>
 													<select	class="selectpicker form-control" title="请选择" 
-													id="addprofessionaltypes" name="riIdentificationRriskMsg.professionaltypes">
+													id="" name="">
 														<option value="" id="option0">--请选择--</option>
 														<option value="采煤">采煤</option>
 														<option value="挖水">挖水</option>
@@ -260,7 +221,7 @@ a {
 												<div class="input-group el_modellist" role="toolbar">
 													<span class="el_spans">灾害类型：</span>
 													<select	class="selectpicker form-control" title="请选择" 
-													id="adddisastertypes" name="riIdentificationRriskMsg.disastertypes">
+													id="" name="">
 														<option value="" id="option0">--请选择--</option>
 														<option value="火">火</option>
 														<option value="水">水</option>
@@ -270,7 +231,7 @@ a {
 												<div class="input-group el_modellist" role="toolbar">
 													<span class="el_spans">可能导致事故：</span>
 													<select	class="selectpicker form-control" title="请选择" 
-													id="addcancauseaccidents" name="riIdentificationRriskMsg.cancauseaccidents">
+													id="" name="">
 														<option value="" id="option0">--请选择--</option>
 														<option value="人身伤害">人身伤害</option>
 														<option value="死亡">死亡</option>
@@ -279,23 +240,23 @@ a {
 												</div>
 												<div class="input-group el_modellist" role="toolbar">
 													<span class="el_spans">管控措施：</span>
-													<textarea id="addctrlmeasure" class="form-control texta"
-													rows="2" name="riIdentificationRriskMsg.ctrlmeasure"></textarea>
+													<textarea id="dangerneirong" class="form-control texta"
+													rows="2" name="danger.content"></textarea>
 												</div>
 												<div class="input-group el_modellist" role="toolbar">
 													<span class="el_spans">负责人：</span>
 													<input type="text" class="form-control el_modelinput" value=""
-														id="addprincipal" name="riIdentificationRriskMsg.principal" />
+														id="" name="" />
 												</div>
 												<div class="input-group el_modellist" role="toolbar">
 													<span class="el_spans">监管人：</span>
 													<input type="text" class="form-control el_modelinput" value=""
-														id="addsuperintendent" name="riIdentificationRriskMsg.superintendent" />
+														id="" name="" />
 												</div>
 												<div class="input-group el_modellist" role="toolbar">
 													<span class="el_spans">监管周期：</span>
 													<input type="text" class="form-control el_modelinput" value=""
-														id="addmonitoringperiod" name="riIdentificationRriskMsg.monitoringperiod" />
+														id="" name="" />
 												</div>
 												
 												</form>
@@ -303,7 +264,7 @@ a {
 											<div class="modal-footer">
 												<button type="button" class="btn btn-default" data-dismiss="modal">关闭
 												</button>
-												<button type="button" class="btn btn-primary" onclick="addSave()">
+												<button type="button" class="btn btn-primary">
 													保存
 												</button>
 											</div>
@@ -323,36 +284,29 @@ a {
 												</h4>
 											</div>
 											<div class="modal-body">
-												<form action="" id="updateForm">
-													<!-- 隐藏域，隐藏一个风险辨识主表id -->
-													<input id="updateidentiryid" type="hidden" name="riIdentificationRriskMsg.identiryid" value="${identifyMainTableY.identiryid }"/>
-													<!-- 隐藏域，隐藏一个辨识风险信息id -->
-													<input id="updateriskmsgid" type="hidden" name="riIdentificationRriskMsg.riskmsgid" value=""/>
-													
+												<form action="">
 												<div class="input-group el_modellist" role="toolbar">
 													<span class="el_spans">风险地点：</span>
 													<select	class="selectpicker form-control" title="请选择" 
-													id="updateriskAddressSelect" name="" onchange="updateselectchange(this)" >
+													id="" name="">
 														<option value="" id="option0">--请选择--</option>
 														<option value="综采">综采</option>
 														<option value="综掘">综掘</option>
 														
 													</select>
-													<textarea id="updateriskaddress" class="form-control texta"
-													rows="2" name="riIdentificationRriskMsg.riskaddress" readonly="readonly"></textarea>
+													<textarea id="dangerneirong" class="form-control texta"
+													rows="2" name="danger.content"></textarea>
 												</div>
-												<!-- 存放选中的风险地点，用于追加到文本框中 -->
-												<input id="updateAddressToTextarea" type="hidden" value=""/>
 								
 												<div class="input-group el_modellist" role="toolbar">
 													<span class="el_spans">风险描述：</span>
-													<textarea id="updateriskdescribe" class="form-control texta"
-													rows="2" name="riIdentificationRriskMsg.riskdescribe"></textarea>
+													<textarea id="dangerneirong" class="form-control texta"
+													rows="2" name="danger.content"></textarea>
 												</div>
 												<div class="input-group el_modellist" role="toolbar">
 													<span class="el_spans">风险类型：</span>
 													<select	class="selectpicker form-control" title="请选择" 
-													id="updaterisktype" name="riIdentificationRriskMsg.risktype">
+													id="" name="">
 														<option value="" id="option0">--请选择--</option>
 														<option value="人">人</option>
 														<option value="机">机</option>
@@ -365,7 +319,7 @@ a {
 												<div class="input-group el_modellist" role="toolbar">
 													<span class="el_spans">专业类型：</span>
 													<select	class="selectpicker form-control" title="请选择" 
-													id="updateprofessionaltypes" name="riIdentificationRriskMsg.professionaltypes">
+													id="" name="">
 														<option value="" id="option0">--请选择--</option>
 														<option value="采煤">采煤</option>
 														<option value="挖水">挖水</option>
@@ -375,7 +329,7 @@ a {
 												<div class="input-group el_modellist" role="toolbar">
 													<span class="el_spans">灾害类型：</span>
 													<select	class="selectpicker form-control" title="请选择" 
-													id="updatedisastertypes" name="riIdentificationRriskMsg.disastertypes">
+													id="" name="">
 														<option value="" id="option0">--请选择--</option>
 														<option value="火">火</option>
 														<option value="水">水</option>
@@ -385,7 +339,7 @@ a {
 												<div class="input-group el_modellist" role="toolbar">
 													<span class="el_spans">可能导致事故：</span>
 													<select	class="selectpicker form-control" title="请选择" 
-													id="updatecancauseaccidents" name="riIdentificationRriskMsg.cancauseaccidents">
+													id="" name="">
 														<option value="" id="option0">--请选择--</option>
 														<option value="人身伤害">人身伤害</option>
 														<option value="死亡">死亡</option>
@@ -394,23 +348,23 @@ a {
 												</div>
 												<div class="input-group el_modellist" role="toolbar">
 													<span class="el_spans">管控措施：</span>
-													<textarea id="updatectrlmeasure" class="form-control texta"
-													rows="2" name="riIdentificationRriskMsg.ctrlmeasure"></textarea>
+													<textarea id="dangerneirong" class="form-control texta"
+													rows="2" name="danger.content"></textarea>
 												</div>
 												<div class="input-group el_modellist" role="toolbar">
 													<span class="el_spans">负责人：</span>
 													<input type="text" class="form-control el_modelinput" value=""
-														id="updateprincipal" name="riIdentificationRriskMsg.principal" />
+														id="" name="" />
 												</div>
 												<div class="input-group el_modellist" role="toolbar">
 													<span class="el_spans">监管人：</span>
 													<input type="text" class="form-control el_modelinput" value=""
-														id="updatesuperintendent" name="riIdentificationRriskMsg.superintendent" />
+														id="" name="" />
 												</div>
 												<div class="input-group el_modellist" role="toolbar">
 													<span class="el_spans">监管周期：</span>
 													<input type="text" class="form-control el_modelinput" value=""
-														id="updatemonitoringperiod" name="riIdentificationRriskMsg.monitoringperiod" />
+														id="" name="" />
 												</div>
 												
 												</form>
@@ -418,7 +372,7 @@ a {
 											<div class="modal-footer">
 												<button type="button" class="btn btn-default" data-dismiss="modal">关闭
 												</button>
-												<button type="button" class="btn btn-primary" onclick="updateSave()">
+												<button type="button" class="btn btn-primary">
 													确认修改
 												</button>
 											</div>
@@ -426,7 +380,7 @@ a {
 									</div>
 								</div><!-- /.modal -->
 								
-								<!-- 模态框（删除年度的辨识风险信息） -->
+								<!-- 模态框（删除年度风险） -->
 								<div class="modal fade" id="deleteRisk" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 									<div class="modal-dialog">
 										<div class="modal-content">
@@ -444,23 +398,18 @@ a {
 											<div class="modal-footer">
 												<button type="button" class="btn btn-default" data-dismiss="modal">关闭
 												</button>
-												<button type="button" class="btn btn-primary" onclick="deleteBtn()">
-													确认删除
+												<button type="button" class="btn btn-primary">
+													删除
 												</button>
 											</div>
 										</div><!-- /.modal-content -->
 									</div>
 								</div><!-- /.modal -->
-								<!-- 隐藏域，用于删除操作的 风险信息id -->
-								<input id="delriskmsgid" type="hidden" value=""/>
-								
+
+
 									<div id="paginationIDU"></div>
-									<!-- 隐藏当前页页号 默认值为1-->
-									<input id="currentPage" type="hidden" value="1"/>
-									<!-- 隐藏每页显示的记录数 默认值10 -->
-									<input id="currentCount" type="hidden" value="10"/>
 									<script>
-										/* $('#paginationIDU').pagination(
+										$('#paginationIDU').pagination(
 												{
 													//			组件属性
 													"total" :"${result.pageBean.totalCount}",//数字 当分页建立时设置记录的总数量 1
@@ -478,7 +427,7 @@ a {
 														$("#currentCount").val(b);
 														$("#queryForm").submit();
 													}
-												}); */
+												});
 									</script>
 									
 

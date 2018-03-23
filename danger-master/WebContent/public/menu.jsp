@@ -114,6 +114,22 @@
 						<li class="list-group-item"><a id="#hdInsert"
 						href="<%=path%>/risk/monthRiskPlanValidity.jsp" class="towmenu"
 						aria-controls="profile">月风险管控计划有效性</a></li>
+						
+						<!-- 周风险管控计划 -->
+						<li class="list-group-item"><a id="#hdInsert"
+						href="<%=path%>/risk/weekRiskControlPlan.jsp" class="towmenu"
+						aria-controls="profile">旬风险管控计划</a></li>
+						<li class="list-group-item"><a id="#hdInsert"
+						href="<%=path%>/risk/weekRiskControlPlanAnalyze.jsp" class="towmenu"
+						aria-controls="profile">旬风险管控计划分析</a></li>
+						<li class="list-group-item"><a id="#hdInsert"
+						href="<%=path%>/risk/weekRiskPlanValidity.jsp" class="towmenu"
+						aria-controls="profile">旬风险管控计划有效性</a></li>
+						
+						
+						
+						
+						
 						<li class="list-group-item"><a id="#hdInsert"
 						href="<%=path%>/risk/riskConstitute.jsp" class="towmenu"
 						aria-controls="profile">风险构成级分布情况</a></li>
