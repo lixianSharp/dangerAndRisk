@@ -17,6 +17,8 @@
 
 <script type="text/javascript" src="<%=path%>/js/risk/monthRiskControlPlanRisk.js"></script>
 
+<script type="text/javascript" src="<%=path%>/js/risk/monthRiskControlPlanRisk.js"></script>
+
 <link rel="stylesheet" href="<%=path%>/css/public/public_style.css" />
 
 <link rel="stylesheet" href="<%=path%>/css/risk/yearRecognize.css" />

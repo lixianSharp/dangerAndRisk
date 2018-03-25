@@ -13,7 +13,8 @@
 
 <%@ include file="/controls/cssJs.jsp"%>
 
-<script type="text/javascript" src="<%=path%>/js/risk/yearRecognize.js"></script>
+
+<script type="text/javascript" src="<%=path%>/js/risk/monthRiskControlPlanAnalyzeInfo.js"></script>
 
 <script type="text/javascript" src="<%=path%>/js/risk/monthRiskControlPlanAnalyzeInfo.js"></script>
 

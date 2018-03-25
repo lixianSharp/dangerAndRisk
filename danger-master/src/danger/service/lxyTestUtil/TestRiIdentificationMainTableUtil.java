@@ -86,7 +86,7 @@ public class TestRiIdentificationMainTableUtil {
 		condition.put("identifymark", "Y");
 		List<Map<String, Object>> resultMap = identifyService.findIdentifyMainAndRiskMsgByCondition(condition);
 		Integer resultCount = identifyService.getIdentifyMainAndRiskMsgCountByCondition(condition);
-		System.out.println("总记录数"+resultCount/2);
+		System.out.println("总记录数"+resultCount);
 		System.out.println(resultMap.size()+" =="+resultMap);
 	}
 	

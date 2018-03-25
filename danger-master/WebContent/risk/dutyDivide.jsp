@@ -22,6 +22,13 @@
 <link rel="stylesheet" href="<%=path%>/css/public/public_style.css" />
 
 <link rel="stylesheet" href="<%=path%>/css/risk/dutyDivide.css" />
+
+<style type="text/css">
+	
+
+</style>
+
+
 </head>
 
 <body>
@@ -110,7 +117,7 @@
 								<!-- 模态框（新增职责） -->
 								<div class="modal fade" id="addDuty" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 									<div class="modal-dialog">
-										<div class="modal-content">
+										<div class="modal-content" >
 											<div class="modal-header">
 												<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
 													&times;
@@ -122,24 +129,24 @@
 											<div class="modal-body">
 												<form action="" id="addForm">
 												<div class="input-group el_modellist" role="toolbar">
-													<span class="el_spans">岗&nbsp;&nbsp;位：</span>
+													<span class="el_spans">&nbsp;&nbsp;&nbsp;&nbsp;岗位：</span>
 													<input type="text" class="form-control el_modelinput"
 														id="addquarters" name="riResponsibility.quarters" />
 												</div>
 								
 												<div class="input-group el_modellist" role="toolbar">
-													<span class="el_spans">职&nbsp;&nbsp;责：</span>
+													<span class="el_spans">&nbsp;&nbsp;&nbsp;&nbsp;职责：</span>
 													<input type="text" class="form-control el_modelinput"
 														id="addduty" name="riResponsibility.duty" />
 												</div>
 												<div class="input-group el_modellist" role="toolbar">
-													<span class="el_spans">管控内容：</span>
+													<span class="el_spans">&nbsp;&nbsp;管控内容：</span>
 													<input type="text" class="form-control el_modelinput"
 														id="addctrlcontent" name="riResponsibility.ctrlcontent" />
 												</div>
 								
 												<div class="input-group el_modellist" role="toolbar">
-													<span class="el_spans">管控频率：</span>
+													<span class="el_spans">&nbsp;&nbsp;管控频率：</span>
 													<input type="text" class="form-control el_modelinput"
 														id="addctrlfrequency" name="riResponsibility.ctrlfrequency" />
 												</div>
@@ -180,24 +187,24 @@
 													<input id="updaterespid" type="hidden" name="riResponsibility.respid" value="">
 													
 												<div class="input-group el_modellist" role="toolbar">
-													<span class="el_spans">岗&nbsp;&nbsp;位：</span>
+													<span class="el_spans">&nbsp;&nbsp;&nbsp;&nbsp;岗位：</span>
 													<input type="text" class="form-control el_modelinput" value="技术岗位"
 														id="updatequarters" name="riResponsibility.quarters" />
 												</div>
 								
 												<div class="input-group el_modellist" role="toolbar">
-													<span class="el_spans">职&nbsp;&nbsp;责：</span>
+													<span class="el_spans">&nbsp;&nbsp;&nbsp;&nbsp;职责：</span>
 													<input type="text" class="form-control el_modelinput" value="技术更新"
 														id="updateduty" name="riResponsibility.duty" />
 												</div>
 												<div class="input-group el_modellist" role="toolbar">
-													<span class="el_spans">管控内容：</span>
+													<span class="el_spans">&nbsp;&nbsp;管控内容：</span>
 													<input type="text" class="form-control el_modelinput" value="技术合理性"
 														id="updatectrlcontent" name="riResponsibility.ctrlcontent" />
 												</div>
 								
 												<div class="input-group el_modellist" role="toolbar">
-													<span class="el_spans">管控频率：</span>
+													<span class="el_spans">&nbsp;&nbsp;管控频率：</span>
 													<input type="text" class="form-control el_modelinput" value="一月一次"
 														id="updatectrlfrequency" name="riResponsibility.ctrlfrequency" />
 												</div>

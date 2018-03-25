@@ -14,7 +14,7 @@
 <%@ include file="/controls/cssJs.jsp"%>
 <!-- 弹出层插件 -->
 <script type="text/javascript" src="<%=path%>/js/risk/plug-in.js"></script>
-<script type="text/javascript" src="<%=path%>/js/risk/yearRecognize.js"></script>
+
 <script type="text/javascript" src="<%=path%>/js/risk/monRiskPlanValidity.js"></script>
 <link rel="stylesheet" href="<%=path%>/css/public/public_style.css" />
 
