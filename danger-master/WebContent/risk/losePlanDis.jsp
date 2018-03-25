@@ -40,11 +40,31 @@
 					<div class="el_stairTitle">
 						<span>风险管理 </span><span>>失效风险分布情况</span>
 					</div>
-
+						
 					<div class="panel-body el_main">
 
 						<!--内容-->
 						<div class=" col-md-12">
+						<%--   <c:set value="${[]}" var="aList" />
+					        <c:forEach items="${aList}" var="aNum">
+					            ${aNum}
+					        </c:forEach>
+						 --%>
+						
+						<%-- 
+						<c:forEach var="riskInfo"	items="${result.dutyDepartmentList }"  varStatus="status">
+							${riskInfo.dutyDepartment }
+							${riskInfo.count }
+							
+							
+						</c:forEach> 
+						
+						<c:forEach var="riskInfo"	items="${result.addressList }"  varStatus="status">
+							${riskInfo.riskAddress }
+							${riskInfo.count }
+							
+							
+						</c:forEach>   --%>
 
 
 							<!--显示内容-->
@@ -68,9 +88,7 @@
 						                	left: 'center'
 							            },
 							             tooltip: {},//提示框 
-							            /* legend: {//图例
-							                data:['失效风险地点']
-							            }, */
+							        
 							            xAxis: {
 							                data: ["总数量","3256工作面","32986工作面","458工作面","井口"]
 							            },
@@ -96,11 +114,12 @@
 							                left: 'center'
 							            },
 							            tooltip: {},//提示框
-							            /* legend: {//图例
-							                data:['失效风险责任部门']
-							            }, */
+							       
 							            xAxis: {
-							                data: ["总数量","采煤科","挖掘科"]
+							               data: ["总数量","采煤科","挖掘科"]
+							          //  data:
+							            	
+							            
 							            },
 							            yAxis: {},
 							            series: [{

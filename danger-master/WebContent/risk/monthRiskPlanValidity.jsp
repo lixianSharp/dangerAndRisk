@@ -14,10 +14,16 @@
 <%@ include file="/controls/cssJs.jsp"%>
 <!-- 弹出层插件 -->
 <script type="text/javascript" src="<%=path%>/js/risk/plug-in.js"></script>
-
+<script type="text/javascript" src="<%=path%>/js/risk/monRiskPlanValidity.js"></script>
 <link rel="stylesheet" href="<%=path%>/css/public/public_style.css" />
 
 <link rel="stylesheet" href="<%=path%>/css/risk/yearRecognize.css" />
+<style type="text/css">
+.warnInfo{
+background-color:#EEEE00;
+}
+
+</style>
 </head>
 
 <body>
@@ -58,26 +64,32 @@
 											<div class="input-group" role="toolbar">
 												
 												<span class="el_spans el_chooseSpan">月份：</span> 
-												<input id="optsdate6"
-													class="selectpicker form-control" title="点击选择年份" name="type">
+												<input id="optsdate6" class="selectpicker form-control" title="点击选择年份" name="monthOrWeek">
+													<input type="hidden" name="currentPage" id="currentPage" />
+													<input type="hidden" name="currentCount" id="currentCount" />
 												</input>
 											</div>
 										</div>
 										<div class="col-md-3 el_qlmQuery">
 											<div class="input-group" role="toolbar">
 												<span class="el_spans">专业类型：</span>
-												  <select id=""
-													class="selectpicker form-control" title="请选择" name="type">
-													<option value="0">--全部--</option>
+												  <!-- <select id=""
+													class="selectpicker form-control" title="请选择" name="professionalTypes">
+													<option value="">--全部--</option>
 													<option value="未评估">煤矿</option>
 													<option value="已评估">井口</option>
+												</select> -->
+												
+												<select id="professionalTypesId"
+													class="selectpicker form-control" title="请选择" name="specialty">
+													
 												</select>
 											</div>
 										</div>
 
 									
 										
-										<button type="submit"
+										<button  type="button" id="queryId" onclick="queryButton()" 
 										class="btn btn-primary el_queryButton btn-sm" style="left: 930.62px;top: 0px;bottom: 12px;margin-bottom: 3px;padding-bottom: 0px;padding-top: 0px;"  >查询</button>
 									<button class="btn btn-default btn-sm" style="margin-left: 400px;" >清空</button>
 									</div>
@@ -92,7 +104,7 @@
 								<div class="panel-body">
 
 									
-									<table class="table table-hover table-bordered">
+									<table class="risk table table-hover table-bordered">
 										<thead>
 											<tr>
 												
@@ -108,7 +120,7 @@
 												<th>措施失效风险数量</th>
 											</tr>
 										</thead>
-										<tbody>
+										<%-- <tbody>
 											<tr>
 												
 												<td>
@@ -137,20 +149,24 @@
 												5
 												</td>
 												<td title="点击查看失效风险具体情况">
-													
-													<a href="<%=path%>/risk/losePlanDis.jsp">5</a>
+													<a class="loseRiskNum" href="<%=path%>/risk/losePlanDis.jsp">0</a>
 												</td>
 											</tr>
-
-										</tbody>
+										</tbody> --%>
+										<tbody id="tbody"></tbody>
 									</table>
-
-
-								
-
-
 									<div id="paginationIDU"></div>
-									<script>
+
+									<script type="text/javascript">
+									$(document).ready(function(){
+										var loseRiskNum=$(".loseRiskNum").text();
+										if(loseRiskNum>0){
+											$(".risk tr td:last-child").addClass("warnInfo");
+										}
+									});
+									</script>
+									
+									<!-- <script>
 										$('#paginationIDU').pagination(
 												{
 													//			组件属性
@@ -170,7 +186,7 @@
 														$("#queryForm").submit();
 													}
 												});
-									</script>
+									</script> -->
 									
 
 								</div>

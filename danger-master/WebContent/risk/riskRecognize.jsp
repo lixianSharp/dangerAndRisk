@@ -130,12 +130,12 @@
 												</div>
 								
 												<div class="input-group el_modellist" role="toolbar">
-													<span class="el_spans">概&nbsp;&nbsp;况：</span>
+													<span class="el_spans">&nbsp;&nbsp;&nbsp;概况：</span>
 													<input type="text" class="form-control el_modelinput"
 														id="addsurvey" name="riIdentificationRange.survey" />
 												</div>
 												<div class="input-group el_modellist" role="toolbar">
-													<span class="el_spans">类&nbsp;&nbsp;型：</span>
+													<span class="el_spans">&nbsp;&nbsp;&nbsp;类型：</span>
 													<select	class="selectpicker form-control" title="请选择" 
 													id="addrirtype" name="riIdentificationRange.rirtype">
 														<option value="" id="option0">--请选择--</option>
@@ -146,7 +146,7 @@
 												</div>
 								
 												<div class="input-group el_modellist" role="toolbar">
-													<span class="el_spans">开始时间：</span>
+													<span class="el_spans">&nbsp;开始时间：</span>
 													<input
 													class="datainp wicon form-control" id="optsdate2"
 													type="text" placeholder="点击选择开始时间" value=""
@@ -154,7 +154,7 @@
 												</div>
 												
 												<div class="input-group el_modellist" role="toolbar">
-													<span class="el_spans">结束时间：</span>
+													<span class="el_spans">&nbsp;结束时间：</span>
 													<input
 													class="datainp wicon form-control" id="optsdate22"
 													type="text" placeholder="点击选择结束时间" value=""
@@ -197,12 +197,12 @@
 												</div>
 								
 												<div class="input-group el_modellist" role="toolbar">
-													<span class="el_spans">概&nbsp;&nbsp;况：</span>
+													<span class="el_spans">&nbsp;&nbsp;&nbsp;概况：</span>
 													<input type="text" class="form-control el_modelinput"
 														id="updatesurvey" name="riIdentificationRange.survey" />
 												</div>
 												<div class="input-group el_modellist" role="toolbar">
-													<span class="el_spans">类&nbsp;&nbsp;型：</span>
+													<span class="el_spans">&nbsp;&nbsp;&nbsp;类型：</span>
 													<select	class="selectpicker form-control" title="请选择" 
 													id="updaterirtype" name="riIdentificationRange.rirtype">
 														<option value="" id="option0">--请选择--</option>
@@ -213,14 +213,14 @@
 												</div>
 								
 												<div class="input-group el_modellist" role="toolbar">
-													<span class="el_spans">开始时间：</span>
+													<span class="el_spans">&nbsp;开始时间：</span>
 													<input
 													class="datainp wicon form-control" id="optsdate3"
 													type="text" placeholder="" value=""
 													name="riIdentificationRange.starttime"  />
 												</div>
 												<div class="input-group el_modellist" role="toolbar">
-													<span class="el_spans">结束时间：</span>
+													<span class="el_spans">&nbsp;结束时间：</span>
 													<input
 													class="datainp wicon form-control" id="optsdate33"
 													type="text" placeholder="" value=""

@@ -200,7 +200,7 @@
 													&times;
 												</button>
 												<h4 class="modal-title" id="myModalLabel">
-												新增年度风险信息
+												新增年度/专项风险信息
 												</h4>
 											</div>
 											<div class="modal-body">
@@ -209,7 +209,7 @@
 													<input id="addidentiryid" type="hidden" name="riIdentificationRriskMsg.identiryid" value=""/>
 													
 												<div class="input-group el_modellist" role="toolbar">
-													<span class="el_spans">风险地点：</span>
+													<span class="el_spans">&nbsp;&nbsp;风险地点：</span>
 													<select	class="selectpicker form-control" title="请选择" 
 													id="addriskAddressSelect" name="" onchange="addselectchange(this)">
 														<option value="" id="option0">--请选择--</option>
@@ -224,12 +224,12 @@
 												<input id="addAddressToTextarea" type="hidden" value=""/>
 												
 												<div class="input-group el_modellist" role="toolbar">
-													<span class="el_spans">风险描述：</span>
+													<span class="el_spans">&nbsp;&nbsp;风险描述：</span>
 													<textarea id="addriskdescribe" class="form-control texta"
 													rows="2" name="riIdentificationRriskMsg.riskdescribe"></textarea>
 												</div>
 												<div class="input-group el_modellist" role="toolbar">
-													<span class="el_spans">风险类型：</span>
+													<span class="el_spans">&nbsp;&nbsp;风险类型：</span>
 													<select	class="selectpicker form-control" title="请选择" 
 													id="addrisktype" name="riIdentificationRriskMsg.risktype">
 														<option value="" id="option0">--请选择--</option>
@@ -242,7 +242,7 @@
 												</div>
 								
 												<div class="input-group el_modellist" role="toolbar">
-													<span class="el_spans">专业类型：</span>
+													<span class="el_spans">&nbsp;&nbsp;专业类型：</span>
 													<select	class="selectpicker form-control" title="请选择" 
 													id="addprofessionaltypes" name="riIdentificationRriskMsg.professionaltypes">
 														<option value="" id="option0">--请选择--</option>
@@ -252,7 +252,7 @@
 													</select>
 												</div>
 												<div class="input-group el_modellist" role="toolbar">
-													<span class="el_spans">灾害类型：</span>
+													<span class="el_spans">&nbsp;&nbsp;灾害类型：</span>
 													<select	class="selectpicker form-control" title="请选择" 
 													id="adddisastertypes" name="riIdentificationRriskMsg.disastertypes">
 														<option value="" id="option0">--请选择--</option>
@@ -272,22 +272,22 @@
 													</select>
 												</div>
 												<div class="input-group el_modellist" role="toolbar">
-													<span class="el_spans">管控措施：</span>
+													<span class="el_spans">&nbsp;&nbsp;管控措施：</span>
 													<textarea id="addctrlmeasure" class="form-control texta"
 													rows="2" name="riIdentificationRriskMsg.ctrlmeasure"></textarea>
 												</div>
 												<div class="input-group el_modellist" role="toolbar">
-													<span class="el_spans">负责人：</span>
+													<span class="el_spans">&nbsp;&nbsp;&nbsp;负责人：</span>
 													<input type="text" class="form-control el_modelinput" value=""
 														id="addprincipal" name="riIdentificationRriskMsg.principal" />
 												</div>
 												<div class="input-group el_modellist" role="toolbar">
-													<span class="el_spans">监管人：</span>
+													<span class="el_spans">&nbsp;&nbsp;&nbsp;监管人：</span>
 													<input type="text" class="form-control el_modelinput" value=""
 														id="addsuperintendent" name="riIdentificationRriskMsg.superintendent" />
 												</div>
 												<div class="input-group el_modellist" role="toolbar">
-													<span class="el_spans">监管周期：</span>
+													<span class="el_spans">&nbsp;&nbsp;监管周期：</span>
 													<input type="text" class="form-control el_modelinput" value=""
 														id="addmonitoringperiod" name="riIdentificationRriskMsg.monitoringperiod" />
 												</div>
@@ -324,7 +324,7 @@
 													<input id="assessmentToriskmsgid" name="riAssessment.riskmsgid" type="hidden" value=""/>
 													
 												<div class="input-group el_modellist" role="toolbar">
-													<span class="el_spans">可能性（L）：</span>
+													<span class="el_spans">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;可能性（L）：</span>
 													<select	class="selectpicker form-control" title="请选择" 
 													id="evaluatePossibility" onchange="optionChange1()" name="riAssessment.possibility">
 														<!-- <option value="" id="option0">--请选择--</option>
@@ -346,7 +346,7 @@
 													</select>
 												</div>
 												<div class="input-group el_modellist" role="toolbar">
-													<span class="el_spans">损失后果（C）：</span>
+													<span class="el_spans">&nbsp;&nbsp;&nbsp;&nbsp;损失后果（C）：</span>
 													<select	class="selectpicker form-control" title="请选择" 
 													id="evaluateLossfcconsequence" onchange="optionChange3()"  name="riAssessment.lossofcconsequences">
 														<!-- <option value="" id="option0">--请选择--</option>
@@ -367,12 +367,12 @@
 								
 												
 												<div class="input-group el_modellist" role="toolbar">
-													<span class="el_spans">风险值（D）：</span>
+													<span class="el_spans">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;风险值（D）：</span>
 													<input type="text" class="form-control el_modelinput" value="" 
 														id="evaluateRiskValue" name="riAssessment.riskvalue" readonly="readonly"/>
 												</div>
 												<div class="input-group el_modellist" role="toolbar">
-													<span class="el_spans">风险等级：</span>
+													<span class="el_spans">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;风险 等级：</span>
 													<input type="text" class="form-control el_modelinput" value=""
 														id="evaluateRiskGrade" name="riAssessment.riskgrade" readonly="readonly"/>
 												</div>

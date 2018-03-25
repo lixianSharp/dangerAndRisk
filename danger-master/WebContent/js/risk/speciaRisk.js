@@ -179,18 +179,29 @@ function addOpenBtn(){
 ////将选择风险地点的select下拉框选中的值追加到 风险地点文本框中
 function addselectchange(obj){
 	var riskAddress = $("#addriskAddressSelect option:selected").text();//选择风险地点的select下拉框
-	
 	var before = $("#addAddressToTextarea").val();//之前的    隐藏域中的
-	$("#addAddressToTextarea").val(riskAddress);//将现在选中的添加
+	$("#addAddressToTextarea").val(riskAddress);//将现在选中的添加到隐藏域中
+	
+	//1.如果值重复选中了，或者选中的值为无效的("--请选择--")，则不进行任何操作
+	//2.如果隐藏域中的值为"",则说明是第一次添加,则不将""拼接到隐藏域中,直接将当前选中的值保存在隐藏域中
 	if(before==""){
-		var laterTextArea = $("#addAddressToTextarea").val();
-		$("#addAddressToTextarea").val(laterTextArea);
-		$("#addriskaddress").val($("#addAddressToTextarea").val());//添加到文本框中
+		//说明第一次选择，直接将当前选中的值放在隐藏域中
+		$("#addAddressToTextarea").val(riskAddress);//将最终的值保存在隐藏域中
+		$("#addriskaddress").val(riskAddress);//添加到文本框中
+	}else if(before.indexOf(riskAddress)>-1){
+		//说明值重复选中，则不进行任何操作，只需将隐藏域中原来的值进行恢复
+		$("#addAddressToTextarea").val("");//清空隐藏域中的值
+		$("#addAddressToTextarea").val(before);//恢复隐藏域中原来的值
+	}else if(riskAddress=="--请选择--"){
+		//说明是选择的值无效，则不进行任何操作，只需将隐藏域中原来的值进行恢复
+		$("#addAddressToTextarea").val("");//清空隐藏域中的值
+		$("#addAddressToTextarea").val(before);//恢复隐藏域中原来的值
 	}else{
 		var laterTextArea = $("#addAddressToTextarea").val()+","+before;
-		$("#addAddressToTextarea").val(laterTextArea);
+		$("#addAddressToTextarea").val(laterTextArea);//将最终的值(以前+当前选中的)保存在隐藏域中
 		$("#addriskaddress").val($("#addAddressToTextarea").val());//添加到文本框中
 	}
+	
 }
 
 
@@ -312,16 +323,29 @@ function updateselectchange(obj){
 	var riskAddress = $("#updateriskAddressSelect option:selected").text();//选择风险地点的select下拉框
 	
 	var before = $("#updateAddressToTextarea").val();//之前的    隐藏域中的
-	$("#updateAddressToTextarea").val(riskAddress);//将现在选中的添加
+	$("#updateAddressToTextarea").val(riskAddress);//将现在选中的添加到隐藏域中
+	
+	//1.如果值重复选中了，或者选中的值为无效的("--请选择--")，则不进行任何操作
+	//2.如果隐藏域中的值为"",则说明是第一次添加,则不将""拼接到隐藏域中,直接将当前选中的值保存在隐藏域中
 	if(before==""){
-		var laterTextArea = $("#updateAddressToTextarea").val();
-		$("#updateAddressToTextarea").val(laterTextArea);
-		$("#updateriskaddress").val($("#updateAddressToTextarea").val());//添加到文本框中
+		//说明第一次选择，直接将当前选中的值放在隐藏域中
+		$("#updateAddressToTextarea").val(riskAddress);//将最终的值保存在隐藏域中
+		$("#updateriskaddress").val(riskAddress);//添加到文本框中
+	}else if(before.indexOf(riskAddress)>-1){
+		//说明值重复选中，则不进行任何操作，只需将隐藏域中原来的值进行恢复
+		$("#updateAddressToTextarea").val("");//清空隐藏域中的值
+		$("#updateAddressToTextarea").val(before);//恢复隐藏域中原来的值
+	}else if(riskAddress=="--请选择--"){
+		//说明是选择的值无效，则不进行任何操作，只需将隐藏域中原来的值进行恢复
+		$("#updateAddressToTextarea").val("");//清空隐藏域中的值
+		$("#updateAddressToTextarea").val(before);//恢复隐藏域中原来的值
 	}else{
 		var laterTextArea = $("#updateAddressToTextarea").val()+","+before;
-		$("#updateAddressToTextarea").val(laterTextArea);
+		$("#updateAddressToTextarea").val(laterTextArea);//将最终的值(以前+当前选中的)保存在隐藏域中
 		$("#updateriskaddress").val($("#updateAddressToTextarea").val());//添加到文本框中
 	}
+	
+	
 }
 
 

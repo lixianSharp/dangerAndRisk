@@ -18,6 +18,8 @@
 <link rel="stylesheet" href="<%=path%>/css/public/public_style.css" />
 
 <link rel="stylesheet" href="<%=path%>/css/risk/yearRecognize.css" />
+
+<script type="text/javascript" src="<%=path%>/js/risk/monthRiskControlPlanAnalyze.js"></script>
 </head>
 
 <body>
@@ -59,15 +61,21 @@
 												
 												<span class="el_spans el_chooseSpan">月份：</span> 
 												<input id="optsdate6"
-													class="selectpicker form-control" title="点击选择年份" name="type">
+													class="selectpicker form-control" title="点击选择年份" name="monthOrWeek">
 												</input>
+										
+												
+												<input type="hidden" name="currentPage" id="currentPage" />
+												<input type="hidden" name="currentCount" id="currentCount" />
 											</div>
 										</div>
 
 									
 										
-										<button type="submit"
-										class="btn btn-primary el_queryButton btn-sm"  style="left: 963.617px;">查询</button>
+										<!-- <button type="submit"
+										class="btn btn-primary el_queryButton btn-sm"  style="left: 963.617px;">查询</button> -->
+									<button type="button"
+										class="btn btn-primary el_queryButton btn-sm"  style="left: 963.617px;" onclick="queryButton()" id="queryId">查询</button>
 									<button class="btn btn-default btn-sm" style="margin-top: 6px;margin-left: 732px;" onclick="clearBtn()" >清空</button>
 									</div>
 								</form>
@@ -96,7 +104,7 @@
 												<th>操作</th>
 											</tr>
 										</thead>
-										<tbody>
+									<%-- 	<tbody>
 											<tr>
 												
 												<td>
@@ -132,13 +140,14 @@
 												</td>
 											</tr>
 
-										</tbody>
+										</tbody> --%>
+										<tbody id="tbody"></tbody>
 									</table>
 
 								
 
 									<div id="paginationIDU"></div>
-									<script>
+									<!-- <script>
 										$('#paginationIDU').pagination(
 												{
 													//			组件属性
@@ -159,7 +168,7 @@
 													}
 												});
 									</script>
-									
+									 -->
 
 								</div>
 							</div>

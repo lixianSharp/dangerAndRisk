@@ -130,7 +130,7 @@
 	<select id="findIdentifyMainAndRiskMsgByCondition" parameterType="map" resultType="map">
 		select <include refid="Base_Column_List_riIdentificationMainTable"></include>,
 				(SELECT COUNT(*) FROM riidentificationrriskmsg WHERE riidentificationrriskmsg.identiryId=riIdentificationMainTable.identiryid) as "riskmsgcount"
-		from riIdentificationMainTable,riIdentificationrriskmsg
+		from riIdentificationMainTable
 		<where>
 			<!-- 年度还是专项 -->
 			<if test="identifymark!=null">

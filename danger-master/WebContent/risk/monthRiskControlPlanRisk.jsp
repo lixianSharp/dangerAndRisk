@@ -14,6 +14,8 @@
 <%@ include file="/controls/cssJs.jsp"%>
 
 
+<script type="text/javascript" src="<%=path%>/js/risk/monthRiskControlPlanRisk.js"></script>
+
 <link rel="stylesheet" href="<%=path%>/css/public/public_style.css" />
 
 <link rel="stylesheet" href="<%=path%>/css/risk/yearRecognize.css" />
@@ -60,16 +62,23 @@
 
 							<!--显示内容-->
 							<div class="panel panel-default el_Mainmain" style="margin-top: 0px;">
-
+								<form id="hiddenForm" method="post" action="${baseurl }/controlPlan_getRiskInfoByPage.action">
+									<div>
+										<input type="hidden" name="currentPage" id="currentPage" />
+										<input type="hidden" name="currentCount" id="currentCount" />
+										<input type="hidden" id="myRictrlplanid" value=${result.riControlPlan.rictrlplanid } />
+										</div>
+								</form>
 								<!--按钮面板-->
 								<div class="panel-body">
 									<!-- 年度辨识基本信息 -->
 									<div class="row el_queryBox" style=" border-bottom-width: 0px; margin-top: 0px;">
 									<h4>月风险管控计划</h4>
-									<button class="btn btn-primary">计划上报</button>
+									
+									<!-- <button class="btn btn-primary">计划上报</button> -->
 									<div class="yearReInfo">
 									<table class="table  table-bordered">
-									<tr>
+									<!-- <tr>
 									<td>年份</td>
 									<td>2015</td>
 									<td>月份</td>
@@ -80,14 +89,29 @@
 									<td>张三</td>
 									<td>专业负责人</td>
 									<td>王五</td>
+									</tr> -->
+									
+									<tr>
+									<td>年份2</td>
+									<td id="myyear">${result.riControlPlan.year }</td>
+									<td>月份</td>
+									<td id="mymonth">${result.riControlPlan.monthorweek }</td>
 									</tr>
+									
+									<tr>
+									<td>专业</td>
+									<td id="myspecialty">${result.riControlPlan.specialty }</td>
+									<td>专业负责人</td>
+									<td id="myleader">${result.riControlPlan.leader }</td>
+									</tr>
+									
 									</table>
 									</div>
 									</div>
 
 									<div>
 									<h4>月风险管控计划风险</h4>
-									<button class="btn btn-primary">复制上月风险管控计划风险数据</button>
+									<button class="btn btn-primary" onclick="conpyPrecedingMonth()">复制上月风险管控计划风险数据</button>
 									<button class="btn btn-primary" onclick="yearRiskControlImport()">导入</button>
 									<button class="btn btn-primary" data-toggle="modal" data-target="#addDuty" >新增</button>
 									
@@ -110,7 +134,7 @@
 												<th width="140">操作</th>
 											</tr>
 										</thead>
-										<tbody>
+										<!-- <tbody>
 											<tr>
 												
 												<td>
@@ -148,8 +172,63 @@
 												</td>
 											</tr>
 
+										</tbody> -->
+										<tbody id="tbody">
+										
+										<c:forEach var="riskInfo"	items="${result.pageBean.productList }" varStatus="status">
+											<tr>
+											<td>${ status.index + (result.pageBean.currentPage-1)*10+1}
+												
+											</td>
+											<td>${riskInfo.riskaddress }</td>
+											<td>${riskInfo.riskdescribe }</td>
+											<td>${riskInfo.risktype }</td>
+											<td>${riskInfo.professionaltypes }</td>
+											<td>${riskInfo.disastertypes }</td>
+											<td>${riskInfo.cancauseaccidents }</td>
+											<td>${riskInfo.ctrlmeasure }</td>
+											<td>${riskInfo.principal }</td>
+											<td>${riskInfo.superintendent }</td>
+											<td>${riskInfo.monitoringperiod }
+											<input type="hidden" id="myRiskInfoId" value=${riskInfo.riskmsgid } />
+											</td>
+											<td>
+												<a data-toggle="modal" data-target="#modifierDuty" >修改</a>
+												<!-- <a data-toggle="modal" data-target="#deleteRisk" onclick='deleteRiskInfo(this)'>删除</a> -->
+												<a data-toggle="modal" onclick='deleteRiskInfo(this)'>删除</a>
+											</td>
+											</tr>
+										</c:forEach>
+										
+										
+										
 										</tbody>
 									</table>
+								
+									<div id="paginationIDU"></div>
+									
+									<script>
+										$('#paginationIDU').pagination(
+												{
+													//			组件属性
+													"total" :"${result.pageBean.totalCount}",//数字 当分页建立时设置记录的总数量 1
+													"pageSize" : 10,//数字 每一页显示的数量 10
+													"pageNumber" : "${result.pageBean.currentPage}",//数字 当分页建立时，显示的页数 1
+													"pageList" : [ 10 ],//数组 用户可以修改每一页的大小，
+													//功能
+													"layout" : [ 'list', 'sep',
+															'first', 'prev',
+															'manual', 'next',
+															'last', 'links' ],
+													"onSelectPage" : function(
+															pageNumber, b) {
+														$("#currentPage").val(pageNumber);
+														$("#currentCount").val(b);
+														$("#hiddenForm").submit();
+													}
+												});
+									</script>
+											</div>
 									</div>
 									
 									<!-- 模态框（导入年度风险信息） -->
@@ -170,17 +249,16 @@
 											<div class="row el_queryBox">
 												<form
 													action=""
-													method="post" id="queryForm">
+													method="post" id="queryRiskForm">
 													<div class="row el_queryBoxrow">
 				
 														<div class="col-md-3 el_qlmQuery">
 															<div class="input-group" role="toolbar">
 																
 																<span class="el_spans el_chooseSpan">风险描述：</span> 
-																<input
-																	class="selectpicker form-control" name=""
-																	id="" title="请选择">
-																</input>
+																<input class="selectpicker form-control" name="riskDescribe" id="" />
+																<input type="hidden" name="currentPage" id="currentPage2" />
+																<input type="hidden" name="currentCount" id="currentCount2" />
 															</div>
 														</div>
 				
@@ -188,14 +266,14 @@
 															<div class="input-group" role="toolbar">
 																<span class="el_spans">风险地点：</span>
 																 <input id=""
-																	class="selectpicker form-control" title="请选择" name="type">
+																	class="selectpicker form-control" title="请选择" name="riskType">
 																	
 																</input>
 															</div>
 														</div>
 														
-														<button type="submit"
-														class="btn btn-primary  btn-sm">查询</button>
+														<button type="button"
+														class="btn btn-primary  btn-sm" onclick="queryRiskButton()">查询</button>
 													    <button class="btn btn-default btn-sm">清空</button>
 													</div>
 				
@@ -207,11 +285,11 @@
 											<div>
 											<button  class="btn btn-primary" onclick="confirmImport()">确定导入</button>
 											</div>
-											<script type="text/javascript">
+											<!-- <script type="text/javascript">
 											function confirmImport(){
 												$('#yearRiskControlImport').modal("hide");
 											}
-											</script>
+											</script> -->
 									
 									<table class="table table-hover table-bordered">
 										<thead>
@@ -232,7 +310,7 @@
 												
 											</tr>
 										</thead>
-										<tbody>
+									<!-- 	<tbody>
 											<tr>
 												<td>
 												<input type="checkbox">
@@ -273,9 +351,10 @@
 												
 											</tr>
 
-										</tbody>
+										</tbody> -->
+										<tbody id="t_body"></tbody>
 									</table>
-									<div id="paginationIDU1"></div>
+									<div id="paginationIDU2"></div>
 											</div>
 											
 											<div class="modal-footer">
@@ -286,32 +365,12 @@
 										</div><!-- /.modal-content -->
 									</div>
 								</div><!-- /.modal -->
-								<script type="text/javascript">
+								<!-- <script type="text/javascript">
 								function yearRiskControlImport(){
 									$('#yearRiskControlImport').modal();
-								}
+								} -->
 								</script>
-									<script>
-										$('#paginationIDU1').pagination(
-												{
-													//			组件属性
-													"total" :"${result.pageBean.totalCount}",//数字 当分页建立时设置记录的总数量 1
-													"pageSize" : 10,//数字 每一页显示的数量 10
-													"pageNumber" : "${result.pageBean.currentPage}",//数字 当分页建立时，显示的页数 1
-													"pageList" : [ 10 ],//数组 用户可以修改每一页的大小，
-													//功能
-													"layout" : [ 'list', 'sep',
-															'first', 'prev',
-															'manual', 'next',
-															'last', 'links' ],
-													"onSelectPage" : function(
-															pageNumber, b) {
-														$("#currentPage").val(pageNumber);
-														$("#currentCount").val(b);
-														$("#queryForm").submit();
-													}
-												});
-									</script>
+									
 								<!-- 模态框（新增年度风险信息） -->
 								<div class="modal fade" id="addDuty" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 									<div class="modal-dialog">
@@ -330,11 +389,11 @@
 												<div class="input-group el_modellist" role="toolbar">
 													<span class="el_spans">风险地点：</span>
 													<select	class="selectpicker form-control" title="请选择" 
-													id="" name="">
-														<option value="" id="option0">--请选择--</option>
+													id="addRiskAddressId" name="riIdentificationRriskMsg.riskaddress">
+														<!-- <option value="" id="option0">--请选择--</option>
 														<option value="综采">综采</option>
 														<option value="综掘">综掘</option>
-														
+														 -->
 													</select>
 													<textarea id="dangerneirong" class="form-control texta"
 													rows="2" name="danger.content"></textarea>
@@ -595,9 +654,10 @@
 												您确定要删除该条年度风险信息吗？
 											</div>
 											<div class="modal-footer">
+												<input type="hidden" id="url" />
 												<button type="button" class="btn btn-default" data-dismiss="modal">关闭
 												</button>
-												<button type="button" class="btn btn-primary">
+												<button type="button" class="btn btn-primary" onclick="urlSubmit()">
 													删除
 												</button>
 											</div>
@@ -605,7 +665,7 @@
 									</div>
 								</div><!-- /.modal -->
 
-
+<!-- 
 									<div id="paginationIDU"></div>
 									<script>
 										$('#paginationIDU').pagination(
@@ -628,7 +688,7 @@
 													}
 												});
 									</script>
-									
+									 -->
 
 								</div>
 							</div>

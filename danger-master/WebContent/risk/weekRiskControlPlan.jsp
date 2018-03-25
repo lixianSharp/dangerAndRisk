@@ -26,7 +26,7 @@
 <script src="<%=path%>/controls/validate/messages_zh.js"></script>
 
 <!-- 月风险管控的js -->
-<script type="text/javascript" src="<%=path%>/js/risk/monthRiskControlPlan.js"></script>
+<script type="text/javascript" src="<%=path%>/js/risk/weekRiskControlPlan.js"></script>
 </head>
 
 <body>
@@ -49,7 +49,7 @@
 				<div class="panel panel-default">
 					<!--菜单连接标题-->
 					<div class="el_stairTitle">
-						<span>风险管理 </span><span>>月风险管控计划</span>
+						<span>风险管理 </span><span>>旬风险管控计划</span>
 					</div>
 
 					<div class="panel-body el_main">
@@ -68,8 +68,23 @@
 												
 												<span class="el_spans el_chooseSpan">月份：</span> 
 												<input id="optsdate6"
-													class="selectpicker form-control" title="点击选择年份" name="monthOrWeek">
+													class="selectpicker form-control" title="点击选择年份" name="year">
 												</input>
+												
+												<div class="col-md-3 el_qlmQuery">
+											<div class="input-group" role="toolbar">
+												<span class="el_spans">旬期：</span>
+												  <select id=""
+													class="selectpicker form-control" title="请选择" name="monthOrWeek">
+													<option value="">--请选择--</option>
+													<option value="上旬">上旬</option>
+													<option value="中旬">中旬</option>
+													<option value="下旬">下旬</option>
+												</select>
+												
+												
+											</div>
+										</div>
 												
 												<input type="hidden" name="currentPage" id="currentPage" />
 												<input type="hidden" name="currentCount" id="currentCount" />
@@ -110,8 +125,9 @@
 											<tr>
 												<th>选择</th>
 												<th>序号</th>
-												<th>年度</th>
+												<!-- <th>年度</th> -->
 												<th>月份</th>
+												<th>旬期</th>
 												<th>风险辨识范围</th>
 												<th>风险数量</th>
 												<th>专业</th>

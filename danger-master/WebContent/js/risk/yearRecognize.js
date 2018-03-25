@@ -231,7 +231,6 @@ function findAllRiRespon() {
 		// 每页显示的记录数
 		},
 		success : function(data) {
-			
 			//删除tbody中的所有子标签
 			$("#tbody").children().remove();
 			var options = "";

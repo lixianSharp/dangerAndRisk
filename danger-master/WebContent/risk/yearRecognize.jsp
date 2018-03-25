@@ -27,7 +27,6 @@
 
 <link rel="stylesheet" href="<%=path%>/css/public/public_style.css" />
 
-<link rel="stylesheet" href="<%=path%>/css/risk/yearRecognize.css" />
 </head>
 
 

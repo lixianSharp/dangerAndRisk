@@ -14,6 +14,8 @@
 <%@ include file="/controls/cssJs.jsp"%>
 
 
+<script type="text/javascript" src="<%=path%>/js/risk/monthRiskControlPlanAnalyzeInfo.js"></script>
+
 <link rel="stylesheet" href="<%=path%>/css/public/public_style.css" />
 
 <link rel="stylesheet" href="<%=path%>/css/risk/yearRecognize.css" />
@@ -63,7 +65,12 @@
 
 								<!--按钮面板-->
 								<div class="panel-body">
-							
+									<form id="hiddenForm" method="post" action="${baseurl }/controlPlan_getRiskInfoByPage.action">
+									<div>
+										<input type="hidden" name="currentPage" id="currentPage" />
+										<input type="hidden" name="currentCount" id="currentCount" />
+									</div>
+									</form>
 									<div>
 									<button class="btn btn-primary" onclick="monthRiskControlPlanAnalyze()">分析</button>
 									
@@ -88,7 +95,7 @@
 												<th>考核情况</th>
 											</tr>
 										</thead>
-										<tbody>
+									<!-- 	<tbody>
 											<tr>
 												<td>
 												<input type="checkbox" name="riskAna" class="planCheck">
@@ -178,7 +185,47 @@
 												
 											</tr>
 											
+										</tbody> -->
+										
+										<tbody id="tbody">
+										
+										<c:forEach var="riskInfo"	items="${result.pageBean.productList }"  varStatus="status">
+											<tr>
+											<td>
+												<input type="checkbox" name="riskAna" class="planCheck">
+												</td>
+											<td>${ status.index + (result.pageBean.currentPage-1)*10+1}
+												<input type="hidden" id="myriskmsgid" value=${riskInfo.riskMsgId } /> 
+												<input type="hidden" id="myrictrlplanid" value=${riskInfo.riCtrlPlanId } />
+											</td>
+											<!-- 下面是风险信息的字段 -->
+											
+											<td>${riskInfo.riskAddress }</td>
+											<td>${riskInfo.riskDescribe }</td>
+											<td>${riskInfo.riskType }</td>
+											<td>${riskInfo.professionalTypes }</td>
+											<td>${riskInfo.disasterTypes }</td>
+											<td>${riskInfo.canCauseAccidents }</td>
+											<td>${riskInfo.ctrlMeasure }</td>
+											<td>${riskInfo.principal }</td>
+											<td>${riskInfo.superintendent }</td>
+											<td>${riskInfo.monitoringPeriod }</td>
+											
+								
+											 <!-- 下面是风险分析的字段 -->
+											 <td>${riskInfo.dutyDepartment }</td>
+											<td>${riskInfo.implementationOfMeasures }</td>
+											<td>${riskInfo.measureIsValid }</td>
+											<td>${riskInfo.inspectionSituation }</td>
+											
+											</tr>
+										</c:forEach> 
+										
+										
+										
 										</tbody>
+										
+										
 									</table>
 										<div id="paginationIDU"></div>
 									<script>
@@ -203,7 +250,7 @@
 												});
 									</script>
 									</div>
-									<script type="text/javascript">
+							<!-- 		<script type="text/javascript">
 									function monthRiskControlPlanAnalyze(){
 										var choosePlan = 0;// 判断是否有风险被选中
 
@@ -227,7 +274,7 @@
 										}
 										
 									}
-									</script>
+									</script> -->
 									<!-- 模态框（单条评估信息） -->
 								<div class="modal fade" id="monthRiskControlPlanAnalyze1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 									<div class="modal-dialog">
@@ -244,7 +291,7 @@
 											<h4>风险信息详情</h4>
 												<div class="yearReInfo">
 												<table class="table  table-bordered">
-												<tr>
+												<!-- <tr>
 												<td>风险地点：</td>
 												<td>井口</td>
 												<td>风险描述：</td>
@@ -272,44 +319,77 @@
 												<td>监管周期 ：</td>
 												<td>张三</td>
 												
+												</tr> -->
+												<tr>
+												<td>风险地点：</td>
+												<td id="riskaddress"></td>
+												<td>风险描述：</td>
+												<td id="riskdescribe"></td>
+												
+												</tr>
+												<tr>
+												
+												<td>风险类型 	：</td>
+												<td id="risktype"></td>
+												<td>专业类型：</td>
+												<td id="professionaltypes"></td>
+												</tr>
+												<tr>
+												<td>管控措施：</td>
+												<td id="ctrlmeasure"></td>
+												<td>负责人 ：</td>
+												<td id="principal"></td>
+												</tr>
+												
+												<tr>
+												
+												<td>监管人 ：</td>
+												<td id="superintendent"></td>
+												<td>监管周期 ：</td>
+												<td id="monitoringperiod"></td>
+												
 												</tr>
 												
 												
 												</table>
 												</div>
 											<h4>管控计划分析</h4>
+											<form action="" method="post" id="addAnalysisPlanForm1">
 											<div class="yearReInfo">
 												<div class="input-group el_modellist" role="toolbar">
 													<span class="el_spans">责任部门：</span>
 													<input type="text" class="form-control el_modelinput" value="" 
-														id="" name="" />
+														id="addDutydepartment1" name="riDetailedOfRiskCtrlPlan.dutydepartment" />
+													<input type="hidden" id="addRiskmsgid1" name="riDetailedOfRiskCtrlPlan.riskmsgid"/> 
+												<input type="text" id="addRiCtrlPlanId1"  name="riDetailedOfRiskCtrlPlan.rictrlplanid"/>
 												</div>
 												<div class="input-group el_modellist" role="toolbar">
 													<span class="el_spans">措施执行情况：</span>
 													<textarea rows="3" type="text" class="form-control el_modelinput texta" value="" 
-														id="" name="" />措施执行情况</textarea>
+														id="addImplementationofmeasures1" name="riDetailedOfRiskCtrlPlan.implementationofmeasures" />措施执行情况</textarea>
 												</div>
 												<div class="input-group el_modellist" role="toolbar">
 													<span class="el_spans">措施是否有效：</span>
 													<select	class="selectpicker form-control" title="请选择" 
-													id="" name="">
+													id="addMeasureisvalid1" name="riDetailedOfRiskCtrlPlan.measureisvalid">
 														<option value="" id="option0">--请选择--</option>
-														<option value="">有效</option>
-														<option value="">无效</option>
+														<option value="有效">有效</option>
+														<option value="无效">无效</option>
 														
 													</select>
 												</div>
 												<div class="input-group el_modellist" role="toolbar">
 													<span class="el_spans">考核情况：</span>
 													<textarea rows="3" type="text" class="form-control el_modelinput texta" value="" 
-														id="" name="" />措施执行情况</textarea>
+														id="addInspectionsituation1" name="riDetailedOfRiskCtrlPlan.inspectionsituation" />措施执行情况</textarea>
 												</div>
 												
 											</div>
+											</form>
 											<div class="modal-footer">
 												<button type="button" class="btn btn-default" data-dismiss="modal">关闭
 												</button>
-												<button type="button" class="btn btn-primary">
+												<button type="button" class="btn btn-primary" onclick="addAnalysisRisk1()">
 													保存
 												</button>
 											</div>
@@ -329,43 +409,48 @@
 												管控计划分析
 												</h4>
 											</div>
+											
 											<div class="modal-body">
+											<form action="" method="post" id="addAnalysisPlanForm2">
 											<div class="yearReInfo">
 												<div class="input-group el_modellist" role="toolbar">
 													<span class="el_spans">责任部门：</span>
-													<input type="text" class="form-control el_modelinput" value="" 
-														id="" name="" />
+													<input type="text" class="form-control el_modelinput" value="" id="addDutydepartment2" name="riDetailedOfRiskCtrlPlan.dutydepartment" />
+													<input type="hidden" id="addRiskmsgid2" name="riDetailedOfRiskCtrlPlan.riskmsgid"/> 
+													<input type="hidden" id="addIdentiryid2"  name="riDetailedOfRiskCtrlPlan.identiryid"/>
 												</div>
 												<div class="input-group el_modellist" role="toolbar">
 													<span class="el_spans">措施执行情况：</span>
 													<textarea rows="3" type="text" class="form-control el_modelinput texta" value="" 
-														id="" name="" />措施执行情况</textarea>
+														id="addImplementationofmeasures2" name="riDetailedOfRiskCtrlPlan.implementationofmeasures" />措施执行情况</textarea>
 												</div>
 												<div class="input-group el_modellist" role="toolbar">
 													<span class="el_spans">措施是否有效：</span>
 													<select	class="selectpicker form-control" title="请选择" 
-													id="" name="">
+													id="addMeasureisvalid2" name="riDetailedOfRiskCtrlPlan.measureisvalid">
 														<option value="" id="option0">--请选择--</option>
-														<option value="">有效</option>
-														<option value="">无效</option>
+														<option value="有效">有效</option>
+														<option value="无效">无效</option>
 														
 													</select>
 												</div>
 												<div class="input-group el_modellist" role="toolbar">
 													<span class="el_spans">考核情况：</span>
 													<textarea rows="3" type="text" class="form-control el_modelinput texta" value="" 
-														id="" name="" />措施执行情况</textarea>
+														id="addInspectionsituation2" name="riDetailedOfRiskCtrlPlan.inspectionsituation" />措施执行情况</textarea>
 												</div>
 												
 											</div>
+											</form>
 											<div class="modal-footer">
 												<button type="button" class="btn btn-default" data-dismiss="modal">关闭
 												</button>
-												<button type="button" class="btn btn-primary">
+												<button type="button" class="btn btn-primary" onclick="addAnalysisRisk2()">
 													保存
 												</button>
 											</div>
 										</div><!-- /.modal-content -->
+											
 									</div>
 								</div>
 								</div><!-- /.modal -->
