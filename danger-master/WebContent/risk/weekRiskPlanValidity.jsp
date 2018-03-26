@@ -46,7 +46,7 @@ background-color:#EEEE00;
 				<div class="panel panel-default">
 					<!--菜单连接标题-->
 					<div class="el_stairTitle">
-						<span>风险管理 </span><span>>月风险管控计划有效性</span>
+						<span>风险管理 </span><span>>旬风险管控计划有效性</span>
 					</div>
 
 					<div class="panel-body el_main">
@@ -64,11 +64,26 @@ background-color:#EEEE00;
 											<div class="input-group" role="toolbar">
 												
 												<span class="el_spans el_chooseSpan">月份：</span> 
-												<input id="optsdate6" class="selectpicker form-control" title="点击选择年份" name="monthOrWeek">
+												<input id="optsdate6" class="selectpicker form-control" title="点击选择年份" name="year">
 													<input type="hidden" name="currentPage" id="currentPage" />
 													<input type="hidden" name="currentCount" id="currentCount" />
-													<input type="hidden" name="riskCtrlPlanMark" value="1">
+													<input type="hidden" name="riskCtrlPlanMark" value="0">
+												</input>
+											</div>
+											</div>
+											<div class="col-md-3 el_qlmQuery">
+											<div class="input-group el_chooseSpan"  role="toolbar">
+												<span class="el_spans">旬期：</span>
+												  <select id=""
+													class="selectpicker form-control" title="请选择" name="monthOrWeek2">
+													<option value="">--请选择--</option>
+													<option value="上旬">上旬</option>
+													<option value="中旬">中旬</option>
+													<option value="下旬">下旬</option>
+												</select>
 												
+												
+											
 											</div>
 										</div>
 										<div class="col-md-3 el_qlmQuery">
@@ -92,7 +107,7 @@ background-color:#EEEE00;
 										
 										<button  type="button" id="queryId" onclick="queryButton()" 
 										class="btn btn-primary el_queryButton btn-sm" style="left: 930.62px;top: 0px;bottom: 12px;margin-bottom: 3px;padding-bottom: 0px;padding-top: 0px;"  >查询</button>
-									<button class="btn btn-default btn-sm" style="margin-left: 400px;" >清空</button>
+									<button class="btn btn-default btn-sm" style="margin-left: 100px;" >清空</button>
 									</div>
 								</form>
 							</div>

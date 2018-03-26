@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="danger.mapper.riCtrl.custom.RiControlPlanCustomMapper">
 
-	<!--查询管控计划的条件 -->
+	<!--查询月/周管控计划的条件 -->
 	<sql id="query_controlPlan_where">
 		<if test="monthOrWeek!=null">
 			and monthOrWeek=#{monthOrWeek}
@@ -10,8 +10,16 @@
 		<if test="specialty!=null">
 		and specialty=#{specialty}
 		</if>
+		<if test="year!=null">
+		and year=#{year}
+		</if>
+		<if test="riskCtrlPlanMark!=null">
+		and riskCtrlPlanMark=#{riskCtrlPlanMark}
+		</if>
 		
 	</sql>
+	
+	
 	
 	<!-- 查询管控计划的范围 -->
 	<sql id="query_controlPlan_limit">

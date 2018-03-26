@@ -64,7 +64,7 @@
 													class="selectpicker form-control" title="点击选择年份" name="monthOrWeek">
 												</input>
 										
-												
+												<input type="hidden" name="riskCtrlPlanMark" value="1">
 												<input type="hidden" name="currentPage" id="currentPage" />
 												<input type="hidden" name="currentCount" id="currentCount" />
 											</div>

@@ -8,36 +8,42 @@ $(function() {
 });
 
 
-
+function addControl(){
+	$("#optsdate66").val("");
+	$("#addControlPlanSpecialty").val("");
+	$("#addControlPlanLeader").val("");
+	$('#addDuty').modal();
+}
 /**
  * 添加管控计划
  */
 function saveControlPlanButton() {
-/*	
+	
+	
 	var isNotNull = $("#addControlPlanForm").validate({
 		rules : {
-			"month" : {
+			"ricontrolPlan.monthorweek" : {
 				required : true
 
 			},
-			"specialty" : {
+			"ricontrolPlan.specialty" : {
 				required : true
 
 			},
-			"leader" : {
+			"ricontrolPlan.leader" : {
 				required : true
 			}
 		},
 		messages : {
-			"month" : {
+			"ricontrolPlan.monthorweek" : {
 				required : "请输入日期"
 			},
 		
-			"specialty" : {
+			"ricontrolPlan.specialty" : {
 				required : "请输入专业名称"
 			},
 
-			"leader" : {
+			"ricontrolPlan.leader" : {
 				required : "请输入专业负责人"
 			}
 		
@@ -45,7 +51,7 @@ function saveControlPlanButton() {
 
 	});
 
-	if (isNotNull.form()) {*/
+	if (isNotNull.form()) {
 		$.ajax({
 			url : 'controlPlan_addControlPlan.action',
 			data : $("#addControlPlanForm").serialize(),
@@ -64,7 +70,7 @@ function saveControlPlanButton() {
 	//}
 
 }
-
+}
 
 
 //分页查询管控计划
@@ -160,7 +166,8 @@ var successList = function List(result) {
 				
 				var time=Format(new Date(shenhes[i][j].audittime.replace(/T/g, " ").replace(
 						/-/g, "/")), "yyyy-MM-dd HH:ss")
-				var shenhe ="["+time+"]:"+shenhes[i][j].auditmsg+","+shenhes[i][j].auditstatus+"!</br>";
+				//var shenhe ="["+time+"]:"+shenhes[i][j].auditmsg+","+shenhes[i][j].auditstatus+"!</br>";
+				var shenhe ="["+time+"]:"+shenhes[i][j].auditmsg+"!</br>";
 				
 				if(checkstatus!=null){
 					checkstatus=checkstatus+shenhe;
@@ -202,11 +209,12 @@ var successList = function List(result) {
 		+ricontrolPlans[i]+"</td><td>"
 		+controlPlans[i].specialty+"</td><td>"
 		+controlPlans[i].leader+"</td><td>"
+		+"<input type='hidden' id='controlPlansid' value='"+controlPlans[i].rictrlplanid+"'>"
 		//+controlPlans[i].createtime+"</td><td>"
 		+Format(new Date(controlPlans[i].createtime.replace(/T/g, " ").replace(
 				/-/g, "/")), "yyyy-MM-dd HH:ss")+"</td><td>"
 				
-		+"<input type='hidden' id='controlPlansid' value='"+controlPlans[i].rictrlplanid+"'>"
+	
 		
 		
 		+checkstatus+"</td><td>"
@@ -248,7 +256,39 @@ function updateControlPlan(obj){
 
 function updateControlPlanButton(){
 	
-	
+
+	var isNotNull = $("#updateControlPlanForm").validate({
+		rules : {
+			"ricontrolPlan.monthorweek" : {
+				required : true
+
+			},
+			"ricontrolPlan.specialty" : {
+				required : true
+
+			},
+			"ricontrolPlan.leader" : {
+				required : true
+			}
+		},
+		messages : {
+			"ricontrolPlan.monthorweek" : {
+				required : "请输入日期"
+			},
+		
+			"ricontrolPlan.specialty" : {
+				required : "请输入专业名称"
+			},
+
+			"ricontrolPlan.leader" : {
+				required : "请输入专业负责人"
+			}
+		
+		}
+
+	});
+
+	if (isNotNull.form()) {
 	$.ajax({
 		url : 'controlPlan_updateControlPlan.action',
 		data : $("#updateControlPlanForm").serialize(),
@@ -265,6 +305,7 @@ function updateControlPlanButton(){
 		}
 
 	});
+	}
 }
 
 /*
@@ -307,9 +348,15 @@ function planReport(){
 
 //获取到历史审核备注信息
 function riskCheck(){
+	$("#benciAuditmsg").val("");
+	
+   // $("input[name='riRiskPlanAudit.auditstatus'][value='通过审核']").attr("checked","checked");
+	$("input[name='riRiskPlanAudit.auditstatus'][value='通过审核']").prop( "checked", true );
 	
 	$tds = $("input[name='riskAna']:checked").parents('tr').find('td');
-	$("#historyAuditmsg").val($tds.eq(9).html());
+	/*eval("("+$tds.eq(9).html()+")")*/
+	
+	$("#historyAuditmsg").val($tds.eq(9).text().replace(/<br>/g, ''));
 	
 	//隐藏一个管控计划id
 	var controlPlansid = $("input[name='riskAna']:checked").parents('tr').find("#controlPlansid").val();
@@ -318,8 +365,11 @@ function riskCheck(){
 	//判断是否已经上报
 	var idReport =$tds.eq(10).html();
 	if(idReport=="未上报"){
-		alert("上报之后才可以审核，请您现上报");
+		alert("上报之后才可以审核，请您先上报");
 	}else{
+		
+		
+		
 		$('#riskCheck').modal();
 	}
 	
@@ -327,11 +377,25 @@ function riskCheck(){
 }
 
 function saveAuditButton(){
-	//alert($("#shenHeRictrlplanId").val());
 	
-	
-	
-	
+
+	var isNotNull = $("#queryAuditForm").validate({
+		rules : {
+			"riRiskPlanAudit.auditmsg" : {
+				required : true
+
+			}
+		},
+		messages : {
+			"riRiskPlanAudit.auditmsg" : {
+				required : "请输入本次审核备注信息"
+			}
+		
+		}
+
+	});
+
+	if (isNotNull.form()) {
 	$.ajax({
 		url : 'controlPlan_auditPlan.action',
 		data : $("#queryAuditForm").serialize(),
@@ -349,6 +413,8 @@ function saveAuditButton(){
 		}
 
 	});
+	}
 }
+
 
 

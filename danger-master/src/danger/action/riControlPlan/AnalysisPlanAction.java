@@ -154,11 +154,54 @@ public class AnalysisPlanAction extends ActionSupport {
 		return SUCCESS;
 	}
 	
+	
+	private String addRiskmsgid2;
+	private String addIdentiryid2;
+	public String getAddRiskmsgid2() {
+		return addRiskmsgid2;
+	}
+
+	public void setAddRiskmsgid2(String addRiskmsgid2) {
+		this.addRiskmsgid2 = addRiskmsgid2;
+	}
+
+	public String getAddIdentiryid2() {
+		return addIdentiryid2;
+	}
+
+	public void setAddIdentiryid2(String addIdentiryid2) {
+		this.addIdentiryid2 = addIdentiryid2;
+	}
+
 	//添加多条管控计划分析
 	public String addControlPlanAnalysis2(){
 		result = new HashMap<String,Object>();
 		
-		boolean flag = controlPlanDetailService.addControlPlanAnalysis(riDetailedOfRiskCtrlPlan);
+		String[] str = null;
+		if(addRiskmsgid2 != null){
+			addRiskmsgid2 = addRiskmsgid2.replace("\"", "");
+			addRiskmsgid2=addRiskmsgid2.substring(1, addRiskmsgid2.length()-1);
+			str = addRiskmsgid2.split(",");
+		}
+		System.out.println(str);
+		
+		String[] str2 = null;
+		if(addIdentiryid2 != null){
+			addIdentiryid2 = addIdentiryid2.replace("\"", "");
+			addIdentiryid2=addIdentiryid2.substring(1, addIdentiryid2.length()-1);
+			str2 = addIdentiryid2.split(",");
+		}
+		System.out.println(str2);
+		boolean flag=true;
+		for(int i=0;i<str.length;i++){
+			riDetailedOfRiskCtrlPlan.setRictrlplanid(str2[i]);
+			riDetailedOfRiskCtrlPlan.setRiskmsgid(str[i]);
+			flag = controlPlanDetailService.addControlPlanAnalysis(riDetailedOfRiskCtrlPlan);
+		}
+		
+		
+		
+		//boolean flag = controlPlanDetailService.addControlPlanAnalysis(riDetailedOfRiskCtrlPlan);
 
 		if (flag) {
 			result.put("message", "添加成功");

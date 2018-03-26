@@ -84,5 +84,12 @@ public interface ControlPlanService {
 	 */
 	boolean addWeekControlPlan(RiControlPlan ricontrolPlan);
 
+	/*
+	 * 得到周管控计划的所有记录
+	 */
+	PageBean<RiControlPlan> getAllWeekControlPlan(Map<String, Object> condition);
+
+	boolean updateWeekControlPlan(RiControlPlan ricontrolPlan);
+
 
 }

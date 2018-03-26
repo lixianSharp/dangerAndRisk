@@ -249,30 +249,32 @@ public class ControlPlanDetailServiceImpl implements ControlPlanDetailService {
 		condition.put("index", index);
 		condition.put("currentCount", currentCount);
 		
-
-		/*
-		 * 年份
-		 */
-		if(condition.get("monthOrWeek")!=null){
-			String str = condition.get("monthOrWeek").toString();
+		if(condition.get("monthOrWeek")=="1"){
+			/*
+			 * 年份
+			 */
+			if(condition.get("monthOrWeek")!=null){
+				String str = condition.get("monthOrWeek").toString();
+				
+				String str1 = str.substring(0, 4);
+				
+				condition.put("year", str1);
+				
+			}
 			
-			String str1 = str.substring(0, 4);
-			
-			condition.put("year", str1);
-			
+			/*
+			 * 月份
+			 */
+			if(condition.get("monthOrWeek")!=null){
+				String str = condition.get("monthOrWeek").toString();
+				System.out.println(str);
+				String str1 = str.substring(str.length()-2, str.length());
+				int number = Integer.parseInt(str1);
+				condition.put("monthOrWeek", String.valueOf(number));
+				
+			}
 		}
 		
-		/*
-		 * 月份
-		 */
-		if(condition.get("monthOrWeek")!=null){
-			String str = condition.get("monthOrWeek").toString();
-			System.out.println(str);
-			String str1 = str.substring(str.length()-2, str.length());
-			int number = Integer.parseInt(str1);
-			condition.put("monthOrWeek", String.valueOf(number));
-			
-		}
 		
 		
 		List<RiControlPlan> validList = riControlPlanCustomMapper.getControlPlanByCondition(condition);

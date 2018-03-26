@@ -9,21 +9,17 @@
 <html lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>月风险管控计划</title>
+<title>旬风险管控计划</title>
 
 <%@ include file="/controls/cssJs.jsp"%>
 <!-- 弹出层插件 -->
 <script type="text/javascript" src="<%=path%>/js/risk/plug-in.js"></script>
-<script type="text/javascript" src="<%=path%>/js/risk/monRiskPlanValidity.js"></script>
+
 <link rel="stylesheet" href="<%=path%>/css/public/public_style.css" />
 
 <link rel="stylesheet" href="<%=path%>/css/risk/yearRecognize.css" />
-<style type="text/css">
-.warnInfo{
-background-color:#EEEE00;
-}
 
-</style>
+<script type="text/javascript" src="<%=path%>/js/risk/monthRiskControlPlanAnalyze.js"></script>
 </head>
 
 <body>
@@ -46,13 +42,13 @@ background-color:#EEEE00;
 				<div class="panel panel-default">
 					<!--菜单连接标题-->
 					<div class="el_stairTitle">
-						<span>风险管理 </span><span>>月风险管控计划有效性</span>
+						<span>风险管理 </span><span>>旬风险管控计划分析</span>
 					</div>
 
 					<div class="panel-body el_main">
 
 						<!--内容-->
-						<div class="col-md-12">
+						<div class=" col-md-12">
 						<!--索引-->
 							<div class="row el_queryBox">
 								<form
@@ -64,35 +60,35 @@ background-color:#EEEE00;
 											<div class="input-group" role="toolbar">
 												
 												<span class="el_spans el_chooseSpan">月份：</span> 
-												<input id="optsdate6" class="selectpicker form-control" title="点击选择年份" name="monthOrWeek">
-													<input type="hidden" name="currentPage" id="currentPage" />
-													<input type="hidden" name="currentCount" id="currentCount" />
-													<input type="hidden" name="riskCtrlPlanMark" value="1">
+												<input id="optsdate6"
+													class="selectpicker form-control" title="点击选择年份" name="year">
 												
+												<input type="hidden" name="riskCtrlPlanMark" value="0">
+												
+												<input type="hidden" name="currentPage" id="currentPage" />
+												<input type="hidden" name="currentCount" id="currentCount" />
 											</div>
 										</div>
 										<div class="col-md-3 el_qlmQuery">
-											<div class="input-group" role="toolbar">
-												<span class="el_spans">专业类型：</span>
-												  <!-- <select id=""
-													class="selectpicker form-control" title="请选择" name="professionalTypes">
-													<option value="">--全部--</option>
-													<option value="未评估">煤矿</option>
-													<option value="已评估">井口</option>
-												</select> -->
-												
-												<select id="professionalTypesId"
-													class="selectpicker form-control" title="请选择" name="specialty">
-													
+											<div class="input-group el_chooseSpan"  role="toolbar">
+												<span class="el_spans">旬期：</span>
+												  <select id=""
+													class="selectpicker form-control" title="请选择" name="monthOrWeek2">
+													<option value="">--请选择--</option>
+													<option value="上旬">上旬</option>
+													<option value="中旬">中旬</option>
+													<option value="下旬">下旬</option>
 												</select>
+												
+												
 											</div>
 										</div>
 
 									
 										
-										<button  type="button" id="queryId" onclick="queryButton()" 
-										class="btn btn-primary el_queryButton btn-sm" style="left: 930.62px;top: 0px;bottom: 12px;margin-bottom: 3px;padding-bottom: 0px;padding-top: 0px;"  >查询</button>
-									<button class="btn btn-default btn-sm" style="margin-left: 400px;" >清空</button>
+									<button type="button"
+										class="btn btn-primary el_queryButton btn-sm"  style="left: 930.62px;top: 0px;bottom: 12px;margin-bottom: 3px;padding-bottom: 0px;padding-top: 0px;" onclick="queryButton()" id="queryId">查询</button>
+									<button class="btn btn-default btn-sm" style="margin-left: 400px;" onclick="clearBtn()" >清空</button>
 									</div>
 								</form>
 							</div>
@@ -105,23 +101,22 @@ background-color:#EEEE00;
 								<div class="panel-body">
 
 									
-									<table class="risk table table-hover table-bordered">
+									<table class="table table-hover table-bordered">
 										<thead>
 											<tr>
-												
 												<th>序号</th>
-												<th>年份</th>
+												<th>年度</th>
 												<th>月份</th>
 												<th>风险辨识范围</th>
-												
+												<th>风险数量</th>
 												<th>专业</th>
 												<th>专业负责人</th>
 												<th>创建时间</th>
-												<th>风险总数</th>
-												<th>措施失效风险数量</th>
+												<th>状态</th>
+												<th>操作</th>
 											</tr>
 										</thead>
-										<%-- <tbody>
+									<%-- 	<tbody>
 											<tr>
 												
 												<td>
@@ -145,28 +140,25 @@ background-color:#EEEE00;
 												<td>
 												张三
 												</td>
+												<td>
+												2923
+												</td>
 												
 												<td>
-												5
+												审核通过
 												</td>
-												<td title="点击查看失效风险具体情况">
-													<a class="loseRiskNum" href="<%=path%>/risk/losePlanDis.jsp">0</a>
+												<td>
+													<a href="<%=path%>/risk/monthRiskControlPlanAnalyzeInfo.jsp">详情</a>
 												</td>
 											</tr>
+
 										</tbody> --%>
 										<tbody id="tbody"></tbody>
 									</table>
-									<div id="paginationIDU"></div>
 
-									<script type="text/javascript">
-									$(document).ready(function(){
-										var loseRiskNum=$(".loseRiskNum").text();
-										if(loseRiskNum>0){
-											$(".risk tr td:last-child").addClass("warnInfo");
-										}
-									});
-									</script>
-									
+								
+
+									<div id="paginationIDU"></div>
 									<!-- <script>
 										$('#paginationIDU').pagination(
 												{
@@ -187,8 +179,8 @@ background-color:#EEEE00;
 														$("#queryForm").submit();
 													}
 												});
-									</script> -->
-									
+									</script>
+									 -->
 
 								</div>
 							</div>

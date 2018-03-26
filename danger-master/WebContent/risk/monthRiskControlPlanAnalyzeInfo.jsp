@@ -16,8 +16,6 @@
 
 <script type="text/javascript" src="<%=path%>/js/risk/monthRiskControlPlanAnalyzeInfo.js"></script>
 
-<script type="text/javascript" src="<%=path%>/js/risk/monthRiskControlPlanAnalyzeInfo.js"></script>
-
 <link rel="stylesheet" href="<%=path%>/css/public/public_style.css" />
 
 <link rel="stylesheet" href="<%=path%>/css/risk/yearRecognize.css" />
@@ -360,19 +358,19 @@
 											<div class="yearReInfo">
 												<div class="input-group el_modellist" role="toolbar">
 													<span class="el_spans">责任部门：</span>
-													<input type="text" class="form-control el_modelinput" value="" 
+													<input style="margin-left: 25px;" type="text" class="form-control el_modelinput" value="" 
 														id="addDutydepartment1" name="riDetailedOfRiskCtrlPlan.dutydepartment" />
 													<input type="hidden" id="addRiskmsgid1" name="riDetailedOfRiskCtrlPlan.riskmsgid"/> 
-												<input type="text" id="addRiCtrlPlanId1"  name="riDetailedOfRiskCtrlPlan.rictrlplanid"/>
+												<input type="hidden" id="addRiCtrlPlanId1"  name="riDetailedOfRiskCtrlPlan.rictrlplanid"/>
 												</div>
 												<div class="input-group el_modellist" role="toolbar">
 													<span class="el_spans">措施执行情况：</span>
-													<textarea rows="3" type="text" class="form-control el_modelinput texta" value="" 
+													<textarea style="width: 399px;" rows="3" type="text" class="form-control el_modelinput texta" value="" 
 														id="addImplementationofmeasures1" name="riDetailedOfRiskCtrlPlan.implementationofmeasures" />措施执行情况</textarea>
 												</div>
 												<div class="input-group el_modellist" role="toolbar">
 													<span class="el_spans">措施是否有效：</span>
-													<select	class="selectpicker form-control" title="请选择" 
+													<select style="width: 399px;" class="selectpicker form-control" title="请选择" 
 													id="addMeasureisvalid1" name="riDetailedOfRiskCtrlPlan.measureisvalid">
 														<option value="" id="option0">--请选择--</option>
 														<option value="有效">有效</option>
@@ -382,7 +380,7 @@
 												</div>
 												<div class="input-group el_modellist" role="toolbar">
 													<span class="el_spans">考核情况：</span>
-													<textarea rows="3" type="text" class="form-control el_modelinput texta" value="" 
+													<textarea style="margin-left: 25px;" rows="3" type="text" class="form-control el_modelinput texta" value="" 
 														id="addInspectionsituation1" name="riDetailedOfRiskCtrlPlan.inspectionsituation" />措施执行情况</textarea>
 												</div>
 												
@@ -418,8 +416,8 @@
 												<div class="input-group el_modellist" role="toolbar">
 													<span class="el_spans">责任部门：</span>
 													<input type="text" class="form-control el_modelinput" value="" id="addDutydepartment2" name="riDetailedOfRiskCtrlPlan.dutydepartment" />
-													<input type="hidden" id="addRiskmsgid2" name="riDetailedOfRiskCtrlPlan.riskmsgid"/> 
-													<input type="hidden" id="addIdentiryid2"  name="riDetailedOfRiskCtrlPlan.identiryid"/>
+													<input type="hidden" id="addRiskmsgid2" name="addRiskmsgid2"/> 
+													<input type="hidden" id="addIdentiryid2"  name="addIdentiryid2"/>
 												</div>
 												<div class="input-group el_modellist" role="toolbar">
 													<span class="el_spans">措施执行情况：</span>

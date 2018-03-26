@@ -1,42 +1,5 @@
 
 
-
-/**
- * 专业类型下拉菜单
- */
-function selectProfessionalTypes() {
-	
-	$.ajax({
-		url : 'validPlan_getProfessionalTypesList.action',
-		data : '',
-		type : 'POST',
-		dataType : 'json',
-		async : true,
-		success : function(result) {
-
-			var ptLists = result.ptList;
-			
-			$("#professionalTypesId").empty();
-			var professionalTypes = $("#professionalTypesId");
-			// duty.append("<option value=''>无</option>");
-			// console.log("ceshi"+dictionarys)
-			// alert(dictionarys.length);
-			var str="<option value=''>--全部--</option>";
-			for (var i = 0; i < ptLists.length; i++) {
-				
-				var s="<option value='" + ptLists[i]
-						+ "'>" + ptLists[i]
-						+ "</option>";
-				str=str+s;
-				
-			}
-			professionalTypes.append(str);
-			
-
-		}
-	});
-}
-
 /*
  * 分页查询
  */
@@ -64,6 +27,8 @@ function fenye(total, pageSize, pageNumber) {
 
 
 function yearRiskControlImport(){
+$("#importRiskMiaoshu").val("");
+$("#importRiskAddress").val("");
 	queryRisk();
 	$('#yearRiskControlImport').modal();
 }
@@ -129,25 +94,47 @@ var successList = function List(result) {
  * 导入风险信息到管控计划中
  */
 function confirmImport(){
-	/*var shuzu =[];
-	var count=0;
-	//多条风险信息导入到管控计划中
+	
+	
+	
+	var dataArray = new Array();
+
 	$(".planCheck").each(function() { // 获取选择的风险
 		
-		if ($(this).prop("checked")) {// 如果选中。。。
-			
-		count++;
-		}
-		for(var i=0;i<count;i++){
-			if ($(this).prop("checked")) {// 如果选中。。。
-				
-				shuzu[i]=$(this).parents('tr').find("#riskmsgid").val();
-			}
-		}
-		
-	})*/
 	
-	var choosePlan = 0;// 判断是否有风险被选中
+	if ($(this).prop("checked")) {// 如果选中。。。
+		
+		//shuzu[i]=$(this).parents('tr').find("#riskmsgid").val();
+		 dataArray.push($(this).parents('tr').find("#riskmsgid").val());
+		
+	}
+		
+	})
+	alert(JSON.stringify(dataArray))
+	
+	
+	
+	$.ajax({
+		url : 'controlPlan_importRiskInfo2.action',
+		data : {
+			"rictrlplanid" : $("#myRictrlplanid").val(),
+			//"shuzu":shuzu
+			data: JSON.stringify(dataArray)
+		},
+		type : 'POST',
+		dataType : 'json',
+		async : true,
+		success : function(result) {
+			alert(result.message);
+			
+			$('#yearRiskControlImport').modal('hide');
+			// 全局刷新当前页面
+			window.location.reload();
+
+		}
+
+	});
+	/*var choosePlan = 0;// 判断是否有风险被选中
 
 	$(".planCheck").each(function() { // 获取选择的风险
 
@@ -170,7 +157,7 @@ function confirmImport(){
 			}
 		
 		
-	})
+	})*/
 	
 }
 
@@ -247,7 +234,7 @@ function urlSubmit() {
  */
 //获取这个月的id
 function conpyPrecedingMonth(){
-	alert($("#myRictrlplanid").val())
+	//alert($("#myRictrlplanid").val())
 	$.ajax({
 		url : 'controlPlan_iconpyPrecedingMonthRiskInfo.action',
 		data : {
@@ -268,5 +255,570 @@ function conpyPrecedingMonth(){
 	});
 }
 
+
+$(function(){
+	//风险信息
+	initWorkFace();//工作面
+	initRiType();//风险类型
+	initRiProfessionType();//专业类型(隐患类型)
+	initRiDisasterType();//灾害类型
+	initCanCauseAccidentType();//可能导致事故
+	
+	//评估
+	initPossibility();//可能性
+	initBLPFCD();//人员暴露频繁程度
+	initSSHG();//损失后果
+})
+
+
+/**********************风险信息***************************/
+//初始化工作面地点(风险地点)  == 从风险辨识范围中查询，查询出所有工作面名称
+function initWorkFace(){
+	$.ajax({
+		type : "post",
+		dataType : "json",
+		url : "${pageContext.request.contextPath}/identify_initWorkFace.action",
+		data : "",
+		success : function(data) {
+			$("#addriskAddressSelect option").remove();//新增模态框中的
+
+			$("#updateriskAddressSelect option").remove();//修改模态框中的
+				
+			var str = "<option value=''>--请选择--</option>";//<option value="综采">综采</option>
+			for(var i=0;i<data.riIdentificationRangeList.length;i++){
+				str +="<option value="+data.riIdentificationRangeList[i].facename+">"+data.riIdentificationRangeList[i].facename+"</option>";
+			}
+			
+			$("#addriskAddressSelect").append(str);
+
+			$("#updateriskAddressSelect").append(str);
+		
+		},
+		error : function() {
+			alert("初始化字典失败，请重新初始化！");
+		}
+	});
+}
+//初始化风险类型
+function initRiType(){
+	$.ajax({
+		type : "post",
+		dataType : "json",
+		url : "${pageContext.request.contextPath}/initDic_initRiType.action",
+		data : "",
+		success : function(data) {
+			
+				$("#addrisktype option").remove();//新增模态框中的
+
+				$("#updaterisktype option").remove();//修改模态框中的
+				var str = "<option value=''>--请选择--</option>";//<option value="综采">综采</option>
+				for(var i=0;i<data.dictionaryList.length;i++){
+					str +="<option value="+data.dictionaryList[i].name+">"+data.dictionaryList[i].name+"</option>";
+				}
+				$("#addrisktype").append(str);
+
+				$("#updaterisktype").append(str);
+			
+			//刷新数据
+			//findAllRiRespon();
+		},
+		error : function() {
+			alert("字典初始化失败，请重新初始化！");
+		}
+	});
+}
+
+
+
+//初始化专业类型
+function initRiProfessionType(){
+	$.ajax({
+		type : "post",
+		dataType : "json",
+		url : "${pageContext.request.contextPath}/initDic_initDangerType.action",
+		data : "",
+		success : function(data) {
+			
+				$("#addprofessionaltypes option").remove();//新增模态框中的
+
+				$("#updateprofessionaltypes option").remove();//修改模态框中的
+				var str = "<option value=''>--请选择--</option>";//<option value="综采">综采</option>
+				for(var i=0;i<data.dictionaryList.length;i++){
+					str +="<option value="+data.dictionaryList[i].name+">"+data.dictionaryList[i].name+"</option>";
+				}
+				$("#addprofessionaltypes").append(str);
+
+				$("#updateprofessionaltypes").append(str);
+			
+			//刷新数据
+			//findAllRiRespon();
+		},
+		error : function() {
+			alert("字典初始化失败，请重新初始化！");
+		}
+	});
+}
+
+//初始化灾害类型
+function initRiDisasterType(){
+	$.ajax({
+		type : "post",
+		dataType : "json",
+		url : "${pageContext.request.contextPath}/initDic_initDisasterType.action",
+		data : "",
+		success : function(data) {
+			
+				$("#adddisastertypes option").remove();//新增模态框中的
+
+				$("#updatedisastertypes option").remove();//修改模态框中的
+				var str = "<option value=''>--请选择--</option>";//<option value="综采">综采</option>
+				for(var i=0;i<data.dictionaryList.length;i++){
+					str +="<option value="+data.dictionaryList[i].name+">"+data.dictionaryList[i].name+"</option>";
+				}
+				$("#adddisastertypes").append(str);
+
+				$("#updatedisastertypes").append(str);
+			
+			//刷新数据
+			//findAllRiRespon();
+		},
+		error : function() {
+			alert("字典初始化失败，请重新初始化！");
+		}
+	});
+}
+
+//初始化可能导致事故
+function initCanCauseAccidentType(){
+	$.ajax({
+		type : "post",
+		dataType : "json",
+		url : "${pageContext.request.contextPath}/initDic_initCanCauseAccident.action",
+		data : "",
+		success : function(data) {
+			
+				$("#addcancauseaccidents option").remove();//新增模态框中的
+
+				$("#updatecancauseaccidents option").remove();//修改模态框中的
+				var str = "<option value=''>--请选择--</option>";//<option value="综采">综采</option>
+				for(var i=0;i<data.dictionaryList.length;i++){
+					str +="<option value="+data.dictionaryList[i].name+">"+data.dictionaryList[i].name+"</option>";
+				}
+				$("#addcancauseaccidents").append(str);
+
+				$("#updatecancauseaccidents").append(str);
+			
+			//刷新数据
+			//findAllRiRespon();
+		},
+		error : function() {
+			alert("字典初始化失败，请重新初始化！");
+		}
+	});
+}
+/*************************************************/
+
+/******************风险评估*********************/
+
+//初始化可能性(L)
+function initPossibility(){
+	$.ajax({
+		type : "post",
+		dataType : "json",
+		url : "${pageContext.request.contextPath}/initDic_initPossibility.action",
+		data : "",
+		success : function(data) {
+				$("#evaluatePossibility option").remove();//新增模态框中的
+
+				var str = "<option value=''>--请选择--</option>";//<option value="综采">综采</option>
+				for(var i=0;i<data.dictionaryList.length;i++){
+					str +="<option title='"+data.dictionaryList[i].description+"' value="+data.dictionaryList[i].name+">"+data.dictionaryList[i].name+"</option>";
+				}
+				$("#evaluatePossibility").append(str);
+
+		},
+		error : function() {
+			alert("字典初始化失败，请重新初始化！");
+		}
+	});
+}
+
+
+//初始化人员暴露频繁程度(E)
+function initBLPFCD(){
+	$.ajax({
+		type : "post",
+		dataType : "json",
+		url : "${pageContext.request.contextPath}/initDic_initBLPFCD.action",
+		data : "",
+		success : function(data) {
+				$("#evaluatePersondegreeofexposure option").remove();//新增模态框中的
+
+				var str = "<option value=''>--请选择--</option>";//<option value="综采">综采</option>
+				for(var i=0;i<data.dictionaryList.length;i++){
+					str +="<option title='"+data.dictionaryList[i].description+"' value="+data.dictionaryList[i].name+">"+data.dictionaryList[i].name+"</option>";
+				}
+				$("#evaluatePersondegreeofexposure").append(str);
+
+		},
+		error : function() {
+			alert("字典初始化失败，请重新初始化！");
+		}
+	});
+}
+
+//初始化损失后果(C)
+function initSSHG(){
+	$.ajax({
+		type : "post",
+		dataType : "json",
+		url : "${pageContext.request.contextPath}/initDic_initSSHG.action",
+		data : "",
+		success : function(data) {
+				$("#evaluateLossfcconsequence option").remove();//新增模态框中的
+
+				var str = "<option value=''>--请选择--</option>";//<option value="综采">综采</option>
+				for(var i=0;i<data.dictionaryList.length;i++){
+					str +="<option title='"+data.dictionaryList[i].description+"' value="+data.dictionaryList[i].name+">"+data.dictionaryList[i].name+"</option>";
+				}
+				$("#evaluateLossfcconsequence").append(str);
+
+		},
+		error : function() {
+			alert("字典初始化失败，请重新初始化！");
+		}
+	});
+}
+
+//初始化风险等级
+function initRiGrade(){
+	$.ajax({
+		type : "post",
+		dataType : "json",
+		url : "${pageContext.request.contextPath}/initDic_initRiGrade.action",
+		data : "",
+		success : function(data) {
+				$("#riskGradeCondition option").remove();//新增模态框中的
+
+				var str = "<option value=''>--请选择--</option>";//<option value="综采">综采</option>
+				for(var i=0;i<data.dictionaryList.length;i++){
+					str +="<option value="+data.dictionaryList[i].name+">"+data.dictionaryList[i].name+"</option>";
+				}
+				$("#riskGradeCondition").append(str);
+		},
+		error : function() {
+			alert("字典初始化失败，请重新初始化！");
+		}
+	});
+}
+
+/***************************************/
+
+
+
+//打开新增模态框之前要进行的操作
+function addOpenBtn(){
+	
+	//添加管控计划id到隐藏域中
+	
+	$("#addRictrlplanid").val($("#myRictrlplanid").val());
+	//添加
+	
+	//风险信息初始化表单(清空表单)
+	$("#addriskAddressSelect").val("");//选择风险地点的select下拉框
+	$("#addriskaddress").val("");//风险地点
+	$("#addriskdescribe").val("");//风险描述
+	$("#addrisktype").val("");//风险类型
+	$("#addprofessionaltypes").val("");//专业类型
+	$("#adddisastertypes").val("");//灾害类型
+	$("#addcancauseaccidents").val("");//可能导致事故
+	$("#addctrlmeasure").val("");//管控措施
+	$("#addprincipal").val("");//负责人
+	$("#addsuperintendent").val("");//监管人
+	$("#addmonitoringperiod").val("");//管控周期
+	
+	$("#addAddressToTextarea").val("");//存放选中的风险地点，用于追加到文本框中 -
+	
+	
+	
+	//风险评估表单初始化
+	$("#evaluateRiskGrade").val("");//风险等级
+	$("#evaluateRiskValue").val("");//风险值
+	$("#evaluateLossfcconsequence").val("");//损失后果
+	$("#evaluatePersondegreeofexposure").val("");//人员暴露频繁程度
+	$("#evaluatePossibility").val("");//可能性
+}
+
+
+//新增
+////将选择风险地点的select下拉框选中的值追加到 风险地点文本框中
+function addselectchange(obj){
+	var riskAddress = $("#addriskAddressSelect option:selected").text();//选择风险地点的select下拉框
+	
+	var before = $("#addAddressToTextarea").val();//之前的    隐藏域中的
+	$("#addAddressToTextarea").val(riskAddress);//将现在选中的添加
+	if(before==""){
+		var laterTextArea = $("#addAddressToTextarea").val();
+		$("#addAddressToTextarea").val(laterTextArea);
+		$("#addriskaddress").val($("#addAddressToTextarea").val());//添加到文本框中
+	}else{
+		var laterTextArea = $("#addAddressToTextarea").val()+","+before;
+		$("#addAddressToTextarea").val(laterTextArea);
+		$("#addriskaddress").val($("#addAddressToTextarea").val());//添加到文本框中
+	}
+}
+
+
+
+//增加辨识风险信息的保存按钮的点击事件
+function addSave(){
+	// 表单校验   
+	var isNotNull = $("#addForm").validate({
+		ignore : [],
+		rules : {
+			"riIdentificationRriskMsg.riskaddress" : "required",//风险地点
+			"riIdentificationRriskMsg.riskdescribe" : "required",//风险描述
+			"riIdentificationRriskMsg.risktype" :"required",//风险类型
+			"riIdentificationRriskMsg.professionaltypes":"required",//专业类型
+			"riIdentificationRriskMsg.disastertypes":"required",//灾害类型
+			"riIdentificationRriskMsg.cancauseaccidents" : "required",//可能导致事故
+			"riIdentificationRriskMsg.ctrlmeasure" : "required",//管控措施
+			"riIdentificationRriskMsg.principal" :"required",//负责人
+			"riIdentificationRriskMsg.superintendent":"required",//监管人
+			"riIdentificationRriskMsg.monitoringperiod":"required"//管控周期
+		/*		
+			//风险评估
+			"riAssessment.possibility" : "required",//可能性
+			"riAssessment.persondegreeofexposure" : "required",//人员暴露频繁程度
+			"riAssessment.lossofcconsequences" :"required",//损失后果
+			"riAssessment.riskvalue":"required",//风险值
+			"riAssessment.riskgrade":"required"//风险等级	
+*/		},
+		
+		messages : {
+			"riIdentificationRriskMsg.riskaddress" :{
+				required:"不能为空"//风险地点
+			},
+			"riIdentificationRriskMsg.riskdescribe" : {
+				required:"不能为空"//风险描述
+			},
+			"riIdentificationRriskMsg.risktype" :{
+				required:"不能为空"//风险类型
+			},
+			"riIdentificationRriskMsg.professionaltypes":{
+				required:"不能为空"//专业类型
+			},
+			"riIdentificationRriskMsg.disastertypes":{
+				required:"不能为空"//灾害类型
+			},
+			"riIdentificationRriskMsg.cancauseaccidents" : {
+				required:"不能为空"//可能导致事故
+			},
+			"riIdentificationRriskMsg.ctrlmeasure" : {
+				required:"不能为空"//管控措施
+			},
+			"riIdentificationRriskMsg.principal" :{
+				required:"不能为空"//负责人
+			},
+			"riIdentificationRriskMsg.superintendent":{
+				required:"不能为空"//监管人
+			},
+			"riIdentificationRriskMsg.monitoringperiod":{
+				required:"不能为空"//管控周期
+			}
+			
+			/*//风险评估
+			"riAssessment.possibility" :{
+				required:"不能为空"//可能性
+			},
+			"riAssessment.persondegreeofexposure" : {
+				required:"不能为空"//人员暴露频繁程度
+			},
+			"riAssessment.lossofcconsequences" :{
+				required:"不能为空"//损失后果
+			},
+			"riAssessment.riskvalue":{
+				required:"不能为空"//风险值
+			},
+			"riAssessment.riskgrade":{
+				required:"不能为空"//风险等级
+			}			
+				*/
+			
+		}
+	});
+
+	// 如果通过表单校验，则执行新增年度辨识信息操作
+	if (isNotNull.form()) {
+		$.ajax({
+			type : "post",
+			dataType : "json",
+			//url : "${pageContext.request.contextPath}/identify_addIdentifyRiskMsg.action",
+			url : "controlPlan_addRiskMsgToControlPlan.action",
+			data : $("#addForm").serialize(),
+			success : function(data) {
+				alert(data.message);
+				$("#addDuty").modal("hide");
+				//刷新数据
+				window.location.reload();
+			},
+			error : function() {
+				alert("添加失败，请重新添加！");
+			}
+		});
+	}
+
+}
+
+
+
+/******************************修改风险信息************/
+
+//修改
+//打开修改模态框之前要进行的操作
+function updateOpenBtn(obj){
+	alert("update")
+	
+	var address = $(obj).parents("tr").children("td").eq(1).text();//风险地点
+
+	var describe = $(obj).parents("tr").children("td").eq(2).text();//风险描述
+
+	
+//	$("select[name='ricontrolPlan.monthorweek'] option[value='"+$tds.eq(3).html()+"']").attr("selected", true).prop("selected", true); 
+	var riType = $(obj).parents("tr").children("td").eq(3).text();//风险类型
+	
+	
+	var proType = $(obj).parents("tr").children("td").eq(4).text();//专业类型
+	var disasterType = $(obj).parents("tr").children("td").eq(5).text();//灾害类型
+	var cancauseAccident = $(obj).parents("tr").children("td").eq(6).text();//可能导致事故
+	var ctrlMeasure = $(obj).parents("tr").children("td").eq(7).text();//管控措施
+	var principal = $(obj).parents("tr").children("td").eq(8).text();//负责人
+	var superintendent = $(obj).parents("tr").children("td").eq(9).text();//监管人
+	var monitoringperiod = $(obj).parents("tr").children("td").eq(10).text();//管控周期
+	
+	
+	//初始化表单(回显数据)
+	$("#updateriskAddressSelect").val("");//选择风险地点的select下拉框
+	$("#updateriskaddress").val(address);//风险地点
+	$("#updateriskdescribe").val(describe);//风险描述
+	$("#updaterisktype").val(riType);//风险类型
+	$("#updateprofessionaltypes").val(proType);//专业类型
+	$("#updatedisastertypes").val(disasterType);//灾害类型
+	$("#updatecancauseaccidents").val(cancauseAccident);//可能导致事故
+	$("#updatectrlmeasure").val(ctrlMeasure);//管控措施
+	$("#updateprincipal").val(principal);//负责人
+	$("#updatesuperintendent").val(superintendent);//监管人
+	$("#updatemonitoringperiod").val(monitoringperiod);//管控周期
+	
+	$("#updateAddressToTextarea").val("");//存放选中的风险地点，用于追加到文本框中 
+	
+	//为辨识风险信息id 隐藏域赋值  用于修改操作的
+	/*var result= $(obj).attr("value");
+	$("#updateriskmsgid").val(result);
+	*/
+	$("#updateriskmsgid").val($(obj).parents("tr").find("#myRiskInfoId").val());
+	//添加管控计划id
+	//$("#updateriskmsgid").val($("#myRictrlplanid"));
+	
+	//添加辨识id
+	
+	$("#updateidentiryid").val($(obj).parents("tr").find("#myIdentiryid").val());
+}
+
+//将选择风险地点的select下拉框选中的值追加到 风险地点文本框中
+function updateselectchange(obj){
+	var riskAddress = $("#updateriskAddressSelect option:selected").text();//选择风险地点的select下拉框
+	
+	var before = $("#updateAddressToTextarea").val();//之前的    隐藏域中的
+	$("#updateAddressToTextarea").val(riskAddress);//将现在选中的添加
+	if(before==""){
+		var laterTextArea = $("#updateAddressToTextarea").val();
+		$("#updateAddressToTextarea").val(laterTextArea);
+		$("#updateriskaddress").val($("#updateAddressToTextarea").val());//添加到文本框中
+	}else{
+		var laterTextArea = $("#updateAddressToTextarea").val()+","+before;
+		$("#updateAddressToTextarea").val(laterTextArea);
+		$("#updateriskaddress").val($("#updateAddressToTextarea").val());//添加到文本框中
+	}
+}
+
+
+
+//修改辨识风险信息的保存按钮的点击事件
+function updateSave(){
+
+	// 表单校验   
+	var isNotNull = $("#updateForm").validate({
+		ignore : [],
+		rules : {
+			"riIdentificationRriskMsg.riskaddress" : "required",//风险地点
+			"riIdentificationRriskMsg.riskdescribe" : "required",//风险描述
+			"riIdentificationRriskMsg.risktype" :"required",//风险类型
+			"riIdentificationRriskMsg.professionaltypes":"required",//专业类型
+			"riIdentificationRriskMsg.disastertypes":"required",//灾害类型
+			"riIdentificationRriskMsg.cancauseaccidents" : "required",//可能导致事故
+			"riIdentificationRriskMsg.ctrlmeasure" : "required",//管控措施
+			"riIdentificationRriskMsg.principal" :"required",//负责人
+			"riIdentificationRriskMsg.superintendent":"required",//监管人
+			"riIdentificationRriskMsg.monitoringperiod":"required"//管控周期
+		},
+		
+		messages : {
+			"riIdentificationRriskMsg.riskaddress" :{
+				required:"不能为空"//风险地点
+			},
+			"riIdentificationRriskMsg.riskdescribe" : {
+				required:"不能为空"//风险描述
+			},
+			"riIdentificationRriskMsg.risktype" :{
+				required:"不能为空"//风险类型
+			},
+			"riIdentificationRriskMsg.professionaltypes":{
+				required:"不能为空"//专业类型
+			},
+			"riIdentificationRriskMsg.disastertypes":{
+				required:"不能为空"//灾害类型
+			},
+			"riIdentificationRriskMsg.cancauseaccidents" : {
+				required:"不能为空"//可能导致事故
+			},
+			"riIdentificationRriskMsg.ctrlmeasure" : {
+				required:"不能为空"//管控措施
+			},
+			"riIdentificationRriskMsg.principal" :{
+				required:"不能为空"//负责人
+			},
+			"riIdentificationRriskMsg.superintendent":{
+				required:"不能为空"//监管人
+			},
+			"riIdentificationRriskMsg.monitoringperiod":{
+				required:"不能为空"//管控周期
+			}
+				
+			
+		}
+	});
+
+	// 如果通过表单校验，则执行修改辨识风险信息操作
+	if (isNotNull.form()) {
+		$.ajax({
+			type : "post",
+			dataType : "json",
+			url : "${pageContext.request.contextPath}/identify_updateIdentifyRiskMsg.action",
+			
+			data : $("#updateForm").serialize(),
+			success : function(data) {
+				alert(data.result);
+				$("#modifierDuty").modal("hide");
+				//刷新数据
+				window.location.reload();
+			},
+			error : function() {
+				alert("修改失败，请重新修改！");
+			}
+		});
+	}
+
+}
 
 
