@@ -49,7 +49,8 @@
 	<div id="el_header">
 		<div id="el_headerLeftLogo">
 			<%-- <img src="<%=path%>/image/logo.png" width="30"
-				style="position: relative; top: 0px;" /> --%> 煤矿安全隐患排查管理系统
+				style="position: relative; top: 0px;" /> --%> 
+				煤矿隐患排查与风险分级管控管理系统
 		</div>
 		<div id="el_headerRightinfo">
 			<div id="el_systemTime">

@@ -1,6 +1,8 @@
 function monthRiskControlPlanAnalyze(){
 	var choosePlan = 0;// 判断是否有风险被选中
 
+	var riskMsgIdArray = new Array();
+	var indentiryIdArray = new Array();
 	$(".planCheck").each(function() { // 获取选择的风险
 
 		if ($(this).prop("checked")) {// 如果选中。。。
@@ -11,20 +13,29 @@ function monthRiskControlPlanAnalyze(){
 
 	if (choosePlan >= 2) {
 		
-			$("#monthRiskControlPlanAnalyze2").modal();
-			//多条风险信息分析
+			
 			$(".planCheck").each(function() { // 获取选择的风险
 
 				if ($(this).prop("checked")) {// 如果选中。。。
-					$(this).parents('tr').find("#riskmsgid").val()
+				/*	$(this).parents('tr').find("#riskmsgid").val()
 					$("#addRiskmsgid2").val($(this).parents('tr').find("#myriskmsgid").val());
-					$("#addIdentiryid2").val($(this).parents('tr').find("#myrictrlplanid").val());
+					$("#addIdentiryid2").val($(this).parents('tr').find("#myrictrlplanid").val());*/
 					$("#monthRiskControlPlanAnalyze2").modal();
 	
-					//analyze2();
+					riskMsgIdArray.push($(this).parents('tr').find("#myriskmsgid").val());
+					indentiryIdArray.push($(this).parents('tr').find("#myrictrlplanid").val());
+					
 				}
 			})
 			
+			alert(JSON.stringify(riskMsgIdArray))
+			alert(JSON.stringify(indentiryIdArray))
+			$("#addRiskmsgid2").val(JSON.stringify(riskMsgIdArray));
+			$("#addIdentiryid2").val(JSON.stringify(indentiryIdArray));
+			
+			$("#monthRiskControlPlanAnalyze2").modal();
+			alert($("#addRiskmsgid2").val())
+			alert($("#addIdentiryid2").val())
 	}else if(choosePlan == 1){
 		//$("#monthRiskControlPlanAnalyze1").modal();
 		analyze1();
@@ -60,6 +71,12 @@ function analyze1(){
 	//管控计划分析信息
 	
 	
+	//将分析信息赋为空
+	$("#addDutydepartment1").val("");
+	$("#addImplementationofmeasures1").val("");
+	$("#addMeasureisvalid1").val("");
+	$("#addInspectionsituation1").val("");
+	
 	//打开模态框
 	$("#monthRiskControlPlanAnalyze1").modal();
 }
@@ -88,8 +105,9 @@ function addAnalysisRisk1(){
 
 
 function addAnalysisRisk2(){
+	alert("dfjdk")
 	$.ajax({
-		url : 'analysisPlan_addControlPlanAnalysis.action',
+		url : 'analysisPlan_addControlPlanAnalysis2.action',
 		data : $("#addAnalysisPlanForm2").serialize(),
 		type : 'POST',
 		dataType : 'json',

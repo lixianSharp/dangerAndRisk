@@ -64,7 +64,7 @@
 													class="selectpicker form-control" title="点击选择年份" name="monthOrWeek">
 												</input>
 										
-												
+												<input type="hidden" name="riskCtrlPlanMark" value="1">
 												<input type="hidden" name="currentPage" id="currentPage" />
 												<input type="hidden" name="currentCount" id="currentCount" />
 											</div>
@@ -75,8 +75,8 @@
 										<!-- <button type="submit"
 										class="btn btn-primary el_queryButton btn-sm"  style="left: 963.617px;">查询</button> -->
 									<button type="button"
-										class="btn btn-primary el_queryButton btn-sm"  style="left: 963.617px;" onclick="queryButton()" id="queryId">查询</button>
-									<button class="btn btn-default btn-sm" style="margin-top: 6px;margin-left: 732px;" onclick="clearBtn()" >清空</button>
+										class="btn btn-primary el_queryButton btn-sm"  style="right:10%;" onclick="queryButton()" id="queryId">查询</button>
+									<button class="btn btn-primary el_queryButton btn-sm" style="right:3%; margin-top: 5px;" onclick="clearBtn()" >清空</button>
 									</div>
 								</form>
 							</div>

@@ -47,6 +47,10 @@
 	
 	<!-- lixianyuan -->
 	
+	<!-- 文件导出 lixianyuan start-->
+	<include file="struts/exportToexcel.xml"></include>
+	<!-- 文件导出 lixianyuan end-->
+	
 	<!-- zhangwenyi -->
 	<include file="struts/riControlPlan.xml"></include>
 	<include file="struts/riControlPlanDetail.xml"></include>

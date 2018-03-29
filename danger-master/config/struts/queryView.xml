@@ -4,7 +4,7 @@
 	"http://struts.apache.org/dtds/struts-2.3.dtd">
 
 <struts>
-	<package name="queryView" extends="struts-default" namespace="/">
+	<package name="queryView" extends="json-default" namespace="/">
 		<action name="queryView_*" class="danger.action.queryView.QueryViewAction"
 			method="{1}">
 			<result name="pageDanger">/main/handle.jsp</result>
@@ -19,6 +19,7 @@
 			</result>
 			<result name="pageDangerSFR1">/main/hdMonthReport.jsp
 			</result>
+			
 		</action>
 
 		<action name="tongjiInfo" class="danger.action.queryView.TongjiAction">

@@ -61,6 +61,7 @@ public class ValidPlanAction extends ActionSupport {
 	//分页条件
 	private String monthOrWeek;
 	private String specialty;
+    private String riskCtrlPlanMark;
 	private String currentPage;
 	private String currentCount;
 	
@@ -96,8 +97,14 @@ public class ValidPlanAction extends ActionSupport {
 	public void setCurrentCount(String currentCount) {
 		this.currentCount = currentCount;
 	}
-	
-	
+	public String getRiskCtrlPlanMark() {
+		return riskCtrlPlanMark;
+	}
+
+	public void setRiskCtrlPlanMark(String riskCtrlPlanMark) {
+		this.riskCtrlPlanMark = riskCtrlPlanMark;
+	}
+
 	//跳转到losePlanDis页面
 	public String toLosePlanDis(){
 		result = new HashMap<String, Object>();
@@ -190,6 +197,11 @@ public class ValidPlanAction extends ActionSupport {
 			condition.put("specialty", specialty);
 			result.put("specialty", specialty);
 		}
+		if (ValidateCheck.isNotNull(riskCtrlPlanMark)) {
+			condition.put("riskCtrlPlanMark", riskCtrlPlanMark);
+			result.put("riskCtrlPlanMark", riskCtrlPlanMark);
+		}
+		
 		return condition;
 	}
 	

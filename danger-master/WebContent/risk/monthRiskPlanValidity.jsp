@@ -67,7 +67,8 @@ background-color:#EEEE00;
 												<input id="optsdate6" class="selectpicker form-control" title="点击选择年份" name="monthOrWeek">
 													<input type="hidden" name="currentPage" id="currentPage" />
 													<input type="hidden" name="currentCount" id="currentCount" />
-												</input>
+													<input type="hidden" name="riskCtrlPlanMark" value="1">
+												
 											</div>
 										</div>
 										<div class="col-md-3 el_qlmQuery">
@@ -90,8 +91,8 @@ background-color:#EEEE00;
 									
 										
 										<button  type="button" id="queryId" onclick="queryButton()" 
-										class="btn btn-primary el_queryButton btn-sm" style="left: 930.62px;top: 0px;bottom: 12px;margin-bottom: 3px;padding-bottom: 0px;padding-top: 0px;"  >查询</button>
-									<button class="btn btn-default btn-sm" style="margin-left: 400px;" >清空</button>
+										class="btn btn-primary el_queryButton btn-sm" style="right:10%;" onclick="queryButton()"  >查询</button>
+									<button class="btn btn-primary el_queryButton btn-sm" style="right:3%; margin-top: 5px;" >清空</button>
 									</div>
 								</form>
 							</div>

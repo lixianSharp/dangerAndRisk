@@ -147,12 +147,12 @@ $(function(){
 
 										<div class="col-md-3 el_qlmQuery" id="calendarIndex">
 											<div class="input-group" role="toolbar">
-												<span class="el_spans">时间：</span> 
+												<span class="el_spans">起始时间:</span> 
 												<input type="text"
 													name="startTime" id="optsdate2" value="${startTime }"
 													class="datainp wicon form-control el_modelinput" readonly placeholder="起始时间"/>
 													
-												<span>&nbsp;&nbsp;&nbsp;&nbsp;到</span> 
+												<span>到</span> 
 												
 												<input type="text"
 													name="endTime" id="optsdate22" value="${endTime }"
@@ -260,15 +260,43 @@ $(function(){
 											<div class="el_topButton">
 												<!-- 按钮触发模态框1-->
 												<div class="col-md-2">
-													<!-- <a style="text-decoration: none; color: white;"
-														href="addExam.html">
-														<button class="btn btn-primary">导出</button> -->
-													</a>
+													<button class="btn btn-primary" onclick="exportRiskList()">导出</button>
 												</div>
 											</div>
 
 										</div>
 									</div>
+
+							<!-- 模态框（导出） -->
+							<div class="modal fade" id="deleteDuty" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+								<div class="modal-dialog">
+									<div class="modal-content">
+										<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+												&times;
+											</button>
+											<h4 class="modal-title" id="myModalLabel">
+											导出
+											</h4>
+										</div>
+										<div class="modal-body">
+											您确定要导出吗?
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-default" data-dismiss="modal">关闭
+											</button>
+											<!-- 隐藏导出的文件的文件名 -->
+											<input id="exportFileNameHidden" type="hidden" value=""/>
+											<%-- // href="${pageContext.request.contextPath}/export_down.action?name=" --%>
+											<a id="exportATag" class="btn btn-primary" href="#" onclick="clickCloseModal()">
+												导出
+											</a>
+										</div>
+									</div><!-- /.modal-content -->
+								</div>
+							</div><!-- /.modal -->
+
+
 
 									<!--表格
                             		内容都提取到json里边

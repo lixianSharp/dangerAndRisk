@@ -54,13 +54,13 @@
 
 					<div class="panel-body el_main">
 
+
+
 						<!--内容-->
 						<div class=" col-md-12">
 						<!--索引-->
 							<div class="row el_queryBox">
-								<form
-									action=""
-									method="post" id="queryForm">
+								<form action="" method="post" id="queryForm">
 									<div class="row el_queryBoxrow">
 
 										<div class="col-md-3 el_qlmQuery">
@@ -69,22 +69,25 @@
 												<span class="el_spans el_chooseSpan">月份：</span> 
 												<input id="optsdate6"
 													class="selectpicker form-control" title="点击选择年份" name="year">
-												</input>
 												
-												<div class="col-md-3 el_qlmQuery">
+												
+												
+											</div> 
+										</div>
+										<div class="col-md-3 el_qlmQuery">
 											<div class="input-group" role="toolbar">
-												<span class="el_spans">旬期：</span>
+											<input type="hidden" name="riskCtrlPlanMark" value="0">
+												<span class="el_spans el_chooseSpan">旬期：</span>
 												  <select id=""
-													class="selectpicker form-control" title="请选择" name="monthOrWeek">
+													class="selectpicker form-control" title="请选择" name="monthOrWeek2">
 													<option value="">--请选择--</option>
 													<option value="上旬">上旬</option>
 													<option value="中旬">中旬</option>
 													<option value="下旬">下旬</option>
 												</select>
-												
-												
-											</div>
-										</div>
+											
+											<!-- </div>
+										</div> -->
 												
 												<input type="hidden" name="currentPage" id="currentPage" />
 												<input type="hidden" name="currentCount" id="currentCount" />
@@ -94,8 +97,14 @@
 									
 										
 										<button type="button"
-										class="btn btn-primary el_queryButton btn-sm"  style="left: 963.617px;" onclick="queryButton()" id="queryId">查询</button>
-									<button class="btn btn-default btn-sm" style="margin-top: 6px;margin-left: 732px;" onclick="clearBtn()" >清空</button>
+										class="btn btn-primary el_queryButton btn-sm"  style="left: 930.62px;top: 0px;bottom: 12px;margin-bottom: 3px;padding-bottom: 0px;padding-top: 0px;"  onclick="queryButton()" id="queryId">查询</button>
+									<button class="btn btn-default btn-sm" style="margin-left: 400px;" onclick="clearBtn()" >清空</button>
+									
+								<!-- 	
+									<button  type="button" id="queryId" onclick="queryButton()" 
+										class="btn btn-primary el_queryButton btn-sm" style="left: 930.62px;top: 0px;bottom: 12px;margin-bottom: 3px;padding-bottom: 0px;padding-top: 0px;"  >查询</button>
+									<button class="btn btn-default btn-sm" style="margin-left: 400px;" >清空</button>
+									 -->
 									</div>
 								</form>
 							</div>
@@ -108,7 +117,8 @@
 								<div class="panel-body">
 
 									<div>
-									<button  class="btn btn-primary" data-toggle="modal" data-target="#addDuty" onClick="$.Pop('每个月每个专业只能有一个风险管控计划，可以通过“详情”维护专业的风险管控计划信息。','confirm',function(){})" >新增</button>
+									<!-- <button  class="btn btn-primary" data-toggle="modal" data-target="#addDuty" onClick="$.Pop('每个月每个专业只能有一个风险管控计划，可以通过“详情”维护专业的风险管控计划信息。','confirm',function(){})" >新增</button> -->
+									<button  class="btn btn-primary" data-toggle="modal" onClick="$.Pop('每个月每个专业只能有一个风险管控计划，可以通过“详情”维护专业的风险管控计划信息。','confirm',function(){addWeekControlPlan()})" >新增</button>
 									<button class="btn btn-primary" onclick="planReport()">计划上报</button>
 									<button class=" btn btn-primary" onclick="riskCheck()">审核</button>
 									
@@ -185,7 +195,7 @@
 									
 									<div id="paginationIDU"></div>
 
-								<!-- 模态框（新增月风险管控计划信息） -->
+								<!-- 模态框（新增周风险管控计划信息） -->
 								<div class="modal fade" id="addDuty" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 									<div class="modal-dialog">
 										<div class="modal-content">
@@ -194,7 +204,7 @@
 													&times;
 												</button>
 												<h4 class="modal-title" id="myModalLabel">
-												新增月风险管控计划信息
+												新增周风险管控计划信息
 												</h4>
 											</div>
 											<div class="modal-body">
@@ -204,13 +214,29 @@
 													<input
 													class="datainp wicon form-control" id="optsdate66"
 													type="text" placeholder="点击选择月份" value=""
-													name="ricontrolPlan.monthorweek" readonly />
+													name="ricontrolPlan.year" disable="disable" />
+												</div>
+												
+												<div class="input-group el_modellist"  role="toolbar">
+												<span class="el_spans">旬&nbsp;&nbsp;期：</span>
+												  <select id="addxunqi"
+													class="selectpicker form-control" title="请选择" name="ricontrolPlan.monthorweek">
+													<option value="">--请选择--</option>
+													<option value="上旬">上旬</option>
+													<option value="中旬">中旬</option>
+													<option value="下旬">下旬</option>
+												</select>
+												
+												
 												</div>
 								 
 												<div class="input-group el_modellist" role="toolbar">
 													<span class="el_spans">专&nbsp;&nbsp;业：</span>
 													<input type="text" class="form-control el_modelinput"
 														id="addControlPlanSpecialty" name="ricontrolPlan.specialty" />
+														
+													<!-- 说明是否是周管控计划 -->	
+													<input type="hidden" name="ricontrolPlan.riskctrlplanmark" value="0"/>
 												</div>
 												<div class="input-group el_modellist" role="toolbar">
 													<span class="el_spans">负责&nbsp;人：</span>
@@ -230,7 +256,7 @@
 										</div><!-- /.modal-content -->
 									</div>
 								</div><!-- /.modal -->
-								<!-- 模态框（月风险管控计划审核） -->
+								<!-- 模态框（周风险管控计划审核） -->
 								<div class="modal fade" id="riskCheck" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 									<div class="modal-dialog">
 										<div class="modal-content">
@@ -239,7 +265,7 @@
 													&times;
 												</button>
 												<h4 class="modal-title" id="myModalLabel">
-												月风险管控计划审核
+												周风险管控计划审核
 												</h4>
 											</div>
 											<div class="modal-body">
@@ -253,15 +279,15 @@
 													
 												<div class="input-group el_modellist" role="toolbar">
 													<span class="el_spans">本次审核备注信息：</span>
-													<textarea id="" class="form-control texta"
+													<textarea id="benciAuditmsg" class="form-control texta"
 										rows="3" name="riRiskPlanAudit.auditmsg"></textarea>
 										<input type="hidden" name="riRiskPlanAudit.rictrlplanid" id="shenHeRictrlplanId" />
 												</div>
 												<div class="input-group el_modellist" role="toolbar">
 													<span class="el_spans">审核状态：</span>
-													<div class="form-control texta">
-													通过审核<input class="" type="radio" checked="checked" name="riRiskPlanAudit.auditstatus" value="通过审核" />
-													未通过审核<input class=" "  type="radio" checked="" name="riRiskPlanAudit.auditstatus" value="未通过审核" />
+													<div class="form-control texta" style=" margin-left: 51px;width: 361px;">
+													<input class="" type="radio" name="riRiskPlanAudit.auditstatus" value="通过审核" />通过审核
+													<input class=" "  type="radio" name="riRiskPlanAudit.auditstatus" value="未通过审核" />未通过审核
 													</div>
 													
 												</div>
@@ -287,7 +313,7 @@
 													&times;
 												</button>
 												<h4 class="modal-title" id="myModalLabel">
-												修改月风险管控计划信息
+												修改周风险管控计划信息
 												</h4>
 											</div>
 											<div class="modal-body">
@@ -297,18 +323,29 @@
 													<input
 													class="datainp wicon form-control" id="optsdate666"
 													type="text" placeholder="点击选择月份" value=""
-													name="ricontrolPlan.monthorweek" readonly />
+													name="ricontrolPlan.year" style="left: 10px;"/>
+												</div>
+												
+												<div class="input-group el_modellist"  role="toolbar">
+												<span class="el_spans">旬&nbsp;&nbsp;期：</span>
+												  <select style="left: 10px;" id=""
+													class="selectpicker form-control" title="请选择" name="ricontrolPlan.monthorweek" id="updateWeek">
+													<option value="">--请选择--</option>
+													<option value="上旬">上旬</option>
+													<option value="中旬">中旬</option>
+													<option value="下旬">下旬</option>
+												</select>
 												</div>
 								
 												<div class="input-group el_modellist" role="toolbar">
 													<span class="el_spans">专&nbsp;&nbsp;业：</span>
 													<input type="text" class="form-control el_modelinput"
-														id="updateControlPlanSpecialty" name="ricontrolPlan.specialty" />
+														id="updateControlPlanSpecialty" name="ricontrolPlan.specialty" style="left: 10px;"/>
 												</div>
 												<div class="input-group el_modellist" role="toolbar">
 													<span class="el_spans">负责&nbsp;人：</span>
 													<input type="text" class="form-control el_modelinput"
-														id="updateControlPlanLeader" name="ricontrolPlan.leader" />
+														id="updateControlPlanLeader" name="ricontrolPlan.leader" style="left: 9px;"/>
 														
 													<input type="hidden" id="updateControlPlanId" name="ricontrolPlan.rictrlplanid" />
 												</div>

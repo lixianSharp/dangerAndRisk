@@ -9,7 +9,7 @@
 <html lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>yorge的用户管理</title>
+<title>隐患查询</title>
 
 <%@ include file="/controls/cssJs.jsp"%>
 
@@ -373,19 +373,47 @@
 								}
 							</script>
 
+							<!-- 模态框（导出） -->
+							<div class="modal fade" id="deleteDuty" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+								<div class="modal-dialog">
+									<div class="modal-content">
+										<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+												&times;
+											</button>
+											<h4 class="modal-title" id="myModalLabel">
+											导出
+											</h4>
+										</div>
+										<div class="modal-body">
+											您确定要导出吗?
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-default" data-dismiss="modal">关闭
+											</button>
+											<!-- 隐藏导出的文件的文件名 -->
+											<input id="exportFileNameHidden" type="hidden" value=""/>
+											<%-- // href="${pageContext.request.contextPath}/export_down.action?name=" --%>
+											<a id="exportATag" class="btn btn-primary" href="#" onclick="clickCloseModal()">
+												导出
+											</a>
+										</div>
+									</div><!-- /.modal-content -->
+								</div>
+							</div><!-- /.modal -->
+
+
 							<!--显示内容-->
 							<div class="panel panel-default el_Mainmain">
 
 								<!--按钮面板-->
 								<div class="panel-body">
-
+									
 									<div class="panel panel-default">
 										<div class="panel-body el_MainxiaoMain">
-
-											<!-- <div class="el_topButton">
-												<button class="btn btn-primary" data-toggle="modal"
-													data-target="#el_Export">导出</button>
-											</div> -->
+										<div class="el_topButton">
+											<button class="btn btn-primary" onclick="exportRiskList()">导出</button>
+										</div> 
 
 										</div>
 									</div>
@@ -837,36 +865,36 @@
 		                    }
 		                </script>
 
-									<!-- 模态框 导出-->
-									<div class="modal fade" id="el_Export" tabindex="-1"
-										role="dialog" aria-labelledby="myModalLabel"
-										aria-hidden="true">
-										<div class="modal-dialog">
-											<div class="modal-content">
-												<div class="modal-header">
-													<button type="button" class="close" data-dismiss="modal"
-														aria-hidden="true">&times;</button>
-													<!--关闭符号-->
-													<!--标题-->
-													<h3 class="modal-title">导出提示</h3>
-												</div>
-												<form>
-													<div class="modal-body">
-														<span>是否导出当前信息？</span>
-													</div>
-													<div class="modal-footer">
-														<button type="button" class="btn btn-primary">导出</button>
-														<button type="button" class="btn btn-default"
-															data-dismiss="modal">关闭</button>
-													</div>
-												</form>
-
+		<!-- 						模态框 导出
+								<div class="modal fade" id="el_Export" tabindex="-1"
+									role="dialog" aria-labelledby="myModalLabel"
+									aria-hidden="true">
+									<div class="modal-dialog">
+										<div class="modal-content">
+											<div class="modal-header">
+												<button type="button" class="close" data-dismiss="modal"
+													aria-hidden="true">&times;</button>
+												关闭符号
+												标题
+												<h3 class="modal-title">导出提示</h3>
 											</div>
-											<!-- /.modal-content -->
-										</div>
-										<!-- /.modal -->
-									</div>
+											<form>
+												<div class="modal-body">
+													<span>是否导出当前信息？</span>
+												</div>
+												<div class="modal-footer">
+													<button type="button" class="btn btn-primary">导出</button>
+													<button type="button" class="btn btn-default"
+														data-dismiss="modal">关闭</button>
+												</div>
+											</form>
 
+										</div>
+										/.modal-content
+									</div>
+									/.modal
+								</div>
+ -->
 									<div id="paginationIDU"></div>
 									<script>
 										$('#paginationIDU').pagination(

@@ -7,37 +7,44 @@ $(function() {
 	query();
 });
 
-
+function addWeekControlPlan(){
+	
+	$("#optsdate66").val("");
+	$("#addControlPlanSpecialty").val("");
+	$("#addControlPlanLeader").val("");
+	$("#addxunqi").val("");
+	$('#addDuty').modal();
+}
 
 /**
  * 添加管控计划
  */
 function saveControlPlanButton() {
-/*	
+
 	var isNotNull = $("#addControlPlanForm").validate({
 		rules : {
-			"month" : {
+			"ricontrolPlan.monthorweek" : {
 				required : true
 
 			},
-			"specialty" : {
+			"ricontrolPlan.specialty" : {
 				required : true
 
 			},
-			"leader" : {
+			"ricontrolPlan.leader" : {
 				required : true
 			}
 		},
 		messages : {
-			"month" : {
+			"ricontrolPlan.monthorweek" : {
 				required : "请输入日期"
 			},
 		
-			"specialty" : {
+			"ricontrolPlan.specialty" : {
 				required : "请输入专业名称"
 			},
 
-			"leader" : {
+			"ricontrolPlan.leader" : {
 				required : "请输入专业负责人"
 			}
 		
@@ -45,7 +52,7 @@ function saveControlPlanButton() {
 
 	});
 
-	if (isNotNull.form()) {*/
+	if (isNotNull.form()) {
 		$.ajax({
 			url : 'controlPlan_addWeekControlPlan.action',
 			data : $("#addControlPlanForm").serialize(),
@@ -62,7 +69,7 @@ function saveControlPlanButton() {
 			}
 		});
 	//}
-
+	}
 }
 
 
@@ -102,7 +109,7 @@ function queryButton() {
 function query() {
 
 	$.ajax({
-		url : 'controlPlan_getAllControlPlan.action',
+		url : 'controlPlan_getAllWeekControlPlan.action',
 		data : $("#queryForm").serialize(),
 		type : 'POST',
 		dataType : 'json',
@@ -194,29 +201,29 @@ var successList = function List(result) {
 		if(controlPlans[i].checkstatus==null&&controlPlans[i].reportstatus=="0"){
 			status="未上报";
 		}
-		
 		var str = "<tr><td><input type='checkbox' name='riskAna'></td><td>"
-		+index+"</td><td>"
-		+controlPlans[i].year+"</td><td>"
-		+controlPlans[i].monthorweek+"</td><td>"+riskrange+"</td><td>"
-		+ricontrolPlans[i]+"</td><td>"
-		+controlPlans[i].specialty+"</td><td>"
-		+controlPlans[i].leader+"</td><td>"
-		//+controlPlans[i].createtime+"</td><td>"
-		+Format(new Date(controlPlans[i].createtime.replace(/T/g, " ").replace(
-				/-/g, "/")), "yyyy-MM-dd HH:ss")+"</td><td>"
-				
-		+"<input type='hidden' id='controlPlansid' value='"+controlPlans[i].rictrlplanid+"'>"
+			+index+"</td><td>"
+			+controlPlans[i].year+"</td><td>"
+			+controlPlans[i].monthorweek+"</td><td>"+riskrange+"</td><td>"
+			+ricontrolPlans[i]+"</td><td>"
+			+controlPlans[i].specialty+"</td><td>"
+			+controlPlans[i].leader+"</td><td>"
+			+"<input type='hidden' id='controlPlansid' value='"+controlPlans[i].rictrlplanid+"'>"
+			//+controlPlans[i].createtime+"</td><td>"
+			+Format(new Date(controlPlans[i].createtime.replace(/T/g, " ").replace(
+					/-/g, "/")), "yyyy-MM-dd HH:ss")+"</td><td>"
+					
 		
+			
+			
+			+checkstatus+"</td><td>"
+			
+			
+			//+controlPlans[i].reportstatus+"</td><td><a data-toggle='modal' data-target='#modifierDuty'>修改</a><a href='<%=path%>/risk/monthRiskControlPlanRisk.jsp'>详情</a></td></tr>";
+			+status+"</td><td><a data-toggle='modal' onclick='updateControlPlan(this)'>修改</a>" 
+			+"<a href='/danger/controlPlanDetail_toControlPlanDetail.action?method="+controlPlans[i].rictrlplanid+"'>详情</a></td></tr>";
 		
-		+checkstatus+"</td><td>"
-		
-		
-		//+controlPlans[i].reportstatus+"</td><td><a data-toggle='modal' data-target='#modifierDuty'>修改</a><a href='<%=path%>/risk/monthRiskControlPlanRisk.jsp'>详情</a></td></tr>";
-		+status+"</td><td><a data-toggle='modal' onclick='updateControlPlan(this)'>修改</a>" 
-		+"<a href='/danger/controlPlanDetail_toControlPlanDetail.action?method="+controlPlans[i].rictrlplanid+"'>详情</a></td></tr>";
-	
-		t_body.append(str);
+			t_body.append(str);
 
 	}
 
@@ -237,7 +244,9 @@ function updateControlPlan(obj){
 	
 	//管控计划的数据
 	$tds = $(obj).parents('tr').children('td');
-	$("#optsdate666").val($tds.eq(2).html()+"-"+$tds.eq(3).html())
+	$("#optsdate666").val($tds.eq(2).html());
+	$("select[name='ricontrolPlan.monthorweek'] option[value='"+$tds.eq(3).html()+"']").attr("selected", true).prop("selected", true); 
+	$("#updateWeek").val(1);
 	$("#updateControlPlanSpecialty").val($tds.eq(6).html());
 	$("#updateControlPlanLeader").val($tds.eq(7).html());
 	
@@ -247,10 +256,10 @@ function updateControlPlan(obj){
 
 
 function updateControlPlanButton(){
-	
+	alert("nihao")
 	
 	$.ajax({
-		url : 'controlPlan_updateControlPlan.action',
+		url : 'controlPlan_updateWeekControlPlan.action',
 		data : $("#updateControlPlanForm").serialize(),
 		type : 'POST',
 		dataType : 'json',
@@ -308,9 +317,14 @@ function planReport(){
 //获取到历史审核备注信息
 function riskCheck(){
 	
-	$tds = $("input[name='riskAna']:checked").parents('tr').find('td');
-	$("#historyAuditmsg").val($tds.eq(9).html());
+	$("#benciAuditmsg").val("");
+	$("input[name='riRiskPlanAudit.auditstatus'][value='通过审核']").prop( "checked", true );
 	
+	
+	
+	$tds = $("input[name='riskAna']:checked").parents('tr').find('td');
+	//$("#historyAuditmsg").val($tds.eq(9).html());
+	$("#historyAuditmsg").val($tds.eq(9).html().replace(/<br>/g, '/n'));
 	//隐藏一个管控计划id
 	var controlPlansid = $("input[name='riskAna']:checked").parents('tr').find("#controlPlansid").val();
 	$("#shenHeRictrlplanId").val(controlPlansid);

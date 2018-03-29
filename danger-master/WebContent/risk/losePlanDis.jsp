@@ -51,21 +51,23 @@
 					        </c:forEach>
 						 --%>
 						
-						<%-- 
-						<c:forEach var="riskInfo"	items="${result.dutyDepartmentList }"  varStatus="status">
-							${riskInfo.dutyDepartment }
-							${riskInfo.count }
-							
-							
-						</c:forEach> 
+								<%--  <c:forEach var="riskInfo"	items="${result.dutyDepartmentList }"  varStatus="status">
+									"${riskInfo.dutyDepartment }"
+									"${riskInfo.count }""
+																
+								</c:forEach> 
+								
+								<c:forEach var="riskInfo"	items="${result.addressList }"  varStatus="status">
+									${riskInfo.riskAddress }
+									${riskInfo.count }
+									
+									
+								</c:forEach> 
+ --%>
+								
+								
 						
-						<c:forEach var="riskInfo"	items="${result.addressList }"  varStatus="status">
-							${riskInfo.riskAddress }
-							${riskInfo.count }
-							
-							
-						</c:forEach>   --%>
-
+					
 
 							<!--显示内容-->
 							<div class="panel panel-default el_Mainmain">
@@ -78,9 +80,15 @@
 							
 							</div>
 								<script type="text/javascript">
+								
+								
+								
+								
+								
 							        // 基于准备好的dom，初始化echarts实例
 							        var myChart1 = echarts.init(document.getElementById('loseRiskAttribute'));
 							
+							       
 							        // 指定图表的配置项和数据
 							        var option1 = {
 							            title: {
@@ -90,13 +98,17 @@
 							             tooltip: {},//提示框 
 							        
 							            xAxis: {
-							                data: ["总数量","3256工作面","32986工作面","458工作面","井口"]
+							                data: [<c:forEach var="riskInfo"	items="${result.addressList }"  varStatus="status">
+											"${riskInfo.riskAddress}",																				
+										</c:forEach>]
 							            },
 							            yAxis: {},
 							            series: [{
 							                name: '失效风险地点',
 							                type: 'bar',
-							                data: [5, 1, 1, 1, 2]
+							                data: [<c:forEach var="riskInfo"	items="${result.addressList }"  varStatus="status">
+											"${riskInfo.count }",																				
+											</c:forEach>]
 							            }]
 							        };
 							
@@ -116,7 +128,9 @@
 							            tooltip: {},//提示框
 							       
 							            xAxis: {
-							               data: ["总数量","采煤科","挖掘科"]
+							            	data: [<c:forEach var="riskInfo"	items="${result.dutyDepartmentList }"  varStatus="status">
+											'${riskInfo.dutyDepartment }',																				
+										</c:forEach>]
 							          //  data:
 							            	
 							            
@@ -125,7 +139,9 @@
 							            series: [{
 							                name: '失效风险责任部门',
 							                type: 'bar',
-							                data: [5, 3,2]
+							                data: [<c:forEach var="riskInfo"	items="${result.dutyDepartmentList }"  varStatus="status">
+											'${riskInfo.count }',																				
+											</c:forEach>]
 							            }]
 							        };
 							

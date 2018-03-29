@@ -101,37 +101,37 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</sql>
 	<!-- 查询隐患的条件 -->
 	<sql id="query_where">
-		<if test="checkunit!=null">
+		<if test="checkunit!=null and checkunit!=''">
 			and checkunit=#{checkunit}
 		</if>
-		<if test="manager!=null">
+		<if test="manager!=null and manager!=''">
 			and manager=#{manager}
 		</if>
-		<if test="startTime!=null">
-			and findTime > #{startTime}
+		<if test="startTime!=null and startTime!=''">
+			and findTime &gt; #{startTime}
 		</if>
-		<if test="endTime!=null">
-			and findTime&lt;#{endTime}
+		<if test="endTime!=null and endTime!=''">
+			and findTime &lt; #{endTime}
 		</if>
-		<if test="dangergrade!=null">
+		<if test="dangergrade!=null and dangergrade!=''">
 			and dangergrade=#{dangergrade}
 		</if>
-		<if test="address!=null">
+		<if test="address!=null and address!=''">
 			and address like '%${address}%'
 		</if>
-		<if test="content!=null">
+		<if test="content!=null and content!=''">
 			and content like '%${content}%'
 		</if>
-		<if test="type!=null">
+		<if test="type!=null and type!=''">
 			and type=#{type}
 		</if>
-		<if test="dangerstatus">
+		<if test="dangerstatus!=null and dangerstatus!=''">
 			and dangerstatus=#{dangerstatus}
 		</if>
-		<if test="unit!=null">
+		<if test="unit!=null and unit!=''">
 			and unit=#{unit}
 		</if>
-		<if test="findtime!=null">
+		<if test="findtime!=null and findtime!=''">
 			and findtime=#{findtime}
 		</if>
 	</sql>

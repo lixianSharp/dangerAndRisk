@@ -112,6 +112,9 @@ public class QueryViewAction extends ActionSupport {
 		result.put("pageBean", pageBean);
 		return "pageDangerQuery";
 	}
+	
+	
+	
 
 	/**
 	 * 五定的查询
@@ -300,11 +303,7 @@ public class QueryViewAction extends ActionSupport {
 			condition.put("endTime", endTime + " 23:59:59");
 			result.put("endTime", endTime);
 		}
-		if (ValidateCheck.isNotNull(findtime)) {
-			condition.put("startTime", findtime + " 00:00:00");
-			condition.put("endTime", findtime + " 23:59:59");
-			result.put("findtime", findtime);
-		}
+		
 		if (ValidateCheck.isNotNull(address)) {
 			condition.put("address", address);
 			result.put("address", address);

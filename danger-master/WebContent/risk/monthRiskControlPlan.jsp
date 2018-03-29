@@ -16,7 +16,6 @@
 <script type="text/javascript" src="<%=path%>/js/risk/plug-in.js"></script>
 
 
-
 <link rel="stylesheet" href="<%=path%>/css/public/public_style.css" />
 
 <link rel="stylesheet" href="<%=path%>/css/risk/yearRecognize.css" />
@@ -70,7 +69,7 @@
 												<input id="optsdate6"
 													class="selectpicker form-control" title="点击选择年份" name="monthOrWeek">
 												</input>
-												
+												<input type="hidden" name="riskCtrlPlanMark" value="1">
 												<input type="hidden" name="currentPage" id="currentPage" />
 												<input type="hidden" name="currentCount" id="currentCount" />
 											</div>
@@ -79,8 +78,8 @@
 									
 										
 										<button type="button"
-										class="btn btn-primary el_queryButton btn-sm"  style="left: 963.617px;" onclick="queryButton()" id="queryId">查询</button>
-									<button class="btn btn-default btn-sm" style="margin-top: 6px;margin-left: 732px;" onclick="clearBtn()" >清空</button>
+										class="btn btn-primary el_queryButton btn-sm"  style="right:10%;" onclick="queryButton()" id="queryId">查询</button>
+									<button class="btn btn-primary el_queryButton btn-sm" style="right:3%; margin-top: 5px;" onclick="clearBtn()" >清空</button>
 									</div>
 								</form>
 							</div>
@@ -93,7 +92,9 @@
 								<div class="panel-body">
 
 									<div>
-									<button  class="btn btn-primary" data-toggle="modal" data-target="#addDuty" onClick="$.Pop('每个月每个专业只能有一个风险管控计划，可以通过“详情”维护专业的风险管控计划信息。','confirm',function(){})" >新增</button>
+									<!-- <button  class="btn btn-primary" data-toggle="modal" data-target="#addDuty" onClick="$.Pop('每个月每个专业只能有一个风险管控计划，可以通过“详情”维护专业的风险管控计划信息。','confirm',function(){})" >新增</button> -->
+									
+									<button  class="btn btn-primary" data-toggle="modal" onClick="$.Pop('每个月每个专业只能有一个风险管控计划，可以通过“详情”维护专业的风险管控计划信息。','confirm',function(){addControl()})" >新增</button>
 									<button class="btn btn-primary" onclick="planReport()">计划上报</button>
 									<button class=" btn btn-primary" onclick="riskCheck()">审核</button>
 									
@@ -188,13 +189,15 @@
 													<input
 													class="datainp wicon form-control" id="optsdate66"
 													type="text" placeholder="点击选择月份" value=""
-													name="ricontrolPlan.monthorweek" readonly />
+													name="ricontrolPlan.monthorweek"/>
 												</div>
 								 
 												<div class="input-group el_modellist" role="toolbar">
 													<span class="el_spans">专&nbsp;&nbsp;业：</span>
 													<input type="text" class="form-control el_modelinput"
 														id="addControlPlanSpecialty" name="ricontrolPlan.specialty" />
+														<!-- 说明是否是周管控计划 -->	
+													<input type="hidden" name="ricontrolPlan.riskctrlplanmark" value="1"/>
 												</div>
 												<div class="input-group el_modellist" role="toolbar">
 													<span class="el_spans">负责&nbsp;人：</span>
@@ -237,15 +240,16 @@
 													
 												<div class="input-group el_modellist" role="toolbar">
 													<span class="el_spans">本次审核备注信息：</span>
-													<textarea id="" class="form-control texta"
+													<textarea id="benciAuditmsg" class="form-control texta"
 										rows="3" name="riRiskPlanAudit.auditmsg"></textarea>
 										<input type="hidden" name="riRiskPlanAudit.rictrlplanid" id="shenHeRictrlplanId" />
 												</div>
 												<div class="input-group el_modellist" role="toolbar">
 													<span class="el_spans">审核状态：</span>
-													<div class="form-control texta">
-													通过审核<input class="" type="radio" checked="checked" name="riRiskPlanAudit.auditstatus" value="通过审核" />
-													未通过审核<input class=" "  type="radio" checked="" name="riRiskPlanAudit.auditstatus" value="未通过审核" />
+													<div class="form-control texta"  style=" margin-left: 51px;width: 361px;">
+													<!-- <input class="" type="radio" checked="checked" name="riRiskPlanAudit.auditstatus" value="通过审核" />通过审核 -->
+													<input class="" type="radio" name="riRiskPlanAudit.auditstatus" value="通过审核" />通过审核
+													<input class=" "  type="radio" name="riRiskPlanAudit.auditstatus" value="未通过审核" />未通过审核
 													</div>
 													
 												</div>
@@ -281,18 +285,18 @@
 													<input
 													class="datainp wicon form-control" id="optsdate666"
 													type="text" placeholder="点击选择月份" value=""
-													name="ricontrolPlan.monthorweek" readonly />
+													name="ricontrolPlan.monthorweek"  style="left: 10px;"/>
 												</div>
 								
 												<div class="input-group el_modellist" role="toolbar">
 													<span class="el_spans">专&nbsp;&nbsp;业：</span>
 													<input type="text" class="form-control el_modelinput"
-														id="updateControlPlanSpecialty" name="ricontrolPlan.specialty" />
+														id="updateControlPlanSpecialty" name="ricontrolPlan.specialty" style="left: 10px;"/>
 												</div>
 												<div class="input-group el_modellist" role="toolbar">
 													<span class="el_spans">负责&nbsp;人：</span>
 													<input type="text" class="form-control el_modelinput"
-														id="updateControlPlanLeader" name="ricontrolPlan.leader" />
+														id="updateControlPlanLeader" name="ricontrolPlan.leader" style="left: 9px;"/>
 														
 													<input type="hidden" id="updateControlPlanId" name="ricontrolPlan.rictrlplanid" />
 												</div>

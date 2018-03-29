@@ -18,6 +18,9 @@
 <link rel="stylesheet" href="<%=path%>/css/public/public_style.css" />
 
 <link rel="stylesheet" href="<%=path%>/css/risk/yearRecognize.css" />
+<script type="text/javascript">
+	var fileName = $("#exportFileNameHidden").val();
+</script>
 <style type="text/css">
 .yearReInfo table tr td:nth-child(2n+1) {
 
@@ -60,9 +63,7 @@
 						<div class=" col-md-12">
 							<!--索引-->
 							<div class="row el_queryBox">
-								<form
-									action=""
-									method="post" id="queryForm">
+								<form action=""	method="post" id="queryForm">
 									<div class="row el_queryBoxrow">
 
 										<div class="col-md-3 el_qlmQuery">
@@ -115,11 +116,43 @@
 										class="btn btn-primary el_queryButton btn-sm"  style="right:10%;" onclick="findBtn()">查询</button>
 									<button type="button" class="btn btn-primary el_queryButton btn-sm" style="right:3%; margin-top: 5px;" onclick="clearBtn()" >清空</button>
 									</div>
-								</form>
+
 							</div>
+							
+							<!-- 模态框（导出） -->
+								<div class="modal fade" id="deleteDuty" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+									<div class="modal-dialog">
+										<div class="modal-content">
+											<div class="modal-header">
+												<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+													&times;
+												</button>
+												<h4 class="modal-title" id="myModalLabel">
+												导出
+												</h4>
+											</div>
+											<div class="modal-body">
+												您确定要导出吗?
+											</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-default" data-dismiss="modal">关闭
+												</button>
+												<!-- 隐藏导出的文件的文件名 -->
+												<input id="exportFileNameHidden" type="hidden" value=""/>
+												<%-- // href="${pageContext.request.contextPath}/export_down.action?name=" --%>
+												<a id="exportATag" class="btn btn-primary" href="#" onclick="clickCloseModal()">
+													导出
+												</a>
+											</div>
+										</div><!-- /.modal-content -->
+									</div>
+								</div><!-- /.modal -->
+								
 							<!--结束 查询表单提交-->
 							<!--显示内容-->
 							<div class="panel panel-default el_Mainmain">
+							<!-- onclick="exportRiskList()" -->
+								<button class="btn btn-primary" type="button" onclick="exportRiskList()">导出</button>
 								<!--按钮面板-->
 								<div class="panel-body">
 									<table class="table table-hover table-bordered">

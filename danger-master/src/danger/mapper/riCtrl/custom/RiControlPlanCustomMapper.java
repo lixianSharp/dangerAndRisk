@@ -85,6 +85,12 @@ public interface RiControlPlanCustomMapper {
 	//通过管控计划id得到管控计划详情
 	List<RiDetailedOfRiskCtrlPlan> getMyRiskmsgid(String rictrlplanid);
 
+	//得到周管控计划的数量
+	int getWeekControlPlanCountById(Map<String, Object> condition);
+
+	//得到周管控计划的记录
+	List<RiControlPlan> getWeekControlPlanByCondition(Map<String, Object> condition);
+
 	
 	
 

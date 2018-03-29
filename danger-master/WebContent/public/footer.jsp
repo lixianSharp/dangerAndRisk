@@ -29,7 +29,7 @@
 <body>
 <!--放脚-->
 <footer class="footer">
-    <div class="center">Copyright © 2017-2018   All Rights Reserved. &nbsp;&nbsp;煤矿安全隐患排查管理系统   &nbsp;&nbsp; 技术支持联系方式：0351-6998011</div>
+    <div class="center">Copyright © 2017-2018   All Rights Reserved. &nbsp;&nbsp;煤矿安全隐患排查与风险分级管控管理系统   &nbsp;&nbsp; 技术支持联系方式：0351-6998011</div>
     <div class="center">版权所有 备案证号：晋ICP备050024564号</div>
 </footer>
 </body>

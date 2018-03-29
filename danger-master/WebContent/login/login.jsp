@@ -17,7 +17,7 @@
     </style>
 </head>
 <body>
-<h1><%-- <img alt="" src="<%=path %>/image/logo.png" width="30"> --%> 煤矿安全隐患排查管理系统<sup>V2017</sup></h1>
+<h1><%-- <img alt="" src="<%=path %>/image/logo.png" width="30"> --%> 煤矿安全隐患排查与风险分级管控管理系统<sup>V2017</sup></h1>
 
 <div class="login">
     <!--头部-->

@@ -1,12 +1,15 @@
 package danger.action.riControlPlan;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
+import org.apache.struts2.ServletActionContext;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
@@ -14,9 +17,13 @@ import com.opensymphony.xwork2.ActionSupport;
 
 import danger.bean.riCtrl.RiControlPlan;
 import danger.bean.riCtrl.RiRiskPlanAudit;
+import danger.bean.riIdentify.RiAssessment;
 import danger.bean.riIdentify.RiIdentificationRriskMsg;
 import danger.service.riControlPlan.ControlPlanService;
+import danger.service.riIdentity.RiAssessmentService;
+import danger.service.riIdentity.RiIdentificationRriskMsgService;
 import danger.utils.PageBean;
+import danger.utils.UUIDUtil;
 import danger.utils.ValidateCheck;
 
 @Controller
@@ -69,6 +76,21 @@ public class ControlPlanAction extends ActionSupport {
 		return SUCCESS;
 	}
 	
+	
+	//修改周管控计划
+	public String updateWeekControlPlan(){
+		result = new HashMap<String,Object>();
+		
+		boolean flag = controlPlanService.updateWeekControlPlan(ricontrolPlan);
+		if (flag) {
+			result.put("message", "修改成功");
+		} else {
+			result.put("message", "修改失败");
+		}
+		System.out.println(result);
+		
+		return SUCCESS;
+	}
 	
 	//得到所有的管控计划的信息（分页）
 	public String getAllControlPlan(){
@@ -140,6 +162,10 @@ public class ControlPlanAction extends ActionSupport {
 		if (ValidateCheck.isNotNull(monthOrWeek)) {
 			condition.put("monthOrWeek", monthOrWeek);
 			result.put("monthOrWeek", monthOrWeek);
+		}
+		if (ValidateCheck.isNotNull(riskCtrlPlanMark)) {
+			condition.put("riskCtrlPlanMark", riskCtrlPlanMark);
+			result.put("riskCtrlPlanMark", riskCtrlPlanMark);
 		}
 		return condition;
 	}
@@ -214,6 +240,53 @@ public class ControlPlanAction extends ActionSupport {
 		
 		return SUCCESS;
 	}
+	
+	private String data ;
+	
+	
+	public String getData() {
+		return data;
+	}
+	public void setData(String data) {
+		this.data = data;
+	}
+	public String importRiskInfo2(){
+		result = new HashMap<String, Object>();
+		//System.out.println(shuzu);
+		/*for(int i=0;i<shuzu.length;i++){
+			System.out.println(shuzu[i]);
+			boolean flag = controlPlanService.importRiskInfo(rictrlplanid,shuzu[i]);
+		}
+		*/
+		/*HttpServletRequest request = ServletActionContext.getRequest();
+		String[] data = request.getParameterValues("array");*/
+		String[] str = null;
+		if(data != null){
+			data = data.replace("\"", "");
+			data=data.substring(1, data.length()-1);
+			str = data.split(",");
+		}
+		
+		System.out.println(str);
+		boolean flag=true;
+		for(int i=0;i<str.length;i++){
+			flag = controlPlanService.importRiskInfo(rictrlplanid,str[i]);
+		}
+		//boolean flag = controlPlanService.importRiskInfo(rictrlplanid,riskmsgid);
+		//boolean flag = controlPlanService.importRiskInfo(rictrlplanid,rictrlplanid);
+		if (flag) {
+			result.put("message", "导入成功");
+		} else {
+			result.put("message", "导入失败");
+		}
+		System.out.println(result);
+		
+		return SUCCESS;
+	}
+	
+	
+	
+	
 	
 	/*
 	 * 删除该管控计划中的一条风险信息
@@ -309,7 +382,162 @@ public class ControlPlanAction extends ActionSupport {
 		
 		return SUCCESS;
 	}
+	
+	
+	/*
+	 * 新增一条风险信息到该管控计划中
+	 */
+	public String addRiskMsgToControlPlan() throws Exception{
+		result = new HashMap<String, Object>();
+		
+		/*
+		 * 一添加风险信息，得到风险信息id
+		 */
+	
+		//1.1添加主键风险信息id		
+		String riskmsgid = UUIDUtil.getUUID2();
+		riIdentificationRriskMsg.setRiskmsgid(riskmsgid);
+		
+		//1.2设置评估状态 未评估"N"
+		riIdentificationRriskMsg.setEvaluationstatus("N");
+		//1.3执行保存操作
+		boolean flag0 = riIdentificationRriskMsgService.addRiIdentificationRriskMsg(riIdentificationRriskMsg);
+		
+		
+		
+		if(flag0){
+			/*
+			 * 二添加风险评估
+			 */
+		
+			//1.设置评估id
+			riAssessment.setAssessmentid(UUIDUtil.getUUID2());
+			//1.1将该条风险信息的风险信息id放在评估表中=》放在jsp中处理，弄个隐藏域
+			//1.2设置评估时间
+			riAssessment.setEvaluatetime(new Date());
+			
+			//1.3设置风险信息id
+			riAssessment.setRiskmsgid(riskmsgid);
+			//2.添加评估
+			boolean flag1 = riAssessmentService.addRiAssessment(riAssessment);
+			//3.如果评估完成，则修改辨识风险信息中的评估状态，修改为已评估"Y"
+			
+			if(flag1){
+				//3.1根据辨识风险信息id查找辨识风险信息，并修改该条辨识风险信息的评估状态，设置为"Y"
+				//String riskmsgid = riAssessment.getRiskmsgid();//获取风险信息id
+				RiIdentificationRriskMsg identifyRiskMsg = riIdentificationRriskMsgService.selRiIdentifyRriskMsgByRiskMsgId(riskmsgid);//风险信息id查找辨识风险信息
+				identifyRiskMsg.setEvaluationstatus("Y");//修改评估状态
+				//3.2将修改后的信息保存在辨识风险信息表中
+				boolean flag3 = riIdentificationRriskMsgService.updateRiIdentificationRriskMsg(identifyRiskMsg);
+			
+				/*
+				 * 三添加该风险到该管控计划中
+				 */
+				
+				if(flag3){
+					String rictrlplanid =ricontrolPlan.getRictrlplanid();
+					
+					boolean flag4 = controlPlanService.importRiskInfo(rictrlplanid,riskmsgid);
+					
+				
+					if (flag4) {
+						result.put("message", "添加成功");
+					} else {
+						result.put("message", "添加失败");
+					}
+				}
+				
+		
+			}
+		}
+		
+		return SUCCESS;
+	}
 
+
+	//得到所有的周管控计划的信息（分页）
+	public String getAllWeekControlPlan(){
+		result = new HashMap<String, Object>();
+		
+		Map<String, Object> condition = new HashMap<String, Object>();
+		condition = generateCondition3(condition);
+		
+		PageBean<RiControlPlan> pageBean = controlPlanService.getAllWeekControlPlan(condition);
+		
+		List<RiControlPlan> ricontrolPlanList = pageBean.getProductList();
+		//得到管控计划的风险数量
+		List<Integer> riskCountList = new LinkedList<Integer>();
+		
+		//得到该管控计划的审核备注信息
+		List<LinkedList<RiRiskPlanAudit>> shenheList = new LinkedList<LinkedList<RiRiskPlanAudit>>();
+		
+		//得到该管控计划下的所有风险信息的风险地点
+		List<List<String>> addressList = new LinkedList<List<String>>();
+		
+		for(int i=0;i<ricontrolPlanList.size();i++){
+			System.out.println(ricontrolPlanList.get(i).getRictrlplanid());
+			int a=controlPlanService.getRiskCount(ricontrolPlanList.get(i).getRictrlplanid());
+			riskCountList.add(a);
+			//得到其中一条管控计划的所有审核备注信息
+			LinkedList<RiRiskPlanAudit> strList=controlPlanService.getShenHe(ricontrolPlanList.get(i).getRictrlplanid());
+			shenheList.add(strList);
+			
+			List<String> s2=  controlPlanService.getRiskAddress(ricontrolPlanList.get(i).getRictrlplanid());
+			addressList.add(s2);
+		}
+		
+		
+		
+		
+		
+		result.put("riskCountList", riskCountList);
+		
+		result.put("shenheList", shenheList);
+		
+		result.put("addressList", addressList);
+		
+		result.put("pageBean", pageBean);
+		System.out.println(result);
+		return SUCCESS;
+	}
+
+	//分页查询条件
+	private Map<String, Object> generateCondition3(Map<String, Object> condition) {
+		if (currentPage == null || "".equals(currentPage.trim())) {
+			currentPage = "1";
+			condition.put("currentPage", currentPage);
+			result.put("currentPage", currentPage);
+		}
+		if (currentCount == null || "".equals(currentCount.trim())) {
+			currentCount ="10";
+			condition.put("currentCount", currentCount);
+			result.put("currentCount", currentCount);
+		}
+
+		if (ValidateCheck.isNotNull(currentPage)) {
+			condition.put("currentPage", currentPage);
+			result.put("currentPage", currentPage);
+		}
+		if (ValidateCheck.isNotNull(currentCount)) {
+			condition.put("currentCount", currentCount);
+			result.put("currentCount", currentCount);
+		}
+		if (ValidateCheck.isNotNull(year)) {
+			condition.put("year", year);
+			result.put("year", year);
+		}
+		if (ValidateCheck.isNotNull(riskCtrlPlanMark)) {
+			condition.put("riskCtrlPlanMark", riskCtrlPlanMark);
+			result.put("riskCtrlPlanMark", riskCtrlPlanMark);
+		}
+		if (ValidateCheck.isNotNull(monthOrWeek2)) {
+			condition.put("monthOrWeek2", monthOrWeek2);
+			result.put("monthOrWeek2", monthOrWeek2);
+		}
+		return condition;
+	}
+	
+	
 	@Resource
 	private ControlPlanService controlPlanService;
 	
@@ -430,7 +658,22 @@ public class ControlPlanAction extends ActionSupport {
 	public void setShuzu(String[] shuzu) {
 		this.shuzu = shuzu;
 	}
+	
+	
 */
+	
+	
+	private String[] shuzu;
+	
+	
+
+	public String[] getShuzu() {
+		return shuzu;
+	}
+	public void setShuzu(String[] shuzu) {
+		this.shuzu = shuzu;
+	}
+
 
 	//将action中得到的值返回到jsp中
 	private Map<String, Object> result;
@@ -496,5 +739,61 @@ public class ControlPlanAction extends ActionSupport {
 		this.riRiskPlanAudit = riRiskPlanAudit;
 	}
 	
+	//javabean风险评估
+	private RiAssessment riAssessment;
+	public RiAssessment getRiAssessment() {
+		return riAssessment;
+	}
+
+	public void setRiAssessment(RiAssessment riAssessment) {
+		this.riAssessment = riAssessment;
+	}
+	//辨识风险信息
+	@Resource
+	private RiIdentificationRriskMsgService riIdentificationRriskMsgService;
+
+	public RiIdentificationRriskMsgService getRiIdentificationRriskMsgService() {
+		return riIdentificationRriskMsgService;
+	}
+	public void setRiIdentificationRriskMsgService(RiIdentificationRriskMsgService riIdentificationRriskMsgService) {
+		this.riIdentificationRriskMsgService = riIdentificationRriskMsgService;
+	}
+	
+	//风险评估
+	@Resource
+	private RiAssessmentService riAssessmentService;
+
+	public RiAssessmentService getRiAssessmentService() {
+		return riAssessmentService;
+	}
+	public void setRiAssessmentService(RiAssessmentService riAssessmentService) {
+		this.riAssessmentService = riAssessmentService;
+	}
+	
+	//周管控计划的查询条件
+	private String year;
+	private String monthOrWeek2;
+	private String riskCtrlPlanMark;
+	
+	public String getRiskCtrlPlanMark() {
+		return riskCtrlPlanMark;
+	}
+	public void setRiskCtrlPlanMark(String riskCtrlPlanMark) {
+		this.riskCtrlPlanMark = riskCtrlPlanMark;
+	}
+	public String getYear() {
+		return year;
+	}
+	public void setYear(String year) {
+		this.year = year;
+	}
+	public String getMonthOrWeek2() {
+		return monthOrWeek2;
+	}
+	public void setMonthOrWeek2(String monthOrWeek2) {
+		this.monthOrWeek2 = monthOrWeek2;
+	}
+	 
+
 	
 }
