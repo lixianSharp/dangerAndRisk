@@ -560,7 +560,9 @@
 													<!-- <input id="addidentiryid" type="text" name="riIdentificationRriskMsg.identiryid"/> -->
 													
 													<!-- 隐藏一个管控计划表的id -->
-													<input type="text" id="addRictrlplanid" name="ricontrolPlan.rictrlplanid" />
+
+													<input type="hidden" id="addRictrlplanid" name="ricontrolPlan.rictrlplanid" />
+
 													<!-- 添加年度风险辨识中 -->
 													
 													
@@ -701,12 +703,16 @@
 												<div class="input-group el_modellist" role="toolbar">
 													<span class="el_spans">风险值（D）：</span>
 													<input type="text" class="form-control el_modelinput" value="" 
-														id="evaluateRiskValue" name="riAssessment.riskvalue" readonly="readonly"/>
+
+														id="evaluateRiskValue" name="riAssessment.riskvalue" />
+
 												</div>
 												<div class="input-group el_modellist" role="toolbar">
 													<span class="el_spans">风险等级：</span>
 													<input type="text" class="form-control el_modelinput" value=""
-														id="evaluateRiskGrade" name="riAssessment.riskgrade" readonly="readonly"/>
+
+														id="evaluateRiskGrade" name="riAssessment.riskgrade" />
+
 												</div>
 												
 												</form>

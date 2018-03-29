@@ -8,13 +8,15 @@
 <html lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>yorge的用户管理</title>
+<title>隐患日报</title>
 <%@ include file="/controls/cssJs.jsp"%>
 
 <!--下拉树, 用于固定分页样式。否则分页内容上漂-->
 <link rel="stylesheet" href="<%=path%>/controls/selectDropTree/demo.css" type="text/css">
 
 <link rel="stylesheet" href="<%=path%>/css/public/public_style.css" />
+
+<script type="text/javascript" src="<%=path%>/js/danger/hdDayReport.js"></script>
 
 <script>
 /* 根据部门修改颜色 */
@@ -114,7 +116,7 @@ for(int i = 0; i < trLenght; i ++) {
 
 								<!--按钮面板-->
 								<div class="panel-body">
-
+										<button class="btn btn-primary" onclick="exportRiskList()">导出</button>
 									<!-- 表格  -->
 									<table class="table table-hover table-bordered">
 										<thead>
@@ -156,6 +158,38 @@ for(int i = 0; i < trLenght; i ++) {
 											</c:forEach>
 										</tbody>
 									</table>
+
+
+							<!-- 模态框（导出） -->
+							<div class="modal fade" id="deleteDuty" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+								<div class="modal-dialog">
+									<div class="modal-content">
+										<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+												&times;
+											</button>
+											<h4 class="modal-title" id="myModalLabel">
+											导出
+											</h4>
+										</div>
+										<div class="modal-body">
+											您确定要导出吗?
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-default" data-dismiss="modal">关闭
+											</button>
+											<!-- 隐藏导出的文件的文件名 -->
+											<input id="exportFileNameHidden" type="hidden" value=""/>
+											<%-- // href="${pageContext.request.contextPath}/export_down.action?name=" --%>
+											<a id="exportATag" class="btn btn-primary" href="#" onclick="clickCloseModal()">
+												导出
+											</a>
+										</div>
+									</div><!-- /.modal-content -->
+								</div>
+							</div><!-- /.modal -->
+
+
 
 									<div id="paginationIDU"></div>
 									<script>

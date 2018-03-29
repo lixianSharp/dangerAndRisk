@@ -78,8 +78,8 @@
 									
 										
 										<button type="button"
-										class="btn btn-primary el_queryButton btn-sm"  style="left: 963.617px;" onclick="queryButton()" id="queryId">查询</button>
-									<button class="btn btn-default btn-sm" style="margin-top: 6px;margin-left: 732px;" onclick="clearBtn()" >清空</button>
+										class="btn btn-primary el_queryButton btn-sm"  style="right:10%;" onclick="queryButton()" id="queryId">查询</button>
+									<button class="btn btn-primary el_queryButton btn-sm" style="right:3%; margin-top: 5px;" onclick="clearBtn()" >清空</button>
 									</div>
 								</form>
 							</div>

@@ -225,4 +225,49 @@ function clearBtn(){
 	$("#proTypeCondition").val("");//专业类型
 	$("#riskTypeCondition").val("");//风险类型
 	$("#riskGradeCondition").val("");//风险等级
+	
+	//清空隐藏的文件名
+	$("#exportFileNameHidden").val("");
+	
+	//把导出的隐藏域中的标签也清空
+	/*$("#exportRiskType").val("");//风险类型
+	$("#exportProType").val("");//专业类型
+	$("#exportDisasterType").val("");//灾害类型
+	$("#exportRiskGrade").val("");//风险等级
+*/
 }
+
+
+//导出
+function exportRiskList(){
+	$.ajax({
+		type : "post",
+		dataType : "json",
+		url : "${pageContext.request.contextPath}/export_exportRiskList.action",
+		data : {
+			// 当前页页号 每页显示的记录数
+			"riskgrade":$("#riskGradeCondition").val(),//风险等级
+			"risktype":$("#riskTypeCondition").val(),//风险类型
+			"professionaltypes":$("#proTypeCondition").val(),//专业类型
+			"disastertypes":$("#disasterTypeCondition").val()//灾害类型
+		// 每页显示的记录数
+		},
+		success:function(data){
+			//返回文件名
+			$("#exportFileNameHidden").val(data.fileNameExcel);
+			//为导出的a标签的href属性赋值
+			$("#exportATag").attr("href", "${pageContext.request.contextPath}/export_down.action?name="+$("#exportFileNameHidden").val());
+		}
+	});
+	
+	//打开模态框
+	$("#deleteDuty").modal();
+	
+}
+
+//点击确定导出按钮之后 将模态框关闭
+function clickCloseModal(){
+	$("#deleteDuty").modal("hide");
+}
+
+

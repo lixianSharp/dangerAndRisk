@@ -8,7 +8,7 @@
 <html lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>yorge的用户管理</title>
+<title>登陆成功之后的界面</title>
 
 <%@ include file="/controls/cssJs.jsp"%>
 
@@ -72,12 +72,12 @@
 		<!--放主界面内容-->
 		<div class="el_right" style="background:#aee6fe;margin-bottom:10px;position:relative;top:-3px;">
 			<%-- <img src="<%=path %>/image/hdMain.jpg" width="100%" /> --%>
-			<span style="font-size:60px;font-weight:bolder;position:absolute;left:25%;top:20%;">欢迎进入隐患排查系统</span>
+			<span style="font-size:50px;font-weight:bolder;position:absolute;left:10%;top:20%;">欢迎进入煤矿安全隐患排查与风险分级管控管理系统</span>
 			
 			<div id="baseInfo">
 				<!-- <span>未五定隐患：23</span>
 				<span>复查不通过隐患：23</span> -->
-				<span><a href="${baseurl }/queryView_findDanger2.action"><h3>点击这里进行隐患处理>></h3></a></span>
+				<span><a href="${baseurl }/queryView_findDanger2.action"><h3>处理隐患排查与风险分级管控>></h3></a></span>
 			</div>
 		</div>
 

@@ -104,7 +104,7 @@ a {
 									<div>
 									<h4>年度风险信息</h4>
 									<button class="btn btn-primary" data-toggle="modal" data-target="#addDuty" onclick="addOpenBtn()">新增</button>
-									
+									<a class="btn btn-primary" href="${pageContext.request.contextPath }/export_exportIdentifyYS.action?identiryid=${identifyMainTableY.identiryid }">导出</a>
 									
 									<table class="table table-hover table-bordered">
 										<thead>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+	<package name="exportExcel" extends="json-default" namespace="/">
+		
+		<!-- <action name="export_*" class="exportToExcelAction"
+			method="{1}">
+			
+			这个用于将map转成json
+			<result name="ok" type="json">
+				这里指定将被Struts2序列化的属性，该属性在action中必须有对应的getter方法
+				<param name="root">map</param>
+			</result>
+			
+		</action> -->
+		
+		
+		
+	<!-- 文件下载 start -->
+		<action name="export_*" class="exportToExcelAction"
+			method="{1}">
+			
+			<!-- 这个用于将map转成json -->
+			<result name="ok" type="json">
+				这里指定将被Struts2序列化的属性，该属性在action中必须有对应的getter方法
+				<param name="root">map</param>
+			</result>
+			
+			
+			
+			<!-- 为setServerPath方法中的serverPath属性注入值 也就是文件存放的地址/目录(文件应该从哪里下载) -->
+			<param name="serverPath">D:/exportExcel/</param>
+
+			<!-- 文件下载的关键：视图类型一定是stream -->
+			<result name="down" type="stream">
+				<!-- 往StreamResult类中的属性注入内容 -->
+				<!-- 返回给浏览器的文件类型。返回通用的二进制 -->
+				<param name="contentType">application/octet-stream</param>
+				<!-- 返回给浏览器的输入流 -->
+				<!-- 默认就是 inputStream，它将会指示 StreamResult 通过 inputName 属性值的 getter 方法， 
+					比如这里就是 getInputStream() 来获取下载文件的内容，意味着你的 Action 要有这个方法 -->
+				<param name="inputName">inputStream</param>
+
+				<!-- 告诉浏览器的方式下载资源 ${name}:获取Action中getName()方法的数据 -->
+				<!-- 默认为 inline(在线打开)，设置为 attachment 将会告诉浏览器下载该文件，filename 指定下载文 件保存的文件名，若未指定将会是以浏览的页面名作为文件名，如以 
+					download.action 作为文件名， 这里使用的是动态文件名，${name}, 它将通过 Action 的 getName() 获得文件名 -->
+				<param name="contentDisposition">attachment;filename=${name}</param>
+				<!-- 缓存大小 -->
+				<param name="bufferSize">2048</param>
+			</result>
+		</action>
+
+		<!-- 文件下载 end -->
+			
+	</package>
+
+
+	
+</struts>

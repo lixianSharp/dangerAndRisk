@@ -677,7 +677,7 @@ function addSave(){
 //修改
 //打开修改模态框之前要进行的操作
 function updateOpenBtn(obj){
-	alert("update")
+
 	
 	var address = $(obj).parents("tr").children("td").eq(1).text();//风险地点
 

@@ -159,7 +159,7 @@
 	</select>
 	
 	
-	<!-- 根据风险辨识主表年份 查询该是否有该年度的年度辨识主表信息 -->
+	<!-- 根据风险辨识主表年份 查询该是否有该年度的年度辨识主表信息 用于判断添加年度辨识主表信息的时候年份不能重复的-->
 	<select id="selIdentifyMainByYear" parameterType="map" resultType="danger.bean.riIdentify.RiIdentificationMainTable">
 		SELECT * FROM riidentificationmaintable
 		<where>
