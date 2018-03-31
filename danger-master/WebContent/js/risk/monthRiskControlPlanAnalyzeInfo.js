@@ -1,3 +1,9 @@
+
+$(function(){
+	duoxuan();
+});
+
+
 function monthRiskControlPlanAnalyze(){
 	var choosePlan = 0;// 判断是否有风险被选中
 
@@ -28,14 +34,18 @@ function monthRiskControlPlanAnalyze(){
 				}
 			})
 			
-			alert(JSON.stringify(riskMsgIdArray))
-			alert(JSON.stringify(indentiryIdArray))
+			//将分析信息赋为空
+			$("#addDutydepartment2").val("");
+			$("#addImplementationofmeasures2").val("");
+			$("#addMeasureisvalid2").val("");
+			$("#addInspectionsituation2").val("");
+			
+			
 			$("#addRiskmsgid2").val(JSON.stringify(riskMsgIdArray));
 			$("#addIdentiryid2").val(JSON.stringify(indentiryIdArray));
 			
 			$("#monthRiskControlPlanAnalyze2").modal();
-			alert($("#addRiskmsgid2").val())
-			alert($("#addIdentiryid2").val())
+			
 	}else if(choosePlan == 1){
 		//$("#monthRiskControlPlanAnalyze1").modal();
 		analyze1();
@@ -48,6 +58,11 @@ function monthRiskControlPlanAnalyze(){
 	
 	
 }
+
+
+
+
+
 function analyze1(){
 
 	//风险信息
@@ -84,6 +99,47 @@ function analyze1(){
 
 
 function addAnalysisRisk1(){
+	
+	
+	var isNotNull = $("#addAnalysisPlanForm1").validate({
+		rules : {
+			"riDetailedOfRiskCtrlPlan.dutydepartment" : {
+				required : true
+
+			},
+			"riDetailedOfRiskCtrlPlan.implementationofmeasures" : {
+				required : true
+
+			},
+			"riDetailedOfRiskCtrlPlan.measureisvalid" : {
+				required : true
+			},
+			"riDetailedOfRiskCtrlPlan.inspectionsituation" : {
+				required : true
+			}
+		},
+		messages : {
+			"riDetailedOfRiskCtrlPlan.dutydepartment" : {
+				required : " 请输入责任部门"
+			},
+		
+			"riDetailedOfRiskCtrlPlan.implementationofmeasures" : {
+				required : "请输入措施执行情况"
+			},
+
+			"riDetailedOfRiskCtrlPlan.measureisvalid" : {
+				required : "请选择措施是否有效"
+			},
+			"riDetailedOfRiskCtrlPlan.inspectionsituation" : {
+				required : " 请输入考核情况"
+			}
+			
+		
+		}
+
+	});
+
+	if (isNotNull.form()) {
 	$.ajax({
 		url : 'analysisPlan_addControlPlanAnalysis.action',
 		data : $("#addAnalysisPlanForm1").serialize(),
@@ -102,10 +158,51 @@ function addAnalysisRisk1(){
 	});
 }
 
-
+}
 
 function addAnalysisRisk2(){
-	alert("dfjdk")
+	
+	
+
+	var isNotNull = $("#addAnalysisPlanForm1").validate({
+		rules : {
+			"riDetailedOfRiskCtrlPlan.dutydepartment" : {
+				required : true
+
+			},
+			"riDetailedOfRiskCtrlPlan.implementationofmeasures" : {
+				required : true
+
+			},
+			"riDetailedOfRiskCtrlPlan.measureisvalid" : {
+				required : true
+			},
+			"riDetailedOfRiskCtrlPlan.inspectionsituation" : {
+				required : true
+			}
+		},
+		messages : {
+			"riDetailedOfRiskCtrlPlan.dutydepartment" : {
+				required : " 请输入责任部门"
+			},
+		
+			"riDetailedOfRiskCtrlPlan.implementationofmeasures" : {
+				required : "请输入措施执行情况"
+			},
+
+			"riDetailedOfRiskCtrlPlan.measureisvalid" : {
+				required : "请选择措施是否有效"
+			},
+			"riDetailedOfRiskCtrlPlan.inspectionsituation" : {
+				required : " 请输入考核情况"
+			}
+			
+		
+		}
+
+	});
+
+	if (isNotNull.form()) {
 	$.ajax({
 		url : 'analysisPlan_addControlPlanAnalysis2.action',
 		data : $("#addAnalysisPlanForm2").serialize(),
@@ -122,9 +219,22 @@ function addAnalysisRisk2(){
 		}
 
 	});
+	}
 }
 
 
+	
+function duoxuan(){
+	// 全选和全不选操作
+	$("#selectAllId").change(function() {
+		if ($(this).prop("checked") == true) {
+			$("input[name='riskAna']").prop("checked", "true");
+		} else {
+			$("input[name='riskAna']").removeAttr("checked");
+		}
+	})
+	
+}
 
 
 

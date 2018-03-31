@@ -52,7 +52,8 @@
 							<!-- 灾害类型风险构成 -->
 							<div  class="col-md-12">
 							<div class="col-md-6">
-							<h4 align="center">当前重大风险共12处</h4>
+							<!-- <h4 align="center">当前重大风险共12处</h4> -->
+							<h4 align="center" id="top"></h4>
 							<table class="table table-hover table-bordered">
 						<thead>
 							<tr>

@@ -33,9 +33,11 @@ var successList = function List(result) {
 	var t_body = $("#tbody");
 	// 循环添加每一行
 	var allCount =0;
+	$("#top").html("当前重大风险共"+riskCounts.length+"处");
 	for (var i = 0; i < riskCounts.length; i++) {
 		allCount =allCount+riskCounts[i].count;
 	}
+	$("#top").html("当前重大风险共"+allCount+"处");
 	for (var i = 0; i < riskCounts.length; i++) {
 		
 		var point =riskCounts[i].count/allCount

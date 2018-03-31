@@ -112,9 +112,9 @@ public class ControlPlanDetailAction extends ActionSupport {
 	}
 
 	/*
-	 * 跳转到管控详情界面
+	 * 跳转到月管控详情界面
 	 */
-	public String toControlPlanDetail(){
+	public String toMonthControlPlanDetail(){
 		result = new HashMap<String, Object>();
 		HttpServletRequest request = ServletActionContext.getRequest();
 		String riCtrlPlanId = request.getParameter("method");
@@ -131,6 +131,27 @@ public class ControlPlanDetailAction extends ActionSupport {
 		System.out.println("pageBean"+pageBean);
 		result.put("pageBean", pageBean);
 		return "monthRiskControlPlanRisk";
+	}
+	/*
+	 * 跳转到周管控详情界面
+	 */
+	public String toWeekControlPlanDetail(){
+		result = new HashMap<String, Object>();
+		HttpServletRequest request = ServletActionContext.getRequest();
+		String riCtrlPlanId = request.getParameter("method");
+	
+		//得到该管控记录
+		RiControlPlan riControlPlan = controlPlanService.getRiControlPlanById(riCtrlPlanId);
+		result.put("riControlPlan", riControlPlan);
+	
+		
+		//得到该管控记录的所有风险信息
+		Map<String, Object> condition = new HashMap<String, Object>();
+		condition = generateCondition(condition,riCtrlPlanId);
+		PageBean<RiIdentificationRriskMsg> pageBean=controlPlanDetailService.getAllRiskMsgByControlPlanId(condition);
+		System.out.println("pageBean"+pageBean);
+		result.put("pageBean", pageBean);
+		return "weekRiskControlPlanRisk";
 	}
 	
 	

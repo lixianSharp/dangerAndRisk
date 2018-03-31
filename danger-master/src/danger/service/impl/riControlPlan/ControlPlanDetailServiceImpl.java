@@ -295,6 +295,19 @@ public class ControlPlanDetailServiceImpl implements ControlPlanDetailService {
 		} 
 		return flag;
 	}
+	
+	
+	@Override
+	public List<RiIdentificationRriskMsg> getRiskMsgList(String riCtrlPlanId) {
+		List<RiIdentificationRriskMsg> riskMsgList=null;
+		if (riCtrlPlanId != null) {
+
+			
+			riskMsgList = RiDetailedOfRiskCtrlPlanCustomMapper.getRiskMsgList(riCtrlPlanId);
+
+		} 
+		return riskMsgList;
+	}
 
 	//得到该管控记录的所有责任部门及其个数
 	@Override
@@ -330,6 +343,8 @@ public class ControlPlanDetailServiceImpl implements ControlPlanDetailService {
 		List<String> ptList = RiDetailedOfRiskCtrlPlanCustomMapper.getProfessionalTypesList();
 		return ptList;
 	}
+
+	
 
 	
 	

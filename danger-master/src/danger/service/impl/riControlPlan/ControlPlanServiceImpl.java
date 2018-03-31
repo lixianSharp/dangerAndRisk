@@ -1,5 +1,6 @@
 package danger.service.impl.riControlPlan;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -12,11 +13,13 @@ import org.springframework.stereotype.Service;
 import danger.bean.riCtrl.RiControlPlan;
 import danger.bean.riCtrl.RiDetailedOfRiskCtrlPlan;
 import danger.bean.riCtrl.RiRiskPlanAudit;
+import danger.bean.riIdentify.RiIdentificationMainTable;
 import danger.bean.riIdentify.RiIdentificationRriskMsg;
 import danger.mapper.riCtrl.RiControlPlanMapper;
 import danger.mapper.riCtrl.RiDetailedOfRiskCtrlPlanMapper;
 import danger.mapper.riCtrl.RiRiskPlanAuditMapper;
 import danger.mapper.riCtrl.custom.RiControlPlanCustomMapper;
+import danger.mapper.riIdentify.RiIdentificationMainTableMapper;
 import danger.service.riControlPlan.ControlPlanService;
 import danger.utils.PageBean;
 import danger.utils.UUIDUtil;
@@ -64,9 +67,20 @@ public class ControlPlanServiceImpl implements ControlPlanService {
 	public void setRiDetailedOfRiskCtrlPlanMapper(RiDetailedOfRiskCtrlPlanMapper riDetailedOfRiskCtrlPlanMapper) {
 		this.riDetailedOfRiskCtrlPlanMapper = riDetailedOfRiskCtrlPlanMapper;
 	}
+	
+	
+	@Resource
+	private RiIdentificationMainTableMapper riIdentificationMainTableMapper;
+	
+	public RiIdentificationMainTableMapper getRiIdentificationMainTableMapper() {
+		return riIdentificationMainTableMapper;
+	}
+	public void setRiIdentificationMainTableMapper(RiIdentificationMainTableMapper riIdentificationMainTableMapper) {
+		this.riIdentificationMainTableMapper = riIdentificationMainTableMapper;
+	}
 	//添加一条管控计划记录
 	@Override
-	public boolean addControlPlan(RiControlPlan ricontrolPlan) {
+	public String addControlPlan(RiControlPlan ricontrolPlan) {
 		int flag=0;
 
 		System.out.println("ricontrolPlan" + ricontrolPlan);
@@ -75,6 +89,9 @@ public class ControlPlanServiceImpl implements ControlPlanService {
 			//设置管控id
 			String rictrlplanid = UUIDUtil.getUUID2();
 			ricontrolPlan.setRictrlplanid(rictrlplanid);
+			
+			//得到添加的管控计划的专业类型
+			String zhuaye = ricontrolPlan.getSpecialty();
 			
 			// 设置当前时间
 			
@@ -97,16 +114,89 @@ public class ControlPlanServiceImpl implements ControlPlanService {
 			//状态设置为未上报
 			ricontrolPlan.setReportstatus("0");
 			
+			/*
+			 * 查询得到所有的月管控计划
+			 */
+			List<RiControlPlan> controlPlanList = riControlPlanCustomMapper.getAllControlPlan("1");
+			for(RiControlPlan riControlPlan:controlPlanList){
+				if(riControlPlan.getMonthorweek().equals(String.valueOf(number))&&riControlPlan.getYear().equals(str1)){
+					if(riControlPlan.getSpecialty().equals(zhuaye)){
+						return "该月管控计划已存在，不可再次添加";
+					}
+					
+					
+				}
+			}
+			
+			
+			
 			flag = riControlPlanMapper.insertSelective(ricontrolPlan);
 			
 
 		} 
 		if(flag==0){
-			return false;
+			return "添加失败";
 		}else{
-			return true;
+			return "添加成功";
 		}
 	}
+	
+	/*
+	 * 添加旬管控计划
+	 */
+	@Override
+	public String addWeekControlPlan(RiControlPlan ricontrolPlan) {
+		int flag=0;
+
+		System.out.println("ricontrolPlan" + ricontrolPlan);
+		if (ricontrolPlan != null) {
+			
+			//得到添加的管控计划的专业类型
+			String zhuaye = ricontrolPlan.getSpecialty();
+			
+			
+			
+
+			//设置管控id
+			String rictrlplanid = UUIDUtil.getUUID2();
+			ricontrolPlan.setRictrlplanid(rictrlplanid);
+			
+			// 设置当前时间
+			
+			ricontrolPlan.setCreatetime(new Date());
+			
+			//将该管控记录标识为旬管控计划
+			ricontrolPlan.setRiskctrlplanmark("0");
+			//状态设置为未上报
+			ricontrolPlan.setReportstatus("0");
+			
+			
+			/*
+			 * 查询得到所有的旬管控计划
+			 */
+			List<RiControlPlan> controlPlanList = riControlPlanCustomMapper.getAllControlPlan2("0");
+			for(RiControlPlan riControlPlan2:controlPlanList){
+				if(riControlPlan2.getMonthorweek().equals(ricontrolPlan.getMonthorweek())&&riControlPlan2.getYear().equals(ricontrolPlan.getYear())){
+					if(riControlPlan2.getSpecialty().equals(zhuaye)){
+						return "该旬管控计划已存在，不可再次添加";
+					}
+					
+					
+				}
+			}
+			
+			
+			flag = riControlPlanMapper.insertSelective(ricontrolPlan);
+			
+
+		} 
+		if(flag==0){
+			return "添加失败";
+		}else{
+			return "添加成功";
+		}
+	}
+	
 	
 	
 	
@@ -127,11 +217,12 @@ public class ControlPlanServiceImpl implements ControlPlanService {
 			ricontrolPlan.setCreatetime(new Date());
 			
 			String month = ricontrolPlan.getMonthorweek();
+			
 			//年
 			String str1 = month.substring(0, 4);
 			
 			//月
-			String str2 = month.substring(month.length()-2, month.length());
+			String str2 = month.substring(5, month.length());
 			int number = Integer.parseInt(str2);
 			
 			ricontrolPlan.setYear(str1);
@@ -308,7 +399,11 @@ public class ControlPlanServiceImpl implements ControlPlanService {
 	@Override
 	public List<Map<String, Object>> getRiskCountByDisasterTypes() {
 		List<Map<String, Object>> riskCountList=null;
-		riskCountList = riControlPlanCustomMapper.getRiskCountByDisasterTypes();
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy");
+	
+		String year = sdf.format((new Date()));
+		riskCountList = riControlPlanCustomMapper.getRiskCountByDisasterTypes(year);
 		return riskCountList;
 	}
 	
@@ -318,7 +413,9 @@ public class ControlPlanServiceImpl implements ControlPlanService {
 	@Override
 	public List<Map<String, Object>> getAddressList() {
 		List<Map<String,Object>> addressList=null;
-		addressList =riControlPlanCustomMapper.getAddressList();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy");
+		String year = sdf.format((new Date()));
+		addressList =riControlPlanCustomMapper.getAddressList2(year);
 		return addressList;
 	}
 	
@@ -459,13 +556,23 @@ public class ControlPlanServiceImpl implements ControlPlanService {
 	 * 得到上月的管控计划的id
 	 */
 	@Override
-	public String getPrecedingMonthId(String myrictrlplanid) {
+	public String getPrecedingMonthId(String riCtrlPlanId, String specialty) {
 		String str = null;
-		if(myrictrlplanid!=null){
-			str = riControlPlanCustomMapper.getPrecedingMonthId(myrictrlplanid);
+		if(riCtrlPlanId!=null){
+			str = riControlPlanCustomMapper.getPrecedingMonthId(riCtrlPlanId,specialty);
 		}
 		return str;
 	}
+	
+	@Override
+	public String getPrecedingMonthId(Map<String, Object> condition) {
+		String str = null;
+		if(condition!=null){
+			str = riControlPlanCustomMapper.getPrecedingMonthIdByCondition(condition);
+		}
+		return str;
+	}
+	
 	
 	/*
 	 * 得到上月的风险信息的id
@@ -486,7 +593,13 @@ public class ControlPlanServiceImpl implements ControlPlanService {
 	public boolean reportPlan(String controlPlansid) {
 		int flag=0;
 		if(controlPlansid!=null){
-			flag = riControlPlanCustomMapper.reportPlan(controlPlansid);
+			RiControlPlan riControlPlan = riControlPlanMapper.selectByPrimaryKey(controlPlansid);
+			if(riControlPlan.getCheckstatus()!=null){
+				flag = riControlPlanCustomMapper.reportPlan(controlPlansid);
+			}else{
+				flag = riControlPlanCustomMapper.reportPlan2(controlPlansid);
+			}
+			
 		}
 		if(flag!=0){
 			return true;
@@ -536,39 +649,7 @@ public class ControlPlanServiceImpl implements ControlPlanService {
 		}
 	}
 	
-	/*
-	 * 添加旬管控计划
-	 */
-	@Override
-	public boolean addWeekControlPlan(RiControlPlan ricontrolPlan) {
-		int flag=0;
-
-		System.out.println("ricontrolPlan" + ricontrolPlan);
-		if (ricontrolPlan != null) {
-
-			//设置管控id
-			String rictrlplanid = UUIDUtil.getUUID2();
-			ricontrolPlan.setRictrlplanid(rictrlplanid);
-			
-			// 设置当前时间
-			
-			ricontrolPlan.setCreatetime(new Date());
-			
-			//将该管控记录标识为旬管控计划
-			ricontrolPlan.setRiskctrlplanmark("0");
-			//状态设置为未上报
-			ricontrolPlan.setReportstatus("0");
-			
-			flag = riControlPlanMapper.insertSelective(ricontrolPlan);
-			
-
-		} 
-		if(flag==0){
-			return false;
-		}else{
-			return true;
-		}
-	}
+	
 	@Override
 	public PageBean<RiControlPlan> getAllWeekControlPlan(Map<String, Object> condition) {
 		// 目的：就是想办法封装一个PageBean 并返回
@@ -621,9 +702,31 @@ public class ControlPlanServiceImpl implements ControlPlanService {
 		return pageBean;
 	}
 	
+	/*
+	 * 得到风险来源
+	 */
+	@Override
+	public RiIdentificationMainTable getRiIdentificationMainTableName(String str) {
+		RiIdentificationMainTable riIdentificationMainTable=null;
+		if(str!=null){
+			riIdentificationMainTable = riIdentificationMainTableMapper.selectByPrimaryKey(str);
+		}
+		return riIdentificationMainTable;
+	}
+	
+	//通过时间查找年度辨识id
+	@Override
+	public String getYearIdByTime(String year) {
+		String yearId=null;
+		if(year!=null){
+			yearId=riControlPlanCustomMapper.getYearIdByTime(year);
+		}
+		return yearId;
+		
+	}
 	
 	
-	
+
 	
 	
 	

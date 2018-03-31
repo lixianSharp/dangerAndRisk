@@ -1,11 +1,13 @@
 package danger.service.riControlPlan;
 
+import java.text.SimpleDateFormat;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
 import danger.bean.riCtrl.RiControlPlan;
 import danger.bean.riCtrl.RiRiskPlanAudit;
+import danger.bean.riIdentify.RiIdentificationMainTable;
 import danger.bean.riIdentify.RiIdentificationRriskMsg;
 import danger.utils.PageBean;
 
@@ -15,7 +17,7 @@ public interface ControlPlanService {
 	PageBean<RiControlPlan> getAllControlPlan(Map<String, Object> condition);
 
 	//添加管控计划记录
-	boolean addControlPlan(RiControlPlan ricontrolPlan);
+	String addControlPlan(RiControlPlan ricontrolPlan);
 
 	//修改管控计划
 	boolean updateControlPlan(RiControlPlan ricontrolPlan);
@@ -62,12 +64,15 @@ public interface ControlPlanService {
 	/*
 	 * 得到上月的管控计划的id
 	 */
-	String getPrecedingMonthId(String myrictrlplanid);
+	String getPrecedingMonthId(String myrictrlplanid, String myspecialty);
+	String getPrecedingMonthId(Map<String, Object> condition);
 
 	/*
 	 * 得到上月的风险信息的id
 	 */
 	List<String> getPrecedingMonthRiskInfoIdList(String precedingMonthId);
+	
+	
 
 	/*
 	 * 计划上报
@@ -82,7 +87,7 @@ public interface ControlPlanService {
 	/*
 	 * 添加旬管控计划
 	 */
-	boolean addWeekControlPlan(RiControlPlan ricontrolPlan);
+	String addWeekControlPlan(RiControlPlan ricontrolPlan);
 
 	/*
 	 * 得到周管控计划的所有记录
@@ -90,6 +95,17 @@ public interface ControlPlanService {
 	PageBean<RiControlPlan> getAllWeekControlPlan(Map<String, Object> condition);
 
 	boolean updateWeekControlPlan(RiControlPlan ricontrolPlan);
+	
+	//得到风险来源
+	RiIdentificationMainTable getRiIdentificationMainTableName(String str);
+
+	//通过时间查找年度辨识id
+	String getYearIdByTime(String year);
+
+
+	
+
+	
 
 
 }

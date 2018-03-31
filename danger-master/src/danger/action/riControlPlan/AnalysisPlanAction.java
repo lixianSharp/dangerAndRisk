@@ -91,7 +91,7 @@ public class AnalysisPlanAction extends ActionSupport {
 	}
 
 	/*
-	 * 跳转到管控计划分析详情界面
+	 * 跳转到月管控计划分析详情界面
 	 */
 	public String toMonthRiskControlPlanAnalyzeInfo(){
 		
@@ -114,6 +114,34 @@ public class AnalysisPlanAction extends ActionSupport {
 		result.put("pageBean", pageBean);
 		return "monthRiskControlPlanAnalyzeInfo";
 	}
+	
+	
+	/*
+	 * 跳转到周管控计划分析详情界面
+	 */
+	public String toWeekRiskControlPlanAnalyzeInfo(){
+		
+		result = new HashMap<String, Object>();
+		HttpServletRequest request = ServletActionContext.getRequest();
+		String riCtrlPlanId = request.getParameter("method");
+	
+		//得到该管控记录
+		RiControlPlan riControlPlan = controlPlanService.getRiControlPlanById(riCtrlPlanId);
+		result.put("riControlPlan", riControlPlan);
+	
+		
+		//得到该管控记录的所有风险信息
+		Map<String, Object> condition = new HashMap<String, Object>();
+		condition = generateCondition(condition,riCtrlPlanId);
+		PageBean<Map<String, Object>> pageBean=controlPlanDetailService.getAllRiskMsgAndAnalysisPlanByControlPlanId(condition);
+		System.out.println("pageBean"+pageBean);
+		
+
+		result.put("pageBean", pageBean);
+		return "weekRiskControlPlanAnalyzeInfo";
+	}
+
+	
 
 	private Map<String, Object> generateCondition(Map<String, Object> condition, String riCtrlPlanId) {
 		if (currentPage == null || "".equals(currentPage.trim())) {

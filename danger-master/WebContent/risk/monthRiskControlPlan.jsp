@@ -74,12 +74,21 @@
 												<input type="hidden" name="currentCount" id="currentCount" />
 											</div>
 										</div>
-
-									
+										<div class="col-md-3 el_qlmQuery">
+											<div class="input-group" role="toolbar">
+												<span class="el_spans">专业类型：</span>
+												 
+												<select id="professionalTypesId"
+													class="selectpicker form-control" title="请选择" name="specialty">
+													
+												</select>
+											</div>
+										</div>
 										
 										<button type="button"
-										class="btn btn-primary el_queryButton btn-sm"  style="right:10%;" onclick="queryButton()" id="queryId">查询</button>
-									<button class="btn btn-primary el_queryButton btn-sm" style="right:3%; margin-top: 5px;" onclick="clearBtn()" >清空</button>
+										class="btn btn-primary el_queryButton btn-sm" style="left: 930.62px;top: 0px;bottom: 12px;margin-bottom: 3px;padding-bottom: 0px;padding-top: 0px;"  onclick="queryButton()" id="queryId">查询</button>
+									<!-- <button class="btn btn-default btn-sm" style="margin-top: 6px;margin-left: 732px;" onclick="clearBtn()" >清空</button> -->
+									<button class="btn btn-default btn-sm" style="margin-left: 400px;" >清空</button>
 									</div>
 								</form>
 							</div>
@@ -97,15 +106,9 @@
 									<button  class="btn btn-primary" data-toggle="modal" onClick="$.Pop('每个月每个专业只能有一个风险管控计划，可以通过“详情”维护专业的风险管控计划信息。','confirm',function(){addControl()})" >新增</button>
 									<button class="btn btn-primary" onclick="planReport()">计划上报</button>
 									<button class=" btn btn-primary" onclick="riskCheck()">审核</button>
-									
-									
+		
 									</div>
-									<!-- <script type="text/javascript">
-									function riskCheck(){
-										$('#riskCheck').modal();
-									} -->
 									
-									</script>
 									<table class="table table-hover table-bordered">
 										<thead>
 											<tr>
@@ -123,48 +126,7 @@
 												<th>操作</th>
 											</tr>
 										</thead>
-									<%-- 	<tbody>
-											<tr>
-												<td>
-												<input type="checkbox">
-												</td>
-												<td>
-												1
-												</td>
-												<td>
-												2017
-												</td>
-												<td>
-												2
-												</td>
-												<td>
-												井口
-												</td>
-												<td>
-												3
-												</td>
-												<td>
-												采煤
-												</td>
-												<td>
-												张三
-												</td>
-												<td>
-												2923
-												</td>
-												<td>
-												审核通过
-												</td>
-												<td>
-												审核通过
-												</td>
-												<td>
-													<a data-toggle="modal" data-target="#modifierDuty" >修改</a>
-													<a href="<%=path%>/risk/monthRiskControlPlanRisk.jsp">详情</a>
-												</td>
-											</tr>
-
-										</tbody>--%>
+									
 										<tbody id="tbody"></tbody>
 									</table> 
 									
@@ -192,13 +154,29 @@
 													name="ricontrolPlan.monthorweek"/>
 												</div>
 								 
-												<div class="input-group el_modellist" role="toolbar">
+												<!-- <div class="input-group el_modellist" role="toolbar">
 													<span class="el_spans">专&nbsp;&nbsp;业：</span>
 													<input type="text" class="form-control el_modelinput"
 														id="addControlPlanSpecialty" name="ricontrolPlan.specialty" />
-														<!-- 说明是否是周管控计划 -->	
+														说明是否是周管控计划	
 													<input type="hidden" name="ricontrolPlan.riskctrlplanmark" value="1"/>
 												</div>
+												 -->
+												
+												<div class="input-group el_modellist" role="toolbar">
+													<span class="el_spans">专&nbsp;&nbsp;业：</span>
+													<select	class="selectpicker form-control" title="请选择" 
+													id="addprofessionaltypes" name="ricontrolPlan.specialty">
+														<!--<option value="" id="option0">--请选择--</option>
+														 <option value="采煤">采煤</option>
+														<option value="挖水">挖水</option>
+														 -->
+													</select>
+												</div>
+												
+												<!-- 说明是否是周管控计划	 -->
+													<input type="hidden" name="ricontrolPlan.riskctrlplanmark" value="1"/>
+												
 												<div class="input-group el_modellist" role="toolbar">
 													<span class="el_spans">负责&nbsp;人：</span>
 													<input type="text" class="form-control el_modelinput"
@@ -231,7 +209,7 @@
 											</div>
 											<div class="modal-body">
 												<form action="" id="queryAuditForm">
-												<div class="input-group el_modellist" role="toolbar">
+												<div class="input-group el_modellist" role="toolbar" id="history">
 													<span class="el_spans">历史审核备注信息：</span>
 													<textarea id="historyAuditmsg" class="form-control texta"
 										rows="3" name=""></textarea>
@@ -245,8 +223,8 @@
 										<input type="hidden" name="riRiskPlanAudit.rictrlplanid" id="shenHeRictrlplanId" />
 												</div>
 												<div class="input-group el_modellist" role="toolbar">
-													<span class="el_spans">审核状态：</span>
-													<div class="form-control texta"  style=" margin-left: 51px;width: 361px;">
+													<span class="el_spans" style="border-left-width: 43px;padding-left: 64px;">审核状态：</span>
+													<div class="form-control texta"  style="margin-left: 0px;width: 361px;"><!-- 51 -->
 													<!-- <input class="" type="radio" checked="checked" name="riRiskPlanAudit.auditstatus" value="通过审核" />通过审核 -->
 													<input class="" type="radio" name="riRiskPlanAudit.auditstatus" value="通过审核" />通过审核
 													<input class=" "  type="radio" name="riRiskPlanAudit.auditstatus" value="未通过审核" />未通过审核
@@ -288,11 +266,24 @@
 													name="ricontrolPlan.monthorweek"  style="left: 10px;"/>
 												</div>
 								
-												<div class="input-group el_modellist" role="toolbar">
+												<!-- <div class="input-group el_modellist" role="toolbar">
 													<span class="el_spans">专&nbsp;&nbsp;业：</span>
 													<input type="text" class="form-control el_modelinput"
 														id="updateControlPlanSpecialty" name="ricontrolPlan.specialty" style="left: 10px;"/>
+												</div> -->
+												
+												<div class="input-group el_modellist" role="toolbar">
+													<span class="el_spans">专&nbsp;&nbsp;业：</span>
+													<select	class="selectpicker form-control" title="请选择" 
+													id="updateprofessionaltypes" name="ricontrolPlan.specialty" style="left: 10px;">
+														<!--<option value="" id="option0">--请选择--</option>
+														 <option value="采煤">采煤</option>
+														<option value="挖水">挖水</option>
+														 -->
+													</select>
 												</div>
+												
+												
 												<div class="input-group el_modellist" role="toolbar">
 													<span class="el_spans">负责&nbsp;人：</span>
 													<input type="text" class="form-control el_modelinput"

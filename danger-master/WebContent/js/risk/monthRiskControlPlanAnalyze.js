@@ -4,7 +4,9 @@
  */
 
 $(function() {
+	selectProfessionalTypes();
 	query();
+	
 });
 
 
@@ -94,20 +96,27 @@ var successList = function List(result) {
 		
 		if(controlPlans[i].checkstatus!=null||controlPlans[i].reportstatus!=null){
 			if(controlPlans[i].checkstatus=="1"&&controlPlans[i].reportstatus=="1"){
-					status ="已审核";
+					status ="通过审核";
 			}
 			if(controlPlans[i].checkstatus=="0"&&controlPlans[i].reportstatus=="1"){
-				status="未审核";
+				status="未通过审核";
 			}
 			
 		}
-		
+		//controlPlans[i].checkstatus==null&&
+		if(controlPlans[i].checkstatus==""&&controlPlans[i].reportstatus=="1"){
+			status ="已上报";
+		}
 		if(controlPlans[i].checkstatus==null&&controlPlans[i].reportstatus=="1"){
 			status ="已上报";
 		}
+		
 		if(controlPlans[i].checkstatus==null&&controlPlans[i].reportstatus=="0"){
 			status="未上报";
 		}
+		
+		
+		
 		
 		var str = "<tr><td>"
 		+index+"</td><td>"
@@ -138,7 +147,38 @@ var successList = function List(result) {
 			result.pageBean.currentPage);// 分页显示
 }
 
+/**
+ * 专业类型下拉菜单
+ */
+function selectProfessionalTypes() {
+	
+	$.ajax({
+		url : 'validPlan_getProfessionalTypesList.action',
+		data : '',
+		type : 'POST',
+		dataType : 'json',
+		async : true,
+		success : function(result) {
 
+			var ptLists = result.ptList;
+			
+			$("#professionalTypesId").empty();
+			var professionalTypes = $("#professionalTypesId");
+			var str="<option value=''>--全部--</option>";
+			for (var i = 0; i < ptLists.length; i++) {
+				
+				var s="<option value='" + ptLists[i]
+						+ "'>" + ptLists[i]
+						+ "</option>";
+				str=str+s;
+				
+			}
+			professionalTypes.append(str);
+			
+
+		}
+	});
+}
 
 
 

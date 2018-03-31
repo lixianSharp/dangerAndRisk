@@ -9,12 +9,12 @@
 <html lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>月风险管控计划</title>
+<title>旬风险管控计划</title>
 
 <%@ include file="/controls/cssJs.jsp"%>
 <!-- 弹出层插件 -->
 <script type="text/javascript" src="<%=path%>/js/risk/plug-in.js"></script>
-<script type="text/javascript" src="<%=path%>/js/risk/monRiskPlanValidity.js"></script>
+<script type="text/javascript" src="<%=path%>/js/risk/weekRiskPlanValidity.js"></script>
 <link rel="stylesheet" href="<%=path%>/css/public/public_style.css" />
 
 <link rel="stylesheet" href="<%=path%>/css/risk/yearRecognize.css" />
@@ -68,18 +68,19 @@ background-color:#EEEE00;
 													<input type="hidden" name="currentPage" id="currentPage" />
 													<input type="hidden" name="currentCount" id="currentCount" />
 													<input type="hidden" name="riskCtrlPlanMark" value="0">
-												</input>
+													<input type="hidden" name="checkstatus" value="1"/>
+												
 											</div>
 											</div>
 											<div class="col-md-3 el_qlmQuery">
 											<div class="input-group el_chooseSpan"  role="toolbar">
 												<span class="el_spans">旬期：</span>
 												  <select id=""
-													class="selectpicker form-control" title="请选择" name="monthOrWeek2">
+													class="selectpicker form-control" title="请选择" name="monthOrWeek">
 													<option value="">--请选择--</option>
-													<option value="上旬">上旬</option>
-													<option value="中旬">中旬</option>
-													<option value="下旬">下旬</option>
+													<option value="1">上旬</option>
+													<option value="2">中旬</option>
+													<option value="3">下旬</option>
 												</select>
 												
 												
@@ -89,12 +90,7 @@ background-color:#EEEE00;
 										<div class="col-md-3 el_qlmQuery">
 											<div class="input-group" role="toolbar">
 												<span class="el_spans">专业类型：</span>
-												  <!-- <select id=""
-													class="selectpicker form-control" title="请选择" name="professionalTypes">
-													<option value="">--全部--</option>
-													<option value="未评估">煤矿</option>
-													<option value="已评估">井口</option>
-												</select> -->
+												 
 												
 												<select id="professionalTypesId"
 													class="selectpicker form-control" title="请选择" name="specialty">
@@ -125,8 +121,8 @@ background-color:#EEEE00;
 											<tr>
 												
 												<th>序号</th>
-												<th>年份</th>
 												<th>月份</th>
+												<th>旬期</th>
 												<th>风险辨识范围</th>
 												
 												<th>专业</th>

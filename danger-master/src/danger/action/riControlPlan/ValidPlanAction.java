@@ -62,6 +62,7 @@ public class ValidPlanAction extends ActionSupport {
 	private String monthOrWeek;
 	private String specialty;
     private String riskCtrlPlanMark;
+    private String checkstatus;
 	private String currentPage;
 	private String currentCount;
 	
@@ -104,6 +105,15 @@ public class ValidPlanAction extends ActionSupport {
 	public void setRiskCtrlPlanMark(String riskCtrlPlanMark) {
 		this.riskCtrlPlanMark = riskCtrlPlanMark;
 	}
+	public String getCheckstatus() {
+		return checkstatus;
+	}
+
+	public void setCheckstatus(String checkstatus) {
+		this.checkstatus = checkstatus;
+	}
+	
+	
 
 	//跳转到losePlanDis页面
 	public String toLosePlanDis(){
@@ -119,8 +129,13 @@ public class ValidPlanAction extends ActionSupport {
 		List<Map<String,Object>> addressList = new LinkedList<Map<String,Object>>();
 		addressList = controlPlanDetailService.getAddressList(riCtrlPlanId);
 		
+		//得到该管控计划失效的风险信息
+		List<RiIdentificationRriskMsg> riskMsgList = new LinkedList<RiIdentificationRriskMsg>();
+		riskMsgList = controlPlanDetailService.getRiskMsgList(riCtrlPlanId);
+		
 		result.put("addressList", addressList);
 		result.put("dutyDepartmentList", dutyDepartmentList);
+		result.put("riskMsgList", riskMsgList);
 		return "losePlanDis";
 	}
 	
@@ -200,6 +215,10 @@ public class ValidPlanAction extends ActionSupport {
 		if (ValidateCheck.isNotNull(riskCtrlPlanMark)) {
 			condition.put("riskCtrlPlanMark", riskCtrlPlanMark);
 			result.put("riskCtrlPlanMark", riskCtrlPlanMark);
+		}
+		if (ValidateCheck.isNotNull(checkstatus)) {
+			condition.put("checkstatus", checkstatus);
+			result.put("checkstatus", checkstatus);
 		}
 		
 		return condition;
