@@ -9,7 +9,7 @@
 <html lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>月风险管控计划风险</title>
+<title>旬风险管控计划风险</title>
 
 <%@ include file="/controls/cssJs.jsp"%>
 
@@ -55,7 +55,7 @@
 				<div class="panel panel-default">
 					<!--菜单连接标题-->
 					<div class="el_stairTitle">
-						<span>风险管理 </span><span>>月风险管控计划风险信息</span>
+						<span>风险管理 </span><span>>旬风险管控计划风险信息</span>
 					</div>
 
 					<div class="panel-body el_main">
@@ -79,7 +79,7 @@
 								<div class="panel-body">
 									<!-- 年度辨识基本信息 -->
 									<div class="row el_queryBox" style=" border-bottom-width: 0px; margin-top: 0px;">
-									<h4>月风险管控计划</h4>
+									<h4>旬风险管控计划</h4>
 									
 									<!-- <button class="btn btn-primary">计划上报</button> -->
 									<div class="yearReInfo">
@@ -98,10 +98,22 @@
 									</tr> -->
 									
 									<tr>
-									<td>年份</td>
-									<td id="myyear">${result.riControlPlan.year }</td>
 									<td>月份</td>
-									<td id="mymonth">${result.riControlPlan.monthorweek }</td>
+									<td id="myyear">${result.riControlPlan.year }</td>
+									<td>旬期</td>
+									
+									
+									<%-- <td id="mymonth">${result.riControlPlan.monthorweek }</td> --%>
+									<td id="mymonth">
+									<c:choose>
+								     <c:when test="${result.riControlPlan.monthorweek==1 }">
+								     	上旬
+								     </c:when>
+								     <c:when test="${result.riControlPlan.monthorweek==2 }">中旬</c:when>
+								     <c:when test="${result.riControlPlan.monthorweek==3 }">下旬</c:when>
+								     
+								   </c:choose>
+									</td>
 									</tr>
 									
 									<tr>
@@ -116,11 +128,11 @@
 									</div>
 
 									<div>
-									<h4>月风险管控计划风险</h4>
-									<button id="conpyPrecedingMonthButton" class="btn btn-primary" onclick="conpyPrecedingMonth()">复制上月风险管控计划风险数据</button>
+									<h4>旬风险管控计划风险</h4>
+									<button id="conpyPrecedingMonthButton" class="btn btn-primary" onclick="conpyPrecedingMonth()">复制该月上一旬期风险管控计划风险数据</button>
 									<button id="yearRiskControlImportButton" class="btn btn-primary" onclick="yearRiskControlImport()">导入</button>
 									<!-- <button class="btn btn-primary" data-toggle="modal" data-target="#addDuty" >新增</button> -->
-									<button id="addOpenBtnButton" class="btn btn-primary" data-toggle="modal" data-target="#addDuty" onclick="addOpenBtn()" >新增</button>
+									<!-- <button id="addOpenBtnButton" class="btn btn-primary" data-toggle="modal" data-target="#addDuty" onclick="addOpenBtn()" >新增</button> -->
 									
 									
 									<table class="table table-hover table-bordered">
@@ -247,8 +259,7 @@
 														
 														<button type="button"
 														class="btn btn-primary  btn-sm" onclick="queryRiskButton()">查询</button>
-													   <!--  <button class="btn btn-default btn-sm" onclick="qingkong()">清空</button> -->
-													<button type="button" class="btn btn-primary btn-sm" onclick="clearBtn()" >清空</button>
+													    <button class="btn btn-default btn-sm" onclick="qingkong()">清空</button>
 													</div>
 				
 												</form>
@@ -298,6 +309,12 @@
 										</div><!-- /.modal-content -->
 									</div>
 								</div><!-- /.modal -->
+								<!-- <script type="text/javascript">
+								function yearRiskControlImport(){
+									$('#yearRiskControlImport').modal();
+								} -->
+								</script>
+									
 								
 								
 									<!-- 模态框（新增年度风险信息） -->
@@ -311,7 +328,7 @@
 													&times;
 												</button>
 												<h4 class="modal-title" id="myModalLabel">
-												月风险管控计划风险添加
+												旬风险管控计划风险添加
 												</h4>
 											</div>
 											<div class="modal-body">
@@ -321,9 +338,7 @@
 													<!-- <input id="addidentiryid" type="text" name="riIdentificationRriskMsg.identiryid"/> -->
 													
 													<!-- 隐藏一个管控计划表的id -->
-
 													<input type="hidden" id="addRictrlplanid" name="ricontrolPlan.rictrlplanid" />
-
 													<!-- 添加年度风险辨识中 -->
 													
 													
@@ -359,22 +374,13 @@
 													</select>
 												</div>
 								
-												<!-- <div class="input-group el_modellist" role="toolbar">
-													<span class="el_spans">专业类型：</span>
-													<select	class="selectpicker form-control" title="请选择" 
-													id="addprofessionaltypes" name="riIdentificationRriskMsg.professionaltypes">
-														<option value="" id="option0">--请选择--</option>
-														<option value="采煤">采煤</option>
-														<option value="挖水">挖水</option>
-														
-													</select>
-												</div> -->
+												
 												
 												
 												<div class="input-group el_modellist" role="toolbar">
 													<span class="el_spans">专业类型：</span>
 													<input type="text" class="form-control el_modelinput"
-														id="addprofessionaltypes2" name="riIdentificationRriskMsg.professionaltypes" style="left: 10px;"/>
+														id="addprofessionaltypes2" disabled="disabled" name="riIdentificationRriskMsg.professionaltypes" style="left: 10px;"/>
 												</div>
 												<div class="input-group el_modellist" role="toolbar">
 													<span class="el_spans">灾害类型：</span>
@@ -471,18 +477,12 @@
 												<div class="input-group el_modellist" role="toolbar">
 													<span class="el_spans">风险值（D）：</span>
 													<input type="text" class="form-control el_modelinput" value="" 
-
-
-												
 														id="evaluateRiskValue" name="riAssessment.riskvalue" readonly="readonly"/>
-
 												</div>
 												<div class="input-group el_modellist" role="toolbar">
 													<span class="el_spans">风险等级：</span>
 													<input type="text" class="form-control el_modelinput" value=""
-
 														id="evaluateRiskGrade" name="riAssessment.riskgrade" readonly="readonly"/>
-
 												</div>
 												
 												</form>
@@ -505,249 +505,7 @@
 										</div>
 									</div>
 								</div>
-								
-								
-								
-								
-								
-								
-								
-								
-								
-								
-								<!-- 模态框（修改年度辨识信息） -->
-								<!-- <div class="modal fade" id="modifierDuty" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-									<div class="modal-dialog">
-										<div class="modal-content">
-											<div class="modal-header">
-												<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-													&times;
-												</button>
-												<h4 class="modal-title" id="myModalLabel">
-												修改年度辨识信息
-												</h4>
-											</div>
-											<div class="modal-body">
-												<form action="">
-												<div class="input-group el_modellist" role="toolbar">
-													<span class="el_spans">风险地点：</span>
-													<select	class="selectpicker form-control" title="请选择" 
-													id="" name="">
-														<option value="" id="option0">--请选择--</option>
-														<option value="综采">综采</option>
-														<option value="综掘">综掘</option>
-														
-													</select>
-													<textarea id="dangerneirong" class="form-control texta"
-													rows="2" name="danger.content"></textarea>
-												</div>
-								
-												<div class="input-group el_modellist" role="toolbar">
-													<span class="el_spans">风险描述：</span>
-													<textarea id="dangerneirong" class="form-control texta"
-													rows="2" name="danger.content"></textarea>
-												</div>
-												<div class="input-group el_modellist" role="toolbar">
-													<span class="el_spans">风险类型：</span>
-													<select	class="selectpicker form-control" title="请选择" 
-													id="" name="">
-														<option value="" id="option0">--请选择--</option>
-														<option value="人">人</option>
-														<option value="机">机</option>
-														<option value="环">环</option>
-														<option value="管">管</option>
-														
-													</select>
-												</div>
-								
-												<div class="input-group el_modellist" role="toolbar">
-													<span class="el_spans">专业类型：</span>
-													<select	class="selectpicker form-control" title="请选择" 
-													id="" name="">
-														<option value="" id="option0">--请选择--</option>
-														<option value="采煤">采煤</option>
-														<option value="挖水">挖水</option>
-														
-													</select>
-												</div>
-												<div class="input-group el_modellist" role="toolbar">
-													<span class="el_spans">灾害类型：</span>
-													<select	class="selectpicker form-control" title="请选择" 
-													id="" name="">
-														<option value="" id="option0">--请选择--</option>
-														<option value="火">火</option>
-														<option value="水">水</option>
-														
-													</select>
-												</div>
-												<div class="input-group el_modellist" role="toolbar">
-													<span class="el_spans">可能导致事故：</span>
-													<select	class="selectpicker form-control" title="请选择" 
-													id="" name="">
-														<option value="" id="option0">--请选择--</option>
-														<option value="人身伤害">人身伤害</option>
-														<option value="死亡">死亡</option>
-														
-													</select>
-												</div>
-												<div class="input-group el_modellist" role="toolbar">
-													<span class="el_spans">管控措施：</span>
-													<textarea id="dangerneirong" class="form-control texta"
-													rows="2" name="danger.content"></textarea>
-												</div>
-												<div class="input-group el_modellist" role="toolbar">
-													<span class="el_spans">负责人：</span>
-													<input type="text" class="form-control el_modelinput" value=""
-														id="" name="" />
-												</div>
-												<div class="input-group el_modellist" role="toolbar">
-													<span class="el_spans">监管人：</span>
-													<input type="text" class="form-control el_modelinput" value=""
-														id="" name="" />
-												</div>
-												<div class="input-group el_modellist" role="toolbar">
-													<span class="el_spans">监管周期：</span>
-													<input type="text" class="form-control el_modelinput" value=""
-														id="" name="" />
-												</div>
-												
-												</form>
-											</div>
-											<div class="modal-footer">
-												<button type="button" class="btn btn-default" data-dismiss="modal">关闭
-												</button>
-												<button type="button" class="btn btn-primary">
-													确认修改
-												</button>
-											</div> 
-										</div>
-									</div>
-								</div>-->
-								
-								<!-- 模态框（修改年度辨识信息） -->
-								<div class="modal fade" id="modifierDuty" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-									<div class="modal-dialog">
-										<div class="modal-content">
-											<div class="modal-header">
-												<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-													&times;
-												</button>
-												
-												<h4 class="modal-title" id="myModalLabel">
-												修改年度辨识信息
-												</h4>
-											</div>
-											<div class="modal-body">
-												<form action="" id="updateForm">
-													<!-- 隐藏域，隐藏一个风险辨识主表id -->
-													<input id="updateidentiryid" type="hidden" name="riIdentificationRriskMsg.identiryid" value=""/>
-													<!-- 隐藏域，隐藏一个辨识风险信息id -->
-													<input id="updateriskmsgid" type="hidden" name="riIdentificationRriskMsg.riskmsgid" value=""/>
-													
-													<!-- 隐藏域，隐藏一个管控计划id -->
-													<!-- <input type="hidden" id="updateRictrlplanid" name="riDetailedOfRiskCtrlPlan.rictrlplanid" /> -->
-													
-												<div class="input-group el_modellist" role="toolbar">
-													<span class="el_spans">风险地点：</span>
-													<select	class="selectpicker form-control" title="请选择" 
-													id="updateriskAddressSelect" name="" onchange="updateselectchange(this)" >
-														<option value="" id="option0">--请选择--</option>
-														<option value="综采">综采</option>
-														<option value="综掘">综掘</option>
-														
-													</select>
-													<textarea id="updateriskaddress" class="form-control texta"
-													rows="2" name="riIdentificationRriskMsg.riskaddress" ></textarea>
-												</div>
-												<!-- 存放选中的风险地点，用于追加到文本框中 -->
-												<input id="updateAddressToTextarea" type="hidden" value=""/>
-								
-												<div class="input-group el_modellist" role="toolbar">
-													<span class="el_spans">风险描述：</span>
-													<textarea id="updateriskdescribe" class="form-control texta"
-													rows="2" name="riIdentificationRriskMsg.riskdescribe"></textarea>
-												</div>
-												<div class="input-group el_modellist" role="toolbar">
-													<span class="el_spans">风险类型：</span>
-													<select	class="selectpicker form-control" title="请选择" 
-													id="updaterisktype" name="riIdentificationRriskMsg.risktype">
-														<option value="" id="option0">--请选择--</option>
-														<option value="人">人</option>
-														<option value="机">机</option>
-														<option value="环">环</option>
-														<option value="管">管</option>
-														
-													</select>
-												</div>
-								
-												<div class="input-group el_modellist" role="toolbar">
-													<span class="el_spans">专业类型：</span>
-													<select	class="selectpicker form-control" title="请选择" 
-													id="updateprofessionaltypes" name="riIdentificationRriskMsg.professionaltypes">
-														<option value="" id="option0">--请选择--</option>
-														<option value="采煤">采煤</option>
-														<option value="挖水">挖水</option>
-														
-													</select>
-												</div>
-												<div class="input-group el_modellist" role="toolbar">
-													<span class="el_spans">灾害类型：</span>
-													<select	class="selectpicker form-control" title="请选择" 
-													id="updatedisastertypes" name="riIdentificationRriskMsg.disastertypes">
-														<option value="" id="option0">--请选择--</option>
-														<option value="火">火</option>
-														<option value="水">水</option>
-														
-													</select>
-												</div>
-												<div class="input-group el_modellist" role="toolbar">
-													<span class="el_spans">可能导致事故：</span>
-													<select	class="selectpicker form-control" title="请选择" 
-													id="updatecancauseaccidents" name="riIdentificationRriskMsg.cancauseaccidents">
-														<option value="" id="option0">--请选择--</option>
-														<option value="人身伤害">人身伤害</option>
-														<option value="死亡">死亡</option>
-														
-													</select>
-												</div>
-												<div class="input-group el_modellist" role="toolbar">
-													<span class="el_spans">管控措施：</span>
-													<textarea id="updatectrlmeasure" class="form-control texta"
-													rows="2" name="riIdentificationRriskMsg.ctrlmeasure"></textarea>
-												</div>
-												<div class="input-group el_modellist" role="toolbar">
-													<span class="el_spans">负责人：</span>
-													<input type="text" class="form-control el_modelinput" value=""
-														id="updateprincipal" name="riIdentificationRriskMsg.principal" />
-												</div>
-												<div class="input-group el_modellist" role="toolbar">
-													<span class="el_spans">监管人：</span>
-													<input type="text" class="form-control el_modelinput" value=""
-														id="updatesuperintendent" name="riIdentificationRriskMsg.superintendent" />
-												</div>
-												<div class="input-group el_modellist" role="toolbar">
-													<span class="el_spans">监管周期：</span>
-													<input type="text" class="form-control el_modelinput" value=""
-														id="updatemonitoringperiod" name="riIdentificationRriskMsg.monitoringperiod" />
-												</div>
-												
-												</form>
-											</div>
-											<div class="modal-footer">
-												<button type="button" class="btn btn-default" data-dismiss="modal">关闭
-												</button>
-												<button type="button" class="btn btn-primary" onclick="updateSave()">
-													确认修改
-												</button>
-											</div>
-										</div>
-									</div>
-								</div>
-								
-								
-								
-								
-								
+						
 								
 								
 								<!-- 模态框（删除年度风险） -->
@@ -777,30 +535,6 @@
 									</div>
 								</div><!-- /.modal -->
 
-<!-- 
-									<div id="paginationIDU"></div>
-									<script>
-										$('#paginationIDU').pagination(
-												{
-													//			组件属性
-													"total" :"${result.pageBean.totalCount}",//数字 当分页建立时设置记录的总数量 1
-													"pageSize" : 10,//数字 每一页显示的数量 10
-													"pageNumber" : "${result.pageBean.currentPage}",//数字 当分页建立时，显示的页数 1
-													"pageList" : [ 10 ],//数组 用户可以修改每一页的大小，
-													//功能
-													"layout" : [ 'list', 'sep',
-															'first', 'prev',
-															'manual', 'next',
-															'last', 'links' ],
-													"onSelectPage" : function(
-															pageNumber, b) {
-														$("#currentPage").val(pageNumber);
-														$("#currentCount").val(b);
-														$("#queryForm").submit();
-													}
-												});
-									</script>
-									 -->
 
 								</div>
 							</div>

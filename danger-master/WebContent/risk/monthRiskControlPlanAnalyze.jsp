@@ -67,16 +67,34 @@
 												<input type="hidden" name="riskCtrlPlanMark" value="1">
 												<input type="hidden" name="currentPage" id="currentPage" />
 												<input type="hidden" name="currentCount" id="currentCount" />
+												<input type="hidden" name="checkstatus" value="1"/>
 											</div>
 										</div>
-
+										
+										<div class="col-md-3 el_qlmQuery">
+											<div class="input-group" role="toolbar">
+												<span class="el_spans">专业类型：</span>
+												  <!-- <select id=""
+													class="selectpicker form-control" title="请选择" name="professionalTypes">
+													<option value="">--全部--</option>
+													<option value="未评估">煤矿</option>
+													<option value="已评估">井口</option>
+												</select> -->
+												
+												<select id="professionalTypesId"
+													class="selectpicker form-control" title="请选择" name="specialty">
+													
+												</select>
+											</div>
+										</div>
 									
 										
 										<!-- <button type="submit"
 										class="btn btn-primary el_queryButton btn-sm"  style="left: 963.617px;">查询</button> -->
 									<button type="button"
-										class="btn btn-primary el_queryButton btn-sm"  style="right:10%;" onclick="queryButton()" id="queryId">查询</button>
-									<button class="btn btn-primary el_queryButton btn-sm" style="right:3%; margin-top: 5px;" onclick="clearBtn()" >清空</button>
+										class="btn btn-primary el_queryButton btn-sm" style="left: 930.62px;top: 0px;bottom: 12px;margin-bottom: 3px;padding-bottom: 0px;padding-top: 0px;"   style="left: 963.617px;" onclick="queryButton()" id="queryId">查询</button>
+									<!-- <button class="btn btn-default btn-sm" style="margin-top: 6px;margin-left: 732px;" onclick="clearBtn()" >清空</button> -->
+									<button class="btn btn-default btn-sm" style="margin-left: 400px;" >清空</button>
 									</div>
 								</form>
 							</div>

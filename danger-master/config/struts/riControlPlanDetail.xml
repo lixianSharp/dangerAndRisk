@@ -13,7 +13,7 @@
 				<param name="root">result</param>
 			</result>
 			<result name="monthRiskControlPlanRisk">/risk/monthRiskControlPlanRisk.jsp</result>
-			
+			<result name="weekRiskControlPlanRisk">/risk/weekRiskControlPlanRisk.jsp</result>
 		</action>
 	
 	</package>

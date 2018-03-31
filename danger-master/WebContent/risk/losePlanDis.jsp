@@ -62,15 +62,57 @@
 									${riskInfo.count }
 									
 									
-								</c:forEach> 
- --%>
-								
+								</c:forEach>  --%>
+
+								<%-- <table class="table table-hover table-bordered">
+										<thead>
+											<tr>
+												
+												<th>风险地点</th>
+												<th>风险描述</th>
+												<th>风险类型</th>
+												<th>专业类型</th>
+												<th>灾害类型</th>
+												<th>可能导致事故</th>
+												<th>管控措施</th>
+												<th>负责人</th>
+												<th>监管人</th>
+												<th>监管周期</th>
+											
+											</tr>
+										</thead>
+										<tbody>
+										<c:forEach var="riskInfo"	items="${result.riskMsgList }"  varStatus="status">
+											<tr>
+											
+											<!-- 下面是风险信息的字段 -->
+											
+											<td>${riskInfo.riskaddress }</td>
+											<td>${riskInfo.riskdescribe }</td>
+											<td>${riskInfo.risktype }</td>
+											<td>${riskInfo.professionaltypes }</td>
+											<td>${riskInfo.disastertypes }</td>
+											<td>${riskInfo.cancauseaccidents }</td>
+											<td>${riskInfo.ctrlmeasure }</td>
+											<td>${riskInfo.principal }</td>
+											<td>${riskInfo.superintendent }</td>
+											<td>${riskInfo.monitoringperiod }</td>
+											
+										
+										</tr>
+										</c:forEach>
+										</tbody>
+							</table> --%>
+							
 								
 						
 					
 
 							<!--显示内容-->
 							<div class="panel panel-default el_Mainmain">
+							
+							
+							
 							<!-- 失效风险地点分布情况 -->
 							<div id="loseRiskAttribute" class="col-md-12" style="width: 1000px;height:400px;">
 							

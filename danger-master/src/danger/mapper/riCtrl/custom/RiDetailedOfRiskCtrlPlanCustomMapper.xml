@@ -66,19 +66,24 @@
 	<!-- 得到月管控计划的措施无效的数量 -->
 	<select id="getValidCount" resultType="int" parameterType="string">
 		select count(*) from ridetailedofriskctrlplan where measureIsValid="无效" and riCtrlPlanId=#{riCtrlPlanId}
-
-		
+	
+	</select>
+	
+	<!-- 得到月管控计划的措施无效的数量 -->
+	<select id="getRiskMsgList" resultType="danger.bean.riIdentify.RiIdentificationRriskMsg" parameterType="string">
+		select * from ridetailedofriskctrlplan where measureIsValid="无效" and riCtrlPlanId=#{riCtrlPlanId}
+	
 	</select>
 	
 	<!-- 得到该管控记录的所有责任部门及其个数 -->
 	<select id="getDutyDepartmentList" resultType="map" parameterType="string">
-		SELECT dutyDepartment, count(dutyDepartment) AS count from ridetailedofriskctrlplan WHERE riCtrlPlanId=#{riCtrlPlanId} GROUP BY dutyDepartment
+		SELECT dutyDepartment, count(dutyDepartment) AS count from ridetailedofriskctrlplan WHERE measureIsValid="无效" and riCtrlPlanId=#{riCtrlPlanId} GROUP BY dutyDepartment
 	</select>
 	
 	
 	<!-- 得到该管控记录的所有失效风险地点及其个数 -->
 	<select id="getAddressList" resultType="map" parameterType="string">
-		SELECT riskAddress, count(riskAddress) AS count from ridetailedofriskctrlplan,riidentificationrriskmsg WHERE ridetailedofriskctrlplan.riskMsgId=riidentificationrriskmsg.riskMsgId and riCtrlPlanId=#{riCtrlPlanId} GROUP BY riskAddress
+		SELECT riskAddress, count(riskAddress) AS count from ridetailedofriskctrlplan,riidentificationrriskmsg WHERE ridetailedofriskctrlplan.measureIsValid="无效" and ridetailedofriskctrlplan.riskMsgId=riidentificationrriskmsg.riskMsgId and riCtrlPlanId=#{riCtrlPlanId} GROUP BY riskAddress
 	</select>
 	
 	<!-- 得到专业类型下拉列表 -->

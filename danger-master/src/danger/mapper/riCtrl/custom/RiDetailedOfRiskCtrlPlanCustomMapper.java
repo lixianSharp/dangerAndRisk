@@ -31,6 +31,8 @@ public interface RiDetailedOfRiskCtrlPlanCustomMapper {
 
 	//得到月管控计划的措施无效的数量
 	int getValidCount(String rictrlplanid);
+	//得到月管控计划的措施无效的信息
+	List<RiIdentificationRriskMsg> getRiskMsgList(String riCtrlPlanId);
 
 	//得到该管控记录的所有责任部门及其个数
 	List<Map<String, Object>> getDutyDepartmentList(String riCtrlPlanId);
@@ -41,6 +43,8 @@ public interface RiDetailedOfRiskCtrlPlanCustomMapper {
 
 	//得到专业类型下拉列表
 	List<String> getProfessionalTypesList();
+
+	
 	
 	
 	

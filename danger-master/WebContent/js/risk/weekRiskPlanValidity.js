@@ -4,8 +4,9 @@
  */
 
 $(function() {
-	selectProfessionalTypes();
 	query();
+	selectProfessionalTypes();
+	
 });
 
 
@@ -45,7 +46,6 @@ function queryButton() {
 }
 
 function query() {
-
 	$.ajax({
 		url : 'validPlan_getAllVaildPlanInfo.action',
 		data : $("#queryForm").serialize(),
@@ -66,7 +66,6 @@ var successList = function List(result) {
 	var riskCounts = result.riskCountList;
 	
 	var validCounts = result.validCountList;
-	
 	var address = result.addressList;
 	
 	$("#tbody").html("");// 清空表体
@@ -93,10 +92,22 @@ var successList = function List(result) {
 			riskrange="无"
 		}
 		
+		var xunqi;
+		//显示旬期
+		
+		if(valids[i].monthorweek=="1"){
+			xunqi="上旬";
+		}else if(valids[i].monthorweek=="2"){
+			xunqi="中旬";
+		}else if(valids[i].monthorweek=="3"){
+			xunqi="下旬";
+		}
+		
+		
 		var str = "<tr><td>"
 			+index+"</td><td>"
 			+valids[i].year+"</td><td>"
-			+valids[i].monthorweek+"</td><td>"+riskrange+"</td><td>"
+			+xunqi+"</td><td>"+riskrange+"</td><td>"
 			+valids[i].specialty+"</td><td>"
 			+valids[i].leader+"</td><td>"
 			

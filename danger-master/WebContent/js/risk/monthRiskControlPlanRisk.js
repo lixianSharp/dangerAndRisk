@@ -1,4 +1,37 @@
+/*
+ * 页面初始化
+ */
 
+
+$(function(){
+	//风险信息
+	initWorkFace();//工作面
+	initRiType();//风险类型
+	initRiProfessionType();//专业类型(隐患类型)
+	initRiDisasterType();//灾害类型
+	initCanCauseAccidentType();//可能导致事故
+	
+	//评估
+	initPossibility();//可能性
+	initBLPFCD();//人员暴露频繁程度
+	initSSHG();//损失后果
+	
+	
+	 //判断是否需要隐藏按钮
+	 
+	var reportStatus = $("#myReportStatus").val();
+	var checkStatus =$("#myCheckStatus").val();
+	
+	if(reportStatus=='1'&&checkStatus!='0'){
+		$("#conpyPrecedingMonthButton").hide();
+		$("#yearRiskControlImportButton").hide();
+		$("#addOpenBtnButton").hide();
+		$("#caozuo").hide();
+		$(".UDcaozuo").hide();
+	}
+	
+	
+})
 
 /*
  * 分页查询
@@ -6,7 +39,6 @@
 /*********************分页*****************************/
 
 function fenye(total, pageSize, pageNumber) {
-	// alert(total+" "+pageSize)
 	$('#paginationIDU2').pagination(
 			{
 				// 组件属性
@@ -35,11 +67,13 @@ $("#importRiskAddress").val("");
 
 function queryRiskButton(){
 	$("#currentPage2").val("1");
+	
 	queryRisk();
 }
 
 function queryRisk(){
-
+	$("#specialtyId").val($("#myspecialty").html())
+	
 	$.ajax({
 		url : 'controlPlan_getAllRiskInfo.action',
 		data : $("#queryRiskForm").serialize(),
@@ -57,6 +91,7 @@ var successList = function List(result) {
 	
 	//得到数据
 	var riskInfos = result.pageBean.productList;
+	var RiIdentificationMainTableIds = result.RiIdentificationMainTableIdList;
 
 	$("#t_body").html("");// 清空表体
 	// 获取到这个表格
@@ -65,9 +100,16 @@ var successList = function List(result) {
 	var index=0;
 	for (var i = 0; i < riskInfos.length; i++) {
 		index=i+1;
+		
+		var RiIdentificationMainTableId;
+		if(RiIdentificationMainTableIds[i]=="Y"){
+			RiIdentificationMainTableId="年度辨识";
+		}
+		//if(RiIdentificationMainTableIds[i]=="Y")
 		var str = "<tr><td><input type='checkbox' class='planCheck'></td><td>"
-		+index+"</td><td>fdsfds"
-		+"</td><td>"
+		+index+"</td><td>"
+		+RiIdentificationMainTableId+"</td><td>"
+		//+"</td><td>"
 		+riskInfos[i].riskaddress+"</td><td>"
 		+riskInfos[i].riskdescribe+"</td><td>"
 		+riskInfos[i].risktype+"</td><td>"
@@ -110,7 +152,7 @@ function confirmImport(){
 	}
 		
 	})
-	alert(JSON.stringify(dataArray))
+	//alert(JSON.stringify(dataArray))
 	
 	
 	
@@ -134,30 +176,6 @@ function confirmImport(){
 		}
 
 	});
-	/*var choosePlan = 0;// 判断是否有风险被选中
-
-	$(".planCheck").each(function() { // 获取选择的风险
-
-		if ($(this).prop("checked")) {// 如果选中。。。
-			choosePlan++;
-
-		}
-	})
-	
-	
-	//多条风险信息导入到管控计划中
-	$(".planCheck").each(function() { // 获取选择的风险
-		
-		
-			if ($(this).prop("checked")) {// 如果选中。。。
-				
-				//shuzu[i]=$(this).parents('tr').find("#riskmsgid").val();
-				alert($(this).parents('tr').find("#riskmsgid").val())
-				addOneRisk($(this).parents('tr').find("#riskmsgid").val())
-			}
-		
-		
-	})*/
 	
 }
 
@@ -234,11 +252,11 @@ function urlSubmit() {
  */
 //获取这个月的id
 function conpyPrecedingMonth(){
-	//alert($("#myRictrlplanid").val())
 	$.ajax({
 		url : 'controlPlan_iconpyPrecedingMonthRiskInfo.action',
 		data : {
-			"Myrictrlplanid" : $("#myRictrlplanid").val()
+			"riCtrlPlanId" : $("#myRictrlplanid").val(),
+			"specialty":$("#myspecialty").html()
 		},
 		type : 'POST',
 		dataType : 'json',
@@ -255,20 +273,6 @@ function conpyPrecedingMonth(){
 	});
 }
 
-
-$(function(){
-	//风险信息
-	initWorkFace();//工作面
-	initRiType();//风险类型
-	initRiProfessionType();//专业类型(隐患类型)
-	initRiDisasterType();//灾害类型
-	initCanCauseAccidentType();//可能导致事故
-	
-	//评估
-	initPossibility();//可能性
-	initBLPFCD();//人员暴露频繁程度
-	initSSHG();//损失后果
-})
 
 
 /**********************风险信息***************************/
@@ -522,6 +526,8 @@ function addOpenBtn(){
 	//添加管控计划id到隐藏域中
 	
 	$("#addRictrlplanid").val($("#myRictrlplanid").val());
+	
+	$("#addprofessionaltypes2").val($("#myspecialty").html());
 	//添加
 	
 	//风险信息初始化表单(清空表单)
@@ -585,15 +591,15 @@ function addSave(){
 			"riIdentificationRriskMsg.ctrlmeasure" : "required",//管控措施
 			"riIdentificationRriskMsg.principal" :"required",//负责人
 			"riIdentificationRriskMsg.superintendent":"required",//监管人
-			"riIdentificationRriskMsg.monitoringperiod":"required"//管控周期
-		/*		
+			"riIdentificationRriskMsg.monitoringperiod":"required",//管控周期
+				
 			//风险评估
 			"riAssessment.possibility" : "required",//可能性
 			"riAssessment.persondegreeofexposure" : "required",//人员暴露频繁程度
 			"riAssessment.lossofcconsequences" :"required",//损失后果
 			"riAssessment.riskvalue":"required",//风险值
 			"riAssessment.riskgrade":"required"//风险等级	
-*/		},
+		},
 		
 		messages : {
 			"riIdentificationRriskMsg.riskaddress" :{
@@ -625,9 +631,9 @@ function addSave(){
 			},
 			"riIdentificationRriskMsg.monitoringperiod":{
 				required:"不能为空"//管控周期
-			}
+			},
 			
-			/*//风险评估
+			//风险评估
 			"riAssessment.possibility" :{
 				required:"不能为空"//可能性
 			},
@@ -643,7 +649,7 @@ function addSave(){
 			"riAssessment.riskgrade":{
 				required:"不能为空"//风险等级
 			}			
-				*/
+				
 			
 		}
 	});
@@ -677,6 +683,7 @@ function addSave(){
 //修改
 //打开修改模态框之前要进行的操作
 function updateOpenBtn(obj){
+
 
 	
 	var address = $(obj).parents("tr").children("td").eq(1).text();//风险地点
@@ -819,6 +826,90 @@ function updateSave(){
 		});
 	}
 
+}
+
+//计算LEC
+function optionChange3(){
+	var possibility = $("#evaluatePossibility option:selected").attr("title");//可能性
+	var exposure = $("#evaluatePersondegreeofexposure option:selected").attr("title");//人员暴露频繁程度
+	var consequence = $("#evaluateLossfcconsequence option:selected").attr("title");//损失后果
+	
+	
+	var riskValue = possibility*exposure*consequence;//计算出风险值
+	//alert(possibility*exposure*consequence)
+	if(!isNaN(riskValue)){
+		$("#evaluateRiskValue").val(riskValue);//风险值
+	}
+	
+	
+	if(riskValue>320){
+		$("#evaluateRiskGrade").val("极其危险,不能继续作业");
+	}else if(riskValue>20 && riskValue<70){
+		$("#evaluateRiskGrade").val("一般危险,需要注意");
+	}else if(riskValue>160 && riskValue<320){
+		$("#evaluateRiskGrade").val("高度危险,需立即整改");
+	}else if(riskValue<20){
+		$("#evaluateRiskGrade").val("稍有危险,可以接受");
+	}else if(riskValue>70 && riskValue<160){
+		$("#evaluateRiskGrade").val("显著危险,需要整改");
+	}
+}
+
+//计算LEC
+function optionChange2(){
+	var possibility = $("#evaluatePossibility option:selected").attr("title");//可能性
+	var exposure = $("#evaluatePersondegreeofexposure option:selected").attr("title");//人员暴露频繁程度
+	var consequence = $("#evaluateLossfcconsequence option:selected").attr("title");//损失后果
+	
+	
+	var riskValue = possibility*exposure*consequence;//计算出风险值
+	//alert(possibility*exposure*consequence)
+	if(!isNaN(riskValue)){
+		$("#evaluateRiskValue").val(riskValue);//风险值
+	}
+	
+	if(riskValue>320){
+		$("#evaluateRiskGrade").val("极其危险,不能继续作业");
+	}else if(riskValue>20 && riskValue<70){
+		$("#evaluateRiskGrade").val("一般危险,需要注意");
+	}else if(riskValue>160 && riskValue<320){
+		$("#evaluateRiskGrade").val("高度危险,需立即整改");
+	}else if(riskValue<20){
+		$("#evaluateRiskGrade").val("稍有危险,可以接受");
+	}else if(riskValue>70 && riskValue<160){
+		$("#evaluateRiskGrade").val("显著危险,需要整改");
+	}
+}
+
+//计算LEC
+function optionChange1(){
+	var possibility = $("#evaluatePossibility option:selected").attr("title");//可能性
+	var exposure = $("#evaluatePersondegreeofexposure option:selected").attr("title");//人员暴露频繁程度
+	var consequence = $("#evaluateLossfcconsequence option:selected").attr("title");//损失后果
+	
+	
+	var riskValue = possibility*exposure*consequence;//计算出风险值
+	//alert(possibility*exposure*consequence)
+	if(!isNaN(riskValue)){
+		$("#evaluateRiskValue").val(riskValue);//风险值
+	}
+	
+	if(riskValue>320){
+		$("#evaluateRiskGrade").val("极其危险,不能继续作业");
+	}else if(riskValue>20 && riskValue<70){
+		$("#evaluateRiskGrade").val("一般危险,需要注意");
+	}else if(riskValue>160 && riskValue<320){
+		$("#evaluateRiskGrade").val("高度危险,需立即整改");
+	}else if(riskValue<20){
+		$("#evaluateRiskGrade").val("稍有危险,可以接受");
+	}else if(riskValue>70 && riskValue<160){
+		$("#evaluateRiskGrade").val("显著危险,需要整改");
+	}
+}
+function clearBtn(){
+	$("#importRiskMiaoshu").val("");
+	$("#importRiskAddress").val("");
+	queryRisk();
 }
 
 

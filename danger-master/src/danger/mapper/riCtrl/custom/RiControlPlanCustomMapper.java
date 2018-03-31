@@ -26,12 +26,12 @@ public interface RiControlPlanCustomMapper {
 	/*
 	 * 得到灾害类型的风险数量
 	 */
-	List<Map<String, Object>> getRiskCountByDisasterTypes();
+	List<Map<String, Object>> getRiskCountByDisasterTypes(String year);
 
 	/*
 	 * 得到失效的风险的地点
 	 */
-	List<Map<String, Object>> getAddressList();
+	List<Map<String, Object>> getAddressList(String year);
 
 	/*
 	 * 得到该管控计划下的所有风险信息的风险地点
@@ -65,7 +65,9 @@ public interface RiControlPlanCustomMapper {
 	/*
 	 * 得到上月的管控计划的id
 	 */
-	String getPrecedingMonthId(String myrictrlplanid);
+	String getPrecedingMonthId(String myrictrlplanid, String myspecialty);
+	
+	String getPrecedingMonthIdByCondition(Map<String, Object> condition);
 
 	/*
 	 * 得到上月的风险信息的id
@@ -73,9 +75,13 @@ public interface RiControlPlanCustomMapper {
 	List<String> getPrecedingMonthRiskInfoIdList(String precedingMonthId);
 
 	/*
-	 * 计划上报
+	 * 计划上报,审核未通过
 	 */
 	int reportPlan(String controlPlansid);
+	/*
+	 * 还未进行审核
+	 */
+	int reportPlan2(String controlPlansid);
 
 	/*
 	 * 计划审核
@@ -90,6 +96,20 @@ public interface RiControlPlanCustomMapper {
 
 	//得到周管控计划的记录
 	List<RiControlPlan> getWeekControlPlanByCondition(Map<String, Object> condition);
+
+	//得到所有的月管控计划
+	List<RiControlPlan> getAllControlPlan(String string);
+
+	List<Map<String, Object>> getAddressList2(String year);
+
+	List<RiControlPlan> getAllControlPlan2(String string);
+
+	//通过时间查找年度辨识id
+	String getYearIdByTime(String year);
+
+	
+
+	
 
 	
 	

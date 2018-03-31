@@ -19,7 +19,7 @@
 
 <link rel="stylesheet" href="<%=path%>/css/risk/yearRecognize.css" />
 
-<script type="text/javascript" src="<%=path%>/js/risk/monthRiskControlPlanAnalyze.js"></script>
+<script type="text/javascript" src="<%=path%>/js/risk/weekRiskControlPlanAnalyze.js"></script>
 </head>
 
 <body>
@@ -67,20 +67,32 @@
 												
 												<input type="hidden" name="currentPage" id="currentPage" />
 												<input type="hidden" name="currentCount" id="currentCount" />
+												<input type="hidden" name="checkstatus" value="1"/>
 											</div>
 										</div>
 										<div class="col-md-3 el_qlmQuery">
 											<div class="input-group el_chooseSpan"  role="toolbar">
 												<span class="el_spans">旬期：</span>
 												  <select id=""
-													class="selectpicker form-control" title="请选择" name="monthOrWeek2">
+													class="selectpicker form-control" title="请选择" name="monthOrWeek">
 													<option value="">--请选择--</option>
-													<option value="上旬">上旬</option>
-													<option value="中旬">中旬</option>
-													<option value="下旬">下旬</option>
+													<option value="1">上旬</option>
+													<option value="2">中旬</option>
+													<option value="3">下旬</option>
 												</select>
 												
 												
+											</div>
+										</div>
+										
+										<div class="col-md-3 el_qlmQuery">
+											<div class="input-group" role="toolbar">
+												<span class="el_spans">专业类型：</span>
+												 
+												<select id="professionalTypesId"
+													class="selectpicker form-control" title="请选择" name="specialty">
+													
+												</select>
 											</div>
 										</div>
 
@@ -88,7 +100,7 @@
 										
 									<button type="button"
 										class="btn btn-primary el_queryButton btn-sm"  style="left: 930.62px;top: 0px;bottom: 12px;margin-bottom: 3px;padding-bottom: 0px;padding-top: 0px;" onclick="queryButton()" id="queryId">查询</button>
-									<button class="btn btn-default btn-sm" style="margin-left: 400px;" onclick="clearBtn()" >清空</button>
+									<button class="btn btn-default btn-sm" style="margin-left: 112px;" onclick="clearBtn()" >清空</button>
 									</div>
 								</form>
 							</div>
@@ -105,8 +117,8 @@
 										<thead>
 											<tr>
 												<th>序号</th>
-												<th>年度</th>
 												<th>月份</th>
+												<th>旬期</th>
 												<th>风险辨识范围</th>
 												<th>风险数量</th>
 												<th>专业</th>
@@ -116,71 +128,14 @@
 												<th>操作</th>
 											</tr>
 										</thead>
-									<%-- 	<tbody>
-											<tr>
-												
-												<td>
-												1
-												</td>
-												<td>
-												2017
-												</td>
-												<td>
-												2
-												</td>
-												<td>
-												井口
-												</td>
-												<td>
-												3
-												</td>
-												<td>
-												采煤
-												</td>
-												<td>
-												张三
-												</td>
-												<td>
-												2923
-												</td>
-												
-												<td>
-												审核通过
-												</td>
-												<td>
-													<a href="<%=path%>/risk/monthRiskControlPlanAnalyzeInfo.jsp">详情</a>
-												</td>
-											</tr>
-
-										</tbody> --%>
+									
 										<tbody id="tbody"></tbody>
 									</table>
 
 								
 
 									<div id="paginationIDU"></div>
-									<!-- <script>
-										$('#paginationIDU').pagination(
-												{
-													//			组件属性
-													"total" :"${result.pageBean.totalCount}",//数字 当分页建立时设置记录的总数量 1
-													"pageSize" : 10,//数字 每一页显示的数量 10
-													"pageNumber" : "${result.pageBean.currentPage}",//数字 当分页建立时，显示的页数 1
-													"pageList" : [ 10 ],//数组 用户可以修改每一页的大小，
-													//功能
-													"layout" : [ 'list', 'sep',
-															'first', 'prev',
-															'manual', 'next',
-															'last', 'links' ],
-													"onSelectPage" : function(
-															pageNumber, b) {
-														$("#currentPage").val(pageNumber);
-														$("#currentCount").val(b);
-														$("#queryForm").submit();
-													}
-												});
-									</script>
-									 -->
+									
 
 								</div>
 							</div>

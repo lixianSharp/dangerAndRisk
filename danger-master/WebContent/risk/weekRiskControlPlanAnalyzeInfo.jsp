@@ -9,7 +9,7 @@
 <html lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>月风险管控计划风险分析</title>
+<title>旬风险管控计划风险分析</title>
 
 <%@ include file="/controls/cssJs.jsp"%>
 
@@ -57,7 +57,7 @@
 				<div class="panel panel-default">
 					<!--菜单连接标题-->
 					<div class="el_stairTitle">
-						<span>风险管理 </span><span>>月风险管控计划风险分析</span>
+						<span>风险管理 </span><span>>旬风险管控计划风险分析</span>
 					</div>
 
 					<div class="panel-body el_main">

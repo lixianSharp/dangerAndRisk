@@ -5,6 +5,7 @@
 
 $(function() {
 	query();
+	selectProfessionalTypes();
 });
 
 
@@ -94,25 +95,42 @@ var successList = function List(result) {
 		
 		if(controlPlans[i].checkstatus!=null||controlPlans[i].reportstatus!=null){
 			if(controlPlans[i].checkstatus=="1"&&controlPlans[i].reportstatus=="1"){
-					status ="已审核";
+					status ="通过审核";
 			}
 			if(controlPlans[i].checkstatus=="0"&&controlPlans[i].reportstatus=="1"){
-				status="未审核";
+				status="未通过审核";
 			}
 			
 		}
-		
+		//controlPlans[i].checkstatus==null&&
+		if(controlPlans[i].checkstatus==""&&controlPlans[i].reportstatus=="1"){
+			status ="已上报";
+		}
 		if(controlPlans[i].checkstatus==null&&controlPlans[i].reportstatus=="1"){
 			status ="已上报";
 		}
+		
 		if(controlPlans[i].checkstatus==null&&controlPlans[i].reportstatus=="0"){
 			status="未上报";
 		}
 		
+		var xunqi;
+		//显示旬期
+		if(controlPlans[i].monthorweek=="1"){
+			xunqi="上旬";
+		}else if(controlPlans[i].monthorweek=="2"){
+			xunqi="中旬";
+		}else if(controlPlans[i].monthorweek=="3"){
+			xunqi="下旬";
+		}
+		
+		
+		
+		
 		var str = "<tr><td>"
 		+index+"</td><td>"
 		+controlPlans[i].year+"</td><td>"
-		+controlPlans[i].monthorweek+"</td><td>"+riskrange+"</td><td>"
+		+xunqi+"</td><td>"+riskrange+"</td><td>"
 		+ricontrolPlans[i]+"</td><td>"
 		+controlPlans[i].specialty+"</td><td>"
 		+controlPlans[i].leader+"</td><td>"
@@ -128,7 +146,7 @@ var successList = function List(result) {
 		
 		//+controlPlans[i].reportstatus+"</td><td><a data-toggle='modal' data-target='#modifierDuty'>修改</a><a href='<%=path%>/risk/monthRiskControlPlanRisk.jsp'>详情</a></td></tr>";
 		+status+"</td><td>"
-		+"<a href='/danger/analysisPlan_toMonthRiskControlPlanAnalyzeInfo.action?method="+controlPlans[i].rictrlplanid+"'>详情</a></td></tr>";
+		+"<a href='/danger/analysisPlan_toWeekRiskControlPlanAnalyzeInfo.action?method="+controlPlans[i].rictrlplanid+"'>详情</a></td></tr>";
 	
 		t_body.append(str);
 
@@ -138,7 +156,41 @@ var successList = function List(result) {
 			result.pageBean.currentPage);// 分页显示
 }
 
+/**
+ * 专业类型下拉菜单
+ */
+function selectProfessionalTypes() {
+	
+	$.ajax({
+		url : 'validPlan_getProfessionalTypesList.action',
+		data : '',
+		type : 'POST',
+		dataType : 'json',
+		async : true,
+		success : function(result) {
 
+			var ptLists = result.ptList;
+			
+			$("#professionalTypesId").empty();
+			var professionalTypes = $("#professionalTypesId");
+			// duty.append("<option value=''>无</option>");
+			// console.log("ceshi"+dictionarys)
+			// alert(dictionarys.length);
+			var str="<option value=''>--全部--</option>";
+			for (var i = 0; i < ptLists.length; i++) {
+				
+				var s="<option value='" + ptLists[i]
+						+ "'>" + ptLists[i]
+						+ "</option>";
+				str=str+s;
+				
+			}
+			professionalTypes.append(str);
+			
+
+		}
+	});
+}
 
 
 

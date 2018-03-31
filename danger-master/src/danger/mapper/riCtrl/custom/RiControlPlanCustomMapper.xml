@@ -16,6 +16,9 @@
 		<if test="riskCtrlPlanMark!=null">
 		and riskCtrlPlanMark=#{riskCtrlPlanMark}
 		</if>
+		<if test="checkstatus!=null">
+		and checkstatus=#{checkstatus}
+		</if>
 		
 	</sql>
 	
@@ -68,13 +71,19 @@
 	</select>
 	
 	<!-- 得到灾害类型的风险数量 -->
-	<select id="getRiskCountByDisasterTypes" resultType="map">
+	<select id="getRiskCountByDisasterTypes" resultType="map" parameterType="string">
 		SELECT disasterTypes,count(disasterTypes) as count from riidentificationrriskmsg GROUP BY disasterTypes;
+		<!-- SELECT disasterTypes,count(disasterTypes) as count from riidentificationrriskmsg,ricontrolplan,ridetailedofriskctrlplan where ricontrolplan.`year`=#{year} and ricontrolplan.riCtrlPlanId=ridetailedofriskctrlplan.riCtrlPlanId and ridetailedofriskctrlplan.riskMsgId=ridetailedofriskctrlplan.riskMsgId GROUP BY disasterTypes; -->
 	</select>
 	
 	<!-- 得到失效的风险的地点 -->
 	<select id="getAddressList" resultType="map">
 		SELECT riskAddress,count(riskAddress) AS count from ridetailedofriskctrlplan,riidentificationrriskmsg WHERE ridetailedofriskctrlplan.measureIsValid="无效" AND ridetailedofriskctrlplan.riskMsgId=riidentificationrriskmsg.riskMsgId GROUP BY riskAddress;
+	</select>
+	
+	<!-- 得到今年失效的风险的地点 -->
+	<select id="getAddressList2" resultType="map" parameterType="string">
+		SELECT riskAddress,count(riskAddress) AS count from ridetailedofriskctrlplan,riidentificationrriskmsg,ricontrolplan WHERE ricontrolplan.`year`=#{year} and ridetailedofriskctrlplan.measureIsValid="无效" AND ricontrolplan.riCtrlPlanId=ridetailedofriskctrlplan.riCtrlPlanId and ridetailedofriskctrlplan.riskMsgId=riidentificationrriskmsg.riskMsgId GROUP BY riskAddress;
 	</select>
 	
 	<!-- 得到该管控计划下的所有风险信息的风险地点 -->
@@ -83,13 +92,15 @@
 	</select>
 	<!--查询风险信息的条件 -->
 	<sql id="query_riskInfo_where">
-		<if test="riskType!=null">
-			and riskType like '%${riskType}%'
+		<if test="riskAddress!=null">
+			and riskAddress like '%${riskAddress}%'
 		</if>
 		<if test="riskDescribe!=null">
 		and riskDescribe like '%${riskDescribe}%'
 		</if>
-		
+		<if test="specialty!=null">
+		and professionalTypes=#{specialty}
+		</if>
 	</sql>
 	<!-- 按条件查出所有的风险信息 -->
 	<select id="getAllRiskInfo" resultType="danger.bean.riIdentify.RiIdentificationRriskMsg" parameterType="hashmap">
@@ -120,17 +131,45 @@
       #{riskmsgid,jdbcType=VARCHAR})
 	</insert>
 	
-	
+	<!-- 删除该管控计划中的风险信息 -->
 	<delete id="deleteRiskInfo" parameterType="danger.bean.riCtrl.RiDetailedOfRiskCtrlPlan">
 		 delete from ridetailedofriskctrlplan where riCtrlPlanId = #{rictrlplanid,jdbcType=VARCHAR} and riskMsgId =#{riskmsgid,jdbcType=VARCHAR}
 	</delete>
 	
 	
+	
+	
 	<!-- 得到上月的管控计划的id-->
 	<select id="getPrecedingMonthId" resultType="string" parameterType="string">
-		SELECT r2.riCtrlPlanId from ricontrolplan r1,ricontrolplan r2 where r1.riCtrlPlanId=#{myrictrlplanid} and r1.`year`=r2.`year` and r1.monthOrWeek=r2.monthOrWeek+1;
+		SELECT r2.riCtrlPlanId from ricontrolplan r1,ricontrolplan r2 where r1.riCtrlPlanId=#{riCtrlPlanId} and r2.specialty=#{specialty} and r1.`year`=r2.`year` and r1.monthOrWeek=r2.monthOrWeek+1;
 		
 	</select>
+	
+	<!--查询风险信息的条件 -->
+	<sql id="query_PrecedingMonthId_where">
+		<if test="riCtrlPlanId!=null">
+			and r1.riCtrlPlanId =#{riCtrlPlanId}
+		</if>
+		<if test="specialty!=null">
+			and r2.specialty =#{specialty}
+		</if>
+		
+		
+	</sql>
+	
+	
+	<!-- 得到上月的管控计划的id-->
+	<select id="getPrecedingMonthIdByCondition" resultType="string" parameterType="map">
+		SELECT r2.riCtrlPlanId from ricontrolplan r1,ricontrolplan r2 
+		<where>
+			<include refid="query_PrecedingMonthId_where"></include>
+			 and r1.`year`=r2.`year` and r1.monthOrWeek=r2.monthOrWeek+1
+		</where>
+		
+		
+	</select>
+	
+	
 	
 	<!-- 得到上月的风险信息的id-->
 	<select id="getPrecedingMonthRiskInfoIdList" resultType="string" parameterType="string">
@@ -138,15 +177,37 @@
 		
 	</select>
 	
-	<!-- 计划上报-->
+	<!-- 计划上报，已经添加审核信息-->
 	<update id="reportPlan" parameterType="string">
-	 update ricontrolplan set reportStatus="1" where riCtrlPlanId=#{controlPlansid}
-	
+	<!--  update ricontrolplan set reportStatus="1" where riCtrlPlanId=#{controlPlansid} -->
+	update ricontrolplan,ririskplanaudit set ricontrolplan.checkStatus="",ricontrolplan.reportStatus="1",ririskplanaudit.auditStatus="" where ricontrolplan.riCtrlPlanId=#{controlPlansid} and ricontrolplan.riCtrlPlanId=ririskplanaudit.riCtrlPlanId;
 	</update>
+	
+	<!-- 计划上报，还未添加审核信息-->
+	<update id="reportPlan2" parameterType="string">
+	update ricontrolplan set reportStatus="1" where riCtrlPlanId=#{controlPlansid}
+	</update>
+	
 	
 	<!-- 通过管控计划id得到管控计划详情-->
 	<select id="getMyRiskmsgid" resultType="danger.bean.riCtrl.RiDetailedOfRiskCtrlPlan" parameterType="string">
 		SELECT * from ridetailedofriskctrlplan where riCtrlPlanId=#{rictrlplanid}
+		
+	</select>
+	
+	<!-- 得到所有的月管控计划 -->
+	<select id="getAllControlPlan" resultType="danger.bean.riCtrl.RiControlPlan" parameterType="string">
+		SELECT * from ricontrolplan where riskCtrlPlanMark="1"
+		
+	</select>
+	<!-- 得到所有的月管控计划 -->
+	<select id="getAllControlPlan2" resultType="danger.bean.riCtrl.RiControlPlan" parameterType="string">
+		SELECT * from ricontrolplan where riskCtrlPlanMark="0"
+		
+	</select>
+	<!-- 通过时间查找年度辨识id -->
+	<select id="getYearIdByTime" resultType="string" parameterType="string">
+		SELECT identiryId from riidentificationmaintable where SUBSTR(year,1,4)=#{year}
 		
 	</select>
 	
