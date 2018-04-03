@@ -440,7 +440,59 @@ function planReport(){
  */
 
 //获取到历史审核备注信息
+//获取到历史审核备注信息
 function riskCheck(){
+	
+	var count=0;
+	
+	$(".planCheck").each(function() { // 获取选择的风险
+		
+		
+		if ($(this).prop("checked")) {// 如果选中。。。
+			count++;
+		}
+			
+	})
+	if(count==1){
+		
+		   $("#benciAuditmsg").val("");
+		   // $("input[name='riRiskPlanAudit.auditstatus'][value='通过审核']").attr("checked","checked");
+			$("input[name='riRiskPlanAudit.auditstatus'][value='通过审核']").prop( "checked", true );
+			
+			$tds = $("input[name='riskAna']:checked").parents('tr').find('td');
+			
+			//eval("("+$tds.eq(9).html()+")")
+			$("#historyAuditmsg").val($tds.eq(9).text().replace(/<br>/g, '\n'));
+			if($("#historyAuditmsg").val()=="无"){
+				$("#history").hide();
+			}
+			
+			//隐藏一个管控计划id
+			var controlPlansid = $("input[name='riskAna']:checked").parents('tr').find("#controlPlansid").val();
+			$("#shenHeRictrlplanId").val(controlPlansid);
+			
+			//判断是否已经上报
+			var idReport =$tds.eq(10).text();
+			//alert(idReport)
+			if(idReport=="未上报"){
+				alert("上报之后才可以审核，请您先上报");
+			}else if(idReport=="已上报"){ //if(idReport!="通过审核"&&idReport=="未通过审核"){
+					$('#riskCheck').modal();
+			}else if(idReport=="通过审核"){
+					alert("审核已经通过，不能再次审核");
+			}else if(idReport=="未通过审核"){
+				    alert("未通过审核，请重新上报再审核");
+			}
+			
+			
+	}else /*if(count==0)*/{
+		alert("请先选择一条月管控记录");
+	}
+	
+	
+	
+}
+/*function riskCheck(){
 	
 	var count=0;
 	$(".planCheck").each(function() { // 获取选择的风险
@@ -460,7 +512,7 @@ function riskCheck(){
 			$("input[name='riRiskPlanAudit.auditstatus'][value='通过审核']").prop( "checked", true );
 			
 			$tds = $("input[name='riskAna']:checked").parents('tr').find('td');
-			/*eval("("+$tds.eq(9).html()+")")*/
+			eval("("+$tds.eq(9).html()+")")
 			
 			$("#historyAuditmsg").val($tds.eq(9).text().replace(/<br>/g, '\n'));
 			
@@ -500,7 +552,7 @@ function riskCheck(){
 	
 	
 	
-}
+}*/
 
 function saveAuditButton(){
 	

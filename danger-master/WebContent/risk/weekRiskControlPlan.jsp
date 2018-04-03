@@ -314,7 +314,7 @@
 												
 												<div class="input-group el_modellist"  role="toolbar">
 												<span class="el_spans">旬&nbsp;&nbsp;期：</span>
-												  <select style="left: 10px;" id=""
+												  <select style="left: 10px;" 
 													class="selectpicker form-control" title="请选择" name="ricontrolPlan.monthorweek" id="updateWeek">
 													<option value="">--请选择--</option>
 													<option value="1">上旬</option>

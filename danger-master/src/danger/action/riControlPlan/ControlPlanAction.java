@@ -3,9 +3,11 @@ package danger.action.riControlPlan;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.annotation.Resource;
 
@@ -128,16 +130,24 @@ public class ControlPlanAction extends ActionSupport {
 			addressList.add(s2);
 		}
 		
+		
+		
 		//把相同的工作面移除
+		
+		List<List<String>> addressList2 = new LinkedList<List<String>>();
+		
 		for(List<String> str1:addressList){
-			for(int i=0;i<str1.size();i++){
-				for(int j=i+1;j<str1.size();j++){
-					if(str1.get(i).equals(str1.get(j))){
-						str1.remove(j);
-						
-					}
+			Set<String> addressSet = new HashSet<String>();
+			for(String str2:str1){
+				String[] str3 =str2.trim().split(",");
+				for(int i=0;i<str3.length;i++){
+					addressSet.add(str3[i]);
 				}
 			}
+			List<String> myaddressList = new LinkedList<String>();
+			myaddressList.addAll(addressSet);
+			addressList2.add(myaddressList);
+			
 		}
 		
 		
@@ -146,7 +156,7 @@ public class ControlPlanAction extends ActionSupport {
 		
 		result.put("shenheList", shenheList);
 		
-		result.put("addressList", addressList);
+		result.put("addressList", addressList2);
 		
 		result.put("pageBean", pageBean);
 		System.out.println(result);
@@ -535,14 +545,30 @@ public class ControlPlanAction extends ActionSupport {
 		}
 		
 		
+		//把相同的工作面移除
 		
+		List<List<String>> addressList2 = new LinkedList<List<String>>();
+		
+		for(List<String> str1:addressList){
+			Set<String> addressSet = new HashSet<String>();
+			for(String str2:str1){
+				String[] str3 =str2.trim().split(",");
+				for(int i=0;i<str3.length;i++){
+					addressSet.add(str3[i]);
+				}
+			}
+			List<String> myaddressList = new LinkedList<String>();
+			myaddressList.addAll(addressSet);
+			addressList2.add(myaddressList);
+			
+		}
 		
 		
 		result.put("riskCountList", riskCountList);
 		
 		result.put("shenheList", shenheList);
 		
-		result.put("addressList", addressList);
+		result.put("addressList", addressList2);
 		
 		result.put("pageBean", pageBean);
 		System.out.println(result);

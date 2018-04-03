@@ -15,6 +15,17 @@
 			<result name="monthRiskControlPlanRisk">/risk/monthRiskControlPlanRisk.jsp</result>
 			<result name="weekRiskControlPlanRisk">/risk/weekRiskControlPlanRisk.jsp</result>
 		</action>
+		
+		 <!-- 导出培训考试档案信息 -->
+        <action name="exportRiskInfoDoc" class="danger.action.riControlPlan.ExportRiskInfoExcelAction">
+            <result type="stream">
+                <!-- 其他的参数在类中设置或者使用默认 -->
+                <param name="contentType">application/octet-stream</param>
+                <param name="inputName">inputStream</param>
+                <param name="contentDisposition">attachment;filename="${downloadFileName}"</param>
+                <param name="bufferSize">8192</param>
+            </result>
+        </action>
 	
 	</package>
 </struts>

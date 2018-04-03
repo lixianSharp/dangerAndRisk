@@ -33,12 +33,22 @@ public interface ControlPlanDetailService {
 
 	//得到该管控记录的所有责任部门及其个数
 	List<Map<String, Object>> getDutyDepartmentList(String riCtrlPlanId);
-
+	
 	//得到该管控记录的所有失效风险地点及其个数
 	List<Map<String, Object>> getAddressList(String riCtrlPlanId);
 
 	//得到专业类型下拉列表
 	List<String> getProfessionalTypesList();
+
+	/*
+	 * 通过传入的管控计划id得到该管控计划的风险信息
+	 */
+	List<RiIdentificationRriskMsg> findRiskInfoByRictrlplanId(String rictrlplanid);
+
+	/*
+	 * 得到旬风险管控计划有效性
+	 */
+	PageBean<RiControlPlan> getWeekAllVaildPlanInfo(Map<String, Object> condition);
 
 	
 

@@ -281,12 +281,12 @@ public class ControlPlanServiceImpl implements ControlPlanService {
 	public RiControlPlan getRiControlPlanById(String riCtrlPlanId) {
 		
 		RiControlPlan riControlPlan=null;
-		System.out.println("riCtrlPlanId" + riCtrlPlanId);
+		
 		if (riCtrlPlanId != null) {
 			
 			riControlPlan = riControlPlanMapper.selectByPrimaryKey(riCtrlPlanId);
 		} 
-		System.out.println("riControlPlan" + riControlPlan);
+		
 		return riControlPlan;
 	}
 	

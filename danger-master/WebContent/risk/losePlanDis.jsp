@@ -45,6 +45,7 @@
 
 						<!--内容-->
 						<div class=" col-md-12">
+							<h4>月管控计划失效风险信息</h4>
 						<%--   <c:set value="${[]}" var="aList" />
 					        <c:forEach items="${aList}" var="aNum">
 					            ${aNum}
@@ -64,10 +65,11 @@
 									
 								</c:forEach>  --%>
 
-								<%-- <table class="table table-hover table-bordered">
+								<table class="table table-hover table-bordered">
+								
 										<thead>
 											<tr>
-												
+												<th>序号</th>
 												<th>风险地点</th>
 												<th>风险描述</th>
 												<th>风险类型</th>
@@ -86,7 +88,7 @@
 											<tr>
 											
 											<!-- 下面是风险信息的字段 -->
-											
+											<td>${ status.index+1 }</td>
 											<td>${riskInfo.riskaddress }</td>
 											<td>${riskInfo.riskdescribe }</td>
 											<td>${riskInfo.risktype }</td>
@@ -102,7 +104,7 @@
 										</tr>
 										</c:forEach>
 										</tbody>
-							</table> --%>
+							</table>
 							
 								
 						

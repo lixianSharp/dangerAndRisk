@@ -1,9 +1,11 @@
 package danger.action.riControlPlan;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -65,6 +67,7 @@ public class ValidPlanAction extends ActionSupport {
     private String checkstatus;
 	private String currentPage;
 	private String currentCount;
+	private String year;
 	
 	
 	public String getMonthOrWeek() {
@@ -115,6 +118,14 @@ public class ValidPlanAction extends ActionSupport {
 	
 	
 
+	public String getYear() {
+		return year;
+	}
+
+	public void setYear(String year) {
+		this.year = year;
+	}
+
 	//跳转到losePlanDis页面
 	public String toLosePlanDis(){
 		result = new HashMap<String, Object>();
@@ -125,15 +136,61 @@ public class ValidPlanAction extends ActionSupport {
 		List<Map<String,Object>> dutyDepartmentList = new LinkedList<Map<String,Object>>();
 		dutyDepartmentList = controlPlanDetailService.getDutyDepartmentList(riCtrlPlanId);
 		
+		
 		//得到该管控记录的所有失效风险地点及其个数
 		List<Map<String,Object>> addressList = new LinkedList<Map<String,Object>>();
 		addressList = controlPlanDetailService.getAddressList(riCtrlPlanId);
 		
+		
+		//封装所有的工作面到一个List中
+		List<String> addressList2 = new LinkedList<String>();
+	
+		for(Map<String,Object> map:addressList){
+			//得到每一个风险数据的所有工作面
+			//Set<String> addressSet = map.keySet();
+			String str1 = (String)map.get("riskAddress");
+			Long count =(Long) map.get("count");
+			
+			String[] str2 =str1.trim().split(",");
+			for(int i=0;i<str2.length*count;i++){
+				addressList2.add(str2[i]);
+			}
+			
+		}
+		System.out.println(addressList2);
+		
+		//将这些工作面一次放入map中
+		List<Map<String,Object>> addressList3 = new LinkedList<Map<String,Object>>();
+		
+		for(int i=0;i<addressList2.size();i++){
+			int count=1;
+			Map<String,Object> map = new HashMap<String,Object>();
+			for(int j=i+1;j<addressList2.size();j++){
+				if(addressList2.get(i).equals(addressList2.get(j))){
+					count++;
+					addressList2.remove(j);
+					j--;
+				}
+				
+			}
+			map.put("riskAddress", addressList2.get(i));
+			map.put("count",count);
+			addressList3.add(map);
+			
+			
+		}
+		
+	
+		
+		
 		//得到该管控计划失效的风险信息
 		List<RiIdentificationRriskMsg> riskMsgList = new LinkedList<RiIdentificationRriskMsg>();
 		riskMsgList = controlPlanDetailService.getRiskMsgList(riCtrlPlanId);
+		for(RiIdentificationRriskMsg riIdentificationRriskMsg:riskMsgList){
+			System.out.println(riIdentificationRriskMsg.getRiskaddress());
+		}
 		
-		result.put("addressList", addressList);
+		result.put("addressList", addressList3);
 		result.put("dutyDepartmentList", dutyDepartmentList);
 		result.put("riskMsgList", riskMsgList);
 		return "losePlanDis";
@@ -173,11 +230,32 @@ public class ValidPlanAction extends ActionSupport {
 			
 		}
 		
+		
+		//把相同的工作面移除
+		
+		List<List<String>> addressList2 = new LinkedList<List<String>>();
+		
+		for(List<String> str1:addressList){
+			Set<String> addressSet = new HashSet<String>();
+			for(String str2:str1){
+				String[] str3 =str2.trim().split(",");
+				for(int i=0;i<str3.length;i++){
+					addressSet.add(str3[i]);
+				}
+			}
+			List<String> myaddressList = new LinkedList<String>();
+			myaddressList.addAll(addressSet);
+			addressList2.add(myaddressList);
+			
+		}
+		
+		
+		
 		result.put("riskCountList", riskCountList);
 		
 		result.put("validCountList", validCountList);
 		
-		result.put("addressList", addressList);
+		result.put("addressList", addressList2);
 		
 		result.put("pageBean", pageBean);
 		
@@ -235,4 +313,127 @@ public class ValidPlanAction extends ActionSupport {
 		result.put("ptList", ptList);
 		return SUCCESS;
 	}
+	
+	
+	
+	
+	
+	//得到所有的有效性数据
+		public String getWeekAllVaildPlanInfo(){
+			result = new HashMap<String,Object>();
+			Map<String, Object> condition = new HashMap<String, Object>();
+			condition = generateCondition2(condition);
+			
+			PageBean<RiControlPlan> pageBean = controlPlanDetailService.getWeekAllVaildPlanInfo(condition);
+
+			List<RiControlPlan> ricontrolPlanList = pageBean.getProductList();
+			
+			//风险总数
+			List<Integer> riskCountList = new LinkedList<Integer>();
+			
+			List<Integer> validCountList = new LinkedList<Integer>();
+			
+			//得到该管控计划下的所有风险信息的风险地点
+			List<List<String>> addressList = new LinkedList<List<String>>();
+					
+			
+			for(int i=0;i<ricontrolPlanList.size();i++){
+				
+				int a=controlPlanService.getRiskCount(ricontrolPlanList.get(i).getRictrlplanid());
+				riskCountList.add(a);
+				
+				int b = controlPlanDetailService.getValidCount(ricontrolPlanList.get(i).getRictrlplanid());
+				validCountList.add(b);
+				
+				List<String> s2=  controlPlanService.getRiskAddress(ricontrolPlanList.get(i).getRictrlplanid());
+				addressList.add(s2);
+				
+			}
+			
+			
+			//把相同的工作面移除
+			
+			List<List<String>> addressList2 = new LinkedList<List<String>>();
+			
+			for(List<String> str1:addressList){
+				Set<String> addressSet = new HashSet<String>();
+				for(String str2:str1){
+					String[] str3 =str2.trim().split(",");
+					for(int i=0;i<str3.length;i++){
+						addressSet.add(str3[i]);
+					}
+				}
+				List<String> myaddressList = new LinkedList<String>();
+				myaddressList.addAll(addressSet);
+				addressList2.add(myaddressList);
+				
+			}
+			
+			
+			
+			result.put("riskCountList", riskCountList);
+			
+			result.put("validCountList", validCountList);
+			
+			result.put("addressList", addressList2);
+			
+			result.put("pageBean", pageBean);
+			
+			return SUCCESS;
+		}
+
+		private Map<String, Object> generateCondition2(Map<String, Object> condition) {
+			if (currentPage == null || "".equals(currentPage.trim())) {
+				currentPage = "1";
+				condition.put("currentPage", currentPage);
+				result.put("currentPage", currentPage);
+			}
+			if (currentCount == null || "".equals(currentCount.trim())) {
+				currentCount ="10";
+				condition.put("currentCount", currentCount);
+				result.put("currentCount", currentCount);
+			}
+
+			if (ValidateCheck.isNotNull(currentPage)) {
+				condition.put("currentPage", currentPage);
+				result.put("currentPage", currentPage);
+			}
+			if (ValidateCheck.isNotNull(currentCount)) {
+				condition.put("currentCount", currentCount);
+				result.put("currentCount", currentCount);
+			}
+			if (ValidateCheck.isNotNull(monthOrWeek)) {
+				condition.put("monthOrWeek", monthOrWeek);
+				result.put("monthOrWeek", monthOrWeek);
+			}
+			if (ValidateCheck.isNotNull(specialty)) {
+				condition.put("specialty", specialty);
+				result.put("specialty", specialty);
+			}
+			if (ValidateCheck.isNotNull(riskCtrlPlanMark)) {
+				condition.put("riskCtrlPlanMark", riskCtrlPlanMark);
+				result.put("riskCtrlPlanMark", riskCtrlPlanMark);
+			}
+			if (ValidateCheck.isNotNull(checkstatus)) {
+				condition.put("checkstatus", checkstatus);
+				result.put("checkstatus", checkstatus);
+			}
+			if (ValidateCheck.isNotNull(year)) {
+				condition.put("year", year);
+				result.put("year", year);
+			}
+			
+			return condition;
+		}
+		
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

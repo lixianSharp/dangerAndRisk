@@ -47,7 +47,7 @@ function queryButton() {
 
 function query() {
 	$.ajax({
-		url : 'validPlan_getAllVaildPlanInfo.action',
+		url : 'validPlan_getWeekAllVaildPlanInfo.action',
 		data : $("#queryForm").serialize(),
 		type : 'POST',
 		dataType : 'json',

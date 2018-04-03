@@ -71,8 +71,8 @@
 	
 	<!-- 得到月管控计划的措施无效的数量 -->
 	<select id="getRiskMsgList" resultType="danger.bean.riIdentify.RiIdentificationRriskMsg" parameterType="string">
-		select * from ridetailedofriskctrlplan where measureIsValid="无效" and riCtrlPlanId=#{riCtrlPlanId}
-	
+		<!-- select * from ridetailedofriskctrlplan where measureIsValid="无效" and riCtrlPlanId=#{riCtrlPlanId} -->
+	select riidentificationrriskmsg.* from ridetailedofriskctrlplan,riidentificationrriskmsg where riidentificationrriskmsg.riskMsgId=ridetailedofriskctrlplan.riskMsgId and ridetailedofriskctrlplan.measureIsValid="无效" and riCtrlPlanId=#{riCtrlPlanId}
 	</select>
 	
 	<!-- 得到该管控记录的所有责任部门及其个数 -->
@@ -91,7 +91,11 @@
 		SELECT name from dictionary where upDictionaryId="10101"
 	</select>
 	
-	
+	<!-- 通过传入的管控计划id得到该管控计划的风险信息 -->
+	<select id="findRiskInfoByRictrlplanId" resultType="danger.bean.riIdentify.RiIdentificationRriskMsg" parameterType="string">
+		select riidentificationrriskmsg.* from ridetailedofriskctrlplan , riidentificationrriskmsg where ridetailedofriskctrlplan.riCtrlPlanId=#{rictrlplanid} and riidentificationrriskmsg.riskMsgId=ridetailedofriskctrlplan.riskMsgId
+
+	</select>
 	
 
 </mapper>

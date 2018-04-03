@@ -105,7 +105,9 @@ var successList = function List(result) {
 		if(RiIdentificationMainTableIds[i]=="Y"){
 			RiIdentificationMainTableId="年度辨识";
 		}
-		//if(RiIdentificationMainTableIds[i]=="Y")
+		if(RiIdentificationMainTableIds[i]=="S"){
+			RiIdentificationMainTableId="专项辨识";
+		}
 		var str = "<tr><td><input type='checkbox' class='planCheck'></td><td>"
 		+index+"</td><td>"
 		+RiIdentificationMainTableId+"</td><td>"
@@ -585,7 +587,7 @@ function addSave(){
 			"riIdentificationRriskMsg.riskaddress" : "required",//风险地点
 			"riIdentificationRriskMsg.riskdescribe" : "required",//风险描述
 			"riIdentificationRriskMsg.risktype" :"required",//风险类型
-			"riIdentificationRriskMsg.professionaltypes":"required",//专业类型
+			//"riIdentificationRriskMsg.professionaltypes":"required",//专业类型
 			"riIdentificationRriskMsg.disastertypes":"required",//灾害类型
 			"riIdentificationRriskMsg.cancauseaccidents" : "required",//可能导致事故
 			"riIdentificationRriskMsg.ctrlmeasure" : "required",//管控措施
@@ -608,9 +610,9 @@ function addSave(){
 			"riIdentificationRriskMsg.riskdescribe" : {
 				required:"不能为空"//风险描述
 			},
-			"riIdentificationRriskMsg.risktype" :{
+			/*"riIdentificationRriskMsg.risktype" :{
 				required:"不能为空"//风险类型
-			},
+			},*/
 			"riIdentificationRriskMsg.professionaltypes":{
 				required:"不能为空"//专业类型
 			},
@@ -659,7 +661,6 @@ function addSave(){
 		$.ajax({
 			type : "post",
 			dataType : "json",
-			//url : "${pageContext.request.contextPath}/identify_addIdentifyRiskMsg.action",
 			url : "controlPlan_addRiskMsgToControlPlan.action",
 			data : $("#addForm").serialize(),
 			success : function(data) {
@@ -683,8 +684,7 @@ function addSave(){
 //修改
 //打开修改模态框之前要进行的操作
 function updateOpenBtn(obj){
-
-
+	alert("update")
 	
 	var address = $(obj).parents("tr").children("td").eq(1).text();//风险地点
 
@@ -836,6 +836,7 @@ function optionChange3(){
 	
 	
 	var riskValue = possibility*exposure*consequence;//计算出风险值
+	riskValue = riskValue.toFixed(2);
 	//alert(possibility*exposure*consequence)
 	if(!isNaN(riskValue)){
 		$("#evaluateRiskValue").val(riskValue);//风险值
@@ -863,6 +864,7 @@ function optionChange2(){
 	
 	
 	var riskValue = possibility*exposure*consequence;//计算出风险值
+	riskValue = riskValue.toFixed(2);
 	//alert(possibility*exposure*consequence)
 	if(!isNaN(riskValue)){
 		$("#evaluateRiskValue").val(riskValue);//风险值
@@ -889,6 +891,7 @@ function optionChange1(){
 	
 	
 	var riskValue = possibility*exposure*consequence;//计算出风险值
+	riskValue = riskValue.toFixed(2);
 	//alert(possibility*exposure*consequence)
 	if(!isNaN(riskValue)){
 		$("#evaluateRiskValue").val(riskValue);//风险值
@@ -911,5 +914,19 @@ function clearBtn(){
 	$("#importRiskAddress").val("");
 	queryRisk();
 }
+
+/*
+ * 导出该管控计划下的风险信息
+ */
+function extEmpTrain() {
+	// 将数据打包发送到后台
+	var rictrlplanid = $("#myRictrlplanid").val();
+	if (confirm("确定导出?")) {
+		window.location.href = "/danger/exportRiskInfoDoc.action?rictrlplanid=" + rictrlplanid;
+	}
+
+}
+
+
 
 

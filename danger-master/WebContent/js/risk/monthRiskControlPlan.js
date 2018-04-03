@@ -10,18 +10,6 @@ $(function() {
 });
 
 
-/**
- * 批量导入
- */
-function extEmpTrain() {
-	// 将数据打包发送到后台
-	var idcode = $("#hiddenidcode").val();
-	if (confirm("确定导出?")) {
-		window.location.href = "/Exam/exportTrainDoc.action?idcode=" + idcode;
-		// self.location ="/Exam/exportTrainDoc.action?idcode="+idcode;
-	}
-
-}
 
 
 /**
@@ -143,14 +131,13 @@ function query() {
 
 var successList = function List(result) {
 	
+	
 	//得到数据
 	var controlPlans = result.pageBean.productList;
 	var ricontrolPlans = result.riskCountList;
 	var shenhes = result.shenheList;
 	var address = result.addressList;
-	
-	
-	//alert(address)
+
 	
 	$("#tbody").html("");// 清空表体
 	// 获取到这个表格
@@ -418,8 +405,7 @@ function planReport(){
  */
 
 //获取到历史审核备注信息
-function riskCheck(){
-	
+function riskCheckButton(){
 	var count=0;
 	$(".planCheck").each(function() { // 获取选择的风险
 		
@@ -430,15 +416,13 @@ function riskCheck(){
 		}
 			
 		})
-	
 	if(count==1){
 		$("#benciAuditmsg").val("");
-		
+		debugger
 		   // $("input[name='riRiskPlanAudit.auditstatus'][value='通过审核']").attr("checked","checked");
 			$("input[name='riRiskPlanAudit.auditstatus'][value='通过审核']").prop( "checked", true );
 			
 			$tds = $("input[name='riskAna']:checked").parents('tr').find('td');
-			/*eval("("+$tds.eq(9).html()+")")*/
 			
 			$("#historyAuditmsg").val($tds.eq(9).text().replace(/<br>/g, '\n'));
 			
@@ -452,6 +436,7 @@ function riskCheck(){
 			
 			//判断是否已经上报
 			var idReport =$tds.eq(10).html();
+			
 			if(idReport=="未上报"){
 				alert("上报之后才可以审核，请您先上报");
 			}else{
@@ -462,7 +447,7 @@ function riskCheck(){
 				if(idReport=="未通过审核"){
 					alert("未通过审核，请重新上报再审核")
 				}
-				if(idReport!="通过审核"&&idReport=="未通过审核"){
+				if(idReport!="通过审核"&&idReport!="未通过审核"){
 					$('#riskCheck').modal();
 				}
 				

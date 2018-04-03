@@ -105,7 +105,7 @@
 									
 									<button  class="btn btn-primary" data-toggle="modal" onClick="$.Pop('每个月每个专业只能有一个风险管控计划，可以通过“详情”维护专业的风险管控计划信息。','confirm',function(){addControl()})" >新增</button>
 									<button class="btn btn-primary" onclick="planReport()">计划上报</button>
-									<button class=" btn btn-primary" onclick="riskCheck()">审核</button>
+									<button class=" btn btn-primary" onclick="riskCheckButton()">审核</button>
 		
 									</div>
 									

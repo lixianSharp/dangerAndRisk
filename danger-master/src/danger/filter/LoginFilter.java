@@ -40,7 +40,6 @@ public class LoginFilter implements Filter {
 			throws IOException, ServletException {
 		HttpServletRequest req = (HttpServletRequest) request;
 		String path = req.getRequestURI();
-		System.out.println("reqURL----------" + path);
 		// 如果包含login.jsp证明是登陆就放行
 		if (path.contains("login") || path.contains("/js/") || path.contains("/image/") || path.contains("/css/")
 				|| path.contains("message.jsp")|| path.contains("404.jsp")|| path.contains("/images/")) {
@@ -54,7 +53,6 @@ public class LoginFilter implements Filter {
 		if (user == null) {
 			res.sendRedirect(req.getContextPath() + "/login/login.jsp");
 		} else {
-			System.out.println("user----------"+user);
 			chain.doFilter(request, response);
 		}
 

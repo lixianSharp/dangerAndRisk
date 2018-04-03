@@ -72,8 +72,10 @@
 	
 	<!-- 得到灾害类型的风险数量 -->
 	<select id="getRiskCountByDisasterTypes" resultType="map" parameterType="string">
-		SELECT disasterTypes,count(disasterTypes) as count from riidentificationrriskmsg GROUP BY disasterTypes;
+		<!-- SELECT disasterTypes,count(disasterTypes) as count from riidentificationrriskmsg GROUP BY disasterTypes; -->
 		<!-- SELECT disasterTypes,count(disasterTypes) as count from riidentificationrriskmsg,ricontrolplan,ridetailedofriskctrlplan where ricontrolplan.`year`=#{year} and ricontrolplan.riCtrlPlanId=ridetailedofriskctrlplan.riCtrlPlanId and ridetailedofriskctrlplan.riskMsgId=ridetailedofriskctrlplan.riskMsgId GROUP BY disasterTypes; -->
+	<!-- SELECT disasterTypes,count(disasterTypes) as count from riidentificationrriskmsg,riidentificationmaintable where SUBSTR(riidentificationmaintable.`year`,1,4)=#{year} and riidentificationmaintable.identiryId=riidentificationrriskmsg.identiryId GROUP BY disasterTypes; -->
+	SELECT disasterTypes,count(disasterTypes) as count from riidentificationrriskmsg,riidentificationmaintable,riassessment where riassessment.riskMsgId=riidentificationrriskmsg.riskMsgId and riassessment.riskValue>"70" and SUBSTR(riidentificationmaintable.`year`,1,4)=#{year} and riidentificationmaintable.identiryId=riidentificationrriskmsg.identiryId GROUP BY disasterTypes;
 	</select>
 	
 	<!-- 得到失效的风险的地点 -->
@@ -205,9 +207,9 @@
 		SELECT * from ricontrolplan where riskCtrlPlanMark="0"
 		
 	</select>
-	<!-- 通过时间查找年度辨识id -->
+	<!-- 通过时间查找年度辨识id 年度辨识的标记为"N"-->
 	<select id="getYearIdByTime" resultType="string" parameterType="string">
-		SELECT identiryId from riidentificationmaintable where SUBSTR(year,1,4)=#{year}
+		SELECT identiryId from riidentificationmaintable where SUBSTR(year,1,4)=#{year} and riidentificationmaintable.identifyMark="Y"
 		
 	</select>
 	

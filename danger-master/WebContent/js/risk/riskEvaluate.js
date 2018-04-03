@@ -558,7 +558,7 @@ function findAllRiRespon() {
 	});
 }
 
-//极其危险（红色）  高度危险（橙色）  显著危险（黄色）  一般危险（蓝色） 稍有危险（黑色）
+//极其危险（红色）  高度危险（橙色）  显著危险（黄绿色）  一般危险（蓝色） 稍有危险（黑色）
 //根据风险值处理风险等级颜色  参数：风险值  风险等级    返回值：带有颜色的风险等级
 function dealWithRiGradeColor(riskValue,riskGrade){
 	var riskGradeWithColor ="";
@@ -567,7 +567,7 @@ function dealWithRiGradeColor(riskValue,riskGrade){
 	}else if(riskValue>160 && riskValue<320){
 		riskGradeWithColor = "<font color='orange'>"+riskGrade+"</td>";
 	}else if(riskValue>70 && riskValue<160){
-		riskGradeWithColor = "<font color='yellow'>"+riskGrade+"</td>";
+		riskGradeWithColor = "<font color='YellowGreen'>"+riskGrade+"</td>";
 	}else if(riskValue>20 && riskValue<70){
 		riskGradeWithColor = "<font color='blue'>"+riskGrade+"</td>";
 	}else if(riskValue<20){
@@ -681,6 +681,7 @@ function optionChange3(){
 	
 	
 	var riskValue = possibility*exposure*consequence;//计算出风险值
+	riskValue = riskValue.toFixed(2);
 	//alert(possibility*exposure*consequence)
 	if(!isNaN(riskValue)){
 		$("#evaluateRiskValue").val(riskValue);//风险值
@@ -708,6 +709,7 @@ function optionChange2(){
 	
 	
 	var riskValue = possibility*exposure*consequence;//计算出风险值
+	riskValue = riskValue.toFixed(2);
 	//alert(possibility*exposure*consequence)
 	if(!isNaN(riskValue)){
 		$("#evaluateRiskValue").val(riskValue);//风险值
@@ -734,6 +736,7 @@ function optionChange1(){
 	
 	
 	var riskValue = possibility*exposure*consequence;//计算出风险值
+	riskValue = riskValue.toFixed(2);
 	//alert(possibility*exposure*consequence)
 	if(!isNaN(riskValue)){
 		$("#evaluateRiskValue").val(riskValue);//风险值

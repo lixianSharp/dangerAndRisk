@@ -249,7 +249,7 @@ public class ControlPlanDetailServiceImpl implements ControlPlanDetailService {
 		condition.put("index", index);
 		condition.put("currentCount", currentCount);
 		
-		if(condition.get("monthOrWeek")=="1"){
+		
 			/*
 			 * 年份
 			 */
@@ -273,7 +273,7 @@ public class ControlPlanDetailServiceImpl implements ControlPlanDetailService {
 				condition.put("monthOrWeek", String.valueOf(number));
 				
 			}
-		}
+		
 		
 		
 		
@@ -342,6 +342,76 @@ public class ControlPlanDetailServiceImpl implements ControlPlanDetailService {
 	public List<String> getProfessionalTypesList() {
 		List<String> ptList = RiDetailedOfRiskCtrlPlanCustomMapper.getProfessionalTypesList();
 		return ptList;
+	}
+
+	/*
+	 * 通过传入的管控计划id得到该管控计划的风险信息
+	 */
+	@Override
+	public List<RiIdentificationRriskMsg> findRiskInfoByRictrlplanId(String rictrlplanid) {
+		List<RiIdentificationRriskMsg> RiskInfo =null;
+		if (rictrlplanid != null) {
+
+			
+			RiskInfo = RiDetailedOfRiskCtrlPlanCustomMapper.findRiskInfoByRictrlplanId(rictrlplanid);
+			
+		} 
+		return RiskInfo;
+	}
+
+	/*
+	 * 得到旬风险管控计划有效性
+	 */
+	@Override
+	public PageBean<RiControlPlan> getWeekAllVaildPlanInfo(Map<String, Object> condition) {
+		// 目的：就是想办法封装一个PageBean 并返回
+		PageBean<RiControlPlan> pageBean = new PageBean<RiControlPlan>();
+
+		// 1、当前页private int currentPage;
+		String strcurrentPage = (String) condition.get("currentPage");
+		int currentPage = Integer.valueOf(strcurrentPage);
+
+		pageBean.setCurrentPage(currentPage);
+
+		// 2、当前页显示的条数private int currentCount;
+		String strcurrentCount = (String) condition.get("currentCount");
+		int currentCount = Integer.valueOf(strcurrentCount);
+
+		pageBean.setCurrentCount(currentCount);
+
+		// 3、总条数private int totalCount;
+		int totalCount = 0;
+		// 调用dao层的方法
+
+		totalCount = riControlPlanCustomMapper.getControlPlanCountById(condition);
+		pageBean.setTotalCount(totalCount);
+
+		// 4、总页数private int totalPage;
+		/*
+		 * 总条数 当前页显示的条数 总页数 10 4 3 11 4 3 12 4 3 13 4 4
+		 * 
+		 * 公式：总页数=Math.ceil(总条数/当前显示的条数)
+		 * 
+		 */
+		int totalPage = (int) Math.ceil(1.0 * totalCount / currentCount);
+		pageBean.setTotalPage(totalPage);
+
+		// 5、每页显示的数据private List<T> productList = new ArrayList<T>();
+
+		/*
+		 * * 页数与limit起始索引的关系 例如 每页显示4条 页数 其实索引 每页显示条数 1 0 4 2 4 4 3 8 4 4 12 4
+		 * 
+		 * 索引index = (当前页数-1)*每页显示的条数
+		 * 
+		 */
+		int index = (currentPage - 1) * currentCount;
+		condition.put("index", index);
+		condition.put("currentCount", currentCount);
+		
+		List<RiControlPlan> controlPlanmap = riControlPlanCustomMapper.getControlPlanByCondition(condition);
+		pageBean.setProductList(controlPlanmap);
+
+		return pageBean;
 	}
 
 	

@@ -63,19 +63,52 @@ public class ConstitutePlanAction extends ActionSupport {
 		
 		result.put("RiskCountList",RiskCountList);
 		
-		result.put("addressList", addressList);
 		
-		List<String> address = new LinkedList<String>();
-		List<Long> counts = new LinkedList<Long>();
-		for(Map<String,Object> map : addressList){
-			Set<String> set = map.keySet();
+		
+		//封装所有的工作面到一个List中
+		List<String> addressList2 = new LinkedList<String>();
+	
+		for(Map<String,Object> map:addressList){
+			//得到每一个风险数据的所有工作面
+			//Set<String> addressSet = map.keySet();
+			String str1 = (String)map.get("riskAddress");
+			Long count =(Long) map.get("count");
 			
-			address.add( (String) map.get("riskAddress"));
-			counts.add((Long)map.get("count"));
-		
+			String[] str2 =str1.trim().split(",");
+			for(int i=0;i<str2.length*count;i++){
+				addressList2.add(str2[i]);
+			}
+			
 		}
-		result.put("address",address);
-		result.put("counts", counts);
+		System.out.println(addressList2);
+		
+		//将这些工作面一次放入map中
+		List<Map<String,Object>> addressList3 = new LinkedList<Map<String,Object>>();
+		
+		for(int i=0;i<addressList2.size();i++){
+			int count=1;
+			Map<String,Object> map = new HashMap<String,Object>();
+			for(int j=i+1;j<addressList2.size();j++){
+				if(addressList2.get(i).equals(addressList2.get(j))){
+					count++;
+					addressList2.remove(j);
+					j--;
+				}
+				
+			}
+			map.put("riskAddress", addressList2.get(i));
+			map.put("count",count);
+			addressList3.add(map);
+			
+			
+		}
+		
+		
+		
+		
+		result.put("addressList", addressList3);
+		
+	
 		
 		return SUCCESS;
 	}
