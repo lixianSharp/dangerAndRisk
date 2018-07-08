@@ -15,21 +15,25 @@
 <link rel="stylesheet" href="<%=path%>/css/public/menu.css" />
 </head>
 <body>
-
-	<div class="el_left" id="el_left">
+<!--头-->
+	<jsp:include page="public/header.jsp"></jsp:include>
+	
+<!-- 最大的DIV start -->
+<div>
+	<div class="el_left" id="el_left" style="width:13%;float: left;">
 		<!--左边索引模块-->
 		<div class="panel-group" id="accordion" role="tablist"
 			aria-multiselectable="true">
 
 			<!--隐患管理-->
 			<div class="panel panel-default el_bigMenu" value="0">
-				<div class="panel-heading" role="tab" id="heading1">
+				<div class="panel-heading" role="tab" id="heading1" style="width:180px">
 					<span role="button" data-toggle="collapse" data-parent="#accordion"
 						href="#collapse1" aria-expanded="true" aria-controls="collapse1"
 						class="el_title" id="heading11"> 隐患管理 </span>
 				</div>
 				<div id="collapse1" class="panel-collapse collapse in"
-					role="tabpanel" aria-labelledby="heading1">
+					role="tabpanel" aria-labelledby="heading1" >
 					<ul class="list-group">
 						<shiro:hasPermission name="danger:insert">
 						<li class="list-group-item"><a id="#hdInsert"
@@ -93,7 +97,7 @@
 					</ul>
 				</div>
 				<!-- 风险管理 -->
-				<div class="panel-heading" role="tab" id="heading1">
+				<div class="panel-heading" role="tab" id="heading1" style="width:180px">
 					<span role="button" data-toggle="collapse" data-parent="#accordion"
 						href="#collapse3" aria-expanded="true" aria-controls="collapse1"
 						class="el_title" id="heading11"> 风险管理 </span>
@@ -186,8 +190,8 @@
 
 			<%-- <c:if test="${user.role gt 1 }"> --%>
 				<!--系统管理-->
-				<div class="panel panel-default el_bigMenu" value="1">
-					<div class="panel-heading" role="tab" id="heading2">
+				<div class="panel panel-default el_bigMenu" value="1" >
+					<div class="panel-heading" role="tab" id="heading2" style="width:180px">
 						<span role="button" data-toggle="collapse"
 							data-parent="#accordion" href="#collapse2" aria-expanded="false"
 							aria-controls="collapse2" class="el_title collapsed"
@@ -226,5 +230,13 @@
 
 		</div>
 	</div>
+	
+	<!-- 右边那块的div -->
+	<div style="width:87%;float: right;font-size: 40px;text-align: center;color:LightGray;margin-top: 200px; ">
+		欢迎使用煤矿安全隐患排查与风险分级管控管理系统
+	</div>
+</div><!-- 最大的DIV end -->	
+	<!--放脚-->
+		<jsp:include page="public/footer.jsp"></jsp:include>
 </body>
 </html>

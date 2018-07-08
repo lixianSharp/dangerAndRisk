@@ -54,16 +54,17 @@
 		</div>
 		<div id="el_headerRightinfo">
 			<div id="el_systemTime">
-				<P id="time"></P>
+				<P id="time" align="left"></P>
 			</div>
 
 			<div id="el_opration">
 				<ul>
 					<li><!-- <img src="" width="15" alt=""> --> <span>欢迎：</span>
-					 <span id="el_currentUser">${user.username }</span></li>
-					<li><span>修改密码</span></li>
-					<li><a href=javascript:void(0)
-						style="text-decoration: none; color: white;" onclick="logout()"><span>退出系统</span></a>
+					 <span id="el_currentUser">${activeUser.username }</span></li>
+					<!-- <li><span>修改密码</span></li> -->
+					<li><!-- <a href=javascript:void(0)
+						style="text-decoration: none; color: white;" onclick="logout()"><span>退出系统</span></a> -->
+						<a href="${pageContext.request.contextPath }/logout.action" style="text-decoration: none; color: white;">退出系统</a>
 					</li>
 				</ul>
 			</div>

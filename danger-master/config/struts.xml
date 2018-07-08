@@ -59,4 +59,8 @@
 	<include file="struts/riConstitute.xml"></include>
 	<!-- zhangwenyi -->
 	<!-- 风险管控  end -->
+	
+	<!-- 权限操作 start  lixianyuan-->
+	<include file="struts/sysShiro.xml"></include>
+	<!-- 权限操作 end -->
 </struts>

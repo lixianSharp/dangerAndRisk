@@ -76,8 +76,9 @@
 			
 			<div id="baseInfo">
 				<!-- <span>未五定隐患：23</span>
-				<span>复查不通过隐患：23</span> -->
-				<span><a href="${baseurl }/queryView_findDanger2.action"><h3>处理隐患排查与风险分级管控>></h3></a></span>
+				<span>复查不通过隐患：23</span> queryView_findDanger2.action -->
+				<%-- <span><a href="${baseurl }/public/menu.jsp"><h3>处理隐患排查与风险分级管控>></h3></a></span> --%>
+				<span><a href="${baseurl }/blank.jsp"><h3>处理隐患排查与风险分级管控>></h3></a></span>
 			</div>
 		</div>
 

@@ -95,4 +95,7 @@
 		<!-- 配置切面:切点+通知 advice-ref：通知名称 pointcut-ref：切点名称 -->
 		<aop:advisor advice-ref="firstTx" pointcut-ref="texPc" />
 	</aop:config>
+	
+	
+	
 </beans>

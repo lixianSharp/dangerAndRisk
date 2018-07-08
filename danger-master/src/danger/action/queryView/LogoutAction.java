@@ -11,12 +11,12 @@ import com.opensymphony.xwork2.ActionSupport;
 @Scope("prototype")
 public class LogoutAction extends ActionSupport {
 
-	@Override
+	/*@Override
 	public String execute() throws Exception {
 		// 获取session
 		HttpSession session = ServletActionContext.getRequest().getSession();
 		// 清空session中的用户
 		session.removeAttribute("user");
 		return super.execute();
-	}
+	}*/
 }

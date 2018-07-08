@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="danger.mapper.shiro.custom.SysUserMapperCustom" >
+  	
+  	<!-- 查询条件 -->
+  	<sql id="query_sysUser_where">
+  		<if test="id!=null">
+  			and id=#{id}
+  		</if>
+  		<if test="usercode!=null and usercode!=''">
+  			and usercode like '%${usercode}%'
+  		</if>
+  		<if test="username!=null and username!=''">
+  			and username like '%${username}%'
+  		</if>
+  		<if test="password!=null">
+  			and password=#{password}
+  		</if>
+  		<if test="salt!=null">
+  			and salt=#{salt}
+  		</if>
+  		<if test="locked!=null">
+  			and locked=#{locked}
+  		</if>
+  	</sql>
+  	
+  	<!-- 查询分页 -->
+	<sql id="queryPage_limit">
+		<if test="index!=null">
+			LIMIT #{index},#{currentCount}
+		</if>
+	</sql>
+
+	
+	<!-- 按组合条件查询所有账户信息 -->
+	<select id="findUserByCondition" parameterType="map" resultType="danger.bean.shiro.SysUser">
+		SELECT * FROM sys_user 
+		<where>
+			<include refid="query_sysUser_where"></include>
+		</where>
+		<include refid="queryPage_limit"></include>
+	</select>
+	
+	<!-- 按组合条件查询所有账户信息的总条数 -->
+	<select id="findUserCountByCondition" parameterType="map" resultType="int">
+		SELECT count(*) FROM sys_user 
+		<where>
+			<include refid="query_sysUser_where"></include>
+		</where>
+	</select>
+	
+	
+</mapper>

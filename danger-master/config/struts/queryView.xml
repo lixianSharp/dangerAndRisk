@@ -27,19 +27,31 @@
 		</action>
 
 
-		<!-- 登陆 -->
-		<action name="login" class="loginAction">
+		<!-- 登陆 这是原来的，使用shiro之后不用这个了 -->
+		<!-- <action name="login" class="loginAction">
 			<result name="success" type="redirect">/index.jsp</result>
 			<result name="error">/message.jsp</result>
-		</action>
+		</action> -->
 
-		<!-- 退出 -->
-		<action name="logout" class="logoutAction">
-			<!-- 成功后送到登陆页面 -->
+		<!-- 退出 使用shiro之后不需要使用这个了-->
+		<!-- <action name="logout" class="logoutAction">
+			成功后送到登陆页面
 			<result name="success" type="redirect">/login/login.jsp</result>
+		</action> -->
+	
+	
+		<!-- 登陆 使用shiro之后的 -->
+		<action name="login" class="loginAction">
+			<!-- 方法返回值对应的视图， 认证失败后还是跳转到/login.jsp-->
+			<result name="success">/login.jsp</result>
 		</action>
-
-
+		
+		<!-- 认证成功之后跳转的页面 -->
+		<action name="first" class="firstAction">
+			<!-- 方法返回值对应的视图 -->
+			<result name="success">/index.jsp</result>
+		</action>
+		
 	</package>
 
 </struts>

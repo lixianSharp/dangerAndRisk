@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="danger.mapper.shiro.custom.SysPermissionMapperCustom" >
+  
+  
+  
+  <!-- 查询条件 -->
+  <sql id="query_sysPermission_where">
+  	<if test="id!=null">
+  		and id=#{id}
+  	</if>
+  	<if test="name!=null">
+  		and name=#{name}
+  	</if>
+  	<if test="type!=null">
+  		and type=#{type}
+  	</if>
+  	<if test="url!=null">
+  		and url=#{url}
+  	</if>
+  	<if test="percode!=null">
+  		and percode=#{percode}
+  	</if>
+  	<if test="parentid!=null">
+  		and parentid=#{parentid}
+  	</if>
+  	<if test="parentids!=null">
+  		and parentids=#{parentids}
+  	</if>
+  	<if test="sortstring!=null">
+  		and sortstring=#{sortstring}
+  	</if>
+  	<if test="available!=null">
+  		and available=#{available}
+  	</if>
+  </sql>
+  
+  
+  	<!-- 查询分页 -->
+	<sql id="queryPage_limit">
+		<if test="index!=null">
+			LIMIT #{index},#{currentCount}
+		</if>
+	</sql>
+  	
+  	
+  	<!-- 按组合条件从权限表sys_permission中查询全部权限信息 -->
+  	<!-- <select id="findSysPermissionByCondition" parameterType="map" resultType="danger.bean.shiro.SysPermission">
+  		SELECT * FROM sys_permission
+  		<where>
+  			<include refid="query_sysPermission_where"></include>
+  		</where>
+  		<include refid="queryPage_limit"></include>
+  	</select> -->
+  
+  
+  	<!-- 按组合条件从权限表sys_permission中查询符合条件的总记录数 -->
+  	<!-- <select id="findSysPermissionCountByCondition" parameterType="map" resultType="int">
+  		SELECT count(*) FROM sys_permission
+  		<where>
+  			<include refid="query_sysPermission_where"></include>
+  		</where>
+  	</select> -->
+  
+  	
+  <!-- 根据登陆帐户名usercode 查询该账户未分配的权限-->
+  <select id="findNotPermissionByUsercode" parameterType="map" resultType="danger.bean.shiro.SysPermission">
+  	SELECT * FROM sys_permission
+	WHERE sys_permission.id NOT IN (SELECT sys_permission.id FROM sys_permission
+	WHERE sys_permission.id IN (SELECT sys_role_permission.sys_permission_id FROM sys_role_permission 
+	WHERE sys_role_permission.sys_role_id = (SELECT sys_user_role.sys_role_id FROM sys_user_role
+	WHERE sys_user_role.sys_user_id = (SELECT sys_user.id FROM sys_user WHERE sys_user.usercode = #{usercode}))))
+	<include refid="queryPage_limit"></include>
+  </select>
+  
+  <!-- 根据登陆帐户名usercode 查询该账户未分配的权限的总记录数-->
+  <select id="findNotPermissionCountByUsercode" parameterType="map" resultType="int">
+	SELECT COUNT(*) FROM sys_permission
+	WHERE sys_permission.id NOT IN (SELECT sys_permission.id FROM sys_permission
+	WHERE sys_permission.id IN (SELECT sys_role_permission.sys_permission_id FROM sys_role_permission 
+	WHERE sys_role_permission.sys_role_id = (SELECT sys_user_role.sys_role_id FROM sys_user_role
+	WHERE sys_user_role.sys_user_id = (SELECT sys_user.id FROM sys_user WHERE sys_user.usercode = #{usercode}))))
+  </select>
+  
+  
+  
+  	
+  
+  
+  
+  
+  <!-- 根据账户的主键id在sys_permission中获取该权限主键id对应的权限名称 -->
+  <select id="findSysUserPermissionbyUsercode" parameterType="map" resultType="danger.bean.shiro.SysPermission">
+  	SELECT * FROM sys_permission
+	WHERE sys_permission.id IN (SELECT sys_role_permission.sys_permission_id FROM sys_role_permission 
+	WHERE sys_role_permission.sys_role_id = (SELECT sys_user_role.sys_role_id FROM sys_user_role
+	WHERE sys_user_role.sys_user_id = (SELECT sys_user.id FROM sys_user WHERE sys_user.usercode = #{usercode})))
+  	<include refid="queryPage_limit"></include>
+  </select>
+  
+  
+  
+  <!-- 根据登陆账户usercode的的主键id在sys_permission中获取该权限的总记录数 --> 
+  <select id="findSysUserPermissionCountbyUsercode" parameterType="map" resultType="int">
+	SELECT COUNT(*) FROM sys_role_permission 
+	WHERE sys_role_permission.sys_role_id = (SELECT sys_user_role.sys_role_id FROM sys_user_role
+	WHERE sys_user_role.sys_user_id = (SELECT sys_user.id FROM sys_user WHERE usercode = #{usercode}))
+  </select>
+  
+  
+  
+  
+  
+  
+  
+ 
+  
+  
+  
+  
+  
+  <!-- 根据用户id查询url -->
+  <select id="findPermissionListByUserId" parameterType="string" resultType="danger.bean.shiro.SysPermission">
+	  SELECT 
+	  * 
+	FROM
+	  sys_permission 
+	WHERE TYPE = 'permission' 
+	  AND id IN 
+	  (SELECT 
+	    sys_permission_id 
+	  FROM
+	    sys_role_permission 
+	  WHERE sys_role_id IN 
+	    (SELECT 
+	      sys_role_id 
+	    FROM
+	      sys_user_role 
+	    WHERE sys_user_id = #{id}))
+  </select>
+  
+   <!-- 根据用户id查询菜单 -->
+  <select id="findMenuListByUserId"  parameterType="string" resultType="danger.bean.shiro.SysPermission">
+  		SELECT 
+	  * 
+	FROM
+	  sys_permission 
+	WHERE TYPE = 'menu' 
+	  AND id IN 
+	  (SELECT 
+	    sys_permission_id 
+	  FROM
+	    sys_role_permission 
+	  WHERE sys_role_id IN 
+	    (SELECT 
+	      sys_role_id 
+	    FROM
+	      sys_user_role 
+	    WHERE sys_user_id = #{id}))
+  </select>
+  
+</mapper>
