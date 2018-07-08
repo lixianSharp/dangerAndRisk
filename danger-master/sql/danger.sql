@@ -1,189 +1,708 @@
-/*==============================================================*/
-/* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2017/9/3 23:32:06                            */
-/*==============================================================*/
+/*
+SQLyog 企业版 - MySQL GUI v8.14 
+MySQL - 5.5.40 : Database - danger
+*********************************************************************
+*/
 
+/*!40101 SET NAMES utf8 */;
 
-drop table if exists danger;
+/*!40101 SET SQL_MODE=''*/;
 
-drop table if exists delay;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+/*Table structure for table `danger` */
 
-drop table if exists department;
+DROP TABLE IF EXISTS `danger`;
 
-drop table if exists dictionary;
+CREATE TABLE `danger` (
+  `dangerId` int(11) NOT NULL AUTO_INCREMENT,
+  `findTime` datetime DEFAULT NULL,
+  `classType` varchar(40) COLLATE utf8_bin DEFAULT NULL,
+  `findPerson` varchar(40) COLLATE utf8_bin DEFAULT NULL,
+  `checkUnit` varchar(40) COLLATE utf8_bin DEFAULT NULL,
+  `address` varchar(40) COLLATE utf8_bin DEFAULT NULL,
+  `content` varchar(1000) COLLATE utf8_bin DEFAULT NULL,
+  `dangerGrade` varchar(10) COLLATE utf8_bin DEFAULT NULL,
+  `type` varchar(20) COLLATE utf8_bin DEFAULT NULL,
+  `unit` varchar(40) COLLATE utf8_bin DEFAULT NULL,
+  `manager` varchar(40) COLLATE utf8_bin DEFAULT NULL,
+  `dangerStatusNum` varchar(2) COLLATE utf8_bin DEFAULT NULL COMMENT 'Ã¯Â¿Â½Ã¯Â¿Â½Ã¯Â¿Â½Ã¯Â¿Â½Ã—Â´ÃŒÂ¬Ã¯Â¿Â½Ã¯Â¿Â½ÃŽÂ»Ã¯Â¿Â½Ã¯Â¿Â½Ã¯Â¿Â½Ã¯Â¿Â½Ã’Â»ÃŽÂ»Ã¯Â¿Â½Ã¯Â¿Â½Ã¯Â¿Â½Ã¯Â¿Â½Ã—Â´ÃŒÂ¬Ã¯Â¿Â½Ã¯Â¿Â½Ã¯Â¿Â½ÃšÂ¶Ã¯Â¿Â½ÃŽÂ»Ã¯Â¿Â½Ã¯Â¿Â½Ã¯Â¿Â½Ã¯Â¿Â½Ã¯Â¿Â½Ã¯Â¿Â½Ã¯Â¿Â½Ã¯Â¿Â½Ã¯Â¿Â½Ã¯Â¿Â½Ã¯Â¿Â½Ã¯Â¿Â½Ã¯Â¿Â½:\n            10  Ã¯Â¿Â½Ã¯Â¿Â½Ã¯Â¿Â½Ã¯Â¿Â½  Ã¯Â¿Â½Ã¯Â¿Â½Ã’Â»Ã¯Â¿Â½Ã¯Â¿Â½Ã¯Â¿Â½Ã¯Â¿Â½Ã¯Â¿Â½Ã„Â¶Ã¯Â¿Â½\n            11  Ã¯Â¿Â½Ã¯Â¿Â½Ã¯Â¿Â½Ã¯Â¿Â½ÃšÂ¶Ã¯Â¿Â½Ã¯Â¿Â½Ã¯Â¿Â½Ã¯Â¿Â½Ã¯Â¿Â½Ã¯Â¿Â½Ã„Â¶Ã¯Â¿Â½',
+  `dangerStatus` varchar(40) COLLATE utf8_bin DEFAULT NULL,
+  `dangerReport` varchar(1000) COLLATE utf8_bin DEFAULT NULL,
+  PRIMARY KEY (`dangerId`)
+) ENGINE=InnoDB AUTO_INCREMENT=181 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Ã¯Â¿Â½Ã¯Â¿Â½Ã¯Â¿Â½Ã¯Â¿Â½Ã¯Â¿Â½Ã¯Â¿Â½';
 
-drop table if exists follow;
+/*Data for the table `danger` */
 
-drop table if exists rechecktable;
+LOCK TABLES `danger` WRITE;
 
-drop table if exists sidingbiao;
+insert  into `danger`(`dangerId`,`findTime`,`classType`,`findPerson`,`checkUnit`,`address`,`content`,`dangerGrade`,`type`,`unit`,`manager`,`dangerStatusNum`,`dangerStatus`,`dangerReport`) values (90,'2017-12-10 00:10:47','零点班','和志军、申继刚、景建立、陈晋东','县煤炭局','副立井','副立井井筒有结冰现象','C','其他','地面运输队','王向卫','00','已现场处理',''),(91,'2017-12-10 00:10:34','零点班','和志军、申继刚、陈晋东、景建立','县煤炭局','副立井','副立井井底平台与罐笼间隙 ...','C','其他','井下运输队','王文芳','00','已现场处理',''),(92,'2017-12-10 00:09:58','零点班','和志军、申继刚、陈晋东、景建立','县煤炭局','3113综采工作面','3113综采工作面部分支 ...','C','采煤','综采队','宋志令','00','已现场处理',''),(93,'2017-12-10 00:13:09','零点班','和志军、申继刚、陈晋东、景建立','县煤炭局','3113综采工作面','3113回风顺槽有一台QBZ80开关上风侧无甲烷断电仪','C','机电','机电科','程林忠','00','已现场处理',''),(94,'2017-12-10 00:15:02','零点班','和志军、申继刚、陈晋东、景建立','县煤炭局','3113综采工作面','3113综采工作面顶板破碎，护顶不及时。','C','采煤','综采队','宋志令','00','已现场处理',''),(95,'2017-12-14 09:23:53','捌点班','李小平、李东兴、曹波、冯鹏飞、景建立、辛光明、丁超','县煤炭局','3113综采工作面','3113综采工作面29—40#支架段顶板漏矸','C','采煤','综采队','宋志令','00','已现场处理',''),(96,'2017-12-14 09:27:57','捌点班','李小平、李东兴、曹波、冯鹏飞、景建立、辛光明、丁超','县煤炭局','3113综采工作面','3113综采工作面28#支架戗柱打设角度偏向行人侧，且无防倒措施。','C','采煤','综采队','宋志令','00','已现场处理',''),(97,'2017-12-14 09:30:06','捌点班','李小平、李东兴、曹波、冯鹏飞、景建立、辛光明、丁超','县煤炭局','副立井','副立井井底信号硐室应增设照明','C','机电','机电科','程林忠','00','已现场处理',''),(98,'2017-12-14 09:32:06','捌点班','李小平、李东兴、曹波、冯鹏飞、景建立、辛光明、丁超','县煤炭局','3113综采工作面','3113综采工作面回风顺槽超前支护外一处钢梁棚腿折断续及时更换。','C','采煤','综采队','宋志令','00','已现场处理',''),(99,'2017-12-14 09:33:50','捌点班','李小平、李东兴、曹波、冯鹏飞、景建立、辛光明、丁超','县煤炭局','3113综采工作面','3113综采工作面上隅角 ...','C','其他','通风科','李强','00','已现场处理',''),(101,'2017-12-14 09:49:05','捌点班','李小平、李东兴、曹波、冯鹏飞、景建立、辛光明、丁超','县煤炭局','3113综采工作面','3113综采工作面进风顺槽超前支护单体柱编号乱。','C','采煤','综采队','宋志令','00','已现场处理',''),(102,'2017-12-20 16:33:40','肆点班','李小平、梁秀前、李东兴、冯鹏飞、辛光明、丁超','县煤炭局','3113综采工作面','3113综采工作面架间浮煤多，煤质松软，部分地段有活矸、落煤。','C','采煤','综采队','宋志令','00','已现场处理',''),(103,'2017-12-20 16:37:04','肆点班','李小平、梁秀前、李东兴、冯鹏飞、辛光明、丁超','县煤炭局','总回风巷、西轨道巷','总回风巷与西轨道巷联络风门无语音报警装置，风门内放有风筒布等杂物。','C','通风','通风科','张伟炳','00','已现场处理',''),(104,'2017-12-20 16:57:37','肆点班','李小平、梁秀前、李东兴、冯鹏飞、辛光明、丁超','县煤炭局','西皮带运输巷','西皮带运输巷一处密闭未挂管理排版，设置栅栏。','C','通风','通风科','张伟炳','00','已现场处理',''),(105,'2017-12-02 11:04:33','捌点班','矿长、各分管矿长及科队长','矿级领导','3113综采工作面','3113综采工作面煤溜机头搭接短，需整改。','C','采煤','综采队','宋志令','00','已现场处理',''),(106,'2017-12-02 09:38:16','捌点班','矿长、各分管矿长及科队长','矿级领导','3113综采工作面','3113综采工作面机头排钢梁打设不规范，需整改。','C','采煤','综采队','宋志令','10','已五定',''),(107,'2017-12-02 09:39:59','捌点班','矿长、各分管矿长及科队长','矿级领导','3113综采工作面','3113综采工作面机尾煤帮连网质量差，及时处理。','C','采煤','综采队','宋志令','00','已现场处理',''),(108,'2017-12-02 09:41:15','捌点班','矿长、各分管矿长及科队长','矿级领导','3113综采工作面','3113综采工作面回风巷 ...','C','采煤','综采队','宋志令','00','已现场处理',''),(109,'2017-12-02 09:44:20','捌点班','矿长、各分管矿长及科队长','矿级领导','轨道巷','轨道大巷大绞车处钢梁变形，电缆受力。','C','机电','机电队','宋其林','10','已五定',''),(110,'2017-12-02 09:45:30','捌点班','矿长、各分管矿长及科队长','矿级领导','3113','3113皮带转载机头积煤 ...','C','其他','搬运队','焦保珍','00','已现场处理',''),(111,'2017-12-02 09:48:18','捌点班','矿长、各分管矿长及科队长','矿级领导','轨道巷','轨道巷3113绕道有废旧 ...','C','其他','搬运队','焦保珍','10','已五定',''),(112,'2017-12-02 09:49:41','捌点班','矿长、各分管矿长及科队长','矿级领导','总回风巷','总回风大巷上坡处地滚不转，尽快处理。','C','其他','搬运队','焦保珍','00','已现场处理',''),(113,'2017-12-09 08:58:52','捌点班','矿长、各分管矿长及科、队长','矿级领导','3113综采面','3113综采工作面机头三角区联网质量差。','C','采煤','综采队','宋志令','00','已现场处理',''),(114,'2017-12-09 09:01:02','捌点班','矿长、各分管矿长及科、队长','矿级领导','3113综采面','3113综采工作面45#支架液管漏液，需及时更换。','C','采煤','综采队','宋志令','00','已现场处理',''),(115,'2017-12-09 09:03:00','捌点班','矿长、各分管矿长及科、队长','矿级领导','3113综采面','3113综采工作面回风巷卫生材料清理，煤尘大，需洒水降尘','C','采煤','综采队','宋志令','00','已现场处理',''),(116,'2017-12-09 09:09:19','捌点班','矿长、各分管矿长及科、队长','矿级领导','轨道巷','轨道巷避难硐室门口垃圾应及时清理','C','其他','搬运队','焦保珍','10','已五定',''),(117,'2017-12-09 09:15:56','捌点班','矿长、各分管矿长及科、队长','矿级领导','轨道巷','轨道巷3113绕道刮板及 ...','C','其他','搬运队','焦保珍','12','已复查',''),(118,'2017-12-09 09:40:12','捌点班','矿长、各分管矿长及科、队长','矿级领导','轨道巷','轨道巷3113口11.4 ...','C','机电','机电队','宋其林','10','已五定',''),(119,'2017-12-09 10:30:29','捌点班','矿长、各分管矿长及科、队长','矿级领导','3113泵站','3113 泵站前后10米范围电缆吊挂比较乱','C','机电','机电队','宋其林','10','已五定',''),(120,'2017-12-09 11:12:35','捌点班','矿长、各分管矿长及科、队长','矿级领导','总回风巷','总回风巷静压水管漏水（梯子处）需更换','C','运输','井下运输队','王文芳','10','已五定',''),(121,'2017-12-16 11:25:01','捌点班','矿长、各分管矿长及科、队长','矿级领导','3113皮带巷','3113皮带巷二部皮带机 ...','C','运输','井下运输队','王文芳','10','已五定',''),(122,'2017-12-09 11:20:07','捌点班','矿长、各分管矿长及科、队长','矿级领导','3113皮带巷','3113皮带巷二部皮带机头积煤多，清理不及时','C','运输','井下运输队','王文芳','00','已现场处理',''),(123,'2017-12-16 08:13:37','捌点班','矿长、各分管矿长及科、队长','矿级领导','3113运输顺槽','3113运输顺槽煤溜机尾 ...','C','采煤','综采队','宋志令','00','已现场处理',''),(124,'2017-12-16 08:15:59','捌点班','矿长、各分管矿长及科、队长','矿级领导','3113综采工作面','3113综采工作面部分架间浮煤多，应及时清理','C','采煤','综采队','宋志令','00','已现场处理',''),(125,'2017-12-16 08:30:34','捌点班','矿长、各分管矿长及科、队长','矿级领导','3113综采工作面','3113综采工作面前煤溜弯度大，应尽快调整','C','采煤','综采队','宋志令','10','已五定',''),(126,'2017-12-16 09:12:48','捌点班','矿长、各分管矿长及科、队长','矿级领导','3113综采工作面','3113综采工作面回风巷超前段有2根漏液柱，需更换。','C','采煤','综采队','宋志令','00','已现场处理',''),(127,'2017-12-16 09:31:08','捌点班','矿长、各分管矿长及科、队长','矿级领导','3113皮带巷','3113皮带巷机头打点信号不清，需及时更换','C','机电','机电队','宋其林','00','已现场处理',''),(128,'2017-12-16 10:16:44','捌点班','矿长、各分管矿长及科、队长','矿级领导','西大巷','西大巷一部皮带上坡处有2个托辊不转，及时更换','C','运输','井下运输队','王文芳','10','已五定',''),(129,'2017-12-16 10:36:04','捌点班','矿长、各分管矿长及科、队长','矿级领导','3113二部皮带','3113二部皮带里帮积煤多，应每班清理','C','运输','井下运输队','王文芳','10','已五定',''),(130,'2017-12-16 11:20:28','捌点班','矿长、各分管矿长及科、队长','矿级领导','斜井井底','斜井井底11.4绞车副钢丝绳绳头绳卡被抽动','C','其他','搬运队','焦保珍','10','已五定',''),(131,'2017-12-16 11:33:45','捌点班','矿长、各分管矿长及科、队长','矿级领导','3113回风巷','3113回风巷的废旧材料，应回收升井','C','其他','搬运队','焦保珍','10','已五定',''),(132,'2017-12-16 11:48:15','捌点班','矿长、各分管矿长及科、队长','矿级领导','总回风巷','总回风巷双速绞车12月15日运行记录未填写','C','其他','搬运队','焦保珍','10','已五定',''),(133,'2017-12-23 07:59:42','捌点班','矿长、各分管矿长及科、队长','矿级领导','3113综采工作面','3113综采工作面顺槽超前支护打设不规范，应整改。','C','采煤','综采队','宋志令','10','已五定',''),(134,'2017-12-23 08:05:37','捌点班','矿长、各分管矿长及科、队长','矿级领导','3113 综采工作面','3113综采工作面煤质松软，应加强煤帮管理','C','采煤','综采队','宋志令','00','已现场处理',''),(135,'2017-12-23 08:07:33','捌点班','矿长、各分管矿长及科、队长','矿级领导','3113综采工作面','3113综采工作面回风超前有3根漏液柱，需更换。','C','采煤','综采队','宋志令','00','已现场处理',''),(136,'2017-12-23 08:58:47','捌点班','矿长、各分管矿长及科、队长','矿级领导','3113皮带巷','3113皮带巷二部机头洒 ...','C','运输','井下运输队','宋志令','00','已现场处理',''),(137,'2017-12-23 09:32:11','捌点班','矿长、各分管矿长及科、队长','矿级领导','西运巷','西运巷一部皮带中间积煤多，需及时清理','C','其他','井下运输队','王文芳','00','已现场处理',''),(138,'2017-12-23 10:38:44','捌点班','矿长、各分管矿长及科、队长','矿级领导','井底车场','井底车场11.4绞车压柱松，应重新整改','C','其他','搬运队','焦保珍','00','已现场处理',''),(139,'2017-12-23 11:03:09','捌点班','矿长、各分管矿长及科、队长','矿级领导','3113综采工作面','3113综采工作面机头有 ...','C','其他','机电队','宋其林','00','已现场处理',''),(140,'2017-12-23 11:45:41','捌点班','矿长、各分管矿长及科、队长','矿级领导','3113皮带巷','3113皮带巷一部皮带跑 ...','C','其他','机电队','宋其林','10','已五定',''),(141,'2018-01-06 08:40:05','捌点班','矿长、各分管矿长及科、队长','矿级领导','3113运巷','3113运巷皮带机护网应固定，里帮皮带下的矸石、积煤需清理','C','采煤','综采队','宋志令','10','已五定',''),(142,'2018-01-06 09:21:35','捌点班','矿长、各分管矿长及科、队长','矿级领导','3113顺槽','3113顺槽转载刮板机更换弯刮板','C','采煤','综采队','宋志令','10','已五定',''),(143,'2018-01-06 09:32:52','捌点班','矿长、各分管矿长及科、队长','矿级领导','3113综采工作面','3113综采工作面采煤机外喷雾固定不牢，方向不对，采煤机缺少载齿','C','采煤','综采队','宋志令','10','已五定',''),(144,'2018-01-06 09:56:52','捌点班','矿长、各分管矿长及科、队长','矿级领导','3113进风巷','3113进风巷超前支护北帮单体柱不足，应补全','C','采煤','综采队','宋志令','10','已五定',''),(145,'2018-01-06 10:46:21','捌点班','矿长、各分管矿长及科、队长','矿级领导','起吊室外','起吊室坡下小水泵处，池内煤泥需清理','C','其他','搬运队','焦保珍','10','已五定',''),(146,'2018-01-06 10:59:51','捌点班','矿长、各分管矿长及科、队长','矿级领导','轨道巷','轨道巷与西运巷联络巷卫生洒水，材料应整理','C','其他','搬运队','焦保珍','10','已五定',''),(147,'2018-01-06 11:23:07','捌点班','矿长、各分管矿长及科、队长','矿级领导','轨道巷','轨道巷台阶半坡处一个木柱失效，需更换','C','其他','搬运队','焦保珍','10','已五定',''),(148,'2018-01-06 12:50:29','捌点班','矿长、各分管矿长及科、队长','矿级领导','轨道巷车场','轨道巷车场小绞车记录填写 ...','C','其他','搬运队','焦保珍','10','已五定',''),(149,'2018-01-06 13:58:44','捌点班','矿长、各分管矿长及科、队长','矿级领导','中央变电所外','中央变电所外压风自救装置无风，供水施救装置无水，需处理','C','其他','井下运输队','王文芳','10','已五定',''),(150,'2018-01-08 08:41:35','捌点班','梁秀前、李东兴、辛光明、景建立、丁超','乡煤管站','3113综采工作面','3113综采工作面支护示 ...','C','其他','生产技术科','宋志令','10','已五定',''),(151,'2018-01-08 08:55:12','捌点班','梁秀前、李东兴、辛光明、景建立、丁超','乡煤管站','3113综采工作面','3113综采工作面20# ...','C','采煤','综采队','宋志令','10','已五定',''),(152,'2018-01-08 09:22:12','捌点班','梁秀前、李东兴、辛光明、景建立、丁超','乡煤管站','3113综采工作面','3113综采工作面进风端头切顶柱里侧应增设护网','C','采煤','综采队','宋志令','10','已五定',''),(153,'2018-01-08 09:48:12','捌点班','梁秀前、李东兴、辛光明、景建立、丁超','乡煤管站','3113综采工作面','3113综采工作面30—40#支架段支架前探梁漏顶','C','采煤','综采队','宋志令','10','已五定',''),(154,'2018-01-08 10:32:29','捌点班','梁秀前、李东兴、辛光明、景建立、丁超','乡煤管站','3113综采工作面','3113综采工作面进风端 ...','C','采煤','综采队','宋志令','10','已五定',''),(155,'2018-01-15 09:11:03','捌点班','梁秀前、李东兴、辛光明、景建立、丁超','乡煤管站','3113回风配巷','3113回风配巷掘进面风筒与穿风门铁风筒不配套','C','通风','通风科','张伟炳','10','已五定',''),(156,'2018-01-15 09:17:49','捌点班','梁秀前、李东兴、辛光明、景建立、丁超','乡煤管站','3113综采工作面','3113综采工作面支架前探上方空顶高度超过规定要求，支架多处漏矸','C','采煤','综采队','宋志令','10','已五定',''),(157,'2018-01-15 09:23:27','捌点班','梁秀前、李东兴、辛光明、景建立、丁超','乡煤管站','3113综采工作面','3113综采工作面部分支架初撑力不达24Ma','C','采煤','综采队','宋志令','10','已五定',''),(158,'2018-01-15 09:39:35','捌点班','梁秀前、李东兴、辛光明、景建立、丁超','乡煤管站','3113回风顺槽','3113回风顺槽超前支护段压力大，巷道变形失修','C','采煤','综采队','宋志令','10','已五定',''),(159,'2018-01-24 10:31:42','捌点班','梁秀前、李东兴、辛光明、景建立、丁超','乡煤管站','3113运输顺槽','3113运输顺槽刮板运输 ...','C','采煤','综采队','宋志令','10','已五定',''),(160,'2018-01-24 08:33:18','捌点班','梁秀前、李东兴、辛光明、景建立、丁超','乡煤管站','3113综采工作面','3113综采工作面73—74#支架处漏顶，护帮板使用不及时。','C','采煤','综采队','宋志令','00','已现场处理',''),(161,'2018-01-24 08:34:59','捌点班','梁秀前、李东兴、辛光明、景建立、丁超','乡煤管站','3113综采工作面','3113综采工作面采煤机 ...','C','采煤','综采队','宋志令','10','已五定',''),(162,'2018-01-24 09:35:48','捌点班','梁秀前、李东兴、辛光明、景建立、丁超','乡煤管站','3113回风辅助巷','3113回风辅助巷掘进面刮板运输机机头无护罩','C','开掘','掘一队','王文山','10','已五定',''),(163,'2018-01-30 08:36:52','捌点班','李小平、梁秀前、李东兴、赵红兵、辛光明、景建立、冯鹏飞、丁超','县煤炭局','3113综采工作面','3113综采工作面机头3架高度不足','C','采煤','综采队','宋志令','10','已五定',''),(164,'2018-01-30 08:39:39','捌点班','李小平、梁秀前、李东兴、赵红兵、辛光明、景建立、冯鹏飞、丁超','县煤炭局','3113综采工作面','3113综采工作面中间巷需设置调节风门','C','通风','通风科','张伟炳','10','已五定',''),(165,'2018-01-30 08:40:54','捌点班','李小平、梁秀前、李东兴、赵红兵、辛光明、景建立、冯鹏飞、丁超','县煤炭局','3113综采工作面','3113综采工作面90#—92#架段漏顶严重','C','采煤','综采队','宋志令','10','已五定',''),(166,'2018-01-30 08:41:51','捌点班','李小平、梁秀前、李东兴、赵红兵、辛光明、景建立、冯鹏飞、丁超','县煤炭局','3113综采工作面','3113综采工作面供电系统示意图错误','C','机电','机电科','程林忠','10','已五定',''),(167,'2018-01-30 08:42:44','捌点班','李小平、梁秀前、李东兴、赵红兵、辛光明、景建立、冯鹏飞、丁超','县煤炭局','3113综采工作面','3113综采工作面回风顺槽调节风门需拆除','C','通风','通风科','张伟炳','10','已五定',''),(168,'2018-01-30 09:43:56','捌点班','李小平、梁秀前、李东兴、赵红兵、辛光明、景建立、冯鹏飞、丁超','县煤炭局','3113综采工作面','3113综采工作面回风超前支护需加强至40米','C','采煤','综采队','宋志令','10','已五定',''),(169,'2018-03-10 21:53:45','肆点班','王永强，、姜帅、冯宇等人','县煤炭局','监控室','产量监控通讯异常','C','其他','监控室','李强','10','已五定',''),(170,'2018-03-10 22:27:18','肆点班','王永强、姜帅、冯宇等人','县煤炭局','监控中心','监控中心监控大显示屏部分不能正常显示','C','其他','监控室','李强','10','已复查',''),(171,'2018-03-10 22:28:19','肆点班','王永强、姜帅、冯宇等人','县煤炭局','监控室','2018年3月10日0点班停产期间井下通风排水，安全员未入井。','C','其他','安全科','王海英','10','已五定',''),(172,'2018-03-21 08:35:25','捌点班','李东兴、薄会鹏、曹波、冯鹏飞、丁超等人','县煤炭局','技术科','未按长红煤字【2018】70号文件中确定四个单项维修作业项目的安全技术措施并会审贯彻落实','C','其他','生产技术科','郜国权','10','已五定',''),(173,'2018-03-21 08:36:49','捌点班','李东兴、薄会鹏、曹波、冯鹏飞、丁超等人','县煤炭局','3113综采工作面','3113综采进风顺槽材料堆放乱，影响行人','C','采煤','综采队','宋志令','10','已五定',''),(174,'2018-03-21 09:38:07','捌点班','李东兴、薄会鹏、曹波、冯鹏飞、丁超等人','县煤炭局','3113回采工作面','3113回采工作面下山巷台阶未铺到位','C','其他','搬运队','焦保珍','10','已五定',''),(175,'2018-03-26 08:41:28','捌点班','薄会鹏、李东兴、冯鹏飞、丁超、景建立等人','县煤炭局','轨道巷','轨道巷液压管路未按规定吊挂','C','采煤','综采队','宋志令','10','已五定',''),(176,'2018-03-26 09:44:18','捌点班','薄会鹏、李东兴、冯鹏飞、丁超、景建立等人','县煤炭局','轨道巷','轨道巷维修需制定安全技术措施','C','其他','生产技术科','郜国权','10','已五定',''),(177,'2018-03-26 08:45:33','捌点班','薄会鹏、李东兴、冯鹏飞、丁超、景建立等人','县煤炭局','3113综采工作面','3113综采工作面中部两处架间距超过规定','C','采煤','综采队','宋志令','10','已五定',''),(178,'2018-03-26 08:46:08','捌点班','薄会鹏、李东兴、冯鹏飞、丁超、景建立等人','县煤炭局','3113综采工作面','3113综采工作面存在片帮现象','C','采煤','综采队','宋志令','10','已五定',''),(179,'2018-03-26 10:47:18','捌点班','薄会鹏、李东兴、冯鹏飞、丁超、景建立等人','县煤炭局','3113综采工作面','3113综采工作面前溜机头处需加强护理，护帮措施','C','其他','生产技术科','郜国权','10','已整改',''),(180,'2018-06-06 10:01:31','零点班','发现人','市煤炭局','地点','隐患内容','无','开掘','隐患排查小组','原志鹏','00','未五定','');
 
-drop table if exists spotDispose;
+UNLOCK TABLES;
 
-drop table if exists user;
+/*Table structure for table `delay` */
 
-/*==============================================================*/
-/* Table: danger                                                */
-/*==============================================================*/
-create table danger
-(
-   dangerId             int not null auto_increment,
-   findTime             datetime,
-   classType            varchar(40),
-   findPerson           varchar(40),
-   checkUnit            varchar(40),
-   address              varchar(40),
-   content              varchar(1000),
-   dangerGrade          varchar(10),
-   type                 varchar(20),
-   unit                 varchar(40),
-   manager              varchar(40),
-   dangerStatusNum      varchar(2) comment '����״̬��λ����һλ����״̬���ڶ�λ��������������:
-            10  ����  ��һ�����Ķ�
-            11  �����ڶ������Ķ�',
-   dangerStatus         varchar(40),
-   dangerReport         varchar(1000),
-   primary key (dangerId)
-);
+DROP TABLE IF EXISTS `delay`;
 
-alter table danger comment '������';
+CREATE TABLE `delay` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `sidingId` int(11) DEFAULT NULL,
+  `delaySeq` int(11) DEFAULT NULL,
+  `deleayReason` varchar(200) COLLATE utf8_bin DEFAULT NULL,
+  `delayTime` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK_Reference_7` (`sidingId`),
+  CONSTRAINT `FK_Reference_7` FOREIGN KEY (`sidingId`) REFERENCES `sidingbiao` (`sidingId`)
+) ENGINE=InnoDB AUTO_INCREMENT=131 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='ï¿½ï¿½ï¿½ï¿½Ã¿ï¿½ï¿½ï¿½Ä¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½';
 
-/*==============================================================*/
-/* Table: delay                                                 */
-/*==============================================================*/
-create table delay
-(
-   id                   int not null auto_increment,
-   sidingId             int,
-   delaySeq             int,
-   deleayReason         varchar(200),
-   delayTime            datetime,
-   primary key (id)
-);
+/*Data for the table `delay` */
 
-alter table delay comment '����ÿ���Ķ�������';
+LOCK TABLES `delay` WRITE;
 
-/*==============================================================*/
-/* Table: department                                            */
-/*==============================================================*/
-create table department
-(
-   departmentId         varchar(40) not null,
-   upDepartmentId       varchar(40),
-   name                 varchar(40),
-   manager              varchar(40),
-   phone                varchar(40),
-   primary key (departmentId)
-);
+insert  into `delay`(`id`,`sidingId`,`delaySeq`,`deleayReason`,`delayTime`) values (74,68,0,NULL,'2017-12-03 09:37:05'),(75,69,0,NULL,'2017-12-03 09:41:38'),(76,70,0,NULL,'2017-12-03 07:43:41'),(77,71,0,NULL,'2017-12-10 09:49:24'),(78,72,0,NULL,'2017-12-10 07:51:23'),(79,73,0,NULL,'2017-12-10 08:53:12'),(80,74,0,NULL,'2018-12-10 08:55:36'),(81,75,0,NULL,'2017-12-10 08:57:17'),(82,76,0,NULL,'2017-12-10 09:00:50'),(83,77,0,NULL,'2017-12-18 07:45:23'),(84,78,0,NULL,'2017-12-17 08:47:43'),(85,79,0,NULL,'2017-12-17 08:16:14'),(86,80,0,NULL,'2017-12-17 08:54:56'),(87,81,0,NULL,'2017-12-17 07:56:15'),(88,82,0,NULL,'2017-12-17 08:05:32'),(89,83,0,NULL,'2017-12-24 08:38:06'),(90,84,0,NULL,'2017-12-24 08:39:15'),(91,85,0,NULL,'2018-01-07 10:00:31'),(92,86,0,NULL,'2018-01-07 06:02:28'),(93,87,0,NULL,'2018-01-07 08:03:20'),(94,88,0,NULL,'2018-01-07 07:04:08'),(95,89,0,NULL,'2018-01-07 04:04:55'),(96,90,0,NULL,'2018-01-07 07:22:41'),(97,91,0,NULL,'2018-01-07 08:08:55'),(98,92,0,NULL,'2018-01-07 06:10:05'),(99,93,0,NULL,'2018-01-07 04:10:47'),(100,94,0,NULL,'2018-01-09 08:09:30'),(101,95,0,NULL,'2018-01-09 08:11:11'),(102,96,0,NULL,'2018-01-10 07:12:09'),(103,97,0,NULL,'2018-01-09 04:12:51'),(104,98,0,NULL,'2018-01-13 08:13:38'),(105,99,0,NULL,'2018-01-19 08:22:30'),(106,100,0,NULL,'2018-01-16 09:24:37'),(107,101,0,NULL,'2018-01-16 09:27:08'),(108,102,0,NULL,'2018-01-19 13:28:30'),(109,103,0,NULL,'2018-01-26 08:38:11'),(110,104,0,NULL,'2018-01-26 10:42:36'),(111,105,0,NULL,'2018-01-27 10:43:31'),(112,106,0,NULL,'2018-02-05 08:45:20'),(113,107,0,NULL,'2018-02-05 08:46:37'),(114,108,0,NULL,'2018-01-31 08:47:31'),(115,109,0,NULL,'2018-01-31 07:48:48'),(116,110,0,NULL,'2018-01-31 02:49:40'),(117,111,0,NULL,'2018-02-02 07:50:33'),(118,112,0,NULL,'2018-03-11 08:29:54'),(119,113,0,NULL,'2018-03-13 09:30:59'),(120,114,0,NULL,'2018-03-11 08:33:19'),(121,115,0,NULL,'2018-03-22 08:39:34'),(122,116,0,NULL,'2018-03-22 09:40:17'),(123,117,0,NULL,'2018-03-22 08:40:52'),(124,118,0,NULL,'2018-03-28 09:48:01'),(125,119,0,NULL,'2018-03-27 08:48:36'),(126,120,0,NULL,'2018-03-27 09:49:04'),(127,121,0,NULL,'2018-03-28 08:49:38'),(128,122,0,NULL,'2018-03-27 11:50:08'),(129,123,0,NULL,'2018-04-03 11:20:07'),(130,124,0,NULL,'2018-04-02 11:24:53');
 
-/*==============================================================*/
-/* Table: dictionary                                            */
-/*==============================================================*/
-create table dictionary
-(
-   dictionaryId         varchar(40) not null,
-   name                 varchar(40),
-   upDictionaryId       varchar(40),
-   isUse                varchar(2),
-   description          varchar(200),
-   primary key (dictionaryId)
-);
+UNLOCK TABLES;
 
-alter table dictionary comment '�ֵ��';
+/*Table structure for table `department` */
 
-/*==============================================================*/
-/* Table: follow                                                */
-/*==============================================================*/
-create table follow
-(
-   followId             int not null auto_increment,
-   sidingId             int,
-   dangerId             int,
-   hasSecurity          varchar(2),
-   safetyTechnician     varchar(40),
-   managerName          varchar(40),
-   recheckTime          datetime,
-   primary key (followId)
-);
+DROP TABLE IF EXISTS `department`;
 
-alter table follow comment '�������ٱ�';
+CREATE TABLE `department` (
+  `departmentId` varchar(40) NOT NULL,
+  `upDepartmentId` varchar(40) DEFAULT NULL,
+  `name` varchar(40) DEFAULT NULL,
+  `manager` varchar(40) DEFAULT NULL,
+  `phone` varchar(40) DEFAULT NULL,
+  PRIMARY KEY (`departmentId`),
+  KEY `FK_Reference_3` (`upDepartmentId`),
+  CONSTRAINT `FK_Reference_3` FOREIGN KEY (`upDepartmentId`) REFERENCES `department` (`departmentId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-/*==============================================================*/
-/* Table: rechecktable                                          */
-/*==============================================================*/
-create table rechecktable
-(
-   recheckid            int not null auto_increment,
-   followId             int,
-   dangerId             int,
-   recheckMan           varchar(40),
-   recheckdate          datetime,
-   recheckresult        varchar(2),
-   comment              varchar(200),
-   primary key (recheckid)
-);
+/*Data for the table `department` */
 
-/*==============================================================*/
-/* Table: sidingbiao                                            */
-/*==============================================================*/
-create table sidingbiao
-(
-   sidingId             int not null auto_increment,
-   dangerId             int,
-   sidingTime           datetime,
-   supervisor           varchar(40),
-   rectificationTime    datetime,
-   rectificationMeasure varchar(600),
-   primary key (sidingId)
-);
+LOCK TABLES `department` WRITE;
 
-/*==============================================================*/
-/* Table: spotDispose                                           */
-/*==============================================================*/
-create table spotDispose
-(
-   disposeId            int not null auto_increment,
-   dangerId             int,
-   hasSafeMeasure       varchar(2),
-   disposeMeasure       varchar(500),
-   disposeDate          datetime,
-   disposePerson        varchar(40),
-   primary key (disposeId)
-);
+insert  into `department`(`departmentId`,`upDepartmentId`,`name`,`manager`,`phone`) values ('10',NULL,'隐患排查小组','原志鹏','13934302138'),('100','10','监控室','李强','18434391738'),('1000','10','掘一队','王文山','13935554141'),('1100','10','掘二队','郭全伟','15603457693'),('1200','10','地面运输队','王向卫','13593291062'),('1300','10','供变电组','王新山','18535519821'),('1400','10','水暖电组','王俊兵','18534111018'),('1500','10','机电队','宋其林','13563656352'),('200','10','调度室','郭书红','13152951222'),('300','10','安全科','王海英','13994638087'),('400','10','生产技术科','郜国权','13835554648'),('500','10','通风科','张伟炳','13453548565'),('600','10','机电科','程林忠','13097665238'),('700','10','综采队','宋志令','13008070701'),('800','10','井下运输队','王文芳','15934051021'),('900','10','搬运队','焦保珍','15635552942');
 
-/*==============================================================*/
-/* Table: user                                                  */
-/*==============================================================*/
-create table user
-(
-   id                   int not null,
-   username             varchar(40),
-   password             varchar(40),
-   role                 int comment '��1��2��3.������������ͬ��Ȩ�ޣ���ʾ��ͬ�Ĳ˵�',
-   primary key (id)
-);
+UNLOCK TABLES;
 
-alter table delay add constraint FK_Reference_7 foreign key (sidingId)
-      references sidingbiao (sidingId) on delete restrict on update restrict;
+/*Table structure for table `dictionary` */
 
-alter table department add constraint FK_Reference_3 foreign key (upDepartmentId)
-      references department (departmentId) on delete restrict on update restrict;
+DROP TABLE IF EXISTS `dictionary`;
 
-alter table follow add constraint FK_Reference_4 foreign key (sidingId)
-      references sidingbiao (sidingId) on delete restrict on update restrict;
+CREATE TABLE `dictionary` (
+  `dictionaryId` varchar(40) NOT NULL,
+  `name` varchar(40) DEFAULT NULL,
+  `upDictionaryId` varchar(40) DEFAULT NULL,
+  `isUse` bit(1) DEFAULT NULL,
+  `description` varchar(200) DEFAULT NULL,
+  PRIMARY KEY (`dictionaryId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='?Öµ??';
 
-alter table follow add constraint FK_Reference_8 foreign key (dangerId)
-      references danger (dangerId) on delete restrict on update restrict;
+/*Data for the table `dictionary` */
 
-alter table rechecktable add constraint FK_Reference_5 foreign key (followId)
-      references follow (followId) on delete restrict on update restrict;
+LOCK TABLES `dictionary` WRITE;
 
-alter table rechecktable add constraint FK_Reference_9 foreign key (dangerId)
-      references danger (dangerId) on delete restrict on update restrict;
+insert  into `dictionary`(`dictionaryId`,`name`,`upDictionaryId`,`isUse`,`description`) values ('10','隐患系统字典',NULL,'','隐患系统字典'),('10001','检查单位','10','','1'),('10001004','市煤炭局','10001','','市煤炭局描述'),('10001005','县煤炭局','10001','','县煤炭局字典描述'),('10001006','省厅','10001','','省厅'),('10001007','安全科','10001','','安全科'),('10001008','矿级领导','10001','\0','矿级领导'),('10001009','科队长','10001','\0','科队长'),('10001010','国家煤监局长治分局','10001','','国家煤监局长治分局'),('10001011','乡煤管站','10001','','乡煤管站'),('10101','隐患类型','10','','隐患类型描述'),('10101001','采煤','10101','',''),('10101002','开掘','10101','\0',''),('10101003','机电','10101','\0',''),('10101004','运输','10101','\0',''),('10101005','通风','10101','\0',''),('10101006','地测','10101','\0',''),('10101007','其他','10101','\0',''),('10201','隐患状态','10','\0','隐患状态描述'),('10201001','未五定','10201','\0','d'),('10201002','已五定','10201','','d'),('10201003','已整改','10201','\0','s'),('10201004','已复查','10201','\0','d'),('10201005','已现场处理','10201','\0','sd'),('10301','班次','10','','班次描述'),('10301004','零点班','10301','\0','零点班'),('10301005','捌点班','10301','\0','捌点班'),('10301006','肆点班','10301','\0','肆点班'),('10401','风险等级','10','','这是风险等级'),('10401001','极其危险,不能继续作业','10401','\0','s'),('10401002','一般危险,需要注意','10401','\0','a'),('10401003','高度危险,需立即整改','10401','\0','aa'),('10401004','稍有危险,可以接受','10401','\0','c'),('10401005','显著危险,需要整改','10401','','d'),('10501','风险辨识范围类型','10','\0','这是风险辨识范围类型'),('10501001','综采','10501','\0','这是综采'),('10501002','综掘','10501','\0','这是综掘'),('10601','风险类型','10','\0','这是风险类型'),('10601001','人','10601','\0','r'),('10601002','机','10601','\0','的'),('10601003','环','10601','','h'),('10601004','管','10601','\0','d'),('10601005','灰尘','10601','','灰尘字典描述'),('10701','灾害类型','10','\0','这是灾害类型'),('10701001','水','10701','\0','s'),('10701002','火','10701','\0','h'),('10701003','瓦斯','10701','\0','ws'),('10701004','顶板','10701','\0','db'),('10701005','煤尘','10701','\0','mc'),('10701006','冲击地压','10701','\0','cjdy'),('10701007','提升运输','10701','\0','tsys'),('10801','可能导致事故','10','\0','这是可能导致事故'),('10801001','人身伤害','10801','\0','rssh'),('10801002','触电','10801','','sd'),('10801003','爆炸','10801','\0','d'),('10901','可能性(L)','10','','史蒂芬'),('10901001','完全可以预料','10901','','10'),('10901002','相当可能','10901','\0','6'),('10901003','可能，但不经常','10901','\0','3'),('10901004','可能性小，完全意外','10901','\0','1'),('10901005','很不可能，可以设想','10901','\0','0.5'),('10901006','既不可能','10901','\0','0.2'),('10901007','实际不可能','10901','\0','0.1'),('11001','人员暴露频繁程度(E)','10','','dsfsd'),('11001001','继续暴露','11001','\0','10'),('11001002','每天工作时间内暴露','11001','\0','6'),('11001003','每周一次，或偶然暴露','11001','\0','3'),('11001004','每月一次暴露','11001','\0','2'),('11001005','每年几次暴露','11001','\0','1'),('11001006','非常罕见的暴露','11001','\0','0.5'),('11101','损失后果(C)','10','','sd'),('11101001','大灾难，许多人死亡','11101','\0','100'),('11101002','灾难，数人死亡','11101','\0','40'),('11101003','非常严重，一人死亡','11101','\0','15'),('11101004','严重，重伤','11101','\0','7'),('11101005','重大，致残','11101','\0','3'),('11101006','引人关注，不利于基本的安全卫生要求','11101','\0','1');
 
-alter table sidingbiao add constraint FK_Reference_1 foreign key (dangerId)
-      references danger (dangerId) on delete restrict on update restrict;
+UNLOCK TABLES;
 
-alter table spotDispose add constraint FK_Reference_6 foreign key (dangerId)
-      references danger (dangerId) on delete restrict on update restrict;
+/*Table structure for table `follow` */
 
+DROP TABLE IF EXISTS `follow`;
+
+CREATE TABLE `follow` (
+  `followId` int(11) NOT NULL AUTO_INCREMENT,
+  `sidingId` int(11) DEFAULT NULL,
+  `dangerId` int(11) DEFAULT NULL,
+  `hasSecurity` varchar(2) COLLATE utf8_bin DEFAULT NULL,
+  `safetyTechnician` varchar(40) COLLATE utf8_bin DEFAULT NULL,
+  `managerName` varchar(40) COLLATE utf8_bin DEFAULT NULL,
+  `recheckTime` datetime DEFAULT NULL,
+  PRIMARY KEY (`followId`),
+  KEY `FK_Reference_4` (`sidingId`),
+  KEY `FK_Reference_8` (`dangerId`),
+  CONSTRAINT `FK_Reference_4` FOREIGN KEY (`sidingId`) REFERENCES `sidingbiao` (`sidingId`),
+  CONSTRAINT `FK_Reference_8` FOREIGN KEY (`dangerId`) REFERENCES `danger` (`dangerId`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ù±ï¿½';
+
+/*Data for the table `follow` */
+
+LOCK TABLES `follow` WRITE;
+
+insert  into `follow`(`followId`,`sidingId`,`dangerId`,`hasSecurity`,`safetyTechnician`,`managerName`,`recheckTime`) values (1,113,170,'1','安全员','现场领到','2018-04-03 11:13:24'),(2,74,117,'1','asdfasfdfasdffas','现场领到eeee','2018-04-03 11:16:29'),(4,118,179,'1','现场安全员','跟踪领导','2018-05-24 13:45:17');
+
+UNLOCK TABLES;
+
+/*Table structure for table `rechecktable` */
+
+DROP TABLE IF EXISTS `rechecktable`;
+
+CREATE TABLE `rechecktable` (
+  `recheckid` int(11) NOT NULL AUTO_INCREMENT,
+  `followId` int(11) DEFAULT NULL,
+  `dangerId` int(11) DEFAULT NULL,
+  `recheckMan` varchar(40) COLLATE utf8_bin DEFAULT NULL,
+  `recheckdate` datetime DEFAULT NULL,
+  `recheckresult` varchar(2) COLLATE utf8_bin DEFAULT NULL,
+  `comment` varchar(200) COLLATE utf8_bin DEFAULT NULL,
+  PRIMARY KEY (`recheckid`),
+  KEY `FK_Reference_5` (`followId`),
+  KEY `FK_Reference_9` (`dangerId`),
+  CONSTRAINT `FK_Reference_5` FOREIGN KEY (`followId`) REFERENCES `follow` (`followId`),
+  CONSTRAINT `FK_Reference_9` FOREIGN KEY (`dangerId`) REFERENCES `danger` (`dangerId`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+/*Data for the table `rechecktable` */
+
+LOCK TABLES `rechecktable` WRITE;
+
+insert  into `rechecktable`(`recheckid`,`followId`,`dangerId`,`recheckMan`,`recheckdate`,`recheckresult`,`comment`) values (1,1,170,'复查人','2018-04-03 11:13:47','0','备注'),(2,2,117,'王跃跃','2018-04-03 11:19:07','1','不合格');
+
+UNLOCK TABLES;
+
+/*Table structure for table `riassessment` */
+
+DROP TABLE IF EXISTS `riassessment`;
+
+CREATE TABLE `riassessment` (
+  `assessmentId` varchar(50) NOT NULL,
+  `riskMsgId` varchar(50) DEFAULT NULL,
+  `possibility` varchar(50) DEFAULT NULL,
+  `personDegreeOfExposure` varchar(50) DEFAULT NULL,
+  `lossOfCconsequences` varchar(50) DEFAULT NULL,
+  `riskValue` double DEFAULT NULL,
+  `riskGrade` varchar(20) DEFAULT NULL,
+  `evaluateTime` datetime DEFAULT NULL,
+  PRIMARY KEY (`assessmentId`),
+  KEY `FK_Reference_12` (`riskMsgId`),
+  CONSTRAINT `FK_Reference_12` FOREIGN KEY (`riskMsgId`) REFERENCES `riidentificationrriskmsg` (`riskMsgId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='?????';
+
+/*Data for the table `riassessment` */
+
+LOCK TABLES `riassessment` WRITE;
+
+insert  into `riassessment`(`assessmentId`,`riskMsgId`,`possibility`,`personDegreeOfExposure`,`lossOfCconsequences`,`riskValue`,`riskGrade`,`evaluateTime`) values ('58d670fe366e40fa9d1706ac689d685b','6a5b93650dac43718655d14a9e76f4a8','可能，但不经常','每月一次暴露','严重，重伤',42,'一般危险,需要注意','2018-05-31 11:01:51'),('941aa8c8a1034d4c93f30869513a1baa','f78480ba499c49e99191238fc815859f','完全可以预料','继续暴露','大灾难，许多人死亡',10000,'极其危险,不能继续作业','2018-05-31 12:23:01'),('dca53d7e5041461f834f5942e5035c2f','0015da3ff32b471cbb6863264a7a690c','很不可能，可以设想','每年几次暴露','引人关注，不利于基本的安全卫生要求',0.5,'稍有危险,可以接受','2018-05-31 11:01:14');
+
+UNLOCK TABLES;
+
+/*Table structure for table `ricontrolplan` */
+
+DROP TABLE IF EXISTS `ricontrolplan`;
+
+CREATE TABLE `ricontrolplan` (
+  `riCtrlPlanId` varchar(50) NOT NULL,
+  `year` char(10) DEFAULT NULL,
+  `monthOrWeek` varchar(10) DEFAULT NULL,
+  `createTime` datetime DEFAULT NULL,
+  `specialty` varchar(100) DEFAULT NULL,
+  `leader` varchar(20) DEFAULT NULL,
+  `riskCtrlPlanMark` varchar(2) DEFAULT NULL,
+  `reportStatus` varchar(2) DEFAULT NULL,
+  `checkStatus` varchar(2) DEFAULT NULL,
+  PRIMARY KEY (`riCtrlPlanId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='�������';
+
+/*Data for the table `ricontrolplan` */
+
+LOCK TABLES `ricontrolplan` WRITE;
+
+insert  into `ricontrolplan`(`riCtrlPlanId`,`year`,`monthOrWeek`,`createTime`,`specialty`,`leader`,`riskCtrlPlanMark`,`reportStatus`,`checkStatus`) values ('00b40d23ae3143adbdf3366eb4c917bd','2018','5','2018-05-31 11:50:50','开掘','张士','1','0',NULL),('09f305392bc34ebd87495c42d27948ea','2018','1','2018-05-31 11:52:37','运输','刘凯','1','0',NULL),('0a23ff613410490ea7dbbc0256df00a1','2018-01','2','2018-05-31 12:14:17','开掘','余凯','0','1','1'),('10a4b7b3d08f4e25873cefd7fa919698','2018','3','2018-05-31 11:47:59','采煤','刘立','1','0',NULL),('10e9791d2fb545cc9f4ee2137d6cf99d','2018-01','3','2018-05-31 12:11:18','采煤','李密','0','0',NULL),('11a4b64e4f3e483dabdb775ea04778d6','2018','2','2018-05-31 11:14:33','采煤','王月','1','1','1'),('2de3e7b0d51148888354a372986995c7','2018','1','2018-05-31 11:53:20','通风','李凯','1','0',NULL),('4136dc0db4db4a3aa15419bc06cb8514','2018','3','2018-05-31 11:49:48','开掘','何物','1','0',NULL),('4ef66b2d58044bec961af4ab14f50e27','2018','1','2018-05-31 11:48:34','开掘','刘大壮','1','0',NULL),('53ab6883f1924c6a8596e5347dcdfc32','2018','4','2018-05-31 11:50:23','开掘','张希','1','0',NULL),('5c49764551b04237aa06005ba0291072','2018-03','3','2018-05-31 12:12:58','采煤','李磊','0','0',NULL),('6cfa3b5054694f89963cfa734e487112','2018-02','3','2018-05-31 12:12:13','采煤','张栩','0','0',NULL),('6d6e37675de140f48c6842b3f8349fd6','2018-01','2','2018-05-31 12:11:03','采煤','李沐','0','0',NULL),('79dc1d8156304a2794f95c423aecbb24','2018-03','2','2018-04-03 01:07:03','开掘','程序','0','0',NULL),('7bd9c7acb8b847dc84d04fc7b62cb5c4','2018-01','2','2018-05-31 12:14:42','机电','李馨月','0','0',NULL),('993105d5354e453393c113c54c042b86','2018','2','2018-05-31 11:49:11','开掘','王世旬','1','0',NULL),('99a76f8766044f6bb21c6d9f25a3e246','2018','1','2018-05-31 11:53:42','地测','张磊','1','0',NULL),('9bfff4dfb62242b7a4989f7694a50297','2018','1','2018-05-31 11:14:59','采煤','张月','1','1','1'),('9ce586edc1f44ba083c7e3e7e4efb597','2018-02','1','2018-05-31 12:11:37','采煤','李默','0','0',NULL),('a4af183866234314aa100f91e0b1e7b1','2018','2','2018-05-31 12:03:25','运输','李欣','1','0',NULL),('bea9cae0c4884feab78ae9fe10711a6b','2018-03','1','2018-05-31 12:12:33','采煤','徐旭','0','0',NULL),('bee96cbad7684396bed1db7ee94233e1','2018-02','2','2018-05-31 12:11:57','采煤','张默','0','0',NULL),('c6d8d54744114e7cb7d9ae4b8f6f66f8','2018-01','1','2018-05-31 12:13:25','开掘','吴旭','0','1','1'),('cada9203788f4c349b1251be8e494d90','2018-01','1','2018-05-31 12:10:35','采煤','李达','0','0',NULL),('d3d24f78931941d7af52749648ee800c','2018','1','2018-05-31 11:51:37','机电','张留','1','1','1'),('eb42d6a0fb72421f91e4128c7a074743','2017','2','2018-05-31 11:17:01','采煤','李月','1','1','1'),('f26fec35b0e44141b5ed579286c2c770','2018-02','1','2018-04-02 23:45:54','机电','询管控负责人','0','1','');
+
+UNLOCK TABLES;
+
+/*Table structure for table `ridetailedofriskctrlplan` */
+
+DROP TABLE IF EXISTS `ridetailedofriskctrlplan`;
+
+CREATE TABLE `ridetailedofriskctrlplan` (
+  `detailedOfRiskCtrlPlanId` varchar(50) NOT NULL,
+  `riCtrlPlanId` varchar(50) DEFAULT NULL,
+  `riskMsgId` varchar(50) DEFAULT NULL,
+  `dutyDepartment` varchar(20) DEFAULT NULL,
+  `implementationOfMeasures` varchar(200) DEFAULT NULL,
+  `measureIsValid` varchar(20) DEFAULT NULL,
+  `inspectionSituation` varchar(20) DEFAULT NULL,
+  `analysisTime` datetime DEFAULT NULL,
+  PRIMARY KEY (`detailedOfRiskCtrlPlanId`),
+  KEY `FK_Reference_15` (`riCtrlPlanId`),
+  KEY `FK_Reference_16` (`riskMsgId`),
+  CONSTRAINT `FK_Reference_15` FOREIGN KEY (`riCtrlPlanId`) REFERENCES `ricontrolplan` (`riCtrlPlanId`),
+  CONSTRAINT `FK_Reference_16` FOREIGN KEY (`riskMsgId`) REFERENCES `riidentificationrriskmsg` (`riskMsgId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='���������';
+
+/*Data for the table `ridetailedofriskctrlplan` */
+
+LOCK TABLES `ridetailedofriskctrlplan` WRITE;
+
+insert  into `ridetailedofriskctrlplan`(`detailedOfRiskCtrlPlanId`,`riCtrlPlanId`,`riskMsgId`,`dutyDepartment`,`implementationOfMeasures`,`measureIsValid`,`inspectionSituation`,`analysisTime`) values ('12e7772652be489ca9183632458cdd71','11a4b64e4f3e483dabdb775ea04778d6','6f5d9670356c40788eb89bd2ee617f1d','安全部门','措施执行失败','无效','考核完成',NULL),('19b00ee154cd4acd9c333d4cc6a943e3','c6d8d54744114e7cb7d9ae4b8f6f66f8','663e3584443b4d839abbf5efec55e602',NULL,NULL,NULL,NULL,NULL),('2449f7a2a8c84a618e5c180f72df58c3','9bfff4dfb62242b7a4989f7694a50297','0359042e115f43908e03977b2d27fd66',NULL,NULL,NULL,NULL,NULL),('27e7c01cdb5b454793a648708bc13a74','0a23ff613410490ea7dbbc0256df00a1','663e3584443b4d839abbf5efec55e602','安全部门','措施执行失败','无效','考核完成',NULL),('296397fa03b548dc84cd623e0611132f','9bfff4dfb62242b7a4989f7694a50297','6f5d9670356c40788eb89bd2ee617f1d',NULL,NULL,NULL,NULL,NULL),('2db0d89892f647959cf916956dcae098','eb42d6a0fb72421f91e4128c7a074743','566384fc23dd4548a7f99cdf0c08238e',NULL,NULL,NULL,NULL,NULL),('42af26b755d643d49a0dea03d275f59e','9bfff4dfb62242b7a4989f7694a50297','566384fc23dd4548a7f99cdf0c08238e',NULL,NULL,NULL,NULL,NULL),('4ef1d05534ea48debefde1128a7a7894','11a4b64e4f3e483dabdb775ea04778d6','0359042e115f43908e03977b2d27fd66','生产部门','措施执行无效','无效','考核完成',NULL),('4f8ddaf4b859446c824aaceb2858cc45','eb42d6a0fb72421f91e4128c7a074743','0359042e115f43908e03977b2d27fd66',NULL,NULL,NULL,NULL,NULL),('6b12b0f2c7d04b3cb58b35179096704d','c6d8d54744114e7cb7d9ae4b8f6f66f8','0913685b9a504cb99bdc9bf3a1f23bc7',NULL,NULL,NULL,NULL,NULL),('6ff59f8a6ac64ac8a6ce590463195b69','0a23ff613410490ea7dbbc0256df00a1','0913685b9a504cb99bdc9bf3a1f23bc7','安全部门','措施执行失败','无效','考核完成',NULL),('7ae2c169720747c18148d2f76277d605','f26fec35b0e44141b5ed579286c2c770','0015da3ff32b471cbb6863264a7a690c',NULL,NULL,NULL,NULL,NULL),('7f9efa7dd2de4a9bb88c6d54f4640b05','f26fec35b0e44141b5ed579286c2c770','a729668f4e69404784ad51d2d589c301',NULL,NULL,NULL,NULL,NULL),('80c697ea3a184ccbb6c6feba0387623f','11a4b64e4f3e483dabdb775ea04778d6','566384fc23dd4548a7f99cdf0c08238e','安全部门','措施执行失败','无效','考核完成',NULL),('8e436e71f9b148ae96faa6389786c1bb','c6d8d54744114e7cb7d9ae4b8f6f66f8','0af9dc3b2b174883813cded6e1f1566f',NULL,NULL,NULL,NULL,NULL),('a3ec453302a1460292ed2d6110369b8f','d3d24f78931941d7af52749648ee800c','a729668f4e69404784ad51d2d589c301',NULL,NULL,NULL,NULL,NULL),('db97c6f6c8fe444383dafef9a2767ac6','eb42d6a0fb72421f91e4128c7a074743','6f5d9670356c40788eb89bd2ee617f1d',NULL,NULL,NULL,NULL,NULL),('e5e791feab1640e493cda06978037f81','09f305392bc34ebd87495c42d27948ea','f78480ba499c49e99191238fc815859f',NULL,NULL,NULL,NULL,NULL),('e99c00f25a7f4b8ba5c744a6c3ac970f','0a23ff613410490ea7dbbc0256df00a1','0af9dc3b2b174883813cded6e1f1566f','生产部门','措施执行失败','无效','考核完成',NULL),('f31c244102e343e0aad5cdd36403ac02','a4af183866234314aa100f91e0b1e7b1','f78480ba499c49e99191238fc815859f',NULL,NULL,NULL,NULL,NULL),('fd9e5e2e675b42c697c5f5e3f82e40f9','d3d24f78931941d7af52749648ee800c','0015da3ff32b471cbb6863264a7a690c',NULL,NULL,NULL,NULL,NULL);
+
+UNLOCK TABLES;
+
+/*Table structure for table `riidentificationmaintable` */
+
+DROP TABLE IF EXISTS `riidentificationmaintable`;
+
+CREATE TABLE `riidentificationmaintable` (
+  `identiryId` varchar(50) NOT NULL,
+  `year` datetime DEFAULT NULL,
+  `name` varchar(40) DEFAULT NULL,
+  `meetingAddress` varchar(100) DEFAULT NULL,
+  `compere` varchar(50) DEFAULT NULL,
+  `recorder` varchar(50) DEFAULT NULL,
+  `participants` varchar(100) DEFAULT NULL,
+  `meetingContent` varchar(500) DEFAULT NULL,
+  `identifyMark` varchar(2) DEFAULT NULL,
+  `createTime` datetime DEFAULT NULL,
+  PRIMARY KEY (`identiryId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='������';
+
+/*Data for the table `riidentificationmaintable` */
+
+LOCK TABLES `riidentificationmaintable` WRITE;
+
+insert  into `riidentificationmaintable`(`identiryId`,`year`,`name`,`meetingAddress`,`compere`,`recorder`,`participants`,`meetingContent`,`identifyMark`,`createTime`) values ('2bf7b4bca10f4d169174c7dc7569008d','2016-01-01 00:00:00','年度辨识风险','矿会议室','刘凌','王飞','赵崇、陈建江、张庆业等','识别年度辨识风险信息','Y','2018-05-31 10:14:23'),('3cb233d4a1b546a88465285a8b82f106','2016-01-01 00:00:00','专项辨识风险','矿会议室','王沛','谢杰翔','苏毅、曾望途等','识别2016年专项辨识风险信息','S','2018-05-31 10:34:09'),('86d3bf12092244b3adc84e94d0168f9f','2017-01-01 00:00:00','专项辨识风险','矿会议室','侯志民','侯兴芬','李倩冰、李琦等','识别2017年专项辨识风险信息','S','2018-05-31 10:30:50'),('9a5ff40721754827a3961557c8d315f8','2017-01-01 00:00:00','年度辨识风险','矿会议室','李瑞旺','石昌瑾','孙凯、张岩、孙伟等','识别年度辨识风险信息','Y','2018-05-31 10:15:44'),('b1b53e2df5834c9487d5e17ac4f0711d','2015-01-01 00:00:00','年度辨识风险','矿会议室','王琳','李凡','王松、刘金等','识别年度辨识风险信息','Y','2018-05-31 10:06:03'),('e091761c352f474c8050fdbb25956830','2015-01-01 00:00:00','专项辨识风险','矿会议室','刘斌','李嘉豪','雷杨、郭瑛等','辨识2015年的专项辨识风险信息','S','2018-05-31 10:59:10');
+
+UNLOCK TABLES;
+
+/*Table structure for table `riidentificationrange` */
+
+DROP TABLE IF EXISTS `riidentificationrange`;
+
+CREATE TABLE `riidentificationrange` (
+  `idenRanId` varchar(50) NOT NULL,
+  `faceName` varchar(20) DEFAULT NULL,
+  `survey` varchar(100) DEFAULT NULL,
+  `rIRType` varchar(20) DEFAULT NULL,
+  `startTime` datetime DEFAULT NULL,
+  `endTime` datetime DEFAULT NULL,
+  PRIMARY KEY (`idenRanId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='�������';
+
+/*Data for the table `riidentificationrange` */
+
+LOCK TABLES `riidentificationrange` WRITE;
+
+insert  into `riidentificationrange`(`idenRanId`,`faceName`,`survey`,`rIRType`,`startTime`,`endTime`) values ('1f8c7bf47e294be8a945e70a38587d29','3256工作面','工作面不整洁','综采','2018-03-01 00:00:00','2018-03-15 00:00:00'),('4b153b8b5ead4e6d82e1bd16b5591925','458工作面','工具没有收集走','综掘','2017-06-25 00:00:00','2017-07-07 00:00:00'),('56f5dfcac7844e8eb3c0ad1e37e6fa08','井口','井口一米之内不可有杂物','综采','2017-06-27 00:00:00','2017-08-04 00:00:00'),('8ebbd87b353d481eaa1f1cee146c7d97','32986大巷','大巷宽度合格，高度合格','综采','2017-06-25 00:00:00','2017-08-15 00:00:00'),('d80ab8ad45424aa09567213eb92fc770','洗煤机出煤口','有碎煤渣','综采','2017-06-25 00:00:00','2017-07-06 00:00:00');
+
+UNLOCK TABLES;
+
+/*Table structure for table `riidentificationrriskmsg` */
+
+DROP TABLE IF EXISTS `riidentificationrriskmsg`;
+
+CREATE TABLE `riidentificationrriskmsg` (
+  `riskMsgId` varchar(50) NOT NULL,
+  `identiryId` varchar(50) DEFAULT NULL,
+  `riskAddress` varchar(200) DEFAULT NULL,
+  `riskDescribe` varchar(500) DEFAULT NULL,
+  `riskType` varchar(20) DEFAULT NULL,
+  `professionalTypes` varchar(20) DEFAULT NULL,
+  `disasterTypes` varchar(20) DEFAULT NULL,
+  `canCauseAccidents` varchar(100) DEFAULT NULL,
+  `ctrlMeasure` varchar(500) DEFAULT NULL,
+  `principal` varchar(20) DEFAULT NULL,
+  `superintendent` varchar(20) DEFAULT NULL,
+  `monitoringPeriod` varchar(50) DEFAULT NULL,
+  `evaluationStatus` varchar(1) DEFAULT NULL,
+  PRIMARY KEY (`riskMsgId`),
+  KEY `FK_Reference_11` (`identiryId`),
+  CONSTRAINT `FK_Reference_11` FOREIGN KEY (`identiryId`) REFERENCES `riidentificationmaintable` (`identiryId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='�������';
+
+/*Data for the table `riidentificationrriskmsg` */
+
+LOCK TABLES `riidentificationrriskmsg` WRITE;
+
+insert  into `riidentificationrriskmsg`(`riskMsgId`,`identiryId`,`riskAddress`,`riskDescribe`,`riskType`,`professionalTypes`,`disasterTypes`,`canCauseAccidents`,`ctrlMeasure`,`principal`,`superintendent`,`monitoringPeriod`,`evaluationStatus`) values ('0015da3ff32b471cbb6863264a7a690c','86d3bf12092244b3adc84e94d0168f9f','洗煤机出煤口','洗煤机出口有少量灰尘','灰尘','机电','煤尘','人身伤害','清理灰尘','李倩冰','李琦','一周一次','Y'),('02bafa1f064c473585e728d5ec35d7b6','9a5ff40721754827a3961557c8d315f8','458工作面,32986大巷,3256工作面','出现了风险','环','地测','提升运输','触电','对提升运输进行管控','李洋','莉莉','每月一次','N'),('0359042e115f43908e03977b2d27fd66','9a5ff40721754827a3961557c8d315f8','32986大巷,井口,3256工作面','出现了风险','人','采煤','顶板','人身伤害','对顶板采取措施','张凯','李凯','每周一次','N'),('0913685b9a504cb99bdc9bf3a1f23bc7','9a5ff40721754827a3961557c8d315f8','3256工作面,458工作面','工作面有大量灰尘','灰尘','开掘','煤尘','人身伤害','清理回城','李瑞旺','张岩','每周一次','N'),('0af9dc3b2b174883813cded6e1f1566f','e091761c352f474c8050fdbb25956830','3256工作面','工作面周围有积水','管','开掘','水','人身伤害','清理积水','李嘉豪','郭瑛','一周一次','N'),('439061d6b94f4867af6911588652a191','2bf7b4bca10f4d169174c7dc7569008d','井口','井口有积水','环','其他','水','人身伤害','清理井口积水','赵崇','石昌谨','每周一次','N'),('566384fc23dd4548a7f99cdf0c08238e','b1b53e2df5834c9487d5e17ac4f0711d','458工作面,3256工作面','工作面地面有大量煤渣','人','采煤','火','人身伤害','清理煤渣','王松','李达','每周一次','N'),('663e3584443b4d839abbf5efec55e602','9a5ff40721754827a3961557c8d315f8','井口,458工作面','对风险进行描述','机','开掘','瓦斯','人身伤害','对瓦斯进行管控','吴昕','李晔','每天一次','N'),('6a5b93650dac43718655d14a9e76f4a8','3cb233d4a1b546a88465285a8b82f106','井口','井口有少许垃圾','环','其他','煤尘','人身伤害','清理垃圾','苏毅','曾望途','一周一次','Y'),('6f5d9670356c40788eb89bd2ee617f1d','9a5ff40721754827a3961557c8d315f8','458工作面,3256工作面,井口','对风险进行描述','灰尘','采煤','顶板','触电','对顶板进行管控','李莉','李欣','每天一次','N'),('8d7cc8491b5b4ceb80e780baaeaf85bb','9a5ff40721754827a3961557c8d315f8','3256工作面,458工作面,32986大巷','有灰尘','灰尘','其他','煤尘','人身伤害','清理灰尘','刘凌','张岩','一周一次','N'),('a729668f4e69404784ad51d2d589c301','9a5ff40721754827a3961557c8d315f8','3256工作面,洗煤机出煤口,458工作面','出现了风险','环','机电','冲击地压','触电','对冲击地压进行管控','王树','王旭','每周一次','N'),('b8a40a7e3afb4ac79bb059300045e1b7','9a5ff40721754827a3961557c8d315f8','32986大巷,井口','出现了风险','管','通风','煤尘','触电','对煤尘进行管控','张旭','李旭','每月一次','N'),('f78480ba499c49e99191238fc815859f','9a5ff40721754827a3961557c8d315f8','洗煤机出煤口,32986大巷,井口','出现了风险','管','运输','火','爆炸','对火进行管控','王绪','汪旭','每天一次','Y');
+
+UNLOCK TABLES;
+
+/*Table structure for table `riresponsibility` */
+
+DROP TABLE IF EXISTS `riresponsibility`;
+
+CREATE TABLE `riresponsibility` (
+  `respId` varchar(50) NOT NULL,
+  `quarters` varchar(20) DEFAULT NULL,
+  `duty` varchar(40) DEFAULT NULL,
+  `ctrlContent` varchar(200) DEFAULT NULL,
+  `ctrlFrequency` varchar(20) DEFAULT NULL,
+  `analysisFrequency` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`respId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='�������';
+
+/*Data for the table `riresponsibility` */
+
+LOCK TABLES `riresponsibility` WRITE;
+
+insert  into `riresponsibility`(`respId`,`quarters`,`duty`,`ctrlContent`,`ctrlFrequency`,`analysisFrequency`) values ('22cceb35a2404195af3d8f13d69ae16b','调度值班长','通风调度','以高度负责的态度，处理好一通三防的日常事务','一天一次','一周一次'),('347852e0e08f480693cd02f64d5c9aa1','监控值班人员','进行检测系统各种功能调用','监视终端屏所显示的各种信息，详细记录系统各部分的运行状态，负责打印报表','一天一次','一周一次'),('35c6838994fa46e6b703f1ef009f6d17','监测监控组长','对全矿井监测监控系统进行管理','负责编制、检测监控系统的月计划工作，每月检查计划执行情况','一月一次','一月一次'),('507dd45f6ac341fda0a2c08c79ba16c1','瓦斯工','对瓦斯进行检测','负责对分工区域内的瓦斯、二氧化碳及其它有害气体的检查与汇报工作','一周一次','一月一次'),('637b8bdab1374dd9ae957aa3e5ca0f7d','测尘工','测尘','保证测尘仪器使用完好可靠。测尘按规程地点和规定距离测定，发现煤尘较大时，要及时反映。','一周一次','一月一次'),('7b918b474cfe40d39bf69bb33c07ab3b','安全仪器检验工','对仪器进行校验','负责瓦斯传感器，光学瓦检仪、测风表、便携式瓦斯检测报警仪、断电仪的校验，调试测试','两周一次','一月一次'),('9357159840f94eaa887a79ead1b97907','检测工','管理检测系统','负责对井下检测系统的安装、拆迁、维护、延伸、更换、调试等。每七天顶起更换瓦斯传感器','一周一次','一月一次'),('959ce14320fb4ae8b913d80464c137bb','灭火工','灭火','从事煤矿消防和灭火工作。检查危害消防水管及相关设施。负责井上下消防器材库设备、材料的管理工作。','一周一次','一月一次'),('acc8dd73d777429a92fb26e3e52d1aec','主扇风机司机','管控风机','监视风机运行情况，保证安全运转。参与主风机房内的检修工作。','一月一次','一月一次'),('e031067e37d44ea5904b1862cbf8c4c5','瓦斯抽放泵司机','管理瓦斯抽放泵','负责瓦斯抽入泵的开停工作，对瓦斯抽放泵的日常管理及维护工作。','一周一次','两周一次'),('e270e80ced16473bbbdf3b6dde60052e','通风工','进行通风','参与检查通风设施，按规定继续宁测风并合理地分配风量。负责处理局本积存的有害气体','三天一次','一周一次'),('f91cc1a553b54701a8b0711685503636','测风工','测风','进行各个用风地点的风量、瓦斯、矿尘、温度的测定工作，对矿井的通风、瓦斯、防灭火情况进行检查分析，并及时提出改善意见','一周一次','一周一次');
+
+UNLOCK TABLES;
+
+/*Table structure for table `ririskplanaudit` */
+
+DROP TABLE IF EXISTS `ririskplanaudit`;
+
+CREATE TABLE `ririskplanaudit` (
+  `riskPlanAuditId` varchar(50) NOT NULL,
+  `riCtrlPlanId` varchar(50) DEFAULT NULL,
+  `auditMsg` varchar(200) DEFAULT NULL,
+  `auditStatus` varchar(20) DEFAULT NULL,
+  `auditTime` datetime DEFAULT NULL,
+  `auditPerson` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`riskPlanAuditId`),
+  KEY `FK_Reference_14` (`riCtrlPlanId`),
+  CONSTRAINT `FK_Reference_14` FOREIGN KEY (`riCtrlPlanId`) REFERENCES `ricontrolplan` (`riCtrlPlanId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='�������';
+
+/*Data for the table `ririskplanaudit` */
+
+LOCK TABLES `ririskplanaudit` WRITE;
+
+insert  into `ririskplanaudit`(`riskPlanAuditId`,`riCtrlPlanId`,`auditMsg`,`auditStatus`,`auditTime`,`auditPerson`) values ('29f4db0d621746d6bb9947fd2176d5a9','eb42d6a0fb72421f91e4128c7a074743','第一次审核','','2018-04-24 17:38:32',NULL),('4fe70defa1504b6a8d918d9005a54dfb','eb42d6a0fb72421f91e4128c7a074743','第三次审核','通过审核','2018-05-31 12:04:41',NULL),('51c27e288cda4ba39ce97d321b37b800','11a4b64e4f3e483dabdb775ea04778d6','he合格','通过审核','2018-04-03 10:49:18',NULL),('63173c9bfd1d4bf09ba93e8dab977a2c','9bfff4dfb62242b7a4989f7694a50297','第二次审核','通过审核','2018-05-31 12:05:25',NULL),('6e5ecd93469d479ea796dbaaf903abe7','0a23ff613410490ea7dbbc0256df00a1','第一次审核','通过审核','2018-05-31 12:17:22',NULL),('83eeefa8eb3142b89d9bf32a34039f5f','f26fec35b0e44141b5ed579286c2c770','询 合格','','2018-04-03 00:56:41',NULL),('96ae03a9ff6741908dde2ba08327222e','9bfff4dfb62242b7a4989f7694a50297','合格','通过审核','2018-04-03 00:53:07',NULL),('bb51a8b6d87c4c0dac4a4993423f4a63','11a4b64e4f3e483dabdb775ea04778d6','第二次审核','通过审核','2018-05-31 12:06:49',NULL),('c7d11fb9f4ed448ba1950007c431dd60','c6d8d54744114e7cb7d9ae4b8f6f66f8','第一次审核','通过审核','2018-05-31 12:17:05',NULL),('fa2006f7242c46c6b5f1082fde5fe9e4','d3d24f78931941d7af52749648ee800c','第一次审核','通过审核','2018-05-31 12:06:11',NULL),('ffbb9aaeb5604782b23ecb99fb23cb60','eb42d6a0fb72421f91e4128c7a074743','第二次审核','通过审核','2018-04-24 17:38:57',NULL);
+
+UNLOCK TABLES;
+
+/*Table structure for table `sidingbiao` */
+
+DROP TABLE IF EXISTS `sidingbiao`;
+
+CREATE TABLE `sidingbiao` (
+  `sidingId` int(11) NOT NULL AUTO_INCREMENT,
+  `dangerId` int(11) DEFAULT NULL,
+  `sidingTime` datetime DEFAULT NULL,
+  `supervisor` varchar(40) COLLATE utf8_bin DEFAULT NULL,
+  `rectificationTime` datetime DEFAULT NULL,
+  `rectificationMeasure` varchar(600) COLLATE utf8_bin DEFAULT NULL,
+  `dutyPerson` varchar(40) COLLATE utf8_bin DEFAULT NULL,
+  PRIMARY KEY (`sidingId`),
+  KEY `FK_Reference_1` (`dangerId`),
+  CONSTRAINT `FK_Reference_1` FOREIGN KEY (`dangerId`) REFERENCES `danger` (`dangerId`)
+) ENGINE=InnoDB AUTO_INCREMENT=125 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+/*Data for the table `sidingbiao` */
+
+LOCK TABLES `sidingbiao` WRITE;
+
+insert  into `sidingbiao`(`sidingId`,`dangerId`,`sidingTime`,`supervisor`,`rectificationTime`,`rectificationMeasure`,`dutyPerson`) values (68,109,'2017-12-04 09:20:05','李旭亮','2017-12-03 09:37:05','已整改','王苗红'),(69,106,'2017-12-04 09:02:38','李旭亮','2017-12-03 09:41:38','钢梁按照规范已从新打设。','王苗红'),(70,111,'2017-12-03 17:43:41','原小龙','2017-12-03 07:43:41','搬运队已把废旧材料回收。','焦保珍'),(71,120,'2017-12-01 17:49:24','王义彪','2017-12-10 09:49:24','井下运输队安排人员更换了静压水管','王文芳'),(72,119,'2017-12-10 18:51:23','冯旭亮','2017-12-10 07:51:23','机电队从新整理了3113泵站前后10米范围内的电缆','宋其林'),(73,118,'2017-12-10 20:53:12','冯旭亮','2017-12-10 08:53:12','机电更换了新的接电线','宋其林'),(74,117,'2017-12-10 17:55:36','原小龙','2018-12-10 08:55:36','搬运队及时对废旧材料和刮板进行了回收','焦保珍'),(75,116,'2017-12-10 18:11:17','原小龙','2017-12-10 08:57:17','搬运队安排人员对避难硐室门口垃圾已清理','焦保珍'),(76,121,'2017-12-10 17:58:50','王义彪','2017-12-10 09:00:50','井下运输队安排人员已清理积煤','王文芳'),(77,131,'2017-12-18 15:45:23','原小龙','2017-12-18 07:45:23','搬运队已把废旧材料回收升井','焦保珍'),(78,128,'2017-12-17 17:03:43','王义彪','2017-12-17 08:47:43','已更换2个托辊','王文芳'),(79,129,'2017-12-17 16:49:14','王义彪','2017-12-17 08:16:14','已清理积煤，安排每班清理','王文芳'),(80,132,'2017-12-17 17:02:56','原小龙','2017-12-17 08:54:56','已补充填写','焦保珍'),(81,125,'2017-12-17 17:00:15','王苗红','2017-12-17 07:56:15','已调整','宋志令'),(82,130,'2017-12-17 16:58:32','原小龙','2017-12-17 08:05:32','已整改','焦保珍'),(83,140,'2017-12-24 16:38:06','王苗红','2017-12-24 08:38:06','已重新打设','宋志令'),(84,133,'2017-12-01 20:39:15','冯旭亮','2017-12-24 08:39:15','已整改','宋其林'),(85,149,'2018-01-08 08:00:31','王文芳','2018-01-07 10:00:31','已处理','王义彪'),(86,148,'2018-01-08 08:02:28','焦保珍','2018-01-07 06:02:28','已补充填写，已整改','原小龙'),(87,147,'2018-01-08 08:03:20','焦保珍','2018-01-07 08:03:20','已更换','原小龙'),(88,146,'2018-01-08 08:12:08','焦保珍','2018-01-07 07:04:08','已整改','原小龙'),(89,145,'2018-01-13 08:19:55','焦保珍','2018-01-07 04:04:55','已清理','原小龙'),(90,144,'2018-01-08 08:29:41','宋志令','2018-01-07 07:22:41','已补充全，已增加','崔志兵'),(91,143,'2018-01-08 09:08:55','宋志令','2018-01-07 08:08:55','已加强固定，已调整方向，已更换','崔志兵'),(92,142,'2018-01-08 10:10:05','宋志令','2018-01-07 06:10:05','已更换','崔志兵'),(93,141,'2018-01-13 10:20:47','宋志令','2018-01-07 04:10:47','以固定，已清理完矸石积煤','崔志兵'),(94,150,'2018-01-13 18:01:48','李红权','2018-01-13 07:09:30','已根据工作面实际情况从新补充画图','程晓红'),(95,154,'2018-01-09 18:11:11','李红权','2018-01-09 08:11:11','综采队已接通喷雾装置水管','韩树明'),(96,153,'2018-01-14 10:12:09','李红权','2018-01-10 07:12:09','已增设护网','孟福贵'),(97,152,'2018-01-14 08:12:51','陈金星','2018-01-09 04:12:51','已加强维护','孟福贵'),(98,151,'2018-01-13 18:01:38','陈金星','2018-01-13 08:13:38','已整改','孟福贵'),(99,158,'2018-01-19 10:22:30','郜天发','2018-01-19 08:22:30','通风科已对3113回风配巷掘进面铁风筒进行了更换','张伟炳'),(100,157,'2018-01-16 13:24:37','王旭科','2018-01-16 09:24:37','综采队已对3113综采工作面支架前探上方空顶处按规定要求作业，同时对支架漏矸处进行了上木头，挂网维护。','孟福贵'),(101,156,'2018-03-16 13:27:08','王旭科','2018-01-16 09:27:08','综采队已对泵站调整到30Mp以上，工作面支架初撑力都不低于24Ma','秦振芳'),(102,155,'2018-01-19 17:28:30','王旭科','2018-01-19 13:28:30','综采队已制定安全措施，对3113回风顺槽超前支护段变形支架全部进行了更换，并加强了工作面现场管理。','孟福贵'),(103,159,'2018-01-26 09:38:11','宋志令','2018-01-26 08:38:11','综采队已对3113运输顺槽刮板运输机机头升量无余量的单体柱及时进行了更换和重新打设','孟福贵'),(104,162,'2018-01-26 12:42:36','宋志令','2018-01-26 10:42:36','综采队已对3113综采工作面采煤机滚筒增设了截齿两个','韩树明'),(105,161,'2018-01-27 13:43:31','王文山','2018-01-27 10:43:31','掘进队已对3113回风辅助巷掘进面刮板运输机机头增设了护罩','韩树明'),(106,163,'2018-02-05 09:45:20','宋志令','2018-02-05 08:45:20','综采队已对3113综采面高度不足的支架及时进行了调整','孟福贵'),(107,164,'2018-02-05 09:46:37','郜天发','2018-02-05 08:46:37','通风科已对3113综采面中间巷按要求设置了调节风门','张伟炳'),(108,165,'2018-01-31 09:47:31','宋志令','2018-01-31 08:47:31','综采队已对3113综采面90#—92#架段进行了挂网、上木头维护，控制冒顶并加强现场管理','孟福贵'),(109,166,'2018-01-31 09:48:48','程林忠','2018-01-31 07:48:48','机电科已对3113综采面供电系统示意图进行了更换','韩树明'),(110,167,'2018-01-31 08:49:40','郜天发','2018-01-31 02:49:40','已拆除','张伟炳'),(111,168,'2018-02-02 09:50:33','宋志令','2018-02-02 07:50:33','综采队已对3113综采工作面回风超前支护加强至40米，并加强现场管理','孟福贵'),(112,171,'2018-03-11 09:29:54','王海英','2018-03-11 08:29:54','当班安全员人员定位卡已进行更换，显示已恢复正常','秦振芳'),(113,170,'2018-03-13 14:30:59','李强','2018-03-13 09:30:59','监控维护工已及时排查故障，更换了摄像头电源，监控画面已恢复正常','杨天传'),(114,169,'2018-03-11 11:33:19','李强','2018-03-11 08:33:19','监控维护工已认真排查线路，更换了有问题的通讯线，产量监控通讯已恢复正常','杨天传'),(115,174,'2018-03-22 12:39:34','原小龙','2018-03-22 08:39:34','搬运队已按要求对3113回采工作面下山巷台阶及时铺设到位','孟福贵'),(116,173,'2018-03-22 11:40:17','崔志兵','2018-03-22 09:40:17','综采队已于3月22日四点班安排人员对3113综采进风顺槽材料及时进行了清理，保持行人畅通','孟福贵'),(117,172,'2018-03-22 10:40:52','郜国权','2018-03-22 08:40:52','技术科已制定四个单项维修作业项目的安全技术措施并会审贯彻落实','程晓红'),(118,179,'2018-03-28 10:48:01','郜国权','2018-03-28 09:48:01','技术科已制定3113综采工作面前溜机头处护帮安全技术措施，并下发到了队组贯彻落实','孟福贵'),(119,176,'2018-03-27 11:48:36','崔志兵','2018-03-27 08:48:36','综采队已对3113综采工作面片帮处当班及时控制，超前移架，并加强了维护及现场管理','孟福贵'),(120,178,'2018-03-27 13:49:04','崔志兵','2018-03-27 09:49:04','综采队已对3113综采工作面中部两处错差支架重新进行了调整，并加强了现场管理','孟福贵'),(121,177,'2018-03-28 10:49:38','郜国权','2018-03-28 08:49:38','技术科已对轨道巷维修制定了专项安全技术措施，并落实到队组贯彻学习','程晓红'),(122,175,'2018-03-27 14:50:08','崔志兵','2018-03-27 11:50:08','综采队已对轨道巷液压管路按规定要求重新进行了吊挂，已符合规定要求','秦振芳'),(123,117,'2018-04-03 11:20:07','督办人x','2018-04-03 11:20:07','整改措施x','责任人x'),(124,117,'2018-04-03 11:24:53','啊似的士大夫','2018-04-02 11:24:53','撒地方萨芬','责任人');
+
+UNLOCK TABLES;
+
+/*Table structure for table `spotdispose` */
+
+DROP TABLE IF EXISTS `spotdispose`;
+
+CREATE TABLE `spotdispose` (
+  `disposeId` int(11) NOT NULL AUTO_INCREMENT,
+  `dangerId` int(11) DEFAULT NULL,
+  `hasSafeMeasure` varchar(2) COLLATE utf8_bin DEFAULT NULL,
+  `disposeMeasure` varchar(500) COLLATE utf8_bin DEFAULT NULL,
+  `disposeDate` datetime DEFAULT NULL,
+  `disposePerson` varchar(40) COLLATE utf8_bin DEFAULT NULL,
+  PRIMARY KEY (`disposeId`),
+  KEY `FK_Reference_6` (`dangerId`),
+  CONSTRAINT `FK_Reference_6` FOREIGN KEY (`dangerId`) REFERENCES `danger` (`dangerId`)
+) ENGINE=InnoDB AUTO_INCREMENT=70 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+/*Data for the table `spotdispose` */
+
+LOCK TABLES `spotdispose` WRITE;
+
+insert  into `spotdispose`(`disposeId`,`dangerId`,`hasSafeMeasure`,`disposeMeasure`,`disposeDate`,`disposePerson`) values (35,90,'1','地面运输队已组织人员对副立井井筒结冰及时进行清除','2017-12-11 08:46:50','王向卫'),(36,91,'1','井下运输队已对副立井井底平台与罐笼间隙及时进行了维修并加固','2018-01-11 09:06:24','王文芳'),(37,94,'1','综采队已对3113综采工作面破碎顶板及时挂网并架单体柱支护，并加强了现场顶帮管理。','2017-12-11 09:17:12','王迅科'),(38,93,'1','机电队已按规定对3113回风顺槽一台QBZ80开关上风侧安装了甲烷断电仪。','2017-12-11 09:19:35','宋其林'),(39,92,'1','综采队已对3113综采工作面初撑力不达24Mp的支架及时进行了调整，出现损坏压力表及时进行了更换，','2017-12-11 09:21:19','王迅科'),(41,99,'1','通风科已对3113综采工作面上隅角瓦斯传感器及时进行更换，经检测对比，传感器显示值误差在规定显示内。','2017-12-14 15:44:46','李强'),(42,101,'1','综采队已对3113综采工作面进风顺槽超前支护单体柱重新进行了编号。','2017-12-18 09:50:34','宋志令'),(43,98,'1','综采队已对3113综采队工作面回风顺槽超前支护外一处折断的钢梁棚腿及时进行了更换。','2017-12-16 09:52:14','宋志令'),(44,97,'1','机电队已对副立井井底信号硐室及时增设照明装置。','2017-12-15 09:54:58','宋其林'),(45,96,'1','综采队已对3113综采工作面28#支架按《作业规程》要求重新打折戗柱，同时做好了防倒措施。','2017-12-15 10:02:11','宋其林'),(46,95,'1','综采队已对3113综采工作面29—40#支架漏矸处进行了挂网，上木头维护，并增强了支护，严格控制漏矸。','2017-12-15 10:04:07','宋志令'),(47,104,'1','通风科已对西皮带运输巷15#密闭及时挂设管理牌板，设置了栅栏。','2017-12-21 10:39:20','郜天发'),(48,103,'1','监控室维护工已及时安装语音报警装置，搬运队已对风门内存放的风筒布等杂物及时进行了清理。','2017-12-24 10:42:25','郜天发'),(49,102,'1','综采队已及时清理架间浮煤，对煤质松软，活矸落煤处进行了挂网打超前支护处理，并加强每班维护，防止活矸伤人。','2017-12-21 10:43:40','宋志令'),(50,105,'1','综采队已对3113综采工作面煤溜机头搭接短进行了整改。','2017-12-03 10:50:55','王苗红'),(51,108,'1','综采队已把3根漏液柱更换完成','2017-12-02 14:52:46','王苗红'),(52,112,'1','搬运队已安排人员处理完毕','2017-12-03 12:55:23','焦保珍'),(53,107,'1','综采队已安排人员加强维护','2017-12-02 13:22:45','王苗红'),(54,110,'1','综采队已清理完积煤，更换了托辊。','2017-12-02 09:39:58','王文芳'),(55,113,'1','综采队已安排人员现场进行了整改','2017-12-09 14:16:36','王苗红'),(56,114,'1','综采队已经更换新液管','2017-12-09 15:17:34','王苗红'),(57,122,'1','井下运输队已及时清理积煤','2017-12-09 16:21:21','王文芳'),(58,115,'1','综采队已清理卫生材料，已对煤尘大的区域洒水降尘。','2017-12-09 14:47:47','王苗红'),(59,123,'1','综采队已及时回撤','2017-12-16 15:26:52','宋志令'),(60,124,'1','综采队人员已清理完架间浮煤','2017-12-16 17:28:11','宋志令'),(61,126,'1','已更换漏液柱','2017-12-16 15:41:31','宋志令'),(62,127,'1','已及时更换','2017-12-16 17:43:13','宋其林'),(63,137,'1','当班已清理','2017-12-23 13:24:45','王文芳'),(64,134,'1','已每班加强管理','2017-12-23 16:28:11','宋志令'),(65,135,'1','已及时更换','2017-12-23 16:30:00','宋志令'),(66,139,'1','已回收','2017-12-23 18:33:49','宋其林'),(67,138,'1','已整改','2017-12-23 12:35:24','焦保珍'),(68,136,'1','已处理','2017-12-23 18:35:54','王文芳'),(69,160,'1','综采队已对3113综采工作面73—74#支架处漏顶进行了挂网、上木头，增加单体柱超前支护，同时升起护帮板顶紧煤帮','2018-01-24 18:40:30','宋志令');
+
+UNLOCK TABLES;
+
+/*Table structure for table `sys_permission` */
+
+DROP TABLE IF EXISTS `sys_permission`;
+
+CREATE TABLE `sys_permission` (
+  `id` bigint(20) NOT NULL COMMENT '主键',
+  `name` varchar(128) NOT NULL COMMENT '资源名称',
+  `type` varchar(32) NOT NULL COMMENT '资源类型：menu,button,',
+  `url` varchar(128) DEFAULT NULL COMMENT '访问url地址',
+  `percode` varchar(128) DEFAULT NULL COMMENT '权限代码字符串',
+  `parentid` bigint(20) DEFAULT NULL COMMENT '父结点id',
+  `parentids` varchar(128) DEFAULT NULL COMMENT '父结点id列表串',
+  `sortstring` varchar(128) DEFAULT NULL COMMENT '排序号',
+  `available` char(1) DEFAULT NULL COMMENT '是否可用,1：可用，0不可用',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `sys_permission` */
+
+LOCK TABLES `sys_permission` WRITE;
+
+insert  into `sys_permission`(`id`,`name`,`type`,`url`,`percode`,`parentid`,`parentids`,`sortstring`,`available`) values (1,'权限','','',NULL,0,'0/','0','1'),(30,'隐患管理','menu',NULL,'',1,'0/1',NULL,'1'),(31,'隐患录入','permission',NULL,'danger:insert',NULL,NULL,NULL,'1'),(32,'现场处理','permission',NULL,'danger:spot',NULL,NULL,NULL,'1'),(33,'隐患四定','permission',NULL,'danger:siding',NULL,NULL,NULL,'1'),(34,'隐患跟踪','permission',NULL,'danger:follow',NULL,NULL,NULL,'1'),(35,'隐患复查','permission',NULL,'danger:recheck',NULL,NULL,NULL,'1'),(36,'隐患查询','permission',NULL,'danger:find',NULL,NULL,NULL,'1'),(37,'隐患日报','permission',NULL,'danger:dayReport',NULL,NULL,NULL,'1'),(38,'隐患统计','permission',NULL,'danger:statistic',NULL,NULL,NULL,'1'),(39,'隐患月报','permission',NULL,'danger:monthReport',NULL,NULL,NULL,'1'),(40,'风险辨识评估','menu',NULL,NULL,NULL,NULL,NULL,'1'),(41,'职责分工','permission',NULL,'risk:duty',NULL,NULL,NULL,'1'),(42,'辨识范围','permission',NULL,'risk:range',NULL,NULL,NULL,'1'),(43,'年度辨识','permission',NULL,'risk:yearIdentify',NULL,NULL,NULL,'1'),(44,'专项辨识','permission',NULL,'risk:specialIdentify',NULL,NULL,NULL,'1'),(45,'风险评估','permission',NULL,'risk:evaluate',NULL,NULL,NULL,'1'),(46,'风险清单','permission',NULL,'risk:list',NULL,NULL,NULL,'1'),(50,'管控计划','menu',NULL,NULL,NULL,NULL,NULL,'1'),(51,'月风险管控计划','permission',NULL,'risk:monthPlan',NULL,NULL,NULL,'1'),(52,'月风险管控计划分析','permission',NULL,'risk:monthPlanAnalysis',NULL,NULL,NULL,'1'),(53,'月风险管控计划有效性','permission',NULL,'risk:monthPlanEffective',NULL,NULL,NULL,'1'),(54,'旬风险管控计划','permission',NULL,'risk:xunPlan',NULL,NULL,NULL,'1'),(55,'旬风险管控计划分析','permission',NULL,'risk:xunPlanAnalysis',NULL,NULL,NULL,'1'),(56,'旬风险管控计划有效性','permission',NULL,'risk:xunPlanEffective',NULL,NULL,NULL,'1'),(57,'风险构成级分布情况','permission',NULL,'risk:statistical',NULL,NULL,NULL,'1'),(60,'系统管理','menu',NULL,NULL,NULL,NULL,NULL,'1'),(61,'机构管理','permission',NULL,'system:department',NULL,NULL,NULL,'1'),(62,'字典管理','permission',NULL,'system:dictionary',NULL,NULL,NULL,'1'),(63,'权限管理','permission',NULL,'system:authority',NULL,NULL,NULL,'1');
+
+UNLOCK TABLES;
+
+/*Table structure for table `sys_role` */
+
+DROP TABLE IF EXISTS `sys_role`;
+
+CREATE TABLE `sys_role` (
+  `id` varchar(36) NOT NULL,
+  `name` varchar(128) NOT NULL,
+  `available` char(1) DEFAULT NULL COMMENT '是否可用,1：可用，0不可用',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `sys_role` */
+
+LOCK TABLES `sys_role` WRITE;
+
+insert  into `sys_role`(`id`,`name`,`available`) values ('ebc8a441-c6f9-11e4-b137-0adc305c3f28','商品管理员','1'),('ebc9d647-c6f9-11e4-b137-0adc305c3f28','用户管理员','1');
+
+UNLOCK TABLES;
+
+/*Table structure for table `sys_role_permission` */
+
+DROP TABLE IF EXISTS `sys_role_permission`;
+
+CREATE TABLE `sys_role_permission` (
+  `id` varchar(36) NOT NULL,
+  `sys_role_id` varchar(32) NOT NULL COMMENT '角色id',
+  `sys_permission_id` varchar(32) NOT NULL COMMENT '权限id',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `sys_role_permission` */
+
+LOCK TABLES `sys_role_permission` WRITE;
+
+insert  into `sys_role_permission`(`id`,`sys_role_id`,`sys_permission_id`) values ('0837fe37f9eb4a829294c9b650ecc478','f30eab92404549e18e278ad0315c7ed1','51'),('11906e19c0424d28be4b65df84fea1f5','b76874b8b8cf456198f73f88223e41a9','56'),('2746320fdb214ca0891202f28b15dd68','f30eab92404549e18e278ad0315c7ed1','52'),('3f36f92b3ca34ca48ab34a6d6bea85d3','f30eab92404549e18e278ad0315c7ed1','43'),('49d7302b30ad4778bf71459b2ec247e8','f30eab92404549e18e278ad0315c7ed1','34'),('51bbeaf5de824852ad9bcebfca2e1331','f30eab92404549e18e278ad0315c7ed1','42'),('57ad5abfcd724321a1654a2ad16c5371','b76874b8b8cf456198f73f88223e41a9','57'),('6ef597674817455c9bffc61451a25492','b76874b8b8cf456198f73f88223e41a9','55'),('85d1b5f2f9ff4e9eb9a2632bfcf0e7d2','b76874b8b8cf456198f73f88223e41a9','62'),('94b0f1e1f8a34ac3b01b945043c104ac','f30eab92404549e18e278ad0315c7ed1','35'),('9ad65de827274955afa8eb6241658ed5','f30eab92404549e18e278ad0315c7ed1','39'),('a819053cee3f4d7c93cd6b5b2f95fab8','28484c96a4384827886c5903ab03a602','39'),('b2256b66d50f440dafca8109672dad8b','f30eab92404549e18e278ad0315c7ed1','44'),('ca54a743f1494615b2273160b8735079','f30eab92404549e18e278ad0315c7ed1','41'),('ed7ebb9dff784e5bab3b1da9fc5d0151','b76874b8b8cf456198f73f88223e41a9','32'),('root1','ebc8a441-c6f9-11e4-b137-0adcroot','31'),('root10','ebc8a441-c6f9-11e4-b137-0adcroot','41'),('root11','ebc8a441-c6f9-11e4-b137-0adcroot','42'),('root12','ebc8a441-c6f9-11e4-b137-0adcroot','43'),('root13','ebc8a441-c6f9-11e4-b137-0adcroot','44'),('root14','ebc8a441-c6f9-11e4-b137-0adcroot','45'),('root15','ebc8a441-c6f9-11e4-b137-0adcroot','46'),('root16','ebc8a441-c6f9-11e4-b137-0adcroot','51'),('root17','ebc8a441-c6f9-11e4-b137-0adcroot','52'),('root18','ebc8a441-c6f9-11e4-b137-0adcroot','53'),('root19','ebc8a441-c6f9-11e4-b137-0adcroot','54'),('root2','ebc8a441-c6f9-11e4-b137-0adcroot','32'),('root20','ebc8a441-c6f9-11e4-b137-0adcroot','55'),('root21','ebc8a441-c6f9-11e4-b137-0adcroot','56'),('root22','ebc8a441-c6f9-11e4-b137-0adcroot','57'),('root23','ebc8a441-c6f9-11e4-b137-0adcroot','61'),('root24','ebc8a441-c6f9-11e4-b137-0adcroot','62'),('root25','ebc8a441-c6f9-11e4-b137-0adcroot','63'),('root3','ebc8a441-c6f9-11e4-b137-0adcroot','33'),('root4','ebc8a441-c6f9-11e4-b137-0adcroot','34'),('root5','ebc8a441-c6f9-11e4-b137-0adcroot','35'),('root6','ebc8a441-c6f9-11e4-b137-0adcroot','36'),('root7','ebc8a441-c6f9-11e4-b137-0adcroot','37'),('root8','ebc8a441-c6f9-11e4-b137-0adcroot','38'),('root9','ebc8a441-c6f9-11e4-b137-0adcroot','39');
+
+UNLOCK TABLES;
+
+/*Table structure for table `sys_user` */
+
+DROP TABLE IF EXISTS `sys_user`;
+
+CREATE TABLE `sys_user` (
+  `id` varchar(36) NOT NULL COMMENT '主键',
+  `usercode` varchar(32) NOT NULL COMMENT '账号',
+  `username` varchar(64) NOT NULL COMMENT '姓名',
+  `password` varchar(32) NOT NULL COMMENT '密码',
+  `salt` varchar(64) DEFAULT NULL COMMENT '盐',
+  `locked` char(1) DEFAULT NULL COMMENT '账号是否锁定，1：锁定，0未锁定',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `sys_user` */
+
+LOCK TABLES `sys_user` WRITE;
+
+insert  into `sys_user`(`id`,`usercode`,`username`,`password`,`salt`,`locked`) values ('2a051808cea14d50a819a30a39a0bf8e','lixianyuan','李贤元','123456',NULL,'0'),('5d2b87f7176b4851b93c62118c8b4ace','admin','管理员一号','admin',NULL,'0'),('6731b16121ad40e69ec1d1c6d7ed0afa','hanxin','韩信','123456',NULL,'0'),('70ee64427deb4fb8bc09eddc7f42e5c3','chengliu','程六','123456',NULL,'0'),('761ffd79ea5a4a33885da8b4d1be5f74','niumo','牛魔','123456',NULL,'0'),('78198b03713c4bdabeecbbea088f32c2','libai','李白','123456',NULL,'0'),('8bce710b3bc54b6fb82d029cd8607984','kai','铠','123456',NULL,'0'),('9725a20c8d53421fab25e01b83531520','zhaoyun','赵云','123456',NULL,'0'),('9e2dfdeec16c418bafbae6b0c55c28ae','wangwu','王五','123456',NULL,'0'),('f64781dbb3d949faa1300b11d634eaf4','zhangsan','张三','123456',NULL,'0'),('rootid','root','超级管理员','root',NULL,'0');
+
+UNLOCK TABLES;
+
+/*Table structure for table `sys_user_role` */
+
+DROP TABLE IF EXISTS `sys_user_role`;
+
+CREATE TABLE `sys_user_role` (
+  `id` varchar(36) NOT NULL,
+  `sys_user_id` varchar(32) NOT NULL,
+  `sys_role_id` varchar(32) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `sys_user_role` */
+
+LOCK TABLES `sys_user_role` WRITE;
+
+insert  into `sys_user_role`(`id`,`sys_user_id`,`sys_role_id`) values ('01e87a9760f945a6a253c64c528a0390','70ee64427deb4fb8bc09eddc7f42e5c3','fbff6ef4b30a47aca70227ff55f78e5c'),('1c65b8dda472406ab0bbf8e7a3a487b2','8bce710b3bc54b6fb82d029cd8607984','39d22b583b6a44b0b5a9b85e6612a1f5'),('44e098264be7493c87aee03670f4caa3','6731b16121ad40e69ec1d1c6d7ed0afa','12f2303990414e9ca229809436ea0848'),('70c9da25fa0847edbd55f419d7310d9b','5d2b87f7176b4851b93c62118c8b4ace','b76874b8b8cf456198f73f88223e41a9'),('7ac579ae29e24684bc0c448dd68b607b','f64781dbb3d949faa1300b11d634eaf4','28484c96a4384827886c5903ab03a602'),('829beb784a0f4e4b8e89584cd316c477','9e2dfdeec16c418bafbae6b0c55c28ae','f0d9e8e5c14d45838f4e5d1eb624cfa1'),('97ea0b8171274985a24002bbe55652da','2a051808cea14d50a819a30a39a0bf8e','f30eab92404549e18e278ad0315c7ed1'),('9a6a6abc06d545e7817292436f6829fc','9725a20c8d53421fab25e01b83531520','ae188ddd0e924d71be4a33d7b4316910'),('b74d618a1a4249c493e63edfe526ee0e','78198b03713c4bdabeecbbea088f32c2','bda6c4d788ad4bfa8a255b3cbfae365e'),('be5ac05c5cf5412c9a1f67129f3777ed','761ffd79ea5a4a33885da8b4d1be5f74','ffaa7f37e138449aa846c84dba47c27d'),('ebc8a441-c6f9-11e4-b137-0adc30515200','rootid','ebc8a441-c6f9-11e4-b137-0adcroot');
+
+UNLOCK TABLES;
+
+/*Table structure for table `user` */
+
+DROP TABLE IF EXISTS `user`;
+
+CREATE TABLE `user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(32) NOT NULL COMMENT '用户名称',
+  `birthday` date DEFAULT NULL COMMENT '生日',
+  `sex` char(1) DEFAULT NULL COMMENT '性别',
+  `address` varchar(256) DEFAULT NULL COMMENT '地址',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
+
+/*Data for the table `user` */
+
+LOCK TABLES `user` WRITE;
+
+insert  into `user`(`id`,`username`,`birthday`,`sex`,`address`) values (1,'王五',NULL,'2',NULL),(10,'张三','2014-07-10','1','北京市'),(16,'张小明',NULL,'1','河南郑州'),(22,'陈小明',NULL,'1','河南郑州'),(24,'张三丰',NULL,'1','河南郑州'),(25,'陈小明',NULL,'1','河南郑州'),(26,'王五',NULL,NULL,NULL);
+
+UNLOCK TABLES;
+
+/*Table structure for table `danger_siding` */
+
+DROP TABLE IF EXISTS `danger_siding`;
+
+/*!50001 DROP VIEW IF EXISTS `danger_siding` */;
+/*!50001 DROP TABLE IF EXISTS `danger_siding` */;
+
+/*!50001 CREATE TABLE  `danger_siding`(
+ `dangerId` int(11) NOT NULL  default '0' ,
+ `findtime` datetime NULL ,
+ `classtype` varchar(40) NULL ,
+ `findperson` varchar(40) NULL ,
+ `checkunit` varchar(40) NULL ,
+ `address` varchar(40) NULL ,
+ `content` varchar(1000) NULL ,
+ `dangerGrade` varchar(10) NULL ,
+ `type` varchar(20) NULL ,
+ `unit` varchar(40) NULL ,
+ `manager` varchar(40) NULL ,
+ `dangerStatusNum` varchar(2) NULL ,
+ `dangerStatus` varchar(40) NULL ,
+ `dangerReport` varchar(1000) NULL ,
+ `sidingid` int(11) NOT NULL  default '0' ,
+ `sidingTime` datetime NULL ,
+ `supervisor` varchar(40) NULL ,
+ `rectificationTime` datetime NULL ,
+ `rectificationMeasure` varchar(600) NULL ,
+ `dutyPerson` varchar(40) NULL 
+)*/;
+
+/*Table structure for table `danger_siding_follow` */
+
+DROP TABLE IF EXISTS `danger_siding_follow`;
+
+/*!50001 DROP VIEW IF EXISTS `danger_siding_follow` */;
+/*!50001 DROP TABLE IF EXISTS `danger_siding_follow` */;
+
+/*!50001 CREATE TABLE  `danger_siding_follow`(
+ `dangerId` int(11) NOT NULL  default '0' ,
+ `findtime` datetime NULL ,
+ `classtype` varchar(40) NULL ,
+ `findperson` varchar(40) NULL ,
+ `checkunit` varchar(40) NULL ,
+ `address` varchar(40) NULL ,
+ `content` varchar(1000) NULL ,
+ `dangerGrade` varchar(10) NULL ,
+ `type` varchar(20) NULL ,
+ `unit` varchar(40) NULL ,
+ `manager` varchar(40) NULL ,
+ `dangerStatusNum` varchar(2) NULL ,
+ `dangerStatus` varchar(40) NULL ,
+ `dangerReport` varchar(1000) NULL ,
+ `sidingId` int(11) NOT NULL  default '0' ,
+ `sidingTime` datetime NULL ,
+ `supervisor` varchar(40) NULL ,
+ `rectificationTime` datetime NULL ,
+ `rectificationMeasure` varchar(600) NULL ,
+ `dutyPerson` varchar(40) NULL ,
+ `followId` int(11) NOT NULL  default '0' ,
+ `hasSecurity` varchar(2) NULL ,
+ `safetyTechnician` varchar(40) NULL ,
+ `managerName` varchar(40) NULL ,
+ `recheckTime` datetime NULL 
+)*/;
+
+/*Table structure for table `danger_siding_follow_recheck` */
+
+DROP TABLE IF EXISTS `danger_siding_follow_recheck`;
+
+/*!50001 DROP VIEW IF EXISTS `danger_siding_follow_recheck` */;
+/*!50001 DROP TABLE IF EXISTS `danger_siding_follow_recheck` */;
+
+/*!50001 CREATE TABLE  `danger_siding_follow_recheck`(
+ `dangerId` int(11) NOT NULL  default '0' ,
+ `findtime` datetime NULL ,
+ `classtype` varchar(40) NULL ,
+ `findperson` varchar(40) NULL ,
+ `checkunit` varchar(40) NULL ,
+ `address` varchar(40) NULL ,
+ `content` varchar(1000) NULL ,
+ `dangerGrade` varchar(10) NULL ,
+ `type` varchar(20) NULL ,
+ `unit` varchar(40) NULL ,
+ `manager` varchar(40) NULL ,
+ `dangerStatusNum` varchar(2) NULL ,
+ `dangerStatus` varchar(40) NULL ,
+ `dangerReport` varchar(1000) NULL ,
+ `sidingId` int(11) NOT NULL  default '0' ,
+ `sidingTime` datetime NULL ,
+ `supervisor` varchar(40) NULL ,
+ `rectificationTime` datetime NULL ,
+ `rectificationMeasure` varchar(600) NULL ,
+ `dutyPerson` varchar(40) NULL ,
+ `followId` int(11) NOT NULL  default '0' ,
+ `hasSecurity` varchar(2) NULL ,
+ `safetyTechnician` varchar(40) NULL ,
+ `managerName` varchar(40) NULL ,
+ `recheckTime` datetime NULL ,
+ `recheckid` int(11) NOT NULL  default '0' ,
+ `recheckMan` varchar(40) NULL ,
+ `recheckdate` datetime NULL ,
+ `recheckresult` varchar(2) NULL ,
+ `comment` varchar(200) NULL 
+)*/;
+
+/*Table structure for table `danger_spot` */
+
+DROP TABLE IF EXISTS `danger_spot`;
+
+/*!50001 DROP VIEW IF EXISTS `danger_spot` */;
+/*!50001 DROP TABLE IF EXISTS `danger_spot` */;
+
+/*!50001 CREATE TABLE  `danger_spot`(
+ `dangerId` int(11) NOT NULL  default '0' ,
+ `findtime` datetime NULL ,
+ `classtype` varchar(40) NULL ,
+ `findperson` varchar(40) NULL ,
+ `checkunit` varchar(40) NULL ,
+ `address` varchar(40) NULL ,
+ `content` varchar(1000) NULL ,
+ `dangerGrade` varchar(10) NULL ,
+ `type` varchar(20) NULL ,
+ `unit` varchar(40) NULL ,
+ `manager` varchar(40) NULL ,
+ `dangerStatusNum` varchar(2) NULL ,
+ `dangerStatus` varchar(40) NULL ,
+ `dangerReport` varchar(1000) NULL ,
+ `hasSafeMeasure` varchar(2) NULL ,
+ `disposeMeasure` varchar(500) NULL ,
+ `disposeDate` datetime NULL ,
+ `disposePerson` varchar(40) NULL 
+)*/;
+
+/*View structure for view danger_siding */
+
+/*!50001 DROP TABLE IF EXISTS `danger_siding` */;
+/*!50001 DROP VIEW IF EXISTS `danger_siding` */;
+
+/*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `danger_siding` AS select `d`.`dangerId` AS `dangerId`,`d`.`findTime` AS `findtime`,`d`.`classType` AS `classtype`,`d`.`findPerson` AS `findperson`,`d`.`checkUnit` AS `checkunit`,`d`.`address` AS `address`,`d`.`content` AS `content`,`d`.`dangerGrade` AS `dangerGrade`,`d`.`type` AS `type`,`d`.`unit` AS `unit`,`d`.`manager` AS `manager`,`d`.`dangerStatusNum` AS `dangerStatusNum`,`d`.`dangerStatus` AS `dangerStatus`,`d`.`dangerReport` AS `dangerReport`,`s`.`sidingId` AS `sidingid`,`s`.`sidingTime` AS `sidingTime`,`s`.`supervisor` AS `supervisor`,`s`.`rectificationTime` AS `rectificationTime`,`s`.`rectificationMeasure` AS `rectificationMeasure`,`s`.`dutyPerson` AS `dutyPerson` from (`danger` `d` join `sidingbiao` `s`) where (`d`.`dangerId` = `s`.`dangerId`) */;
+
+/*View structure for view danger_siding_follow */
+
+/*!50001 DROP TABLE IF EXISTS `danger_siding_follow` */;
+/*!50001 DROP VIEW IF EXISTS `danger_siding_follow` */;
+
+/*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `danger_siding_follow` AS select `d`.`dangerId` AS `dangerId`,`d`.`findTime` AS `findtime`,`d`.`classType` AS `classtype`,`d`.`findPerson` AS `findperson`,`d`.`checkUnit` AS `checkunit`,`d`.`address` AS `address`,`d`.`content` AS `content`,`d`.`dangerGrade` AS `dangerGrade`,`d`.`type` AS `type`,`d`.`unit` AS `unit`,`d`.`manager` AS `manager`,`d`.`dangerStatusNum` AS `dangerStatusNum`,`d`.`dangerStatus` AS `dangerStatus`,`d`.`dangerReport` AS `dangerReport`,`s`.`sidingId` AS `sidingId`,`s`.`sidingTime` AS `sidingTime`,`s`.`supervisor` AS `supervisor`,`s`.`rectificationTime` AS `rectificationTime`,`s`.`rectificationMeasure` AS `rectificationMeasure`,`s`.`dutyPerson` AS `dutyPerson`,`f`.`followId` AS `followId`,`f`.`hasSecurity` AS `hasSecurity`,`f`.`safetyTechnician` AS `safetyTechnician`,`f`.`managerName` AS `managerName`,`f`.`recheckTime` AS `recheckTime` from ((`danger` `d` join `sidingbiao` `s`) join `follow` `f`) where ((`d`.`dangerId` = `s`.`dangerId`) and (`s`.`dangerId` = `f`.`dangerId`) and (`s`.`sidingId` = `f`.`sidingId`)) */;
+
+/*View structure for view danger_siding_follow_recheck */
+
+/*!50001 DROP TABLE IF EXISTS `danger_siding_follow_recheck` */;
+/*!50001 DROP VIEW IF EXISTS `danger_siding_follow_recheck` */;
+
+/*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `danger_siding_follow_recheck` AS select `d`.`dangerId` AS `dangerId`,`d`.`findTime` AS `findtime`,`d`.`classType` AS `classtype`,`d`.`findPerson` AS `findperson`,`d`.`checkUnit` AS `checkunit`,`d`.`address` AS `address`,`d`.`content` AS `content`,`d`.`dangerGrade` AS `dangerGrade`,`d`.`type` AS `type`,`d`.`unit` AS `unit`,`d`.`manager` AS `manager`,`d`.`dangerStatusNum` AS `dangerStatusNum`,`d`.`dangerStatus` AS `dangerStatus`,`d`.`dangerReport` AS `dangerReport`,`s`.`sidingId` AS `sidingId`,`s`.`sidingTime` AS `sidingTime`,`s`.`supervisor` AS `supervisor`,`s`.`rectificationTime` AS `rectificationTime`,`s`.`rectificationMeasure` AS `rectificationMeasure`,`s`.`dutyPerson` AS `dutyPerson`,`f`.`followId` AS `followId`,`f`.`hasSecurity` AS `hasSecurity`,`f`.`safetyTechnician` AS `safetyTechnician`,`f`.`managerName` AS `managerName`,`f`.`recheckTime` AS `recheckTime`,`r`.`recheckid` AS `recheckid`,`r`.`recheckMan` AS `recheckMan`,`r`.`recheckdate` AS `recheckdate`,`r`.`recheckresult` AS `recheckresult`,`r`.`comment` AS `comment` from (((`danger` `d` join `sidingbiao` `s`) join `follow` `f`) join `rechecktable` `r`) where ((`d`.`dangerId` = `s`.`dangerId`) and (`s`.`dangerId` = `f`.`dangerId`) and (`s`.`sidingId` = `f`.`sidingId`) and (`r`.`followId` = `f`.`followId`)) */;
+
+/*View structure for view danger_spot */
+
+/*!50001 DROP TABLE IF EXISTS `danger_spot` */;
+/*!50001 DROP VIEW IF EXISTS `danger_spot` */;
+
+/*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `danger_spot` AS select `d`.`dangerId` AS `dangerId`,`d`.`findTime` AS `findtime`,`d`.`classType` AS `classtype`,`d`.`findPerson` AS `findperson`,`d`.`checkUnit` AS `checkunit`,`d`.`address` AS `address`,`d`.`content` AS `content`,`d`.`dangerGrade` AS `dangerGrade`,`d`.`type` AS `type`,`d`.`unit` AS `unit`,`d`.`manager` AS `manager`,`d`.`dangerStatusNum` AS `dangerStatusNum`,`d`.`dangerStatus` AS `dangerStatus`,`d`.`dangerReport` AS `dangerReport`,`s`.`hasSafeMeasure` AS `hasSafeMeasure`,`s`.`disposeMeasure` AS `disposeMeasure`,`s`.`disposeDate` AS `disposeDate`,`s`.`disposePerson` AS `disposePerson` from (`danger` `d` join `spotdispose` `s`) where (`d`.`dangerId` = `s`.`dangerId`) */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
